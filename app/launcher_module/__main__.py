@@ -17,8 +17,7 @@ def main() -> None:
 
     logger.info("Launching application: %s", PROJECT_NAME)
 
-    df: pd.DataFrame = load_dataset()
-    logger.info("Dataset loaded successfully with %d records.", len(df))
-    logger.debug("First 5 records:\n%s", df.head())
+    file_dict = load_dataset()
+    logger.info("Dataset loaded successfully with %d records.", len(file_dict))
 
     exit()
