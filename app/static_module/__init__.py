@@ -8,6 +8,5 @@
 
 from .parameters import *
 from .classes import *
-from .kaggle_download import *
 
-__all__ = ["PROJECT_NAME", "API_KEY", "LOG_LEVEL", "load_dataset"]
+__all__ = ["PROJECT_NAME", "API_KEY", "LOG_LEVEL"]

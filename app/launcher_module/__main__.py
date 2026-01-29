@@ -11,9 +11,9 @@ def exit() -> NoReturn:
     return os._exit(0)
 
 
-def main() -> None:
+def run() -> None:
     """主程序入口"""
-    from static_module import PROJECT_NAME, load_dataset
+    from static_module import PROJECT_NAME
 
     logger.debug("主程序运行中: %s", PROJECT_NAME)
 

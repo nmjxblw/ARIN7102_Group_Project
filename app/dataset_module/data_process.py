@@ -65,3 +65,10 @@ def visualize_data_frame(df: pd.DataFrame) -> None:
     - df: 需要可视化信息的DataFrame。
     """
     import matplotlib.pyplot as plt
+
+    # TODO: 使用matplotlib绘制图表，保存在'reports/figures'目录下。
+    # 1. 设置图表为UTF-8编码
+    plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]  # 支持中文显示
+    plt.rcParams["axes.unicode_minus"] = False  # 支持负号显示
+    # 2.设置标题为""
+    # 2. 对于每个DF列，进行统计。绘制圆饼图显示Cell中的值分布，百分比表示。对于频率小于1%的数据归类于Other。

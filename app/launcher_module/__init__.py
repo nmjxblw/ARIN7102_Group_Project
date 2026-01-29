@@ -8,6 +8,6 @@
 在程序生命周期中，该包最先被调用。
 """
 
-from .__main__ import main
+from .__main__ import run
 
-__all__ = ["main"]
+__all__ = ["run"]
