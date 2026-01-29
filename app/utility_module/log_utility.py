@@ -12,14 +12,15 @@ from pathlib import Path
 from datetime import datetime
 from types import FrameType, TracebackType
 from typing import Optional, Tuple, Type
-import dotenv
+from static_module import PROJECT_NAME, LOG_LEVEL
 
-dotenv.load_dotenv()
-ProjectName = os.getenv("Project", "MyProject")
+ProjectName: str = PROJECT_NAME
 """项目名称，用于日志记录器名称"""
+LogLevel: int = int(logging.__getattr__(logging, name=LOG_LEVEL))
+"""日志级别"""
 
 
-class TimedDirectoryFileHandler(logging.Handler):
+class __FileHandler(logging.Handler):
     """
     自定义日志处理器
     按日期创建目录，按启动时间创建日志文件
@@ -29,7 +30,7 @@ class TimedDirectoryFileHandler(logging.Handler):
         self,
         base_dir: str = "logs",
         encoding: str = "utf-8",
-        level: int = logging.DEBUG,
+        level: int = LogLevel,
     ):
         """
         初始化处理器
@@ -125,7 +126,7 @@ class LoggerConfig:
         base_dir: str = "logs",
         log_format: str = r"[%(asctime)s.%(msecs)03d][%(pathname)s:%(lineno)d][%(levelname)s] %(message)s",
         date_format: str = r"%Y-%m-%d %H:%M:%S",
-        level: int = logging.DEBUG,
+        level: int = LogLevel,
         encoding: str = "utf-8",
         console_output: bool = True,
     ):
@@ -178,7 +179,7 @@ class LoggerConfig:
         formatter = logging.Formatter(fmt=self.log_format, datefmt=self.date_format)
         """日志格式化器"""
         # 添加文件处理器
-        file_handler = TimedDirectoryFileHandler(
+        file_handler = __FileHandler(
             base_dir=self.base_dir, encoding=self.encoding, level=self.level
         )
         """文件处理器"""
@@ -198,7 +199,7 @@ class LoggerConfig:
 def setup_logger(
     name: str = "AppLogger",
     base_dir: str = "logs",
-    level: int = logging.DEBUG,
+    level: int = LogLevel,
     console_output: bool = True,
 ) -> logging.Logger:
     """
@@ -223,7 +224,7 @@ def setup_logger(
 
 
 # 全局默认日志记录器
-logger: logging.Logger = setup_logger(name=ProjectName, level=logging.DEBUG)
+logger: logging.Logger = setup_logger(name=ProjectName, level=LogLevel)
 """全局默认日志记录器对象"""
 
 
@@ -236,7 +237,7 @@ def get_default_logger(default_name: str = ProjectName) -> logging.Logger:
     """
     global logger
     if logger is None:
-        logger = setup_logger(name=default_name, level=logging.DEBUG)
+        logger = setup_logger(name=default_name, level=LogLevel)
     return logger
 
 

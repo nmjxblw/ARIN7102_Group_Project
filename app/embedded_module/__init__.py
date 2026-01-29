@@ -1,1 +1,7 @@
-"""Embedded Vector Database Package"""
+"""
+词向量库包
+
+在这里编辑向量库的生成、调用。
+
+提供 API 接口用于词向量相似度查询。
+"""
