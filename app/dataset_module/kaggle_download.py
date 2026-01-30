@@ -23,6 +23,7 @@ def download_and_open_datasets() -> dict[str, Any]:
     for url in url_dict.keys():
         url_dict[url] = kagglehub.dataset_download(url, force_download=True)
         try:
+            # 使用浏览器打开下载文件夹
             subprocess.run(
                 ["explorer", url_dict[url]],
                 check=True,

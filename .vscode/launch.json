@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "args": [],
+      "args": ["chcp 65001"],
       "console": "integratedTerminal",
       "cwd": "${fileDirname}",
       "justMyCode": true,
