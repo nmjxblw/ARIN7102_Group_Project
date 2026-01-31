@@ -11,6 +11,7 @@ import queue
 from static_module import TaskStatus, PROJECT_NAME, THREAD_TIMEOUT
 from singleton_module import AppAsyncTaskManager
 from utility_module import logger
+from dataset_module import *
 
 app_running_flag: bool = True
 """应用程序运行标志"""
@@ -201,9 +202,10 @@ def run() -> None:
 
     logger.debug("主程序运行中: %s", PROJECT_NAME)
     # 启动主线程,并设置为非守护线程
-    application_thread = threading.Thread(
-        target=main_thread_task, args=(), kwargs={}, daemon=False
-    )
-    application_thread.start()
-    application_thread.join()
+    # application_thread = threading.Thread(
+    #     target=main_thread_task, args=(), kwargs={}, daemon=False
+    # )
+    # application_thread.start()
+    # application_thread.join()
+    process_datasets_deepseek_version()
     exit()

@@ -208,3 +208,6 @@ __marimo__/
 
 # Datasets
 customer_complaints.csv
+
+# cProfile
+*.stats

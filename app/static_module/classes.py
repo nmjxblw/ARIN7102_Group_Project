@@ -7,7 +7,7 @@ import threading
 from datetime import datetime
 
 # 本地模块导入
-from static_module import TaskStatus
+from .enums import TaskStatus
 from utility_module import logger
 
 
