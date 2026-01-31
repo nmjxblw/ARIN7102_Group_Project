@@ -4,6 +4,7 @@
 # 系统/第三方模块导入
 import threading
 from typing import Callable, Any, Optional
+from datetime import datetime
 
 # 本地模块导入
 from utility_module import logger
@@ -22,7 +23,7 @@ class AppAsyncTaskManager(metaclass=SingletonMeta):
     def create_task(self, task_func: Callable, task_name: str) -> int:
         """创建新任务，返回任务ID"""
         with self._manager_lock:
-            self._task_counter += 1
+            self._task_counter = hash(datetime.now())
             task_id = self._task_counter
             task = AppAsyncTask(
                 task_id=task_id, task_func=task_func, task_name=task_name

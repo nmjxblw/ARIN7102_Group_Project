@@ -4,10 +4,12 @@
 所有单例管理者实例化放置于此
 """
 
-from .main_thread_task_manager import *
 from .singleton_meta import SingletonMeta
+from .main_thread_task_manager import *
+from .deepseek_manager import *
 
 __all__ = [
-    "AppAsyncTaskManager",
     "SingletonMeta",
+    "AppAsyncTaskManager",
+    "deepseek_manager",
 ]

@@ -126,7 +126,10 @@ class LoggerConfig:
     def __init__(
         self,
         base_dir: str = "logs",
-        log_format: str = r"[%(asctime)s.%(msecs)03d][%(pathname)s:%(lineno)d][%(levelname)s] %(message)s",
+        log_format: str = r"[%(asctime)s.%(msecs)03d][%(pathname)s:%(lineno)d][%(levelname)s]"
+        + os.linesep
+        + r"%(message)s"
+        + os.linesep,
         date_format: str = r"%Y-%m-%d %H:%M:%S",
         level: int = LogLevel,
         encoding: str = "utf-8",
