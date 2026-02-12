@@ -55,7 +55,7 @@ def process_user_input():
     """处理用户输入"""
     global app_running_flag
     user_input: str = input("用户：").strip()
-    if re.match(r"^(exit|quit|q)$", user_input, re.IGNORECASE):
+    if re.match(r"^\s?(exit|quit|q)\.?$", user_input, re.IGNORECASE):
         app_running_flag = False
         return
     deepseek_manager.send(user_input)
@@ -116,14 +116,6 @@ def run() -> None:
     logger.debug("主程序运行中: %s", PROJECT_NAME)
 
     register_default_main_thread_tasks()
-
-    # 启动主线程,并设置为非守护线程
-    # app_main_thread = threading.Thread(
-    #     target=main_thread_task_handler, daemon=False, name="AppMainThreadTaskHandler"
-    # )
-    # app_main_thread.start()
-
-    # app_main_thread.join()
 
     main_thread_task_handler()
     exit()
