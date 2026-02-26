@@ -11,7 +11,10 @@ from pathlib import Path
 import pandas as pd
 from typing import Optional
 from matplotlib import pyplot as plt
+from matplotlib.patches import Rectangle
 import tqdm
+import json
+import numpy as np
 
 # 本地模块导入
 from utility_module import logger
@@ -41,9 +44,9 @@ def load_dataset(
                 full_path = Path(file_dir) / file
                 file_path.append(full_path.name)
                 try:
-                    df = pd.read_csv(full_path)
+                    df = pd.read_csv(full_path).fillna("NaN")  # 加载数据并填充缺失值
                     logger.info(f"成功加载文件: {full_path}")
-                    datasets_dict[file] = df
+                    datasets_dict[Path(file).stem] = df
                 except Exception as e:
                     logger.info(f"加载文件{full_path}失败: {e}")
                     continue
@@ -53,90 +56,219 @@ def load_dataset(
                 file += ".csv"
             full_path = Path(file_dir) / file
             try:
-                df = pd.read_csv(full_path)
+                df = pd.read_csv(full_path).fillna("NaN")  # 加载数据并填充缺失值
                 logger.info(f"成功加载文件: {full_path}")
-                datasets_dict[file] = df
+                datasets_dict[Path(file).stem] = df
             except Exception as e:
                 logger.info(f"加载文件{full_path}失败: {e}")
                 continue
     return datasets_dict
 
 
-def visualize_data_frame(df: pd.DataFrame, *, title="DataFrame Visualization") -> None:
+def visualize_data_frame(
+    df: pd.DataFrame,
+    *,
+    file_name="DataFrame Visualization",
+    max_categories_per_chart=10,
+) -> os.PathLike:
     """
-    可视化数据集信息,以图表形式展示DataFrame的基本信息
+    可视化数据帧
 
     参数：
-    - df: 需要可视化信息的DataFrame。
+    - df: 需要可视化信息的DataFrame
+    - file_name: 输出文件名
+    - max_categories_per_chart: 每个图表最多显示的类别数
     """
+    # 设置中文字体和样式 - 更彻底的配置
+    plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei", "STSong"]
+    plt.rcParams["axes.unicode_minus"] = False
+    plt.rcParams["font.family"] = "sans-serif"
+    plt.rcParams["text.usetex"] = False
+    plt.style.use("seaborn-v0_8-whitegrid")
 
-    # 使用matplotlib绘制图表，保存在'reports/figures'目录下。
-    # 1. 设置图表为UTF-8编码
-    plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]  # 支持中文显示
-    plt.rcParams["axes.unicode_minus"] = False  # 支持负号显示
-    # 2.设置标题为title
-    plt.title(title)
-    # 3. 对于每个DF列，进行统计。绘制圆饼图显示Cell中的值分布，百分比表示。对于频率小于1%的数据归类于Other。将所有图表绘制在一张大图上。
-    num_columns = len(df.columns)
-    (fig, axes) = plt.subplots(
-        nrows=(num_columns + 2) // 3,
-        ncols=3,
-        figsize=(15, 5 * ((num_columns + 2) // 3)),
+    file_name = Path(file_name).stem
+
+    # 计算布局
+    num_rows = len(df.columns)
+
+    # 创建图形 - 增加宽度
+    fig = plt.figure(figsize=(28, 5 * num_rows))
+
+    # 创建外部布局 - 调整高度比例
+    gs = fig.add_gridspec(
+        num_rows + 1, 1, hspace=0.3, height_ratios=[0.08] + [1] * num_rows
     )
-    axes = axes.flatten()
-    progress_bar = tqdm.tqdm(
-        enumerate(df.to_records()), total=df.to_records().shape[0], desc="绘制图表"
+
+    # 添加标题
+    title_ax = fig.add_subplot(gs[0, :])
+    title_ax.axis("off")
+    title_ax.text(
+        0.5,
+        0.5,
+        f"{file_name}",
+        fontsize=24,
+        fontweight="bold",
+        ha="center",
+        va="center",
     )
-    val_distribute_dict: dict[str, dict[str, int]] = {}
-    for i, record in progress_bar:
-        for col in df.columns:
-            if col not in val_distribute_dict:
-                val_distribute_dict[col] = {}
-            val = str(record[col])
-            if val not in val_distribute_dict[col]:
-                val_distribute_dict[col][val] = 0
-            val_distribute_dict[col][val] += 1
-    # 将键值对填充到图表中
-    for idx, (col, val_count_dict) in enumerate(val_distribute_dict.items()):
-        ax = axes[idx]
-        # 计算总数
-        total_count = sum(val_count_dict.values())
-        # 计算百分比并归类
-        labels = []
-        sizes = []
-        other_size = 0
-        for val, count in val_count_dict.items():
-            percentage = (count / total_count) * 100
-            if percentage < 1.0:
-                other_size += count
-            else:
-                labels.append(f"{val} ({percentage:.1f}%)")
-                sizes.append(count)
-        if other_size > 0:
-            labels.append(f"Other (<1%)")
-            sizes.append(other_size)
-        # 绘制饼图
-        ax.pie(
+
+    progress_bar = tqdm.tqdm(enumerate(df.columns), desc="绘制图表", total=num_rows)
+
+    for idx, col in progress_bar:
+        row_idx = idx + 1
+
+        # 为每一行创建子网格：左边饼图，右边图例
+        inner_gs = gs[row_idx].subgridspec(1, 2, width_ratios=[1, 1.2], wspace=0.1)
+
+        # 左侧：饼图
+        ax_pie = fig.add_subplot(inner_gs[0])
+        # 右侧：图例
+        ax_legend = fig.add_subplot(inner_gs[1])
+        ax_legend.axis("off")
+
+        # 统计值分布
+        value_counts = df[col].astype(str).value_counts()
+        total = len(df)
+
+        # 如果类别太多，合并小的类别
+        if len(value_counts) > max_categories_per_chart:
+            main_values = value_counts.head(max_categories_per_chart - 1)
+            other_count = value_counts.tail(
+                len(value_counts) - max_categories_per_chart + 1
+            ).sum()
+            main_values = pd.concat(
+                [
+                    main_values,
+                    pd.Series(
+                        {
+                            f"Others ({len(value_counts)-max_categories_per_chart+1})": other_count
+                        }
+                    ),
+                ]
+            )
+        else:
+            main_values = value_counts
+
+        # 计算百分比
+        percentages = (main_values / total * 100).round(2)
+
+        # 准备数据
+        sizes = np.array(main_values.values)
+        labels = main_values.index.tolist()
+
+        # 创建好看的颜色
+        colors = plt.cm.get_cmap("Set3")(np.linspace(0, 1, len(sizes))).tolist()
+
+        # 绘制甜甜圈图
+        wedges, texts, autotexts = ax_pie.pie(  # type: ignore
             sizes,
-            labels=labels,
-            autopct="%1.1f%%",
-            startangle=140,
-            textprops={"fontsize": 8},
+            colors=colors,
+            startangle=90,
+            wedgeprops=dict(width=0.5, edgecolor="white", linewidth=2),
+            autopct=lambda pct: f"{pct:.1f}%" if pct > 3 else "",
+            pctdistance=0.75,
+            textprops=dict(color="white", fontsize=11, fontweight="bold"),
         )
-        ax.set_title(f"Column: {col}")
-    plt.tight_layout()
+
+        # 中心添加信息
+        center_text = f"Total\n{total:,}"
+        ax_pie.text(
+            0,
+            0,
+            center_text,
+            ha="center",
+            va="center",
+            fontsize=13,
+            fontweight="bold",
+            style="italic",
+            fontfamily="sans-serif",
+        )
+
+        # 设置子图标题
+        ax_pie.set_title(
+            f"{col}", fontsize=16, fontweight="bold", pad=15, fontfamily="sans-serif"
+        )
+        ax_pie.axis("equal")
+
+        # 在右侧面板创建带颜色的图例
+        num_labels = len(labels)
+        # 根据标签数量动态调整列数
+
+        cols = (num_labels + 9) // 10  # 每列最多显示10个标签
+        cols = max(1, cols)  # 确保至少有1列
+
+        rows_per_col = (num_labels + cols - 1) // cols  # 向上取整
+        col_width = 1.0 / cols
+
+        for i, (label, count, pct, color) in enumerate(
+            zip(labels, main_values.values, percentages, colors)
+        ):
+            label_str = str(label).replace("_", " ")
+            if len(label_str) > 20:
+                label_display = label_str[:17] + "..."
+            else:
+                label_display = label_str
+
+            # 计算当前项在第几列、第几行
+            col_idx = i // rows_per_col
+            row_idx = i % rows_per_col
+
+            # 计算位置
+            x_start = col_idx * col_width + 0.02
+            y_start = 0.95
+            y_step = 0.85 / rows_per_col
+            y_pos = y_start - row_idx * y_step
+
+            # 绘制颜色方块
+            rect = Rectangle(
+                (x_start, y_pos - 0.015),
+                0.04,
+                0.03,
+                facecolor=color,
+                edgecolor="black",
+                linewidth=1,
+                transform=ax_legend.transAxes,
+            )
+            ax_legend.add_patch(rect)
+
+            # 添加文本 - 明确指定字体
+            text_content = f"{i+1:2d}. {label_display:<18} {count:>6,} ({pct:>6.2f}%)"
+            ax_legend.text(
+                x_start + 0.06,
+                y_pos,
+                text_content,
+                fontsize=9,
+                verticalalignment="center",
+                transform=ax_legend.transAxes,
+                fontfamily="sans-serif",
+            )
+
+    # 调整布局
+    plt.subplots_adjust(top=0.95, bottom=0.05, left=0.05, right=0.95, hspace=0.3)
+
+    # 保存文件
     figures_dir = Path.cwd() / "reports" / "figures"
     figures_dir.mkdir(parents=True, exist_ok=True)
-    fig_path = figures_dir / f"{title.replace(' ', '_')}.png"
-    plt.savefig(fig_path)
+
+    fig_path = figures_dir / f"{file_name.replace(' ', '_')}.png"
+
+    plt.savefig(fig_path, dpi=300, bbox_inches="tight", facecolor="white")
     plt.close()
-    plt.show()
-    logger.info(f"数据集可视化图表已保存至: {fig_path}")
+
+    logger.info(f"可视化图表已保存至: {fig_path}")
+    return fig_path
 
 
-def generate_visualize_data_frame() -> None:
-    # 生成可视化数据集图表
+def generate_visualize_data_frame() -> list[Optional[os.PathLike]]:
+    """
+    生成可视化数据集图表
+    """
     datasets: dict[str, pd.DataFrame] = load_dataset(None)
-    for name, df in datasets.items():
+    fig_paths = []
+    for file_name, df in datasets.items():
 
-        visualize_data_frame(df, title=name)
+        fig_path = visualize_data_frame(
+            df, file_name=file_name, max_categories_per_chart=30
+        )
+        fig_paths.append(fig_path)
+    return fig_paths

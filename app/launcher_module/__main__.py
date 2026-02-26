@@ -114,8 +114,10 @@ def run() -> None:
     """主程序入口"""
 
     logger.debug("主程序运行中: %s", PROJECT_NAME)
+    import dataset_module
 
-    register_default_main_thread_tasks()
+    dataset_module.download_and_open_datasets()
+    # register_default_main_thread_tasks()
 
-    main_thread_task_handler()
+    # main_thread_task_handler()
     exit()

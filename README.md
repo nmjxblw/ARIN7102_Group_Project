@@ -123,3 +123,8 @@ flowchart TB
      - Topical application  
      - Oral intake  
      - Intravenous injection
+
+## Training Resources References
+
+- [FirstAidQA: A Synthetic Dataset for First Aid and Emergency Response in Low-Connectivity Settings](https://huggingface.co/datasets/i-am-mushfiq/FirstAidQA/tree/main)
+  - Saiyma Sittul Muna, Rezwan Islam Salvi, Mushfiqur Rahman Mushfique, Ajwad Abrar

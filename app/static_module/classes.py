@@ -8,7 +8,6 @@ from datetime import datetime
 
 # 本地模块导入
 from .enums import TaskStatus
-from utility_module import logger
 
 
 @dataclass
@@ -29,6 +28,8 @@ class AppAsyncTask:
         """请求取消任务"""
         if self.status in [TaskStatus.PENDING, TaskStatus.RUNNING]:
             self.cancel_event.set()
+            from utility_module import logger  # 避免循环导入
+
             logger.info(f"任务 {self.task_id} ({self.task_name}) 取消请求已发出。")
             return True
         return False
