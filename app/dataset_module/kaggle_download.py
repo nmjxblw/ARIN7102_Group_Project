@@ -36,7 +36,7 @@ def download_and_open_datasets() -> dict[str, Optional[str]]:
             # )
             shutil.copytree(
                 str(url_dict[url]),
-                os.path.join(os.getcwd(), "dataset_module"),
+                os.path.join(os.getcwd(), "dataset_module", os.path.basename(url)),
                 dirs_exist_ok=True,
             )
         except Exception as e:
