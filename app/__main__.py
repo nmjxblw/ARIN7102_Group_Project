@@ -23,8 +23,8 @@ if __name__ == "__main__":
     #     ps.strip_dirs().sort_stats("cumulative").print_stats()
     import dataset_module
 
-    dataset_module.download_and_open_datasets()
-    # dataset_module.generate_visualize_data_frame()
+    # dataset_module.download_and_open_datasets()
+    dataset_module.generate_visualize_data_frame()
 
     # import matplotlib.font_manager
 

@@ -39,17 +39,21 @@ def load_dataset(
     if file_path is None:
         file_path = []
         # 实现自动加载目录下所有数据集的功能
-        for file in os.listdir(file_dir):
-            if file.endswith(".csv"):
-                full_path = Path(file_dir) / file
-                file_path.append(full_path.name)
-                try:
-                    df = pd.read_csv(full_path).fillna("NaN")  # 加载数据并填充缺失值
-                    logger.info(f"成功加载文件: {full_path}")
-                    datasets_dict[Path(file).stem] = df
-                except Exception as e:
-                    logger.info(f"加载文件{full_path}失败: {e}")
-                    continue
+        for root, dirs, files in os.walk(file_dir):
+            for file in files:
+                if str(file).endswith(".csv"):
+                    full_path = Path(root) / file
+                    file_path.append(full_path.name)
+                    try:
+                        df = pd.read_csv(full_path).fillna("NaN")
+                        df = df.drop(columns=["Unnamed: 0"], errors="ignore")
+                        # 过滤掉包含'Unnamed''index''ID'的列
+                        df = df.filter(regex="^(?!Unnamed.*$|.*index.*|.*ID.*$).*$")
+                        logger.info(f"成功加载文件: {full_path}")
+                        datasets_dict[Path(file).stem] = df
+                    except Exception as e:
+                        logger.info(f"加载文件{full_path}失败: {e}")
+                        continue
     else:
         for file in file_path:
             if file.endswith(".csv") is False:
@@ -57,6 +61,9 @@ def load_dataset(
             full_path = Path(file_dir) / file
             try:
                 df = pd.read_csv(full_path).fillna("NaN")  # 加载数据并填充缺失值
+                df = df.drop(columns=["Unnamed: 0"], errors="ignore")
+                # 过滤掉包含'Unnamed''index''ID'的列
+                df = df.filter(regex="^(?!Unnamed.*$|.*index.*|.*ID.*$).*$")
                 logger.info(f"成功加载文件: {full_path}")
                 datasets_dict[Path(file).stem] = df
             except Exception as e:
