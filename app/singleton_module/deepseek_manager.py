@@ -4,7 +4,7 @@
 import os
 import sys
 import queue
-from typing import Any
+from typing import Any, Optional
 import threading
 from openai import OpenAI, resources, responses
 from openai.types.chat import ChatCompletion
@@ -58,12 +58,13 @@ class DeepSeekManager(metaclass=SingletonMeta):
             self._initialized = True
             logger.debug("DeepSeek 管理器已初始化并启动后台线程。")
 
-    def _load_history_from_file(self) -> bool:
+    def _load_history_from_file(self, file_path: Optional[os.PathLike] = None) -> bool:
         """从文件加载对话历史记录"""
         chat_history_dir = Path.cwd() / CHAT_HISTORY_DIR
         chat_history_dir.mkdir(parents=True, exist_ok=True)
         self.history_file = (
-            chat_history_dir / f"{RUNTIME_TIMESTAMP.strftime('%Y%m%d_%H%M%S')}.json"
+            chat_history_dir
+            / f"{RUNTIME_TIMESTAMP.strftime('%Y%m%d_%H%M%S')if file_path is None else Path(file_path).stem}.json"
         )
         # 首先将系统提示词添加到历史记录中
         self._history.append({"role": "system", "content": self._system_prompt})
@@ -82,9 +83,9 @@ class DeepSeekManager(metaclass=SingletonMeta):
         """保存对话历史记录到文件"""
         try:
             # 保存时移除系统提示词，避免重复保存
-            self._history = self._history[1:]
+            self.saved_history = self._history[1:]
             with open(self.history_file, "w", encoding="utf-8") as f:
-                json.dump(self._history, f, ensure_ascii=False, indent=4)
+                json.dump(self.saved_history, f, ensure_ascii=False, indent=4)
             logger.debug(f"已保存对话历史记录到文件: {self.history_file}")
             return True
         except Exception as e:
@@ -114,7 +115,9 @@ class DeepSeekManager(metaclass=SingletonMeta):
                     model="deepseek-reasoner", messages=self._history
                 )
                 if response is not None:
-                    response_json_text = json.dumps(response.model_dump())
+                    response_json_text = json.dumps(
+                        response.model_dump(), ensure_ascii=False, indent=4
+                    )
                     logger.debug(f"DeepSeek:\n {response_json_text}")
                     _response_content = response.choices[0].message.content
                     logger.info(f"DeepSeek:\n{_response_content}")

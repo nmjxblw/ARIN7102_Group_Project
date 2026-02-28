@@ -211,3 +211,6 @@ customer_complaints.csv
 
 # cProfile
 *.stats
+
+# Chat history
+chat_histories/
