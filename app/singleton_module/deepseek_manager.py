@@ -101,10 +101,12 @@ class DeepSeekManager(metaclass=SingletonMeta):
             try:
                 if self.message_queue.empty():
                     continue
+                user_input_message = self.message_queue.get(block=False, timeout=1)
+                logger.debug(f"正在处理用户输入: {user_input_message}")
                 self._history.append(
                     {
                         "role": "user",
-                        "content": self.message_queue.get(block=False, timeout=1),
+                        "content": user_input_message,
                     }
                 )
                 # 在这里处理消息，例如发送到 DeepSeek API
