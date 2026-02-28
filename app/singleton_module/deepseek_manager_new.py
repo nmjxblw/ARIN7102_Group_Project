@@ -24,7 +24,7 @@ class DeepSeekManager(metaclass=SingletonMeta):
         )
 
         self._system_prompt = (
-            "你是AI/数学/统计/编程专家，请用中文回答。"
+            "you are a helpful assistant for data analysis. Please answer the question using english."
         )
 
         self._history_lock = threading.Lock()
