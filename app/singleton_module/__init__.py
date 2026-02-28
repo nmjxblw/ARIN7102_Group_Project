@@ -12,4 +12,5 @@ __all__ = [
     "SingletonMeta",
     "AppAsyncTaskManager",
     "deepseek_manager",
+    "deepseek_manager_new"
 ]
