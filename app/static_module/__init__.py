@@ -19,6 +19,7 @@ __all__ = [
     "LOG_LEVEL",
     "CHAT_HISTORY_DIR",
     "THREAD_TIMEOUT",
+    "KAGGLE_DATASET_DOWNLOAD_URLS_FILE",
     # Classes
     "AppAsyncTask",
     # Enums

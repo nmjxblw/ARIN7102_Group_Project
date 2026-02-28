@@ -212,3 +212,8 @@ customer_complaints.csv
 # cProfile
 *.stats
 app/simple_bert_code_playground/remote_llm_module/chat_histories/20260227_182543.json
+=======
+
+# Chat history
+chat_histories/
+>>>>>>> e0f0d68b00088e710e36a96aaee2cc98f31dad6a

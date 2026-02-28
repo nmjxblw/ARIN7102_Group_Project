@@ -1,4 +1,4 @@
-"""主程序模块"""
+"""启动模块的主函数"""
 
 # 系统/第三方模块导入
 import os
@@ -64,8 +64,9 @@ def process_user_input():
 def register_default_main_thread_tasks():
     """注册默认的主线程任务"""
     # 这里可以添加一些默认的主线程任务
-    logger.debug("注册默认的主线程任务。")
+    logger.debug("开始注册默认的主线程任务。")
     app_main_thread_while_loop_tasks.append(process_user_input)
+    logger.debug("注册主线程任务[process_user_input]完成。")
 
 
 def main_thread_task_handler():
@@ -110,14 +111,14 @@ def end_background_threads():
     logger.debug("结束后台线程。")
 
 
-def run() -> None:
+def app_run() -> None:
     """主程序入口"""
 
     logger.debug("主程序运行中: %s", PROJECT_NAME)
-    import dataset_module
+    # import dataset_module
 
-    dataset_module.download_and_open_datasets()
-    # register_default_main_thread_tasks()
+    # dataset_module.download_and_open_datasets()
+    register_default_main_thread_tasks()
 
-    # main_thread_task_handler()
+    main_thread_task_handler()
     exit()
