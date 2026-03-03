@@ -1,798 +1,798 @@
 [
   {
-    "question": "My skin has been itching a lot, especially in warm weather. What should I do?",
     "answer": "Try to keep the affected area clean and dry. You can use over-the-counter antifungal creams, and avoid scratching to prevent further irritation.",
     "disease": "Fungal infection",
+    "question": "My skin has been itching a lot, especially in warm weather. What should I do?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "I have a rash on my feet that's red and itchy. Is there a way to manage it?",
     "answer": "Make sure to wash and dry your feet thoroughly, especially between toes. Use antifungal powder and wear moisture-wicking socks.",
     "disease": "Fungal infection",
+    "question": "I have a rash on my feet that's red and itchy. Is there a way to manage it?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "There are some raised bumps on my skin that don't hurt but look odd. Any advice?",
     "answer": "These could be fungal-related. Keep the area clean, avoid tight clothing, and consider using topical antifungal treatments.",
     "disease": "Fungal infection",
+    "question": "There are some raised bumps on my skin that don't hurt but look odd. Any advice?",
     "symptoms": [
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "I've got patches on my skin that are lighter in color. What can I do about them?",
     "answer": "Discolored patches might be due to fungal infection. Protect them from sun exposure, and use antifungal creams as directed.",
     "disease": "Fungal infection",
+    "question": "I've got patches on my skin that are lighter in color. What can I do about them?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "My skin feels itchy and has a rash after I sweat. How can I prevent this?",
     "answer": "Shower immediately after sweating, wear loose, breathable clothing, and apply antifungal lotion to prone areas.",
     "disease": "Fungal infection",
+    "question": "My skin feels itchy and has a rash after I sweat. How can I prevent this?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "I noticed some small nodules on my skin that are a bit scaly. Should I try home remedies?",
     "answer": "Yes, you can gently clean the area and apply over-the-counter antifungal ointments. Avoid sharing personal items like towels.",
     "disease": "Fungal infection",
+    "question": "I noticed some small nodules on my skin that are a bit scaly. Should I try home remedies?",
     "symptoms": [
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "The itching on my skin is bothersome but not severe. What lifestyle changes help?",
     "answer": "Maintain good hygiene, keep your skin dry, and avoid environments that cause excessive sweating.",
     "disease": "Fungal infection",
+    "question": "The itching on my skin is bothersome but not severe. What lifestyle changes help?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "I have a rash that comes and goes. How can I stop it from recurring?",
     "answer": "Identify and avoid triggers like damp clothing. Use antifungal soap and ensure your living spaces are well-ventilated.",
     "disease": "Fungal infection",
+    "question": "I have a rash that comes and goes. How can I stop it from recurring?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "There are discolored spots on my back. Are they something to worry about?",
     "answer": "They might be fungal patches. Keep the area clean, use antifungal creams, and wear clean, dry clothing.",
     "disease": "Fungal infection",
+    "question": "There are discolored spots on my back. Are they something to worry about?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "My skin itches and has a mild rash when I wear certain fabrics. What can I do?",
     "answer": "Opt for natural, breathable fabrics like cotton. Wash new clothes before wearing, and use hypoallergenic laundry detergents.",
     "disease": "Fungal infection",
+    "question": "My skin itches and has a mild rash when I wear certain fabrics. What can I do?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "I have some bumpy skin eruptions that aren't painful. How should I care for them?",
     "answer": "Avoid picking or scratching them. Apply antifungal cream regularly and keep the skin moisturized with non-comedogenic products.",
     "disease": "Fungal infection",
+    "question": "I have some bumpy skin eruptions that aren't painful. How should I care for them?",
     "symptoms": [
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "The patches on my skin seem to spread slowly. Is there a way to contain them?",
     "answer": "Consistent use of antifungal treatments can help. Also, boost your immune system with a balanced diet and stay hydrated.",
     "disease": "Fungal infection",
+    "question": "The patches on my skin seem to spread slowly. Is there a way to contain them?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "My itching gets worse at night. Any tips to manage it?",
     "answer": "Take a cool shower before bed, use calming lotions, and ensure your bedding is clean and dry.",
     "disease": "Fungal infection",
+    "question": "My itching gets worse at night. Any tips to manage it?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "A rash appeared on my arm after gardening. How can I treat it?",
     "answer": "Wash the area with mild soap, apply antifungal cream, and wear gloves when handling soil or plants in the future.",
     "disease": "Fungal infection",
+    "question": "A rash appeared on my arm after gardening. How can I treat it?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "I have nodal eruptions on my legs. What home care practices are recommended?",
     "answer": "Keep the legs elevated when possible, wear loose pants, and use antifungal sprays or powders.",
     "disease": "Fungal infection",
+    "question": "I have nodal eruptions on my legs. What home care practices are recommended?",
     "symptoms": [
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "Discolored patches on my skin are making me self-conscious. Any advice?",
     "answer": "Use sunscreen to protect the patches, and consider consulting for cosmetic options if they persist, but first try antifungal treatments.",
     "disease": "Fungal infection",
+    "question": "Discolored patches on my skin are making me self-conscious. Any advice?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "My skin itches in folds like armpits. How can I prevent this?",
     "answer": "Dry thoroughly after bathing, use antifungal powders in skin folds, and wear clothing that reduces friction.",
     "disease": "Fungal infection",
+    "question": "My skin itches in folds like armpits. How can I prevent this?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "A mild rash on my chest doesn't go away. What should I try?",
     "answer": "Avoid synthetic fabrics, shower with antifungal soap, and apply over-the-counter creams as needed.",
     "disease": "Fungal infection",
+    "question": "A mild rash on my chest doesn't go away. What should I try?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "I have small bumps on my skin that are itchy. Is this common?",
     "answer": "Yes, it could be a fungal infection. Keep the area clean, avoid scratching, and use topical antifungals.",
     "disease": "Fungal infection",
+    "question": "I have small bumps on my skin that are itchy. Is this common?",
     "symptoms": [
       "itching",
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "Patches on my skin are lighter and dry. How can I moisturize without aggravating them?",
     "answer": "Use gentle, fragrance-free moisturizers after applying antifungal cream. Avoid harsh soaps and take lukewarm showers.",
     "disease": "Fungal infection",
+    "question": "Patches on my skin are lighter and dry. How can I moisturize without aggravating them?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "I've been having some itching on my skin, and I noticed a small rash. What can I do at home to ease this?",
     "answer": "You can try keeping the area clean and dry, using over-the-counter antifungal creams, and wearing loose, breathable clothing. Avoid scratching to prevent further irritation.",
     "disease": "Fungal infection",
+    "question": "I've been having some itching on my skin, and I noticed a small rash. What can I do at home to ease this?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "What are some everyday things I can do to prevent getting a fungal infection?",
     "answer": "Maintain good hygiene, especially after sweating, keep your skin dry, change clothes regularly, and avoid sharing personal items like towels. Wearing breathable fabrics can also help.",
     "disease": "Fungal infection",
+    "question": "What are some everyday things I can do to prevent getting a fungal infection?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "I have some discolored patches on my skin after a rash cleared up. Is this normal?",
     "answer": "Yes, it's common for fungal infections to leave temporary discoloration. These patches usually fade over time. Keep the skin moisturized and protected from the sun to help it heal.",
     "disease": "Fungal infection",
+    "question": "I have some discolored patches on my skin after a rash cleared up. Is this normal?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "Can diet affect fungal infections? What should I eat or avoid?",
     "answer": "While diet isn't a direct cause, a balanced diet can support your immune system. Reduce sugar intake as fungi thrive on sugar, and include probiotics like yogurt to promote healthy skin.",
     "disease": "Fungal infection",
+    "question": "Can diet affect fungal infections? What should I eat or avoid?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "How long does it typically take for a fungal infection to go away with home treatment?",
     "answer": "With proper home care, such as using antifungal creams and keeping the area dry, symptoms often improve within a few days to a week. If it persists beyond two weeks, you might want to consult a doctor.",
     "disease": "Fungal infection",
+    "question": "How long does it typically take for a fungal infection to go away with home treatment?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "I get skin rashes in folds of my skin. What can I do to manage this?",
     "answer": "Keep those areas dry by patting them thoroughly after bathing, use talcum powder to absorb moisture, and wear loose-fitting clothes. Over-the-counter antifungal powders can also help.",
     "disease": "Fungal infection",
+    "question": "I get skin rashes in folds of my skin. What can I do to manage this?",
     "symptoms": [
       "skin_rash",
       "itching"
     ]
   },
   {
-    "question": "Are fungal infections contagious? How can I prevent spreading it to family?",
     "answer": "Yes, they can be contagious through direct contact or shared items. To prevent spread, avoid sharing towels, clothing, or personal care items, and wash your hands frequently.",
     "disease": "Fungal infection",
+    "question": "Are fungal infections contagious? How can I prevent spreading it to family?",
     "symptoms": [
       "skin_rash",
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "What natural remedies can I try for itchy skin from a fungal infection?",
     "answer": "You can apply diluted tea tree oil or coconut oil, which have antifungal properties. Also, taking oatmeal baths can soothe itching. Always do a patch test first to avoid irritation.",
     "disease": "Fungal infection",
+    "question": "What natural remedies can I try for itchy skin from a fungal infection?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "I've noticed small bumps on my skin that are itchy. Could this be fungal?",
     "answer": "It might be, especially if accompanied by itching. Try keeping the area clean and dry, and consider using an antifungal cream. If it doesn't improve, it's best to get it checked.",
     "disease": "Fungal infection",
+    "question": "I've noticed small bumps on my skin that are itchy. Could this be fungal?",
     "symptoms": [
       "itching",
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "How can I tell if my skin issue is a fungal infection or something else?",
     "answer": "Fungal infections often cause itching, redness, and circular rashes. However, for a definitive diagnosis, it's good to see a healthcare provider. In the meantime, avoid scratching and keep the area dry.",
     "disease": "Fungal infection",
+    "question": "How can I tell if my skin issue is a fungal infection or something else?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "Can stress make fungal infections worse?",
     "answer": "Stress can weaken your immune system, making you more susceptible to infections. Practicing stress-reduction techniques like meditation or gentle exercise might help in managing and preventing recurrences.",
     "disease": "Fungal infection",
+    "question": "Can stress make fungal infections worse?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "What should I do if the antifungal cream isn't working after a few days?",
     "answer": "Give it some more time, as it can take up to a week to see improvement. Ensure you're applying it as directed and keeping the area dry. If there's no change after two weeks, consider seeking medical advice.",
     "disease": "Fungal infection",
+    "question": "What should I do if the antifungal cream isn't working after a few days?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "Is it okay to exercise with a fungal infection?",
     "answer": "Yes, but take precautions. Shower immediately after sweating, wear moisture-wicking clothing, and avoid tight gear that can trap moisture. This helps prevent worsening the infection.",
     "disease": "Fungal infection",
+    "question": "Is it okay to exercise with a fungal infection?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "How can I prevent fungal infections in humid weather?",
     "answer": "In humid conditions, change out of wet clothes promptly, use antifungal powders in areas prone to sweating, and ensure good ventilation in your living spaces to reduce moisture.",
     "disease": "Fungal infection",
+    "question": "How can I prevent fungal infections in humid weather?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "I have discolored patches that don't itch. Should I be concerned?",
     "answer": "Discolored patches can be a residual effect of a fungal infection and often don't cause itching. They usually fade over time. Keep the skin healthy with moisturizer and sun protection.",
     "disease": "Fungal infection",
+    "question": "I have discolored patches that don't itch. Should I be concerned?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "Can wearing certain fabrics cause fungal infections?",
     "answer": "Tight, non-breathable fabrics like synthetic materials can trap moisture and heat, creating an environment for fungi. Opt for cotton or moisture-wicking fabrics to keep your skin dry.",
     "disease": "Fungal infection",
+    "question": "Can wearing certain fabrics cause fungal infections?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "What home hygiene practices can help with fungal skin issues?",
     "answer": "Regularly wash and dry your towels and bed linens, avoid walking barefoot in public showers, and keep your skin clean and dry, especially after activities that make you sweat.",
     "disease": "Fungal infection",
+    "question": "What home hygiene practices can help with fungal skin issues?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "Are there any over-the-counter products you recommend for mild fungal infections?",
     "answer": "Common OTC options include clotrimazole or miconazole creams. Follow the instructions on the package, and if symptoms persist, it's advisable to consult a pharmacist or doctor.",
     "disease": "Fungal infection",
+    "question": "Are there any over-the-counter products you recommend for mild fungal infections?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "How can I soothe itchy skin at night when I'm trying to sleep?",
     "answer": "Try applying a cold compress or using an anti-itch cream before bed. Keeping your bedroom cool and wearing loose pajamas can also help reduce nighttime itching.",
     "disease": "Fungal infection",
+    "question": "How can I soothe itchy skin at night when I'm trying to sleep?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "What lifestyle changes can help prevent recurrent fungal infections?",
     "answer": "Maintain a healthy diet, manage stress, practice good hygiene, wear appropriate clothing, and avoid prolonged moisture on your skin. These habits can strengthen your skin's defense against fungi.",
     "disease": "Fungal infection",
+    "question": "What lifestyle changes can help prevent recurrent fungal infections?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "What can I do for itchy skin on my feet?",
     "answer": "Keep your feet clean and dry, especially between toes. Use over-the-counter antifungal powder or cream. Wear breathable socks and shoes, and change them regularly.",
     "disease": "Fungal infection",
+    "question": "What can I do for itchy skin on my feet?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "How to prevent skin rashes in humid weather?",
     "answer": "Shower after sweating, use talcum powder in skin folds, wear loose cotton clothing, and keep living areas well-ventilated to reduce moisture.",
     "disease": "Fungal infection",
+    "question": "How to prevent skin rashes in humid weather?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "Why do I have small bumps on my skin that itch?",
     "answer": "This could be due to a fungal infection. Keep the area clean, avoid scratching, and apply topical antifungal treatments. Moisturize with gentle, non-comedogenic lotions.",
     "disease": "Fungal infection",
+    "question": "Why do I have small bumps on my skin that itch?",
     "symptoms": [
       "nodal_skin_eruptions",
       "itching"
     ]
   },
   {
-    "question": "What causes dark patches on skin and how to lighten them?",
     "answer": "Fungal infections can lead to discoloration. Use antifungal creams as directed, protect skin from sun with sunscreen, and consider gentle exfoliation. Results may take time.",
     "disease": "Fungal infection",
+    "question": "What causes dark patches on skin and how to lighten them?",
     "symptoms": [
       "dischromic_patches"
     ]
   },
   {
-    "question": "Is it normal to have a rash that comes and goes?",
     "answer": "Yes, fungal rashes can recur. Identify triggers like sweat or tight clothing. Maintain consistent skin care and reapply antifungal treatments during flare-ups.",
     "disease": "Fungal infection",
+    "question": "Is it normal to have a rash that comes and goes?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "Home remedies for itching between toes?",
     "answer": "Soak feet in diluted vinegar or tea tree oil solution, ensure complete drying, and apply cornstarch to absorb moisture. Wear open-toed shoes when possible.",
     "disease": "Fungal infection",
+    "question": "Home remedies for itching between toes?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "How to treat a fungal infection on skin naturally?",
     "answer": "Use natural antifungals like garlic paste or coconut oil, keep the area dry, and boost immunity with a balanced diet rich in probiotics and vitamins.",
     "disease": "Fungal infection",
+    "question": "How to treat a fungal infection on skin naturally?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "What lifestyle changes help with recurring skin issues?",
     "answer": "Improve hygiene habits, manage stress through relaxation, wear breathable fabrics, and avoid sharing personal items like towels to prevent reinfection.",
     "disease": "Fungal infection",
+    "question": "What lifestyle changes help with recurring skin issues?",
     "symptoms": [
       "skin_rash",
       "itching"
     ]
   },
   {
-    "question": "Can diet affect skin fungal infections?",
     "answer": "Yes, reduce sugar and refined carbs which can feed fungi. Include yogurt, garlic, and zinc-rich foods to support skin health and immunity.",
     "disease": "Fungal infection",
+    "question": "Can diet affect skin fungal infections?",
     "symptoms": [
       "itching",
       "dischromic_patches"
     ]
   },
   {
-    "question": "How to keep skin dry to prevent infections?",
     "answer": "Pat skin dry after bathing, use absorbent powders in prone areas, change wet clothes promptly, and use dehumidifiers in damp rooms.",
     "disease": "Fungal infection",
+    "question": "How to keep skin dry to prevent infections?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "What over-the-counter products are good for skin fungus?",
     "answer": "Look for creams containing clotrimazole, miconazole, or terbinafine. Follow package instructions and apply consistently for the recommended duration.",
     "disease": "Fungal infection",
+    "question": "What over-the-counter products are good for skin fungus?",
     "symptoms": [
       "itching",
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "Why does my skin itch more at night?",
     "answer": "Body temperature and moisture levels can increase at night. Take a cool shower before bed, use lightweight bedding, and apply anti-itch creams if needed.",
     "disease": "Fungal infection",
+    "question": "Why does my skin itch more at night?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "How to avoid spreading skin rashes to family members?",
     "answer": "Wash hands frequently, avoid direct skin contact, use separate towels and bedding, and disinfect shared surfaces regularly.",
     "disease": "Fungal infection",
+    "question": "How to avoid spreading skin rashes to family members?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "What are the best fabrics to wear for sensitive skin?",
     "answer": "Choose natural fibers like cotton or bamboo that allow skin to breathe. Avoid synthetic materials that trap moisture and heat.",
     "disease": "Fungal infection",
+    "question": "What are the best fabrics to wear for sensitive skin?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "Can stress cause skin fungal infections to flare up?",
     "answer": "Stress can weaken the immune system, making infections more likely. Practice stress management through exercise, meditation, and adequate sleep.",
     "disease": "Fungal infection",
+    "question": "Can stress cause skin fungal infections to flare up?",
     "symptoms": [
       "skin_rash",
       "itching"
     ]
   },
   {
-    "question": "How long does it take for a fungal rash to clear up with home care?",
     "answer": "With proper care, mild fungal rashes may improve within a week or two. Be patient and consistent with treatment, and monitor for changes.",
     "disease": "Fungal infection",
+    "question": "How long does it take for a fungal rash to clear up with home care?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "What should I avoid if I have a skin fungus?",
     "answer": "Avoid scratching, tight clothing, excessive sweating, and sharing personal items. Also, steer clear of harsh soaps that can irritate the skin.",
     "disease": "Fungal infection",
+    "question": "What should I avoid if I have a skin fungus?",
     "symptoms": [
       "itching",
       "dischromic_patches"
     ]
   },
   {
-    "question": "Is it safe to use essential oils for skin itching?",
     "answer": "Some essential oils like tea tree or lavender have antifungal properties. Dilute with a carrier oil and patch test first. Use sparingly and discontinue if irritation occurs.",
     "disease": "Fungal infection",
+    "question": "Is it safe to use essential oils for skin itching?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "How to moisturize skin without worsening a fungal infection?",
     "answer": "Use antifungal moisturizers or those containing ingredients like aloe vera. Apply to dry skin after cleansing, and avoid heavy, occlusive creams.",
     "disease": "Fungal infection",
+    "question": "How to moisturize skin without worsening a fungal infection?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "What are common triggers for fungal skin infections?",
     "answer": "Humidity, sweat, tight clothing, compromised immunity, and poor hygiene. Manage these by staying dry, wearing appropriate attire, and maintaining good health.",
     "disease": "Fungal infection",
+    "question": "What are common triggers for fungal skin infections?",
     "symptoms": [
       "nodal_skin_eruptions",
       "itching"
     ]
   },
   {
-    "question": "I've noticed some itchy patches on my skin after my workouts. What could be causing this?",
     "answer": "That itchy feeling after sweating could be due to a common fungal infection. Fungi thrive in warm, moist environments. Try showering immediately after exercise, drying your skin thoroughly (especially in skin folds), and wearing loose, breathable cotton clothing.",
     "disease": "Fungal infection",
+    "question": "I've noticed some itchy patches on my skin after my workouts. What could be causing this?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "My skin has been feeling irritated and I have a few small, red bumps. It's not too bad, but it's annoying. Any ideas?",
     "answer": "Those small, red bumps sound like they could be a minor skin rash from a fungal source. Keep the area clean and dry. You might try an over-the-counter antifungal cream. Avoid scratching, as it can spread the irritation.",
     "disease": "Fungal infection",
+    "question": "My skin has been feeling irritated and I have a few small, red bumps. It's not too bad, but it's annoying. Any ideas?",
     "symptoms": [
       "skin_rash",
       "itching"
     ]
   },
   {
-    "question": "I have a few discolored spots on my back that don't hurt. They're just there. Should I be concerned?",
     "answer": "Discolored patches can sometimes result from a past or mild fungal infection. They are often harmless but can be persistent. Using a gentle antifungal wash in the shower and protecting your skin from excessive sun can help manage their appearance.",
     "disease": "Fungal infection",
+    "question": "I have a few discolored spots on my back that don't hurt. They're just there. Should I be concerned?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "My feet get really itchy, especially between the toes. What's a good daily habit to prevent this?",
     "answer": "That's a classic sign of athlete's foot, a fungal infection. Make sure to dry your feet completely after washing, wear moisture-wicking socks, and choose shoes that allow air circulation. Applying antifungal powder daily can be very preventative.",
     "disease": "Fungal infection",
+    "question": "My feet get really itchy, especially between the toes. What's a good daily habit to prevent this?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "I developed a rash in an area where my clothing rubs. How can I care for it at home?",
     "answer": "Friction and moisture can encourage fungal rashes. Wear looser clothing made from natural fibers. Keep the area clean and dry, and apply a thin layer of an antifungal ointment. Changing out of sweaty clothes promptly is key.",
     "disease": "Fungal infection",
+    "question": "I developed a rash in an area where my clothing rubs. How can I care for it at home?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "I've had these light-colored patches on my skin for a while. They're not itchy, just there. Any lifestyle tips?",
     "answer": "Those patches might be due to a common, non-contagious fungal condition. While they often resolve on their own, you can support your skin by using a mild, pH-balanced soap and moisturizing regularly. Some find that limited sun exposure helps, but always use sunscreen.",
     "disease": "Fungal infection",
+    "question": "I've had these light-colored patches on my skin for a while. They're not itchy, just there. Any lifestyle tips?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "My skin gets itchy and has little bumps when I wear certain synthetic fabrics. What's going on?",
     "answer": "Synthetic fabrics can trap sweat and heat, creating a perfect environment for fungal growth that causes itching and bumps. Switching to breathable cotton or moisture-wicking fabrics for everyday wear can make a big difference.",
     "disease": "Fungal infection",
+    "question": "My skin gets itchy and has little bumps when I wear certain synthetic fabrics. What's going on?",
     "symptoms": [
       "itching",
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "What's the best way to dry skin folds to prevent irritation and rash?",
     "answer": "To prevent fungal issues in skin folds, pat the area gently but thoroughly with a clean, soft towel. You can also use a hairdryer on a cool, low setting to ensure it's completely dry. A light dusting of cornstarch or antifungal powder can help absorb residual moisture.",
     "disease": "Fungal infection",
+    "question": "What's the best way to dry skin folds to prevent irritation and rash?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "I sometimes get an itchy rash under my watch or bracelet. How can I avoid this?",
     "answer": "That's likely due to moisture and friction trapped under the accessory. Try to keep the area dry, take off the watch/bracelet when washing hands or sweating heavily, and clean the accessory itself regularly. Let your skin breathe for a few hours each day.",
     "disease": "Fungal infection",
+    "question": "I sometimes get an itchy rash under my watch or bracelet. How can I avoid this?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "Are there any home remedies for mild, itchy skin spots that seem fungal?",
     "answer": "For mild cases, keeping the area clean and dry is most important. Some people find relief with diluted apple cider vinegar soaks or tea tree oil (diluted in a carrier oil), as they have natural antifungal properties. However, an OTC antifungal cream is often the most straightforward and effective home treatment.",
     "disease": "Fungal infection",
+    "question": "Are there any home remedies for mild, itchy skin spots that seem fungal?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "My child came back from camp with a few itchy, ring-shaped spots. What should we do at home first?",
     "answer": "That sounds like ringworm, a common fungal infection. Start by washing the area with soap and water, drying it well, and applying an over-the-counter antifungal cream. Make sure they use their own towel and wash bedding and clothes in hot water.",
     "disease": "Fungal infection",
+    "question": "My child came back from camp with a few itchy, ring-shaped spots. What should we do at home first?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "How often should I change my towels and bed linens if I'm prone to minor skin fungal issues?",
     "answer": "To prevent reinfection, it's a good idea to use a fresh towel every time you bathe and change your bed sheets at least once a week. Wash them in hot water to effectively kill any fungal spores.",
     "disease": "Fungal infection",
+    "question": "How often should I change my towels and bed linens if I'm prone to minor skin fungal issues?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "Can diet affect susceptibility to minor skin fungal infections?",
     "answer": "While not a direct cause, a balanced diet supports a healthy immune system, which helps your body fight off minor infections. Some suggest reducing excessive sugar and refined carb intake, as fungi feed on sugar. Staying well-hydrated and eating probiotics (like yogurt) can also support overall skin health.",
     "disease": "Fungal infection",
+    "question": "Can diet affect susceptibility to minor skin fungal infections?",
     "symptoms": []
   },
   {
-    "question": "I get a recurring rash in the same spot every summer. How can I break the cycle?",
     "answer": "Recurrence in the same area is common with fungal infections. Be proactive: even when the rash clears, continue applying antifungal cream for a week or two as directed. Throughout the season, keep that area exceptionally dry and use preventative antifungal powder.",
     "disease": "Fungal infection",
+    "question": "I get a recurring rash in the same spot every summer. How can I break the cycle?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "What type of soap is best for daily use if I'm prone to little skin bumps and itchiness?",
     "answer": "Opt for a gentle, fragrance-free soap or syndet cleanser. Harsh or heavily scented soaps can disrupt your skin's natural barrier, making it more susceptible to irritation and fungal overgrowth. Look for products labeled 'for sensitive skin'.",
     "disease": "Fungal infection",
+    "question": "What type of soap is best for daily use if I'm prone to little skin bumps and itchiness?",
     "symptoms": [
       "itching",
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "Is it okay to use powder on skin to keep it dry and prevent fungal issues?",
     "answer": "Yes, using powder can be very helpful. Choose a talc-free antifungal powder or plain cornstarch. Apply it lightly to clean, completely dry skin, especially in areas prone to sweating. The key is to avoid creating a damp, caked-on layer, so use it sparingly.",
     "disease": "Fungal infection",
+    "question": "Is it okay to use powder on skin to keep it dry and prevent fungal issues?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "My skin has a few rough, discolored patches that appeared slowly. Any advice?",
     "answer": "Slow-appearing, rough discolored patches can be a sign of a chronic but mild fungal condition. Gentle exfoliation in the shower with a soft cloth can help, followed by moisturizing. An OTC antifungal cream containing clotrimazole or miconazole used consistently may gradually improve the texture and color.",
     "disease": "Fungal infection",
+    "question": "My skin has a few rough, discolored patches that appeared slowly. Any advice?",
     "symptoms": [
-      "dischromic _patches"
+      "dischromic_patches"
     ]
   },
   {
-    "question": "After gardening, I sometimes get an itchy rash on my arms. How can I prevent this?",
     "answer": "Wear long sleeves and gloves while gardening to create a barrier. Fungi live in soil. Shower as soon as you're done, washing thoroughly with soap, and pay special attention to drying your skin. Applying a light moisturizer afterward can help maintain your skin's barrier.",
     "disease": "Fungal infection",
+    "question": "After gardening, I sometimes get an itchy rash on my arms. How can I prevent this?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "Can sharing personal items like combs or hats lead to skin issues?",
     "answer": "Yes, fungal spores can spread through shared personal items. It's best to avoid sharing hats, hairbrushes, combs, towels, or clothing. If you suspect a fungal issue, clean your own items regularly to prevent spreading it to other parts of your body or to others.",
     "disease": "Fungal infection",
+    "question": "Can sharing personal items like combs or hats lead to skin issues?",
     "symptoms": []
   },
   {
-    "question": "I live in a humid climate. What extra steps should I take for my skin care?",
     "answer": "In high humidity, focus on moisture management. Wear loose, breathable clothing, shower at least once a day, and ensure you dry off thoroughly. Use air conditioning or a dehumidifier at home to lower indoor humidity. An antifungal body wash used a few times a week can be a good preventative measure.",
     "disease": "Fungal infection",
+    "question": "I live in a humid climate. What extra steps should I take for my skin care?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "What causes itching and a rash on the skin?",
     "answer": "Itching and a rash can be caused by fungal infections, which thrive in warm, moist environments. To manage it at home, keep the affected area clean and dry, use over-the-counter antifungal creams, and wear breathable clothing.",
     "disease": "Fungal infection",
+    "question": "What causes itching and a rash on the skin?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "How can I treat discolored patches on my skin?",
     "answer": "Discolored patches might be due to fungal infections like tinea versicolor. Home care includes using antifungal shampoos or creams, avoiding excessive sweating, and maintaining good hygiene.",
     "disease": "Fungal infection",
+    "question": "How can I treat discolored patches on my skin?",
     "symptoms": [
       "dischromic_patches"
     ]
   },
   {
-    "question": "What are nodal skin eruptions and how to deal with them?",
     "answer": "Nodal skin eruptions, such as bumps or nodules, can result from fungal infections. For mild cases, apply topical antifungal treatments, keep the skin dry, and avoid scratching to prevent spreading.",
     "disease": "Fungal infection",
+    "question": "What are nodal skin eruptions and how to deal with them?",
     "symptoms": [
       "nodal_skin_eruptions"
     ]
   },
   {
-    "question": "Home remedies for itchy skin from a possible fungal infection?",
     "answer": "For itchy skin from fungal infections, try applying tea tree oil diluted with a carrier oil, using apple cider vinegar compresses, or taking oatmeal baths. Always patch test first and keep the area dry.",
     "disease": "Fungal infection",
+    "question": "Home remedies for itchy skin from a possible fungal infection?",
     "symptoms": [
       "itching"
     ]
   },
   {
-    "question": "How to prevent fungal skin rashes in daily life?",
     "answer": "To prevent fungal skin rashes, practice good hygiene, dry thoroughly after bathing, wear loose-fitting clothes, change sweaty clothes promptly, and avoid sharing personal items like towels.",
     "disease": "Fungal infection",
+    "question": "How to prevent fungal skin rashes in daily life?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "Can diet help with fungal infections on the skin?",
     "answer": "Yes, a balanced diet can support skin health. Reduce sugar intake as fungi feed on sugar, eat probiotic-rich foods like yogurt, and include garlic and coconut oil which have antifungal properties.",
     "disease": "Fungal infection",
+    "question": "Can diet help with fungal infections on the skin?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "What lifestyle changes can reduce fungal skin issues?",
     "answer": "Lifestyle changes include wearing breathable fabrics, showering after exercise, using antifungal powders in shoes, and managing stress which can weaken the immune system.",
     "disease": "Fungal infection",
+    "question": "What lifestyle changes can reduce fungal skin issues?",
     "symptoms": [
       "skin_rash",
       "itching"
     ]
   },
   {
-    "question": "How to identify if a skin rash is fungal?",
     "answer": "Fungal rashes often appear as red, itchy, circular patches. For mild cases, you can try over-the-counter antifungal treatments. If it persists, consider consulting a healthcare provider for confirmation.",
     "disease": "Fungal infection",
+    "question": "How to identify if a skin rash is fungal?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "Natural ways to soothe skin discoloration from fungus?",
     "answer": "For skin discoloration from fungal infections, use natural remedies like aloe vera gel, turmeric paste, or lemon juice (with caution as it can be drying). Maintain skin hygiene and avoid sun exposure which can worsen discoloration.",
     "disease": "Fungal infection",
+    "question": "Natural ways to soothe skin discoloration from fungus?",
     "symptoms": [
       "dischromic_patches"
     ]
   },
   {
-    "question": "Are fungal infections contagious at home?",
     "answer": "Fungal infections can be contagious through direct contact or shared items. To prevent spread, wash hands regularly, avoid sharing towels or clothing, and disinfect surfaces in damp areas like bathrooms.",
     "disease": "Fungal infection",
+    "question": "Are fungal infections contagious at home?",
     "symptoms": [
       "skin_rash",
       "itching"
     ]
   },
   {
-    "question": "Best over-the-counter products for fungal skin problems?",
     "answer": "Over-the-counter options include creams containing clotrimazole, miconazole, or terbinafine. Follow the instructions on the label, apply as directed, and ensure the skin is clean and dry before application.",
     "disease": "Fungal infection",
+    "question": "Best over-the-counter products for fungal skin problems?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "How to clean skin to prevent fungal growth?",
     "answer": "To prevent fungal growth, wash skin with mild soap and water, especially after sweating. Dry thoroughly, pay attention to folds and creases, and use antifungal soap if prone to infections.",
     "disease": "Fungal infection",
+    "question": "How to clean skin to prevent fungal growth?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "What causes recurring fungal rashes?",
     "answer": "Recurring fungal rashes may be due to factors like humidity, poor hygiene, or underlying health conditions. Home care includes keeping skin dry, using preventive antifungal treatments, and wearing appropriate footwear.",
     "disease": "Fungal infection",
+    "question": "What causes recurring fungal rashes?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "Can stress lead to fungal skin issues?",
     "answer": "Stress can weaken the immune system, making you more susceptible to fungal infections. Manage stress through relaxation techniques, exercise, and adequate sleep to help prevent skin problems.",
     "disease": "Fungal infection",
+    "question": "Can stress lead to fungal skin issues?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "Home care tips for mild fungal infections on skin?",
     "answer": "For mild fungal infections, keep the area clean and dry, apply antifungal creams, avoid scratching, and wear loose clothing. Monitor for improvement and if it worsens, seek medical advice.",
     "disease": "Fungal infection",
+    "question": "Home care tips for mild fungal infections on skin?",
     "symptoms": [
       "itching",
       "skin_rash",
@@ -800,35 +800,35 @@
     ]
   },
   {
-    "question": "What to avoid when dealing with a fungal skin condition?",
     "answer": "Avoid scratching the affected area, wearing synthetic fabrics that trap moisture, using harsh soaps, and sharing personal items. Also, limit sugary foods and drinks that can promote fungal growth.",
     "disease": "Fungal infection",
+    "question": "What to avoid when dealing with a fungal skin condition?",
     "symptoms": [
       "itching",
       "skin_rash"
     ]
   },
   {
-    "question": "How long does a fungal infection take to heal with home treatment?",
     "answer": "With proper home care, mild fungal infections may start to improve within a few days to a week. Consistency in treatment and hygiene is key. If no improvement after two weeks, consider seeing a doctor.",
     "disease": "Fungal infection",
+    "question": "How long does a fungal infection take to heal with home treatment?",
     "symptoms": [
       "skin_rash",
       "itching"
     ]
   },
   {
-    "question": "Daily habits to help with fungal skin rashes?",
     "answer": "Daily habits include showering daily, drying skin thoroughly, changing clothes regularly, using separate towels for affected areas, and applying preventive antifungal powders in prone areas.",
     "disease": "Fungal infection",
+    "question": "Daily habits to help with fungal skin rashes?",
     "symptoms": [
       "skin_rash"
     ]
   },
   {
-    "question": "Why is my skin itchy after sweating?",
     "answer": "Itchy skin after sweating could be due to fungal infections, as fungi thrive in moist environments. To prevent this, shower promptly after sweating, wear moisture-wicking clothing, and use antifungal sprays or powders.",
     "disease": "Fungal infection",
+    "question": "Why is my skin itchy after sweating?",
     "symptoms": [
       "itching"
     ]

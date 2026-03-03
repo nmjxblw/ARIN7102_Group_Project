@@ -215,10 +215,7 @@ customer_complaints.csv
 
 # Chat history
 chat_histories/
->>>>>>> e0f0d68b00088e710e36a96aaee2cc98f31dad6a
-.idea/inspectionProfiles/profiles_settings.xml
-.idea/vcs.xml
-.idea/misc.xml
-.idea/deployment.xml
-.idea/ARIN7102_Group_Project.iml
-/app/my_code/
+
+# Local IDE settings
+.idea/
+my_code/
