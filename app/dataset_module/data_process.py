@@ -11,17 +11,33 @@ from pathlib import Path
 import pandas as pd
 from typing import Optional
 from matplotlib import pyplot as plt
+from matplotlib import cm
 from matplotlib.patches import Rectangle
 import tqdm
 import json
 import numpy as np
+import html
+import warnings
+from bs4 import BeautifulSoup, MarkupResemblesLocatorWarning
 
 # 本地模块导入
 from utility_module import logger
 
+warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+
+
+def clean_with_bs4(text):
+    """使用BeautifulSoup处理所有HTML实体"""
+    if not isinstance(text, str):
+        return text
+
+    # 使用BeautifulSoup解析和解码
+    soup = BeautifulSoup(text, "html.parser")
+    return soup.get_text()
+
 
 def load_dataset(
-    file_path: Optional[list[str]],
+    file_name: Optional[list[str]],
     *,
     file_dir: os.PathLike = Path.cwd() / "dataset_module",
 ) -> dict[str, pd.DataFrame]:
@@ -29,46 +45,46 @@ def load_dataset(
     加载数据集文件
 
     参数：
-    - file_path: 可选的文件路径列表。如果为None，则加载目录下所有.csv文件。
+    - file_name: 可选的文件名列表。如果为None，则加载`Path.cwd() / dataset_module`目录下所有.csv文件。
     - file_dir: 数据集文件所在目录，默认为当前工作目录下的'dataset_module'目录。
 
     返回：
     - 包含数据集名称和对应DataFrame的字典。
     """
     datasets_dict = {}
-    if file_path is None:
-        file_path = []
+    if file_name is None:
+        file_name = []
         # 实现自动加载目录下所有数据集的功能
         for root, dirs, files in os.walk(file_dir):
             for file in files:
                 if str(file).endswith(".csv"):
-                    full_path = Path(root) / file
-                    file_path.append(full_path.name)
-                    try:
-                        df = pd.read_csv(full_path).fillna("NaN")
-                        df = df.drop(columns=["Unnamed: 0"], errors="ignore")
-                        # 过滤掉包含'Unnamed''index''ID'的列
-                        df = df.filter(regex="^(?!Unnamed.*$|.*index.*|.*ID.*$).*$")
-                        logger.info(f"成功加载文件: {full_path}")
-                        datasets_dict[Path(file).stem] = df
-                    except Exception as e:
-                        logger.info(f"加载文件{full_path}失败: {e}")
-                        continue
-    else:
-        for file in file_path:
-            if file.endswith(".csv") is False:
-                file += ".csv"
-            full_path = Path(file_dir) / file
-            try:
-                df = pd.read_csv(full_path).fillna("NaN")  # 加载数据并填充缺失值
-                df = df.drop(columns=["Unnamed: 0"], errors="ignore")
-                # 过滤掉包含'Unnamed''index''ID'的列
-                df = df.filter(regex="^(?!Unnamed.*$|.*index.*|.*ID.*$).*$")
-                logger.info(f"成功加载文件: {full_path}")
-                datasets_dict[Path(file).stem] = df
-            except Exception as e:
-                logger.info(f"加载文件{full_path}失败: {e}")
-                continue
+                    file_name.append(str(Path(root, file)))
+                    logger.debug(f"发现数据集文件[{file}]")
+
+    for file in file_name:
+        if file.endswith(".csv") is False:
+            file += ".csv"
+        full_path: Path = Path(file_dir, file)
+        try:
+            logger.debug(f"正在处理数据集文件:{full_path}")
+            df = pd.read_csv(full_path).fillna("NaN")  # 加载数据并填充缺失值
+            df = df.drop(columns=["Unnamed: 0"], errors="ignore")
+            # 过滤掉包含'Unnamed''index''ID'的列
+            df = df.filter(regex="^(?!Unnamed.*$|.*index.*|.*ID.*$).*$")
+            df = df.map(clean_with_bs4)
+            df.to_csv(
+                Path(
+                    file_dir,
+                    full_path.parent,
+                    full_path.stem + "_cleaned.csv",
+                ),
+                index=False,
+            )
+            logger.debug(f"成功加载文件: {full_path}")
+            datasets_dict[Path(file).stem] = df
+        except Exception as e:
+            logger.error(f"加载文件{full_path}失败: {e}")
+            continue
     return datasets_dict
 
 
@@ -157,14 +173,15 @@ def visualize_data_frame(
             main_values = value_counts
 
         # 计算百分比
-        percentages = (main_values / total * 100).round(2)
+        percentages = (main_values.astype(float) / total * 100).round(2)
 
         # 准备数据
         sizes = np.array(main_values.values)
         labels = main_values.index.tolist()
 
         # 创建好看的颜色
-        colors = plt.cm.get_cmap("Set3")(np.linspace(0, 1, len(sizes))).tolist()
+        colors = cm.get_cmap("Set3")(np.linspace(0, 1, len(sizes)))
+        colors = [tuple(c) for c in colors]
 
         # 绘制甜甜圈图
         wedges, texts, autotexts = ax_pie.pie(  # type: ignore

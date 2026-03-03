@@ -39,4 +39,7 @@ KAGGLE_DATASET_DOWNLOAD_URLS_FILE: str = os.getenv(
     "dataset_module/kaggle_dataset_download_urls.json",
 )
 """ Kaggle数据集下载URL列表文件路径 """
+
+DATABASE_FILE: str = os.getenv("DATABASE_FILE", "database_module/database.db")
+""" 数据库文件路径 """
 # endregion

@@ -10,7 +10,7 @@ import re
 
 # 本地模块导入
 from static_module import TaskStatus, PROJECT_NAME, THREAD_TIMEOUT
-from singleton_module import AppAsyncTaskManager, deepseek_manager
+from singleton_module import AppAsyncTaskManager  # , deepseek_manager
 from utility_module import logger
 
 app_running_flag: bool = True
@@ -58,7 +58,7 @@ def process_user_input():
     if re.match(r"^\s?(exit|quit|q)\.?$", user_input, re.IGNORECASE):
         app_running_flag = False
         return
-    deepseek_manager.send(user_input)
+    # deepseek_manager.send(user_input)
 
 
 def register_default_main_thread_tasks():
@@ -118,7 +118,11 @@ def app_run() -> None:
     # import dataset_module
 
     # dataset_module.download_and_open_datasets()
-    register_default_main_thread_tasks()
+    # register_default_main_thread_tasks()
 
-    main_thread_task_handler()
+    # main_thread_task_handler()
+    import database_module
+
+    database_module.run_build_database()
+
     exit()

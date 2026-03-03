@@ -219,3 +219,6 @@ chat_histories/
 # Local IDE settings
 .idea/
 my_code/
+
+# Database
+*.db
