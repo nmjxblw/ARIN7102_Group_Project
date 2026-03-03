@@ -222,3 +222,6 @@ my_code/
 
 # Database
 *.db
+
+# Reports
+reports/
