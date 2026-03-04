@@ -121,8 +121,14 @@ def app_run() -> None:
     # register_default_main_thread_tasks()
 
     # main_thread_task_handler()
-    import database_module
+    import dataset_module
+    import json
 
-    database_module.run_build_database()
+    disease_symptoms_dict = dataset_module.load_disease_with_symptoms()
+    logger.debug(
+        "加载疾病-症状数据\n"
+        + json.dumps(disease_symptoms_dict, ensure_ascii=False, indent=4)
+        + f"\n共计{len(disease_symptoms_dict)}种疾病。"
+    )
 
     exit()
