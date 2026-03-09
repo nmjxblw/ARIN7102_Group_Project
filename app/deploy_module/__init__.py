@@ -5,3 +5,7 @@
 
 也可以在这里写点 Transformer/Bert 之类的模型
 """
+
+from .bert_main import *
+
+__all__ = []

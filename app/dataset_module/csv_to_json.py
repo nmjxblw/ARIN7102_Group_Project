@@ -1,16 +1,12 @@
+from optparse import Option
 import os
 import sys
 import json
-from turtle import st
-from typing import Optional
+from typing import Optional, Callable
 import pandas as pd
 from pathlib import Path
 import ast
 import re
-
-original_csv_file_path: Path = (
-    Path.cwd() / "match_data_preprocessing" / "data" / "enhanced_drug_table.csv"
-)
 
 
 def parse_array_string(val):
@@ -72,7 +68,11 @@ def parse_disease_description(val: str) -> dict[str, str]:
     return result
 
 
-def csv_to_json(csv_file_path: Path, json_file_path: Optional[Path] = None) -> None:
+def csv_to_json(
+    csv_file_path: Path,
+    convert_policy: Optional[dict[str, Callable]] = {},
+    json_file_path: Optional[Path] = None,
+) -> None:
     """将CSV文件转换为JSON格式"""
     if not csv_file_path.exists():
         raise FileNotFoundError(f"CSV文件 {csv_file_path} 不存在")
@@ -81,14 +81,7 @@ def csv_to_json(csv_file_path: Path, json_file_path: Optional[Path] = None) -> N
     df = pd.read_csv(
         csv_file_path,
         encoding="utf-8",
-        converters={
-            "related_drugs": parse_related_drugs,
-            "original_conditions": parse_array_string,
-            "matched_disease_keys": parse_array_string,
-            "matched_symptoms": parse_array_string,
-            "symptom_severity": parse_array_string,
-            "disease_description": parse_disease_description,
-        },
+        converters=convert_policy,
     ).fillna("")
 
     # 将DataFrame转换为字典列表
@@ -104,9 +97,24 @@ def csv_to_json(csv_file_path: Path, json_file_path: Optional[Path] = None) -> N
     print(f"已成功将CSV文件 {csv_file_path} 转换为JSON文件 {json_file_path}")
 
 
-def main():
-    csv_to_json(original_csv_file_path)
+def convert_all_csv_to_json():
+    """将当前目录下的所有CSV文件转换为JSON格式"""
+    for root, dirs, files in os.walk(Path.cwd() / "dataset_module"):
+        for filename in files:
+            if filename.endswith(".csv"):
+                csv_file_path = Path(root) / filename
+                csv_to_json(
+                    csv_file_path,
+                    convert_policy={
+                        "related_drugs": parse_related_drugs,
+                        "original_conditions": parse_array_string,
+                        "matched_disease_keys": parse_array_string,
+                        "matched_symptoms": parse_array_string,
+                        "symptom_severity": parse_array_string,
+                        "disease_description": parse_disease_description,
+                    },
+                )  # Pass an empty convert_policy
 
 
 if __name__ == "__main__":
-    main()
+    convert_all_csv_to_json()
