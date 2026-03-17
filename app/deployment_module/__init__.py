@@ -8,4 +8,4 @@
 
 from .bert_main import *
 
-__all__ = []
+__all__ = ["predict", "train_bert"]

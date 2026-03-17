@@ -224,3 +224,8 @@ my_code/
 
 # Reports
 reports/
+
+# Local deployment BERT Models
+app/deployment_module/clinicalbert_local/*.bin
+app/deployment_module/trained_bert/checkpoint-*
+*.safetensors

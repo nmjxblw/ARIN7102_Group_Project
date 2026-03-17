@@ -8,6 +8,7 @@
 import dotenv
 import os
 import datetime
+from types import SimpleNamespace
 
 RUNTIME_TIMESTAMP: datetime.datetime = datetime.datetime.now()
 """ 程序运行时间戳 """
@@ -39,7 +40,52 @@ KAGGLE_DATASET_DOWNLOAD_URLS_FILE: str = os.getenv(
     "dataset_module/kaggle_dataset_download_urls.json",
 )
 """ Kaggle数据集下载URL列表文件路径 """
-
+# endregion
 DATABASE_FILE: str = os.getenv("DATABASE_FILE", "database_module/database.db")
 """ 数据库文件路径 """
+
+CLINICAL_BERT: str = os.getenv("CLINICAL_BERT", "deployment_module/clinicalbert_local")
+""" 本地临床BERT模型文件夹路径 """
+DISEASES_SYMPTOM_DICT: str = os.getenv(
+    "DISEASES_SYMPTOM_DICT",
+    "dataset_module/disease-symptom-description-dataset/disease_symptoms_dict.json",
+)
+""" 疾病症状字典文件路径 """
+
+
+# region 模型训练参数
+try:
+    import torch
+
+    torch_version = getattr(torch, "version", SimpleNamespace(cuda=None))
+    print(
+        f"检测到torch库，版本: {torch.__version__}, CUDA支持: {torch_version.cuda is not None}"
+    )
+    TORCH_DEVICE: torch.device | None = torch.device(
+        "cuda" if torch.cuda.is_available() else "cpu"
+    )
+    """ Torch训练设备，优先使用GPU """
+    USE_CUDA: bool = (
+        TORCH_DEVICE.type == "cuda" and os.getenv("USE_CUDA", "true").lower() == "true"
+    )
+    """ 是否使用CUDA进行训练 """
+
+except ImportError:
+    print("未安装torch库，无法检测CUDA设备，默认使用CPU进行训练。")
+    TORCH_DEVICE = None
+    USE_CUDA = False
+
+BERT_TRAINING_DATASET_FOLDER: str = os.getenv(
+    "BERT_TRAINING_DATASET_FOLDER", "dataset_module/bert_training_dataset"
+)
+""" BERT训练数据集文件夹路径，包含训练数据和标签文件 """
+# endregion
+# region 本地模型
+BERT_FOLDER: str = os.getenv("BERT_FOLDER", "deployment_module/clinicalbert_local")
+""" 本地BERT模型文件夹路径。包含模型权重文件（如pytorch_model.bin）和配置文件（如config.json） """
+TRAINED_BERT_SAVE_PATH: str = os.getenv(
+    "TRAINED_BERT_SAVE_PATH", "deployment_module/trained_bert"
+)
+""" 训练后BERT模型保存路径 """
+
 # endregion

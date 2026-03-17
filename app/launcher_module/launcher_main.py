@@ -115,20 +115,10 @@ def app_run() -> None:
     """主程序入口"""
 
     logger.debug("主程序运行中: %s", PROJECT_NAME)
-    # import dataset_module
-
-    # dataset_module.download_and_open_datasets()
-    # register_default_main_thread_tasks()
-
-    # main_thread_task_handler()
-    import dataset_module
+    import deployment_module
     import json
 
-    disease_symptoms_dict = dataset_module.load_disease_with_symptoms()
-    logger.debug(
-        "加载疾病-症状数据\n"
-        + json.dumps(disease_symptoms_dict, ensure_ascii=False, indent=4)
-        + f"\n共计{len(disease_symptoms_dict)}种疾病。"
-    )
-
+    msg = "I feel dizzy and nauseous"
+    prediction: dict = deployment_module.predict(msg)
+    logger.debug(f"输入: {msg}\n预测结果: {json.dumps(prediction, indent=2)}")
     exit()
