@@ -10,7 +10,7 @@ import re
 
 # 本地模块导入
 from static_module import TaskStatus, PROJECT_NAME, THREAD_TIMEOUT
-from singleton_module import AppAsyncTaskManager  # , deepseek_manager
+from .main_thread_task_manager import AppAsyncTaskManager
 from utility_module import logger
 
 app_running_flag: bool = True

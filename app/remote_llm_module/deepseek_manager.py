@@ -14,7 +14,7 @@ import json
 from torch import Stream
 
 # 本地模块导入
-from .singleton_meta import SingletonMeta
+from singleton_module import SingletonMeta
 from static_module import DEEPSEEK_API_KEY, RUNTIME_TIMESTAMP, CHAT_HISTORY_DIR
 from utility_module import logger
 

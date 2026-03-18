@@ -8,7 +8,7 @@ from datetime import datetime
 
 # 本地模块导入
 from utility_module import logger
-from .singleton_meta import SingletonMeta
+from singleton_module import SingletonMeta
 from static_module import TaskStatus, AppAsyncTask
 
 
