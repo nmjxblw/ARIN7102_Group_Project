@@ -48,7 +48,7 @@ EPOCHS: int = 10
 LEARNING_RATE: float = 3e-5
 """ 学习率，建议使用较小的学习率进行微调，过大可能导致训练不稳定，过小可能导致收敛过慢。 """
 RAW_DATA_PATH: Path = (
-    Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "medical_questions_dataset.json"
+    Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "generated_medical_dataset.json"
 )
 """ 原始数据路径 """
 DISEASE_LABELS_PATH: Path = (
@@ -114,7 +114,7 @@ class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
     ) -> None:
         """数据集类，负责将原始数据转换为模型输入格式，包括文本的分词和标签的编码。
         Args:
-            data: 原始数据列表，每个元素是一个包含 "question", "disease", "symptoms", "need_first_aid" 等字段的字典。
+            data: 原始数据列表，每个元素是一个包含 "sentences", "disease", "symptoms", "need_first_aid" 等字段的字典。
             tokenizer: DistilBertTokenizer 实例，用于文本分词。
             max_len: 模型输入的最大长度，超过部分将被截断。
         """
@@ -127,8 +127,9 @@ class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
 
     def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
         item: dict[str, Any] = self.data[idx]
-        text: str = item["question"]
-
+        text: str = item.get("sentences", "")
+        if not text:
+            raise ValueError(f"数据项缺少 'sentences' 字段或其值为空: {item}")
         # 分词
         encoding: BatchEncoding = self.tokenizer(
             text,

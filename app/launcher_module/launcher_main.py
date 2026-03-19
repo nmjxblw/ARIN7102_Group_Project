@@ -118,6 +118,7 @@ def app_run() -> None:
     import deployment_module
     import json
 
+    deployment_module.train_bert()
     msg = "I feel dizzy and nauseous"
     prediction: dict = deployment_module.predict(msg)
     logger.debug(f"输入: {msg}\n预测结果: {json.dumps(prediction, indent=2)}")
