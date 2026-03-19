@@ -65,7 +65,7 @@ class DrugEmbeddingEngine:
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = AutoModel.from_pretrained(self.model_name).to(self.device)
         self.model.eval()
-        print(f"[DrugEmbeddingEngine] 模型加载完成 ✅")
+        print(f"[DrugEmbeddingEngine] 模型加载完成 ")
 
     # ----------------------------------------------------------
     # 核心编码方法

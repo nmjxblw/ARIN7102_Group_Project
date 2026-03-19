@@ -48,7 +48,7 @@ class DrugKNNRetriever:
         self.index = faiss.IndexFlatIP(self.dim)  # 内积 = 余弦相似度
         self.index.add(self.embeddings)
 
-        print(f"[DrugKNNRetriever] Faiss 索引构建完成 ✅")
+        print(f"[DrugKNNRetriever] Faiss 索引构建完成 ")
         print(f"  药物总数: {self.n_drugs}")
         print(f"  向量维度: {self.dim}")
         print(f"  索引类型: IndexFlatIP (余弦相似度)")
