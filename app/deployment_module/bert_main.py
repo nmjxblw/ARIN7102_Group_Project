@@ -21,7 +21,7 @@ from transformers import (
     BatchEncoding,
 )
 from transformers.modeling_outputs import BaseModelOutput
-from transformers.utils import ModelOutput
+from transformers.utils.generic import ModelOutput
 from typing import Any, Optional, Tuple, cast
 from pathlib import Path
 
