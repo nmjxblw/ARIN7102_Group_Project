@@ -36,5 +36,9 @@
   "allergy",
   "gerd",
   "hepatitis_a",
-  "chicken_pox"
+  "chicken_pox",
+  "hepatitis_d",
+  "hepatitis_e",
+  "jaundice",
+  "drug_reaction"
 ]
