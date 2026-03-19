@@ -1,7 +1,12 @@
 import json
+
+from sklearn.model_selection import train_test_split
 from torch import FloatTensor
 import torch
 import torch.nn as nn
+from torch.utils.data import DataLoader
+from torch.optim import AdamW
+from tqdm import tqdm
 import numpy as np
 import pickle
 from dataclasses import dataclass
@@ -110,7 +115,7 @@ symptom_label_binarizer: MultiLabelBinarizer = MultiLabelBinarizer().fit([all_sy
 # 处理数据集
 class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
     def __init__(
-        self, data: list[dict[str, Any]], tokenizer: DistilBertTokenizer, max_len: int
+        self,indices, data: list[dict[str, Any]], tokenizer: DistilBertTokenizer, max_len: int
     ) -> None:
         """数据集类，负责将原始数据转换为模型输入格式，包括文本的分词和标签的编码。
         Args:
@@ -121,11 +126,13 @@ class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
         self.data: list[dict[str, Any]] = data
         self.tokenizer: DistilBertTokenizer = tokenizer
         self.max_len: int = max_len
+        self.indices = indices
 
     def __len__(self) -> int:
-        return len(self.data)
+        return len(self.indices)
 
-    def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
+    def __getitem__(self, id: int) -> dict[str, torch.Tensor]:
+        idx = self.indices[id]
         item: dict[str, Any] = self.data[idx]
         text: str = item.get("sentences", "")
         if not text:
@@ -151,8 +158,8 @@ class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
         )  # 二分类用float方便BCEWithLogitsLoss
 
         return {
-            "input_ids": torch.Tensor(encoding["input_ids"]).flatten(),
-            "attention_mask": torch.Tensor(encoding["attention_mask"]).flatten(),
+            "input_ids": encoding["input_ids"].squeeze(0),
+            "attention_mask": encoding["attention_mask"].squeeze(0),
             "labels_disease": labels_disease,
             "labels_symptom": labels_symptom,
             "labels_first_aid": labels_first_aid,
@@ -182,10 +189,11 @@ def load_tokenizer_compat(
 tokenizer = load_tokenizer_compat(LOCAL_MODEL_PATH, local_files_only=True)
 
 # 创建 Dataset
-dataset = MultitaskDataset(raw_data, tokenizer, MAX_LEN)
+#dataset = MultitaskDataset(raw_data, tokenizer, MAX_LEN)
+train_idx, test_idx = train_test_split(range(len(raw_data)), test_size=0.2, random_state=42)
 # 简单的训练/验证划分（实际请用 train_test_split）
-train_dataset = dataset
-val_dataset = dataset
+train_dataset = MultitaskDataset(train_idx,raw_data, tokenizer, max_len=MAX_LEN)
+val_dataset = MultitaskDataset(test_idx,raw_data, tokenizer, max_len=MAX_LEN)
 
 
 # ====================== 3. 自定义多任务模型 ======================
@@ -298,55 +306,108 @@ def compute_metrics(eval_pred: EvalPrediction) -> dict[str, float]:
     }
 
 
-# 由于是自定义模型输出，我们需要一个简单的 DataCollator 或者直接用默认的
-training_args = TrainingArguments(
-    output_dir=str(SAVE_PATH),
-    eval_strategy="epoch",
-    learning_rate=LEARNING_RATE,
-    per_device_train_batch_size=BATCH_SIZE,
-    num_train_epochs=EPOCHS,
-    weight_decay=0.01,
-    logging_steps=10,
-    fp16=USE_FP16,
-    dataloader_pin_memory=USE_CUDA,
-    remove_unused_columns=False,
-)
-
-trainer = Trainer(
-    model=model,
-    args=training_args,
-    train_dataset=train_dataset,
-    eval_dataset=val_dataset,
-    compute_metrics=compute_metrics,
-)
 
 
-# ====================== 5. 开始训练 ======================
-def train_bert() -> None:
+# 1. 准备 DataLoader
+train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
+
+# 2. 定义优化器 (使用原生 PyTorch AdamW)
+# 推荐对 BERT 层使用较小的学习率，对分类头使用较大的学习率
+optimizer = AdamW([
+    {'params': model.distil_bert.parameters(), 'lr': 2e-5},
+    {'params': model.classifier_disease.parameters(), 'lr': 1e-3},
+    {'params': model.classifier_symptom.parameters(), 'lr': 1e-3},
+    {'params': model.classifier_first_aid.parameters(), 'lr': 1e-3}
+], weight_decay=0.01)
+
+
+# ====================== 5. 开始训练 (手动循环) ======================
+
+def train_bert():
     print_runtime_device_info()
-    msg: str = "开始训练..."
-    logger.info(msg)
-    trainer.train()
+    model.to(TORCH_DEVICE)
+    best_f1 = 0.0
 
-    # 保存模型和标签编码器
-    model.save_pretrained(SAVE_PATH)
-    tokenizer.save_pretrained(SAVE_PATH)
-    label_encoders: dict[str, MultiLabelBinarizer] = {
-        "disease": disease_label_binarizer,
-        "symptom": symptom_label_binarizer,
-    }
-    with open(f"{SAVE_PATH}/label_encoders.pkl", "wb") as f:
-        pickle.dump(label_encoders, f)
-    msg: str = f"模型已保存至: {SAVE_PATH}"
-    logger.info(msg)
-    # 验证保存的格式
-    with open(f"{SAVE_PATH}/label_encoders.pkl", "rb") as f:
-        loaded_encoders = pickle.load(f)
-        msg: str = f"保存的encoders类型: {type(loaded_encoders)}"
-        logger.info(msg)
-        if isinstance(loaded_encoders, dict):
-            msg: str = f"encoders的键: {loaded_encoders.keys()}"
-            logger.info(msg)
+    for epoch in range(EPOCHS):
+        # --- 训练阶段 ---
+        model.train()
+        total_loss = 0
+        train_pbar = tqdm(train_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Train]")
+
+        for batch in train_pbar:
+            optimizer.zero_grad()
+
+            # 将所有输入移至设备
+            input_ids = batch['input_ids'].to(TORCH_DEVICE).long()
+            attention_mask = batch['attention_mask'].to(TORCH_DEVICE).long()
+            labels_dis = batch['labels_disease'].to(TORCH_DEVICE)
+            labels_sym = batch['labels_symptom'].to(TORCH_DEVICE)
+            labels_emg = batch['labels_first_aid'].to(TORCH_DEVICE)
+
+            # 前向传播 (模型内部已计算联合 Loss)
+            outputs = model(
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                labels_disease=labels_dis,
+                labels_symptom=labels_sym,
+                labels_first_aid=labels_emg
+            )
+
+            loss = outputs.loss
+            loss.backward()
+            optimizer.step()
+
+            total_loss += loss.item()
+            train_pbar.set_postfix(loss=f"{loss.item():.4f}")
+
+        avg_train_loss = total_loss / len(train_loader)
+
+        # --- 验证阶段 ---
+        model.eval()
+        all_dis_true, all_dis_pred = [], []
+        all_sym_true, all_sym_pred = [], []
+        all_emg_true, all_emg_pred = [], []
+
+        val_pbar = tqdm(val_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Eval]")
+        with torch.no_grad():
+            for batch in val_pbar:
+                input_ids = batch['input_ids'].to(TORCH_DEVICE).long()
+                attention_mask = batch['attention_mask'].to(TORCH_DEVICE).long()
+
+                outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+                logits_dis, logits_sym, logits_emg = outputs.logits
+
+                # 转换预测值
+                all_dis_pred.append((torch.sigmoid(logits_dis) > 0.5).cpu().numpy())
+                all_sym_pred.append((torch.sigmoid(logits_sym) > 0.5).cpu().numpy())
+                all_emg_pred.append((torch.sigmoid(logits_emg) > 0.5).cpu().numpy())
+
+                # 收集真实值
+                all_dis_true.append(batch['labels_disease'].numpy())
+                all_sym_true.append(batch['labels_symptom'].numpy())
+                all_emg_true.append(batch['labels_first_aid'].numpy())
+
+        # 计算指标
+        f1_dis = f1_score(np.vstack(all_dis_true), np.vstack(all_dis_pred), average='micro')
+        f1_sym = f1_score(np.vstack(all_sym_true), np.vstack(all_sym_pred), average='micro')
+        acc_emg = accuracy_score(np.vstack(all_emg_true), np.vstack(all_emg_pred))
+
+        print(f"\nEpoch {epoch + 1} Summary:")
+        print(f"Train Loss: {avg_train_loss:.4f}")
+        print(f"Disease F1: {f1_dis:.4f} | Symptom F1: {f1_sym:.4f} | Emergency Acc: {acc_emg:.4f}")
+
+        # 保存逻辑
+        current_combined_f1 = f1_dis + f1_sym
+        if current_combined_f1 > best_f1:
+            best_f1 = current_combined_f1
+            model.save_pretrained(SAVE_PATH)
+            tokenizer.save_pretrained(SAVE_PATH)
+            # 保存 label_encoders
+            label_encoders = {"disease": disease_label_binarizer, "symptom": symptom_label_binarizer}
+            with open(SAVE_PATH / "label_encoders.pkl", "wb") as f:
+                pickle.dump(label_encoders, f)
+            print(f"★ 模型表现提升，已保存至 {SAVE_PATH}")
 
 
 # ====================== 6. 推理函数 ======================

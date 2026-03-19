@@ -23,6 +23,5 @@
   "tie_weights_": true,
   "tie_word_embeddings": true,
   "transformers_version": "5.3.0",
-  "use_cache": false,
   "vocab_size": 119547
 }
