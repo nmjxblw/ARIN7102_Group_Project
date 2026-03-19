@@ -1,7 +1,30 @@
 """
-词向量库包
+Reusable package exports for the embedding / retrieval pipeline.
 
-在这里编辑向量库的生成、调用。
-
-提供 API 接口用于词向量相似度查询。
+Keep this package lightweight so notebook imports do not eagerly pull
+heavy model dependencies unless they are explicitly needed.
 """
+
+from .recommendation_pipeline import (
+    baseline_filter,
+    build_query_text,
+    build_semantic_text,
+    clean_text,
+    normalize_symptom_name,
+    parse_list_like,
+    prepare_drug_dataframe,
+    query_drugs_hybrid,
+    safe_cosine_scores,
+)
+
+__all__ = [
+    "baseline_filter",
+    "build_query_text",
+    "build_semantic_text",
+    "clean_text",
+    "normalize_symptom_name",
+    "parse_list_like",
+    "prepare_drug_dataframe",
+    "query_drugs_hybrid",
+    "safe_cosine_scores",
+]
