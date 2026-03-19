@@ -1,5 +1,5 @@
 import json
-
+import math
 from sklearn.model_selection import train_test_split
 from torch import FloatTensor
 import torch
@@ -115,7 +115,11 @@ symptom_label_binarizer: MultiLabelBinarizer = MultiLabelBinarizer().fit([all_sy
 # 处理数据集
 class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
     def __init__(
-        self,indices, data: list[dict[str, Any]], tokenizer: DistilBertTokenizer, max_len: int
+        self,
+        indices,
+        data: list[dict[str, Any]],
+        tokenizer: DistilBertTokenizer,
+        max_len: int,
     ) -> None:
         """数据集类，负责将原始数据转换为模型输入格式，包括文本的分词和标签的编码。
         Args:
@@ -187,13 +191,6 @@ def load_tokenizer_compat(
 
 
 tokenizer = load_tokenizer_compat(LOCAL_MODEL_PATH, local_files_only=True)
-
-# 创建 Dataset
-#dataset = MultitaskDataset(raw_data, tokenizer, MAX_LEN)
-train_idx, test_idx = train_test_split(range(len(raw_data)), test_size=0.2, random_state=42)
-# 简单的训练/验证划分（实际请用 train_test_split）
-train_dataset = MultitaskDataset(train_idx,raw_data, tokenizer, max_len=MAX_LEN)
-val_dataset = MultitaskDataset(test_idx,raw_data, tokenizer, max_len=MAX_LEN)
 
 
 # ====================== 3. 自定义多任务模型 ======================
@@ -306,25 +303,34 @@ def compute_metrics(eval_pred: EvalPrediction) -> dict[str, float]:
     }
 
 
-
-
-# 1. 准备 DataLoader
-train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
-
-# 2. 定义优化器 (使用原生 PyTorch AdamW)
-# 推荐对 BERT 层使用较小的学习率，对分类头使用较大的学习率
-optimizer = AdamW([
-    {'params': model.distil_bert.parameters(), 'lr': 2e-5},
-    {'params': model.classifier_disease.parameters(), 'lr': 1e-3},
-    {'params': model.classifier_symptom.parameters(), 'lr': 1e-3},
-    {'params': model.classifier_first_aid.parameters(), 'lr': 1e-3}
-], weight_decay=0.01)
-
-
 # ====================== 5. 开始训练 (手动循环) ======================
 
+
 def train_bert():
+
+    # 创建 Dataset
+    train_idx, test_idx = train_test_split(
+        range(len(raw_data)), test_size=0.2, random_state=42
+    )
+    # 简单的训练/验证划分（实际请用 train_test_split）
+    logger.debug(f"训练集大小: {len(train_idx)}, 验证集大小: {len(test_idx)}")
+    train_dataset = MultitaskDataset(train_idx, raw_data, tokenizer, max_len=MAX_LEN)
+    val_dataset = MultitaskDataset(test_idx, raw_data, tokenizer, max_len=MAX_LEN)
+    # 1. 准备 DataLoader
+    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
+
+    # 2. 定义优化器 (使用原生 PyTorch AdamW)
+    # 推荐对 BERT 层使用较小的学习率，对分类头使用较大的学习率
+    optimizer = AdamW(
+        [
+            {"params": model.distil_bert.parameters(), "lr": 2e-5},
+            {"params": model.classifier_disease.parameters(), "lr": 1e-3},
+            {"params": model.classifier_symptom.parameters(), "lr": 1e-3},
+            {"params": model.classifier_first_aid.parameters(), "lr": 1e-3},
+        ],
+        weight_decay=0.01,
+    )
     print_runtime_device_info()
     model.to(TORCH_DEVICE)
     best_f1 = 0.0
@@ -339,11 +345,11 @@ def train_bert():
             optimizer.zero_grad()
 
             # 将所有输入移至设备
-            input_ids = batch['input_ids'].to(TORCH_DEVICE).long()
-            attention_mask = batch['attention_mask'].to(TORCH_DEVICE).long()
-            labels_dis = batch['labels_disease'].to(TORCH_DEVICE)
-            labels_sym = batch['labels_symptom'].to(TORCH_DEVICE)
-            labels_emg = batch['labels_first_aid'].to(TORCH_DEVICE)
+            input_ids = batch["input_ids"].to(TORCH_DEVICE).long()
+            attention_mask = batch["attention_mask"].to(TORCH_DEVICE).long()
+            labels_dis = batch["labels_disease"].to(TORCH_DEVICE)
+            labels_sym = batch["labels_symptom"].to(TORCH_DEVICE)
+            labels_emg = batch["labels_first_aid"].to(TORCH_DEVICE)
 
             # 前向传播 (模型内部已计算联合 Loss)
             outputs = model(
@@ -351,7 +357,7 @@ def train_bert():
                 attention_mask=attention_mask,
                 labels_disease=labels_dis,
                 labels_symptom=labels_sym,
-                labels_first_aid=labels_emg
+                labels_first_aid=labels_emg,
             )
 
             loss = outputs.loss
@@ -372,8 +378,8 @@ def train_bert():
         val_pbar = tqdm(val_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Eval]")
         with torch.no_grad():
             for batch in val_pbar:
-                input_ids = batch['input_ids'].to(TORCH_DEVICE).long()
-                attention_mask = batch['attention_mask'].to(TORCH_DEVICE).long()
+                input_ids = batch["input_ids"].to(TORCH_DEVICE).long()
+                attention_mask = batch["attention_mask"].to(TORCH_DEVICE).long()
 
                 outputs = model(input_ids=input_ids, attention_mask=attention_mask)
                 logits_dis, logits_sym, logits_emg = outputs.logits
@@ -384,19 +390,23 @@ def train_bert():
                 all_emg_pred.append((torch.sigmoid(logits_emg) > 0.5).cpu().numpy())
 
                 # 收集真实值
-                all_dis_true.append(batch['labels_disease'].numpy())
-                all_sym_true.append(batch['labels_symptom'].numpy())
-                all_emg_true.append(batch['labels_first_aid'].numpy())
+                all_dis_true.append(batch["labels_disease"].numpy())
+                all_sym_true.append(batch["labels_symptom"].numpy())
+                all_emg_true.append(batch["labels_first_aid"].numpy())
 
         # 计算指标
-        f1_dis = f1_score(np.vstack(all_dis_true), np.vstack(all_dis_pred), average='micro')
-        f1_sym = f1_score(np.vstack(all_sym_true), np.vstack(all_sym_pred), average='micro')
+        f1_dis = f1_score(
+            np.vstack(all_dis_true), np.vstack(all_dis_pred), average="micro"
+        )
+        f1_sym = f1_score(
+            np.vstack(all_sym_true), np.vstack(all_sym_pred), average="micro"
+        )
         acc_emg = accuracy_score(np.vstack(all_emg_true), np.vstack(all_emg_pred))
 
-        print(f"\nEpoch {epoch + 1} Summary:")
-        print(f"Train Loss: {avg_train_loss:.4f}")
-        print(f"Disease F1: {f1_dis:.4f} | Symptom F1: {f1_sym:.4f} | Emergency Acc: {acc_emg:.4f}")
-
+        msg = f"\nEpoch {epoch + 1} Summary:\n"
+        msg += f"Train Loss: {avg_train_loss:.4f}\n"
+        msg += f"Disease F1: {f1_dis:.4f} | Symptom F1: {f1_sym:.4f} | Emergency Acc: {acc_emg:.4f}"
+        logger.debug(f"{msg}")
         # 保存逻辑
         current_combined_f1 = f1_dis + f1_sym
         if current_combined_f1 > best_f1:
@@ -404,18 +414,21 @@ def train_bert():
             model.save_pretrained(SAVE_PATH)
             tokenizer.save_pretrained(SAVE_PATH)
             # 保存 label_encoders
-            label_encoders = {"disease": disease_label_binarizer, "symptom": symptom_label_binarizer}
+            label_encoders = {
+                "disease": disease_label_binarizer,
+                "symptom": symptom_label_binarizer,
+            }
             with open(SAVE_PATH / "label_encoders.pkl", "wb") as f:
                 pickle.dump(label_encoders, f)
-            print(f"★ 模型表现提升，已保存至 {SAVE_PATH}")
+            logger.debug(f"★ 模型表现提升，已保存至 {SAVE_PATH}")
 
 
 # ====================== 6. 推理函数 ======================
 def predict(
     text: str,
     model_path: str | Path = SAVE_PATH,
-    threshold: float = 0.5,
-    device: Optional[torch.device] = TORCH_DEVICE,
+    threshold: float = 1 / (1 + math.pow(math.e, -(0))),
+    device: torch.device = TORCH_DEVICE,
 ) -> dict[str, Any]:
     """给定输入文本，返回预测的疾病、症状和是否需要急救的结果"""
     # 加载
@@ -461,9 +474,9 @@ def predict(
     disease_logits = disease_logits.detach().cpu()
     symptoms_logits = symptoms_logits.detach().cpu()
     first_aid_logits = first_aid_logits.detach().cpu()
-    logger.debug(f"disease_logits: {disease_logits}")
-    logger.debug(f"symptoms_logits: {symptoms_logits}")
-    logger.debug(f"first_aid_logits: {first_aid_logits}")
+    logger.debug(f"disease_logits: {disease_logits}\n")
+    logger.debug(f"symptoms_logits: {symptoms_logits}\n")
+    logger.debug(f"first_aid_logits: {first_aid_logits}\n")
     # 解码
     diseases = mlb_d.inverse_transform(
         (torch.sigmoid(disease_logits).numpy() >= threshold).astype(int)
