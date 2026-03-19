@@ -61,7 +61,7 @@ try:
     print(
         f"检测到torch库，版本: {torch.__version__}, CUDA支持: {torch_version.cuda is not None}"
     )
-    TORCH_DEVICE: torch.device | None = torch.device(
+    TORCH_DEVICE: torch.device = torch.device(
         "cuda" if torch.cuda.is_available() else "cpu"
     )
     """ Torch训练设备，优先使用GPU """
@@ -70,10 +70,9 @@ try:
     )
     """ 是否使用CUDA进行训练 """
 
-except ImportError:
-    print("未安装torch库，无法检测CUDA设备，默认使用CPU进行训练。")
-    TORCH_DEVICE = None
-    USE_CUDA = False
+except ImportError as e:
+    print("未安装torch库。")
+    raise e
 
 BERT_TRAINING_DATASET_FOLDER: str = os.getenv(
     "BERT_TRAINING_DATASET_FOLDER", "dataset_module/bert_training_dataset"
