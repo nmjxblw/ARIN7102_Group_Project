@@ -248,7 +248,7 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         logits_first_aid: torch.Tensor = self.classifier_first_aid(pooled_output)
 
         # 计算损失
-        loss = None  # 默认无损失
+        loss: torch.Tensor | None = None  # 默认无损失
         if labels_disease is not None:
             loss_disease: FloatTensor = self.loss_fn_bce(logits_disease, labels_disease)
             loss_symptom: FloatTensor = self.loss_fn_bce(logits_symptom, labels_symptom)
@@ -333,7 +333,7 @@ def train_bert():
     )
     print_runtime_device_info()
     model.to(TORCH_DEVICE)
-    best_f1 = 0.0
+    best_f1: float = 0.0
 
     for epoch in range(EPOCHS):
         # --- 训练阶段 ---
@@ -436,7 +436,9 @@ def predict(
     tokenizer = load_tokenizer_compat(model_path)
     inference_model = cast(
         DistilBertForMultitaskLearning,
-        DistilBertForMultitaskLearning.from_pretrained(model_path),
+        DistilBertForMultitaskLearning.from_pretrained(
+            model_path, local_files_only=True, ignore_mismatched_sizes=True
+        ),
     )
     if isinstance(inference_device, torch.device) and inference_device.type == "cuda":
         torch.nn.Module.cuda(inference_model)
