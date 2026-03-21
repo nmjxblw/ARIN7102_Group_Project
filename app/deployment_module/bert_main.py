@@ -12,7 +12,7 @@ import pickle
 from dataclasses import dataclass
 from types import SimpleNamespace
 from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.metrics import f1_score, accuracy_score
+from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
 from transformers import (
     AutoConfig,
     DistilBertConfig,
@@ -52,6 +52,22 @@ EPOCHS: int = 10
 """ 训练轮数，根据你的数据量和模型复杂度调整，过多可能导致过拟合，过少可能导致欠拟合。 """
 LEARNING_RATE: float = 3e-5
 """ 学习率，建议使用较小的学习率进行微调，过大可能导致训练不稳定，过小可能导致收敛过慢。 """
+# ===== 疾病标签优化参数 =====
+DISEASE_LOSS_WEIGHT: float = 2.5
+""" 疾病任务损失权重，增加以提高疾病预测准确率（相对于其他任务）"""
+SYMPTOM_LOSS_WEIGHT: float = 1.0
+""" 症状任务损失权重 """
+FIRST_AID_LOSS_WEIGHT: float = 0.5
+""" 急救任务损失权重 """
+DISEASE_CLASSIFIER_LR: float = 5e-4
+""" 疾病分类头学习率，比其他头更高以加快收敛 """
+SYMPTOM_CLASSIFIER_LR: float = 1e-3
+""" 症状分类头学习率 """
+FIRST_AID_CLASSIFIER_LR: float = 1e-3
+""" 急救分类头学习率 """
+DISEASE_POSITIVE_WEIGHT: float = 1.2
+""" 疾病标签的正类权重，处理类别不平衡 """
+# ==================
 RAW_DATA_PATH: Path = (
     Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "generated_medical_dataset.json"
 )
@@ -65,7 +81,7 @@ SYMPTOM_LABELS_PATH: Path = (
 )
 """ 症状标签路径 """
 USE_FP16: bool = USE_CUDA
-
+""" 是否使用混合精度训练 """
 if USE_CUDA:
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.backends.cudnn.allow_tf32 = True
@@ -94,7 +110,7 @@ def print_runtime_device_info() -> None:
     logger.info(msg)
 
 
-# 模拟你的训练数据（实际使用时请替换为加载你的 JSON 文件列表）
+# 训练数据
 with open(RAW_DATA_PATH, "r", encoding="utf-8") as f:
     raw_data: list[dict[str, Any]] = json.load(f)
 
@@ -247,15 +263,31 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         logits_symptom: torch.Tensor = self.classifier_symptom(pooled_output)
         logits_first_aid: torch.Tensor = self.classifier_first_aid(pooled_output)
 
-        # 计算损失
+        # 计算损失 - 使用加权的多任务学习
         loss: torch.Tensor | None = None  # 默认无损失
         if labels_disease is not None:
-            loss_disease: FloatTensor = self.loss_fn_bce(logits_disease, labels_disease)
-            loss_symptom: FloatTensor = self.loss_fn_bce(logits_symptom, labels_symptom)
-            loss_first_aid: FloatTensor = self.loss_fn_bce(
+            loss_disease: torch.Tensor = self.loss_fn_bce(
+                logits_disease, labels_disease
+            )
+            loss_symptom: torch.Tensor = self.loss_fn_bce(
+                logits_symptom, labels_symptom
+            )
+            loss_first_aid: torch.Tensor = self.loss_fn_bce(
                 logits_first_aid, labels_first_aid
             )
-            loss = loss_disease + loss_symptom + loss_first_aid  # 联合损失
+            # 对疾病正样本应用额外权重，提高疾病预测精度
+            disease_weight = torch.where(
+                labels_disease == 1,
+                torch.full_like(labels_disease, DISEASE_POSITIVE_WEIGHT),
+                torch.ones_like(labels_disease),
+            )
+            loss_disease = (loss_disease * disease_weight).mean()
+            # 使用不同的权重组合三个损失
+            loss = (
+                DISEASE_LOSS_WEIGHT * loss_disease
+                + SYMPTOM_LOSS_WEIGHT * loss_symptom
+                + FIRST_AID_LOSS_WEIGHT * loss_first_aid
+            )
 
         return MultitaskSequenceClassifierOutput(
             loss=loss,
@@ -321,13 +353,22 @@ def train_bert():
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
     # 2. 定义优化器 (使用原生 PyTorch AdamW)
-    # 推荐对 BERT 层使用较小的学习率，对分类头使用较大的学习率
+    # 优化器配置优化：疾病分类头使用更高学习率以加快收敛
     optimizer = AdamW(
         [
             {"params": model.distil_bert.parameters(), "lr": 2e-5},
-            {"params": model.classifier_disease.parameters(), "lr": 1e-3},
-            {"params": model.classifier_symptom.parameters(), "lr": 1e-3},
-            {"params": model.classifier_first_aid.parameters(), "lr": 1e-3},
+            {
+                "params": model.classifier_disease.parameters(),
+                "lr": DISEASE_CLASSIFIER_LR,
+            },
+            {
+                "params": model.classifier_symptom.parameters(),
+                "lr": SYMPTOM_CLASSIFIER_LR,
+            },
+            {
+                "params": model.classifier_first_aid.parameters(),
+                "lr": FIRST_AID_CLASSIFIER_LR,
+            },
         ],
         weight_decay=0.01,
     )
@@ -374,15 +415,36 @@ def train_bert():
         all_dis_true, all_dis_pred = [], []
         all_sym_true, all_sym_pred = [], []
         all_emg_true, all_emg_pred = [], []
+        total_val_loss = 0
+        val_losses = {"disease": 0, "symptom": 0, "first_aid": 0}
 
         val_pbar = tqdm(val_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Eval]")
         with torch.no_grad():
             for batch in val_pbar:
                 input_ids = batch["input_ids"].to(TORCH_DEVICE).long()
                 attention_mask = batch["attention_mask"].to(TORCH_DEVICE).long()
+                labels_dis = batch["labels_disease"].to(TORCH_DEVICE)
+                labels_sym = batch["labels_symptom"].to(TORCH_DEVICE)
+                labels_emg = batch["labels_first_aid"].to(TORCH_DEVICE)
 
-                outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+                outputs = model(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    labels_disease=labels_dis,
+                    labels_symptom=labels_sym,
+                    labels_first_aid=labels_emg,
+                )
                 logits_dis, logits_sym, logits_emg = outputs.logits
+
+                # 计算单个任务的loss用于分析
+                loss_dis_batch = model.loss_fn_bce(logits_dis, labels_dis)
+                loss_sym_batch = model.loss_fn_bce(logits_sym, labels_sym)
+                loss_emg_batch = model.loss_fn_bce(logits_emg, labels_emg)
+
+                val_losses["disease"] += loss_dis_batch.item() * len(labels_dis)
+                val_losses["symptom"] += loss_sym_batch.item() * len(labels_sym)
+                val_losses["first_aid"] += loss_emg_batch.item() * len(labels_emg)
+                total_val_loss += outputs.loss.item()
 
                 # 转换预测值
                 all_dis_pred.append((torch.sigmoid(logits_dis) > 0.5).cpu().numpy())
@@ -403,14 +465,39 @@ def train_bert():
         )
         acc_emg = accuracy_score(np.vstack(all_emg_true), np.vstack(all_emg_pred))
 
+        # 额外的疾病标签评估指标
+        try:
+            disease_precision = precision_score(
+                np.vstack(all_dis_true),
+                np.vstack(all_dis_pred),
+                average="micro",
+                zero_division=0,
+            )
+            disease_recall = recall_score(
+                np.vstack(all_dis_true),
+                np.vstack(all_dis_pred),
+                average="micro",
+                zero_division=0,
+            )
+        except:
+            disease_precision = 0.0
+            disease_recall = 0.0
+
         msg = f"\nEpoch {epoch + 1} Summary:\n"
-        msg += f"Train Loss: {avg_train_loss:.4f}\n"
-        msg += f"Disease F1: {f1_dis:.4f} | Symptom F1: {f1_sym:.4f} | Emergency Acc: {acc_emg:.4f}"
+        msg += f"Train Loss: {avg_train_loss:.4f} | Val Loss: {total_val_loss/len(val_loader):.4f}\n"
+        msg += f"Task Losses - Disease: {val_losses['disease']/len(test_idx):.4f}, "
+        msg += f"Symptom: {val_losses['symptom']/len(test_idx):.4f}, "
+        msg += f"FirstAid: {val_losses['first_aid']/len(test_idx):.4f}\n"
+        msg += f"Disease - F1: {f1_dis:.4f} | Precision: {disease_precision:.4f} | Recall: {disease_recall:.4f}\n"
+        msg += f"Symptom F1: {f1_sym:.4f} | Emergency Acc: {acc_emg:.4f}"
         logger.debug(f"{msg}")
-        # 保存逻辑
-        current_combined_f1 = f1_dis + f1_sym
-        if current_combined_f1 > best_f1:
-            best_f1 = current_combined_f1
+        # 保存逻辑 - 优先考虑疾病预测准确率
+        # 组合指标：疾病F1权重最高
+        current_disease_metric = (
+            f1_dis * 0.6 + disease_precision * 0.2 + disease_recall * 0.2
+        )
+        if current_disease_metric > best_f1:
+            best_f1 = current_disease_metric
             model.save_pretrained(SAVE_PATH)
             tokenizer.save_pretrained(SAVE_PATH)
             # 保存 label_encoders
@@ -420,7 +507,9 @@ def train_bert():
             }
             with open(SAVE_PATH / "label_encoders.pkl", "wb") as f:
                 pickle.dump(label_encoders, f)
-            logger.debug(f"★ 模型表现提升，已保存至 {SAVE_PATH}")
+            logger.debug(
+                f"★ 模型表现提升 (Disease Metric: {current_disease_metric:.4f})，已保存至 {SAVE_PATH}"
+            )
 
 
 # ====================== 6. 推理函数 ======================
