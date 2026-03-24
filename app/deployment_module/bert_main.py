@@ -596,7 +596,7 @@ def train_bert():
             best_f1 = float(current_disease_metric)
 
             logger.info("模型表现提升，计算每个 label 正样本的中位数...")
-            medians_dict = compute_label_medians(model, train_dataset, TORCH_DEVICE)
+            medians_dict = compute_label_medians(model, val_dataset, TORCH_DEVICE)
 
             model.save_pretrained(SAVE_PATH)
             tokenizer.save_pretrained(SAVE_PATH)
@@ -685,17 +685,16 @@ def predict(
         prob = float(disease_probs[idx])
         median = medians.get("disease", {}).get(label_name, 0.5)
         # 置信度判断（可自行调整规则）
-        confidence = (
-            "very_high" if prob >= median * 1.2 else
-            "high" if prob >= median else
-            "medium" if prob >= 0.7 else
-            "low"
-        )
+        if median <= 0.5:
+            norm_conf = 1.0
+        else:
+            norm_conf = 1.0 if prob >= median else (prob - 0.5) / (median - 0.5)
+        norm_conf = float(np.clip(norm_conf, 0.0, 1.0))
         diseases_result.append({
             "label": label_name,
             "probability": round(prob, 4),
             "median_positive": round(median, 4),
-            "confidence": confidence,  # 与中位数比较得出的置信等级
+            "confidence": norm_conf,  # 与中位数比较得出的置信等级
             "above_median": prob >= median
         })
 
@@ -704,29 +703,27 @@ def predict(
         label_name = mlb_s.classes_[idx]
         prob = float(symptom_probs[idx])
         median = medians.get("symptom", {}).get(label_name, 0.5)
-        confidence = (
-            "very_high" if prob >= median * 1.2 else
-            "high" if prob >= median else
-            "medium" if prob >= 0.7 else
-            "low"
-        )
+        if median <= 0.5:
+            norm_conf = 1.0
+        else:
+            norm_conf = 1.0 if prob >= median else (prob - 0.5) / (median - 0.5)
+        norm_conf = float(np.clip(norm_conf, 0.0, 1.0))
         symptoms_result.append({
             "label": label_name,
             "probability": round(prob, 4),
             "median_positive": round(median, 4),
-            "confidence": confidence,
+            "confidence": norm_conf,
             "above_median": prob >= median
         })
 
     # 急救（二分类）
     need_first_aid = int(first_aid_prob >= threshold)
     fa_median = medians.get("first_aid", 0.5)
-    fa_confidence = (
-        "very_high" if first_aid_prob >= fa_median * 1.2 else
-        "high" if first_aid_prob >= fa_median else
-        "medium" if first_aid_prob >= 0.7 else
-        "low"
-    ) if need_first_aid else "n/a"
+    if fa_median <= 0.5:
+        fa_norm_conf = 1.0 if first_aid_prob >= 0.5 else 0.0
+    else:
+        fa_norm_conf = 1.0 if first_aid_prob >= fa_median else (first_aid_prob - 0.5) / (fa_median - 0.5)
+    fa_norm_conf = float(np.clip(fa_norm_conf, 0.0, 1.0))
 
     result = {
         "diseases": diseases_result,  # 每个正类疾病都带 probability + median + confidence
@@ -735,7 +732,7 @@ def predict(
             "value": need_first_aid,
             "probability": round(first_aid_prob, 4),
             "median_positive": round(fa_median, 4),
-            "confidence": fa_confidence,
+            "confidence": fa_norm_conf,
             "above_median": first_aid_prob >= fa_median if need_first_aid else None,
         },
     }
