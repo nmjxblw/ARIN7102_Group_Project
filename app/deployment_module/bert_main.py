@@ -236,7 +236,7 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         self.classifier_first_aid: nn.Linear = nn.Linear(self.hidden_size, 1)  # 二分类
 
         # 损失函数
-        self.loss_fn_bce: nn.BCEWithLogitsLoss = (
+        self.bce_with_logits_loss: nn.BCEWithLogitsLoss = (
             nn.BCEWithLogitsLoss()
         )  # 用于多标签和二分类
 
@@ -266,13 +266,13 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         # 计算损失 - 使用加权的多任务学习
         loss: torch.Tensor | None = None  # 默认无损失
         if labels_disease is not None:
-            loss_disease: torch.Tensor = self.loss_fn_bce(
+            loss_disease: torch.Tensor = self.bce_with_logits_loss(
                 logits_disease, labels_disease
             )
-            loss_symptom: torch.Tensor = self.loss_fn_bce(
+            loss_symptom: torch.Tensor = self.bce_with_logits_loss(
                 logits_symptom, labels_symptom
             )
-            loss_first_aid: torch.Tensor = self.loss_fn_bce(
+            loss_first_aid: torch.Tensor = self.bce_with_logits_loss(
                 logits_first_aid, labels_first_aid
             )
             # 对疾病正样本应用额外权重，提高疾病预测精度
@@ -309,7 +309,8 @@ def compute_metrics(eval_pred: EvalPrediction) -> dict[str, float]:
     """计算 F1 和准确率指标"""
 
     # logits 是一个 tuple: (disease_logits, symptom_logits, first_aid_logits)
-    logits_tuple, labels_tuple = eval_pred
+    logits_tuple: tuple = eval_pred.predictions
+    labels_tuple: tuple = eval_pred.label_ids
     disease_logits, symptom_logits, first_aid_logits = logits_tuple
     disease_labels, symptom_labels, first_aid_labels = labels_tuple
 
@@ -393,7 +394,7 @@ def train_bert():
             labels_emg = batch["labels_first_aid"].to(TORCH_DEVICE)
 
             # 前向传播 (模型内部已计算联合 Loss)
-            outputs = model(
+            outputs: MultitaskSequenceClassifierOutput = model(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
                 labels_disease=labels_dis,
@@ -402,6 +403,7 @@ def train_bert():
             )
 
             loss = outputs.loss
+            assert loss is not None, "模型前向传播未返回损失，无法进行反向传播"
             loss.backward()
             optimizer.step()
 
@@ -416,7 +418,7 @@ def train_bert():
         all_sym_true, all_sym_pred = [], []
         all_emg_true, all_emg_pred = [], []
         total_val_loss = 0
-        val_losses = {"disease": 0, "symptom": 0, "first_aid": 0}
+        val_losses = {"disease": 0.0, "symptom": 0.0, "first_aid": 0.0}
 
         val_pbar = tqdm(val_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Eval]")
         with torch.no_grad():
@@ -427,23 +429,35 @@ def train_bert():
                 labels_sym = batch["labels_symptom"].to(TORCH_DEVICE)
                 labels_emg = batch["labels_first_aid"].to(TORCH_DEVICE)
 
-                outputs = model(
+                outputs: MultitaskSequenceClassifierOutput = model(
                     input_ids=input_ids,
                     attention_mask=attention_mask,
                     labels_disease=labels_dis,
                     labels_symptom=labels_sym,
                     labels_first_aid=labels_emg,
                 )
+                assert (
+                    outputs.logits is not None
+                ), "模型前向传播未返回 logits，无法计算指标"
                 logits_dis, logits_sym, logits_emg = outputs.logits
 
                 # 计算单个任务的loss用于分析
-                loss_dis_batch = model.loss_fn_bce(logits_dis, labels_dis)
-                loss_sym_batch = model.loss_fn_bce(logits_sym, labels_sym)
-                loss_emg_batch = model.loss_fn_bce(logits_emg, labels_emg)
+                loss_dis_batch: torch.Tensor = model.bce_with_logits_loss(
+                    logits_dis, labels_dis
+                )
+                loss_sym_batch: torch.Tensor = model.bce_with_logits_loss(
+                    logits_sym, labels_sym
+                )
+                loss_emg_batch: torch.Tensor = model.bce_with_logits_loss(
+                    logits_emg, labels_emg
+                )
 
                 val_losses["disease"] += loss_dis_batch.item() * len(labels_dis)
                 val_losses["symptom"] += loss_sym_batch.item() * len(labels_sym)
                 val_losses["first_aid"] += loss_emg_batch.item() * len(labels_emg)
+                assert (
+                    outputs.loss is not None
+                ), "模型前向传播未返回总损失，无法计算平均验证损失"
                 total_val_loss += outputs.loss.item()
 
                 # 转换预测值
@@ -497,7 +511,7 @@ def train_bert():
             f1_dis * 0.6 + disease_precision * 0.2 + disease_recall * 0.2
         )
         if current_disease_metric > best_f1:
-            best_f1 = current_disease_metric
+            best_f1 = float(current_disease_metric)
             model.save_pretrained(SAVE_PATH)
             tokenizer.save_pretrained(SAVE_PATH)
             # 保存 label_encoders
