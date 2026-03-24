@@ -335,6 +335,88 @@ def compute_metrics(eval_pred: EvalPrediction) -> dict[str, float]:
         "acc_first_aid": float(accuracy_score(first_aid_labels, first_aid_predicts)),
     }
 
+# ====================== 新增：计算每个 label 正样本的中位数 ======================
+def compute_label_medians(
+    model: DistilBertForMultitaskLearning,
+    dataset: MultitaskDataset,
+    device: torch.device,
+) -> dict:
+    """在训练集的**正样本**上运行模型，收集每个 label 的 sigmoid 概率，
+    并计算其中位数（仅针对 ground-truth 为正的样本）。
+    返回结构：
+    {
+        "disease": {"疾病名1": 中位数, "疾病名2": 中位数, ...},
+        "symptom": {"症状名1": 中位数, ...},
+        "first_aid": 急救中位数 (float)
+    }
+    """
+    model.eval()
+    disease_probs_pos: list[list[float]] = [[] for _ in range(model.num_diseases)]
+    symptom_probs_pos: list[list[float]] = [[] for _ in range(model.num_symptoms)]
+    first_aid_probs_pos: list[float] = []
+
+    loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=False)
+
+    with torch.no_grad():
+        for batch in tqdm(loader, desc="计算每个 label 正样本中位数"):
+            # 只传入模型需要的输入（不传入 labels，避免计算 loss）
+            input_ids = batch["input_ids"].to(device).long()
+            attention_mask = batch["attention_mask"].to(device).long()
+
+            outputs: MultitaskSequenceClassifierOutput = model(
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+            )
+            assert outputs.logits is not None
+            logits_d, logits_s, logits_f = outputs.logits
+
+            # sigmoid 概率
+            probs_d = torch.sigmoid(logits_d).cpu().numpy()  # (bs, num_diseases)
+            probs_s = torch.sigmoid(logits_s).cpu().numpy()  # (bs, num_symptoms)
+            probs_f = torch.sigmoid(logits_f).cpu().numpy()  # (bs, 1)
+
+            # ground-truth
+            labels_d = batch["labels_disease"].cpu().numpy()  # (bs, num_diseases)
+            labels_s = batch["labels_symptom"].cpu().numpy()  # (bs, num_symptoms)
+            labels_f = batch["labels_first_aid"].cpu().numpy()  # (bs, 1)
+
+            for i in range(len(probs_d)):  # 遍历 batch 内每个样本
+                # 疾病
+                for j in range(model.num_diseases):
+                    if labels_d[i, j] == 1.0:
+                        disease_probs_pos[j].append(probs_d[i, j])
+                # 症状
+                for j in range(model.num_symptoms):
+                    if labels_s[i, j] == 1.0:
+                        symptom_probs_pos[j].append(probs_s[i, j])
+                # 急救（二分类）
+                if labels_f[i, 0] == 1.0:
+                    first_aid_probs_pos.append(probs_f[i, 0])
+
+    # 计算中位数
+    disease_medians: dict[str, float] = {}
+    for j, prob_list in enumerate(disease_probs_pos):
+        label_name = disease_label_binarizer.classes_[j]
+        if prob_list:
+            disease_medians[label_name] = float(np.median(prob_list))
+        else:
+            disease_medians[label_name] = 0.5
+
+    symptom_medians: dict[str, float] = {}
+    for j, prob_list in enumerate(symptom_probs_pos):
+        label_name = symptom_label_binarizer.classes_[j]
+        if prob_list:
+            symptom_medians[label_name] = float(np.median(prob_list))
+        else:
+            symptom_medians[label_name] = 0.5
+
+    first_aid_median = float(np.median(first_aid_probs_pos)) if first_aid_probs_pos else 0.5
+
+    return {
+        "disease": disease_medians,
+        "symptom": symptom_medians,
+        "first_aid": first_aid_median,
+    }
 
 # ====================== 5. 开始训练 (手动循环) ======================
 
@@ -512,12 +594,17 @@ def train_bert():
         )
         if current_disease_metric > best_f1:
             best_f1 = float(current_disease_metric)
+
+            logger.info("模型表现提升，计算每个 label 正样本的中位数...")
+            medians_dict = compute_label_medians(model, train_dataset, TORCH_DEVICE)
+
             model.save_pretrained(SAVE_PATH)
             tokenizer.save_pretrained(SAVE_PATH)
             # 保存 label_encoders
             label_encoders = {
                 "disease": disease_label_binarizer,
                 "symptom": symptom_label_binarizer,
+                "medians": medians_dict,
             }
             with open(SAVE_PATH / "label_encoders.pkl", "wb") as f:
                 pickle.dump(label_encoders, f)
@@ -557,7 +644,7 @@ def predict(
         encoders = {"disease": encoders[0], "symptom": encoders[1]}
     mlb_d: MultiLabelBinarizer = encoders["disease"]
     mlb_s: MultiLabelBinarizer = encoders["symptom"]
-
+    medians: dict = encoders.get("medians", {})
     # 预处理
     inputs: BatchEncoding = tokenizer(
         text,
@@ -582,23 +669,78 @@ def predict(
     logger.debug(f"disease_logits: {disease_logits}\n")
     logger.debug(f"symptoms_logits: {symptoms_logits}\n")
     logger.debug(f"first_aid_logits: {first_aid_logits}\n")
-    # 解码
-    diseases = mlb_d.inverse_transform(
-        (torch.sigmoid(disease_logits).numpy() >= threshold).astype(int)
-    )[0]
-    symptoms = mlb_s.inverse_transform(
-        (torch.sigmoid(symptoms_logits).numpy() >= threshold).astype(int)
-    )[0]
-    need_first_aid = (torch.sigmoid(first_aid_logits).numpy() >= threshold).astype(int)[
-        0
-    ][0]
 
-    return {
-        "disease": list(diseases),
-        "symptoms": list(symptoms),
-        "need_first_aid": int(need_first_aid),
+    disease_probs = torch.sigmoid(disease_logits).cpu().numpy()[0]  # (num_diseases,)
+    symptom_probs = torch.sigmoid(symptoms_logits).cpu().numpy()[0]  # (num_symptoms,)
+    first_aid_prob = torch.sigmoid(first_aid_logits).cpu().numpy()[0][0]  # scalar
+
+    # 4. 决定正类（保持原有 > threshold 逻辑）
+    disease_mask = disease_probs >= threshold
+    symptom_mask = symptom_probs >= threshold
+
+    # 5. 构造带置信信息的返回结果
+    diseases_result = []
+    for idx in np.where(disease_mask)[0]:
+        label_name = mlb_d.classes_[idx]
+        prob = float(disease_probs[idx])
+        median = medians.get("disease", {}).get(label_name, 0.5)
+        # 置信度判断（可自行调整规则）
+        confidence = (
+            "very_high" if prob >= median * 1.2 else
+            "high" if prob >= median else
+            "medium" if prob >= 0.7 else
+            "low"
+        )
+        diseases_result.append({
+            "label": label_name,
+            "probability": round(prob, 4),
+            "median_positive": round(median, 4),
+            "confidence": confidence,  # 与中位数比较得出的置信等级
+            "above_median": prob >= median
+        })
+
+    symptoms_result = []
+    for idx in np.where(symptom_mask)[0]:
+        label_name = mlb_s.classes_[idx]
+        prob = float(symptom_probs[idx])
+        median = medians.get("symptom", {}).get(label_name, 0.5)
+        confidence = (
+            "very_high" if prob >= median * 1.2 else
+            "high" if prob >= median else
+            "medium" if prob >= 0.7 else
+            "low"
+        )
+        symptoms_result.append({
+            "label": label_name,
+            "probability": round(prob, 4),
+            "median_positive": round(median, 4),
+            "confidence": confidence,
+            "above_median": prob >= median
+        })
+
+    # 急救（二分类）
+    need_first_aid = int(first_aid_prob >= threshold)
+    fa_median = medians.get("first_aid", 0.5)
+    fa_confidence = (
+        "very_high" if first_aid_prob >= fa_median * 1.2 else
+        "high" if first_aid_prob >= fa_median else
+        "medium" if first_aid_prob >= 0.7 else
+        "low"
+    ) if need_first_aid else "n/a"
+
+    result = {
+        "diseases": diseases_result,  # 每个正类疾病都带 probability + median + confidence
+        "symptoms": symptoms_result,
+        "need_first_aid": {
+            "value": need_first_aid,
+            "probability": round(first_aid_prob, 4),
+            "median_positive": round(fa_median, 4),
+            "confidence": fa_confidence,
+            "above_median": first_aid_prob >= fa_median if need_first_aid else None,
+        },
     }
 
+    return result
 
 # 测试推理
 if __name__ == "__main__":
