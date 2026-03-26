@@ -16,6 +16,8 @@ from .recommendation_pipeline import (
     query_drugs_hybrid,
     safe_cosine_scores,
 )
+from .cross_encoder_reranker import CrossEncoderReranker
+from .dual_recall_pipeline import DualRecallDrugRecommender, WeightedLabel, parse_weighted_labels
 
 __all__ = [
     "baseline_filter",
@@ -27,4 +29,8 @@ __all__ = [
     "prepare_drug_dataframe",
     "query_drugs_hybrid",
     "safe_cosine_scores",
+    "CrossEncoderReranker",
+    "DualRecallDrugRecommender",
+    "WeightedLabel",
+    "parse_weighted_labels",
 ]

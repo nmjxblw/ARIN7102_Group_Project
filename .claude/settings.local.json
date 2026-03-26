@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd /c \"where conda\")",
+      "Bash(cmd /c \"conda --version\")",
+      "Bash(cmd /c \"C:\\\\ProgramData\\\\miniconda3\\\\Scripts\\\\conda.exe env list\")",
+      "Bash(cmd /c \"C:\\\\Users\\\\zhangyinan197\\\\miniconda3\\\\Scripts\\\\conda.exe env list\")",
+      "Bash(cmd /c \"C:\\\\Users\\\\zhangyinan197\\\\anaconda3\\\\Scripts\\\\conda.exe env list\")"
+    ]
+  }
+}
