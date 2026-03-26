@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 import math
 from sklearn.model_selection import train_test_split
