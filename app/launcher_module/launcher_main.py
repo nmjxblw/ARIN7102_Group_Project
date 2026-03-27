@@ -114,12 +114,6 @@ def end_background_threads():
 def app_run() -> None:
     """主程序入口"""
 
-    logger.debug("主程序运行中: %s", PROJECT_NAME)
-    import deployment_module
-    import json
+    from evaluation import generate_eval_dataset_llm_main
 
-    deployment_module.train_bert()
-    msg = "I feel discomfort in my nose, and there are some pustules on it."
-    prediction: dict = deployment_module.predict(msg)
-    logger.debug(f"输入: {msg}\n预测结果: {json.dumps(prediction, indent=2)}")
-    exit()
+    generate_eval_dataset_llm_main()

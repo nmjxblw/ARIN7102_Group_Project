@@ -1,8 +1,10 @@
 """
 Generate evaluation dataset using LLM to create natural language queries.
 """
-from __future__ import annotations
 
+from __future__ import annotations
+import sys
+import os
 import argparse
 import json
 import random
@@ -12,7 +14,8 @@ from pathlib import Path
 import pandas as pd
 from tqdm import tqdm
 
-from llm_client import LLMClient
+from .llm_client import LLMClient
+from static_module import DRUGS_TRAINING_DATASET_FOLDER
 
 
 def parse_list_field(value) -> list[str]:
@@ -87,8 +90,8 @@ def generate_eval_samples_llm(
     df["symptom_list"] = df["matched_symptoms"].apply(parse_list_field)
 
     candidates = df[
-        (df["disease_list"].str.len() >= min_diseases) &
-        (df["symptom_list"].str.len() >= min_symptoms)
+        (df["disease_list"].str.len() >= min_diseases)
+        & (df["symptom_list"].str.len() >= min_symptoms)
     ].copy()
 
     if len(candidates) == 0:
@@ -96,7 +99,9 @@ def generate_eval_samples_llm(
 
     sampled = candidates.sample(n=min(num_samples, len(candidates)), random_state=42)
 
-    for idx, (_, row) in enumerate(tqdm(sampled.iterrows(), total=len(sampled), desc="Generating")):
+    for idx, (_, row) in enumerate(
+        tqdm(sampled.iterrows(), total=len(sampled), desc="Generating")
+    ):
         diseases = row["disease_list"]
         symptoms = row["symptom_list"]
         drug_name = str(row.get("drug_name", "")).strip()
@@ -104,7 +109,9 @@ def generate_eval_samples_llm(
         if not drug_name:
             continue
 
-        symptom_text = generate_query_with_llm(llm_client, drug_name, diseases, symptoms)
+        symptom_text = generate_query_with_llm(
+            llm_client, drug_name, diseases, symptoms
+        )
 
         if not symptom_text:
             print(f"  Skipping {drug_name}: LLM generation failed")
@@ -120,33 +127,54 @@ def generate_eval_samples_llm(
             for s in symptoms[:4]
         ]
 
-        samples.append({
-            "query_id": f"eval_{idx+1:04d}",
-            "symptom_text": symptom_text,
-            "diseases": disease_items,
-            "symptoms": symptom_items,
-            "relevant_drugs": [drug_name],
-            "relevance_scores": {drug_name: 3}
-        })
+        samples.append(
+            {
+                "query_id": f"eval_{idx+1:04d}",
+                "symptom_text": symptom_text,
+                "diseases": disease_items,
+                "symptoms": symptom_items,
+                "relevant_drugs": [drug_name],
+                "relevance_scores": {drug_name: 3},
+            }
+        )
 
     return samples
 
 
-def main():
+def generate_eval_dataset_llm_main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input-csv", type=Path, required=True)
-    parser.add_argument("--output-json", type=Path, required=True)
+    input_csv_default: Path = (
+        Path.cwd()
+        / DRUGS_TRAINING_DATASET_FOLDER
+        / r"enhanced_drug_table_v1_structured.csv"
+    )
+    if not input_csv_default.exists():
+        print(f"Warning: Default input CSV not found at {input_csv_default}")
+        raise
+    parser.add_argument(
+        "--input-csv",
+        type=Path,
+        default=input_csv_default,
+    )
+    output_json_default: Path = (
+        Path.cwd() / DRUGS_TRAINING_DATASET_FOLDER / "eval_dataset_llm.json"
+    )
+    parser.add_argument(
+        "--output-json",
+        type=Path,
+        default=output_json_default,
+    )
     parser.add_argument("--num-samples", type=int, default=100)
     parser.add_argument("--min-diseases", type=int, default=1)
     parser.add_argument("--min-symptoms", type=int, default=1)
     parser.add_argument("--api-key", type=str, default=None)
     parser.add_argument("--base-url", type=str, default=None)
-    parser.add_argument("--model", type=str, default="gpt-3.5-turbo")
+    parser.add_argument("--model", type=str, default="deepseek-v3-2-251201")
     parser.add_argument("--confidence-min", type=float, default=0.5)
     parser.add_argument("--confidence-max", type=float, default=0.75)
     args = parser.parse_args()
 
-    if not args.input_csv.exists():
+    if not os.path.exists(args.input_csv):
         raise FileNotFoundError(f"Input CSV not found: {args.input_csv}")
 
     llm_client = LLMClient(
@@ -174,4 +202,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    generate_eval_dataset_llm_main()

@@ -32,28 +32,28 @@ assert (
     DEEPSEEK_API_KEY is not None and DEEPSEEK_API_KEY != ""
 ), "DEEPSEEK_API_KEY未在.env文件中设置"
 CHAT_HISTORY_DIR: str = os.getenv(
-    "CHAT_HISTORY_DIR", "remote_llm_module/chat_histories"
+    "CHAT_HISTORY_DIR", r"remote_llm_module/chat_histories"
 )
 """ 对话历史记录文件路径 """
 KAGGLE_DATASET_DOWNLOAD_URLS_FILE: str = os.getenv(
     "KAGGLE_DATASET_DOWNLOAD_URLS_FILE",
-    "dataset_module/kaggle_dataset_download_urls.json",
+    r"dataset_module/kaggle_dataset_download_urls.json",
 )
 """ Kaggle数据集下载URL列表文件路径 """
 # endregion
-DATABASE_FILE: str = os.getenv("DATABASE_FILE", "database_module/database.db")
+DATABASE_FILE: str = os.getenv("DATABASE_FILE", r"database_module/database.db")
 """ 数据库文件路径 """
 
-CLINICAL_BERT: str = os.getenv("CLINICAL_BERT", "deployment_module/clinicalbert_local")
+CLINICAL_BERT: str = os.getenv("CLINICAL_BERT", r"deployment_module/clinicalbert_local")
 """ 本地临床BERT模型文件夹路径 """
 DISEASES_SYMPTOM_DICT: str = os.getenv(
     "DISEASES_SYMPTOM_DICT",
-    "dataset_module/disease-symptom-description-dataset/disease_symptoms_dict.json",
+    r"dataset_module/disease-symptom-description-dataset/disease_symptoms_dict.json",
 )
 """ 疾病症状字典文件路径 """
 
 
-# region 模型训练参数
+# region BERT模型训练参数
 try:
     import torch
 
@@ -75,15 +75,25 @@ except ImportError as e:
     raise e
 
 BERT_TRAINING_DATASET_FOLDER: str = os.getenv(
-    "BERT_TRAINING_DATASET_FOLDER", "dataset_module/bert_training_dataset"
+    "BERT_TRAINING_DATASET_FOLDER", r"dataset_module/bert_training_dataset"
 )
 """ BERT训练数据集文件夹路径，包含训练数据和标签文件 """
+
 # endregion
+
+
+# region 药物训练数据集参数
+DRUGS_TRAINING_DATASET_FOLDER: str = os.getenv(
+    "DRUGS_TRAINING_DATASET_FOLDER", r"dataset_module/drugs_training_dataset"
+)
+""" 药物训练数据集文件夹路径，包含训练数据和标签文件 """
+# endregion
+
 # region 本地模型
-BERT_FOLDER: str = os.getenv("BERT_FOLDER", "deployment_module/clinicalbert_local")
+BERT_FOLDER: str = os.getenv("BERT_FOLDER", r"deployment_module/clinicalbert_local")
 """ 本地BERT模型文件夹路径。包含模型权重文件（如pytorch_model.bin）和配置文件（如config.json） """
 TRAINED_BERT_SAVE_PATH: str = os.getenv(
-    "TRAINED_BERT_SAVE_PATH", "deployment_module/trained_bert"
+    "TRAINED_BERT_SAVE_PATH", r"deployment_module/trained_bert"
 )
 """ 训练后BERT模型保存路径 """
 

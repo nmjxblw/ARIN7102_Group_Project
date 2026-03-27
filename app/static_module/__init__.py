@@ -26,6 +26,7 @@ __all__ = [
     "TORCH_DEVICE",
     "USE_CUDA",
     "BERT_TRAINING_DATASET_FOLDER",
+    "DRUGS_TRAINING_DATASET_FOLDER",
     # Classes
     "AppAsyncTask",
     # Enums

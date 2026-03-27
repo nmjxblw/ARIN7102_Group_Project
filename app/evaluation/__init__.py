@@ -1,4 +1,5 @@
 """Evaluation module for drug recommendation system."""
+
 from .metrics import (
     dcg_at_k,
     evaluate_batch,
@@ -9,6 +10,7 @@ from .metrics import (
     recall_at_k,
     reciprocal_rank,
 )
+from .generate_eval_dataset_llm import *
 
 __all__ = [
     "precision_at_k",
@@ -19,4 +21,5 @@ __all__ = [
     "ndcg_at_k",
     "evaluate_single_query",
     "evaluate_batch",
+    "generate_eval_dataset_llm_main",
 ]

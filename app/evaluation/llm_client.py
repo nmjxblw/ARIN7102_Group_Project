@@ -2,6 +2,7 @@
 LLM client for generating natural language queries.
 Supports OpenAI-compatible APIs.
 """
+
 from __future__ import annotations
 
 import os
