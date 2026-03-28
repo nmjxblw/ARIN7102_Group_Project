@@ -741,7 +741,7 @@ def predict(
 
 # 测试推理
 if __name__ == "__main__":
-    # train_bert()
+    #train_bert()
     test_text = "I feel dizzy and nauseous"
     result = predict(test_text)
     msg = f"输入文本：{test_text}\n推理测试结果:"
