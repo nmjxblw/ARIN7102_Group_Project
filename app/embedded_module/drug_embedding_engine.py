@@ -3,6 +3,7 @@ drug_embedding_engine.py
 使用 PubMedBERT 对药物的"语义文本"(drug_name + symptoms + disease_desc)
 进行 768 维 Embedding，供后续 Faiss KNN 检索与传统 ML 重排使用。
 """
+from __future__ import annotations
 
 import os
 from pathlib import Path
