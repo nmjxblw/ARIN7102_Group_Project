@@ -7,6 +7,8 @@
 from .disease_data_process import load_disease_with_symptoms
 from .kaggle_download import download_and_open_datasets
 from .data_process import *
+from .json_to_dataframe import *
+
 
 __all__ = [
     "download_and_open_datasets",
@@ -14,4 +16,6 @@ __all__ = [
     "visualize_data_frame",
     "generate_visualize_data_frame",
     "load_disease_with_symptoms",
+    "json_to_dataframe",
+    "json_to_dataframe_main",
 ]

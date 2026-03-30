@@ -114,6 +114,6 @@ def end_background_threads():
 def app_run() -> None:
     """主程序入口"""
 
-    from deployment_module import train_bert
+    from dataset_module import json_to_dataframe_main
 
-    train_bert()
+    json_to_dataframe_main()

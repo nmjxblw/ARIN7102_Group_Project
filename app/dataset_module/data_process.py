@@ -296,3 +296,25 @@ def generate_visualize_data_frame() -> list[Optional[os.PathLike]]:
         )
         fig_paths.append(fig_path)
     return fig_paths
+
+
+def visualize_data_frame_by_columns(
+    df: pd.DataFrame, columns: list[str]
+) -> list[Optional[os.PathLike]]:
+    """
+    根据指定列生成可视化图表
+
+    参数：
+    - df: 需要可视化信息的DataFrame
+    - columns: 需要可视化的列名列表
+    """
+    fig_paths = []
+    for col in columns:
+        if col not in df.columns:
+            logger.warning(f"列[{col}]在DataFrame中不存在，跳过可视化")
+            continue
+        fig_path = visualize_data_frame(
+            df[[col]], file_name=f"{col} Distribution", max_categories_per_chart=30
+        )
+        fig_paths.append(fig_path)
+    return fig_paths
