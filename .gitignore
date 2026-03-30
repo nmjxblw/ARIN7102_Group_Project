@@ -228,7 +228,8 @@ reports/
 # Local deployment BERT Models
 app/deployment_module/clinicalbert_local/*.bin
 app/deployment_module/trained_bert/checkpoint-*
+app/dataset_module/bert_training_dataset/generated_medical_dataset.csv
 *.safetensors
 
-# 
+#
 interaction/
