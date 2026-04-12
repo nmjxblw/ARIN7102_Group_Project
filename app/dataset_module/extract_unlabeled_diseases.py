@@ -48,6 +48,8 @@ def extract_unlabeled_diseases():
         if not drug_name:
             continue
         matched_symptoms = entry.get("matched_symptoms", [])
+        if len(matched_symptoms) == 0:
+            continue
         unlabeled_disease_pairs.append(
             {
                 "drug": drug_name,

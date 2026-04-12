@@ -71,13 +71,6 @@
         ]
     },
     {
-        "drug": "abciximab",
-        "diseases": [
-            "high_risk_percutaneous_transluminal_angioplasty"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "abenol",
         "diseases": [
             "pain"
@@ -1038,13 +1031,6 @@
         ]
     },
     {
-        "drug": "adenovirus vaccine",
-        "diseases": [
-            "adenovirus_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "adhansia xr",
         "diseases": [
             "adhd"
@@ -1188,13 +1174,6 @@
         ]
     },
     {
-        "drug": "advicor",
-        "diseases": [
-            "high_cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "advil children's",
         "diseases": [
             "pain"
@@ -1326,20 +1305,6 @@
             "interrupting_others",
             "restlessness"
         ]
-    },
-    {
-        "drug": "aerobid-m",
-        "diseases": [
-            "1_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "afamelanotide",
-        "diseases": [
-            "prevention_of_phototoxicity_in_erythropoietic_protoporphyria"
-        ],
-        "symptoms": []
     },
     {
         "drug": "afatinib",
@@ -2458,22 +2423,6 @@
         ]
     },
     {
-        "drug": "altocor",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "altoprev",
-        "diseases": [
-            "cholesterol",
-            "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "altretamine",
         "diseases": [
             "ovarian_cance"
@@ -2657,20 +2606,6 @@
             "sore_throat",
             "vomiting"
         ]
-    },
-    {
-        "drug": "amikacin liposome",
-        "diseases": [
-            "mycobacterium_avium-intracellulare,_treatment"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "amino acids",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "aminocaproic acid",
@@ -3565,13 +3500,6 @@
         ]
     },
     {
-        "drug": "anthrax vaccine adsorbed",
-        "diseases": [
-            "anthrax_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "anti-inhibitor coagulant complex",
         "diseases": [
             "hemophilia_a"
@@ -4237,13 +4165,6 @@
         ]
     },
     {
-        "drug": "arformoterol",
-        "diseases": [
-            "moterol)"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "argatroban",
         "diseases": [
             "thrombotic/thromboembolic_disorder"
@@ -4260,14 +4181,6 @@
             "swelling_in_limb",
             "warmth_in_limb"
         ]
-    },
-    {
-        "drug": "arginine",
-        "diseases": [
-            "diagnosis_and_investigation",
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "aricept",
@@ -4915,13 +4828,6 @@
         ]
     },
     {
-        "drug": "aspirin / omeprazole",
-        "diseases": [
-            "prevention_of_cardiovascular_disease"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "aspirin / oxycodone",
         "diseases": [
             "pain"
@@ -5155,20 +5061,6 @@
             "xanthomas_on_skin",
             "xanthomas_on_tendons"
         ]
-    },
-    {
-        "drug": "atorvastatin / ezetimibe",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "atracurium",
-        "diseases": [
-            "anesthetic_adjunct"
-        ],
-        "symptoms": []
     },
     {
         "drug": "atropine",
@@ -5965,13 +5857,6 @@
         ]
     },
     {
-        "drug": "b3-500-gr",
-        "diseases": [
-            "high_cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "bacitracin / hydrocortisone / neomycin / polymyxin b",
         "diseases": [
             "bacterial_skin_infection",
@@ -6277,20 +6162,6 @@
         ]
     },
     {
-        "drug": "barium sulfate",
-        "diseases": [
-            "computed_tomography"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "basiliximab",
-        "diseases": [
-            "organ_transplant,_rejection_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "bayer back & body",
         "diseases": [
             "pain"
@@ -6424,20 +6295,6 @@
             "shortness_of_breath",
             "sore_throat"
         ]
-    },
-    {
-        "drug": "bee pollen",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "belatacept",
-        "diseases": [
-            "rejection_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "belbuca",
@@ -6641,13 +6498,6 @@
             "unexplained_weight_loss",
             "unintended_weight_loss"
         ]
-    },
-    {
-        "drug": "benefix",
-        "diseases": [
-            "actor_ix_deficiency"
-        ],
-        "symptoms": []
     },
     {
         "drug": "benemid",
@@ -7006,13 +6856,6 @@
         ]
     },
     {
-        "drug": "benzylpenicilloyl-polylysine",
-        "diseases": [
-            "penicillin_sensitization_testing"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "beractant",
         "diseases": [
             "respiratory_distress_syndrome"
@@ -7329,13 +7172,6 @@
         ]
     },
     {
-        "drug": "bezlotoxumab",
-        "diseases": [
-            "prevention_of_clostridioides_difficile_infection_recurrence"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "biafine",
         "diseases": [
             "dry_skin"
@@ -7390,13 +7226,6 @@
             "shortness_of_breath",
             "swelling_in_legs"
         ]
-    },
-    {
-        "drug": "bifidobacterium infantis / lactobacillus acidophilus",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "bijuva",
@@ -7510,13 +7339,6 @@
             "increased_thirst",
             "sore_throat"
         ]
-    },
-    {
-        "drug": "biotin",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "bisa-lax",
@@ -8045,13 +7867,6 @@
             "low_self_esteem",
             "relationship_difficulties"
         ]
-    },
-    {
-        "drug": "brethine",
-        "diseases": [
-            "premature_lab"
-        ],
-        "symptoms": []
     },
     {
         "drug": "brexanolone",
@@ -9212,13 +9027,6 @@
         ]
     },
     {
-        "drug": "camptosar",
-        "diseases": [
-            "colorectal_cance"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "camrese",
         "diseases": [
             "birth_control"
@@ -9260,13 +9068,6 @@
             "spotting",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "cangrelor",
-        "diseases": [
-            "percutaneous_coronary_intervention"
-        ],
-        "symptoms": []
     },
     {
         "drug": "cannabidiol",
@@ -10343,13 +10144,6 @@
         ]
     },
     {
-        "drug": "cerefolin nac",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "cerezyme",
         "diseases": [
             "gaucher_disease"
@@ -10972,13 +10766,6 @@
         ]
     },
     {
-        "drug": "cholecalciferol / folic acid",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "cholecalciferol / genistein / zinc glycinate",
         "diseases": [
             "osteopenia"
@@ -10991,13 +10778,6 @@
             "stooped_posture",
             "usually_no_symptoms"
         ]
-    },
-    {
-        "drug": "cholera vaccine, live",
-        "diseases": [
-            "cholera_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "cholestyramine light",
@@ -11040,13 +10820,6 @@
             "pale_stools",
             "vitamin_deficiency"
         ]
-    },
-    {
-        "drug": "choline c-11",
-        "diseases": [
-            "positron_emission_tomography_imaging"
-        ],
-        "symptoms": []
     },
     {
         "drug": "choline salicylate / magnesium salicylate",
@@ -11708,20 +11481,6 @@
         ]
     },
     {
-        "drug": "citranatal 90 dha",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "citranatal assure",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "citrate of magnesia",
         "diseases": [
             "constipation"
@@ -11990,13 +11749,6 @@
             "vaginal_irritation",
             "vaginal_itching"
         ]
-    },
-    {
-        "drug": "clinpro 5000",
-        "diseases": [
-            "prevention_of_dental_caries"
-        ],
-        "symptoms": []
     },
     {
         "drug": "clobazam",
@@ -12449,13 +12201,6 @@
         ]
     },
     {
-        "drug": "coenzyme q10",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "cogentin",
         "diseases": [
             "extrapyramidal_reaction"
@@ -12822,13 +12567,6 @@
         ]
     },
     {
-        "drug": "concept dha",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "concerta",
         "diseases": [
             "adhd",
@@ -13116,13 +12854,6 @@
             "nausea",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "coq10",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "cordarone",
@@ -13588,13 +13319,6 @@
         ]
     },
     {
-        "drug": "creatine",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "crinone",
         "diseases": [
             "progesterone_insufficiency"
@@ -13982,13 +13706,6 @@
         ]
     },
     {
-        "drug": "cytomegalovirus immune globulin",
-        "diseases": [
-            "cmv_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "cytotec",
         "diseases": [
             "abortion"
@@ -14135,13 +13852,6 @@
             "unexplained_weight_loss",
             "varied_color"
         ]
-    },
-    {
-        "drug": "daclizumab",
-        "diseases": [
-            "organ_transplant,_rejection_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "dactinomycin",
@@ -14343,13 +14053,6 @@
             "painful_periods",
             "pelvic_pain"
         ]
-    },
-    {
-        "drug": "dantrium",
-        "diseases": [
-            "98_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
     },
     {
         "drug": "dantrolene",
@@ -15730,13 +15433,6 @@
             "vulvar_soreness",
             "vulvar_stinging"
         ]
-    },
-    {
-        "drug": "desirudin",
-        "diseases": [
-            "deep_vein_thrombosis,_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "desogen",
@@ -17405,13 +17101,6 @@
         ]
     },
     {
-        "drug": "diosmiplex",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "diphenhydramine / hydrocortisone",
         "diseases": [
             "pruritus"
@@ -17511,42 +17200,6 @@
         ]
     },
     {
-        "drug": "diphtheria and tetanus toxoids / pertussis, acellular",
-        "diseases": [
-            "diphtheria_prophylaxis",
-            "pertussis_prophylaxis",
-            "tetanus_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "diphtheria toxoid / pertussis, acellular / poliovirus vaccine, inactivated / tetanus toxoid",
-        "diseases": [
-            "diphtheria_prophylaxis",
-            "pertussis_prophylaxis",
-            "poliomyelitis_prophylaxis",
-            "tetanus_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "diphtheria toxoid / pertussis, acellular / tetanus toxoid",
-        "diseases": [
-            "diphtheria_prophylaxis",
-            "pertussis_prophylaxis",
-            "tetanus_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "diphtheria toxoid / tetanus toxoid",
-        "diseases": [
-            "diphtheria_prophylaxis",
-            "tetanus_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "diprivan",
         "diseases": [
             "anesthesia"
@@ -17585,14 +17238,6 @@
             "swelling",
             "thickened_skin"
         ]
-    },
-    {
-        "drug": "dipyridamole",
-        "diseases": [
-            "prosthetic_heart_valves_-_thrombosis_prophylaxis",
-            "radionuclide_myocardial_perfusion_study"
-        ],
-        "symptoms": []
     },
     {
         "drug": "disopyramide",
@@ -18361,13 +18006,6 @@
         ]
     },
     {
-        "drug": "duet dha",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "dulcolax",
         "diseases": [
             "bowel_preparation",
@@ -18865,13 +18503,6 @@
             "feeling_of_fullness",
             "flatulence"
         ]
-    },
-    {
-        "drug": "ebola zaire vaccine, live",
-        "diseases": [
-            "ebola_zaire_disease_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "ecallantide",
@@ -20112,13 +19743,6 @@
         ]
     },
     {
-        "drug": "eovist",
-        "diseases": [
-            "liver_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "epiceram",
         "diseases": [
             "dry_skin"
@@ -20253,13 +19877,6 @@
             "uncontrollable_jerking_movements",
             "uncontrollable_muscle_stiffness"
         ]
-    },
-    {
-        "drug": "epsom salt",
-        "diseases": [
-            "6_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
     },
     {
         "drug": "equalactin",
@@ -21826,13 +21443,6 @@
         ]
     },
     {
-        "drug": "ezallor",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "ezetimibe",
         "diseases": [
             "cholesterol",
@@ -21850,13 +21460,6 @@
             "tendon_stiffness",
             "xanthomas_skin_bumps"
         ]
-    },
-    {
-        "drug": "ezetimibe / rosuvastatin",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "ezetimibe / simvastatin",
@@ -22503,13 +22106,6 @@
         ]
     },
     {
-        "drug": "fenugreek",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "feosol original",
         "diseases": [
             "anemia_associated_with_chronic_renal_failure"
@@ -22852,13 +22448,6 @@
             "rectal_blockage_sensation",
             "straining_during_bowel_movements"
         ]
-    },
-    {
-        "drug": "fibricor",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "fibrin sealant",
@@ -23226,27 +22815,6 @@
         ]
     },
     {
-        "drug": "flolipid",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "florbetaben f-18",
-        "diseases": [
-            "positron_emission_tomography_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "florbetapir f 18",
-        "diseases": [
-            "positron_emission_tomography_imaging"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "florinef",
         "diseases": [
             "postural_orthostatic_tachycardia_syndrome"
@@ -23307,13 +22875,6 @@
             "nausea",
             "unintended_weight_loss"
         ]
-    },
-    {
-        "drug": "fluciclovine f 18",
-        "diseases": [
-            "positron_emission_tomography_imaging"
-        ],
-        "symptoms": []
     },
     {
         "drug": "fludara",
@@ -23500,20 +23061,6 @@
             "skin_swelling",
             "skin_thickening"
         ]
-    },
-    {
-        "drug": "fluoride",
-        "diseases": [
-            "prevention_of_dental_caries"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "fluoridex",
-        "diseases": [
-            "6_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
     },
     {
         "drug": "fluorometholone",
@@ -24019,13 +23566,6 @@
         ]
     },
     {
-        "drug": "flutemetamol f-18",
-        "diseases": [
-            "positron_emission_tomography_imaging"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "fluvastatin",
         "diseases": [
             "cholesterol",
@@ -24398,13 +23938,6 @@
         ]
     },
     {
-        "drug": "formaldehyde",
-        "diseases": [
-            "medical_procedures"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "fortesta",
         "diseases": [
             "hypogonadism,_male"
@@ -24628,66 +24161,6 @@
         ]
     },
     {
-        "drug": "gadavist",
-        "diseases": [
-            "cns_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "gadobenate dimeglumine",
-        "diseases": [
-            "cns_magnetic_resonance_imaging",
-            "magnetic_resonance_angiography"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "gadobutrol",
-        "diseases": [
-            "cns_magnetic_resonance_imaging",
-            "vascular_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "gadodiamide",
-        "diseases": [
-            "cns_magnetic_resonance_imaging",
-            "vascular_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "gadopentetate dimeglumine",
-        "diseases": [
-            "cns_magnetic_resonance_imaging",
-            "vascular_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "gadoterate meglumine",
-        "diseases": [
-            "cns_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "gadoteridol",
-        "diseases": [
-            "cns_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "gadoxetate disodium",
-        "diseases": [
-            "liver_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "galantamine",
         "diseases": [
             "alzheimer's",
@@ -24705,20 +24178,6 @@
             "poor_judgment",
             "withdrawal_from_social_activities"
         ]
-    },
-    {
-        "drug": "gallium ga 68 dotatate",
-        "diseases": [
-            "positron_emission_tomography_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "gallium ga-68 dotatoc",
-        "diseases": [
-            "positron_emission_tomography_imaging"
-        ],
-        "symptoms": []
     },
     {
         "drug": "galsulfase",
@@ -24850,13 +24309,6 @@
             "mood_swings",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "gardasil",
-        "diseases": [
-            "human_papillomavirus_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "gas-x",
@@ -25442,20 +24894,6 @@
         ]
     },
     {
-        "drug": "ginkgo",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "ginseng",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "givosiran",
         "diseases": [
             "porphyria"
@@ -25961,13 +25399,6 @@
         ]
     },
     {
-        "drug": "guarana",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "habitrol",
         "diseases": [
             "smoking_cessation"
@@ -26014,13 +25445,6 @@
             "scalp_itching",
             "thinning_hair"
         ]
-    },
-    {
-        "drug": "hair, skin & nails",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "halaven",
@@ -26171,13 +25595,6 @@
         ]
     },
     {
-        "drug": "hecoria",
-        "diseases": [
-            "organ_transplant,_rejection_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "hemax",
         "diseases": [
             "vitamin/mineral_supplementation_and_deficiency"
@@ -26250,13 +25667,6 @@
             "sensitivity_to_sunlight_causing_blisters",
             "severe_abdominal_pain"
         ]
-    },
-    {
-        "drug": "heparin flush",
-        "diseases": [
-            "patency_maintenance_of_indwelling_intravenous_devices"
-        ],
-        "symptoms": []
     },
     {
         "drug": "herceptin",
@@ -26512,13 +25922,6 @@
             "sneezing",
             "watery_eyes"
         ]
-    },
-    {
-        "drug": "human papillomavirus vaccine",
-        "diseases": [
-            "human_papillomavirus_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "humate-p",
@@ -27995,13 +27398,6 @@
         ]
     },
     {
-        "drug": "inclisiran",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "infant's tylenol",
         "diseases": [
             "pain"
@@ -28345,13 +27741,6 @@
         ]
     },
     {
-        "drug": "iobenguane i 123",
-        "diseases": [
-            "diagnosis_and_investigation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "iobenguane i 131",
         "diseases": [
             "paraganglioma",
@@ -28468,13 +27857,6 @@
             "unintentional_weight_loss",
             "weakness"
         ]
-    },
-    {
-        "drug": "iopamidol",
-        "diseases": [
-            "endoscopy_or_radiology_premedication"
-        ],
-        "symptoms": []
     },
     {
         "drug": "iophen-c nr",
@@ -28929,20 +28311,6 @@
         ]
     },
     {
-        "drug": "jantoven",
-        "diseases": [
-            "prevention_of_thromboembolism_in_atrial_fibrillation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "japanese enceph vacc sa14-14-2, inactivated",
-        "diseases": [
-            "japanese_encephalitis_virus_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "jencycla",
         "diseases": [
             "birth_control"
@@ -29193,13 +28561,6 @@
             "skin_thinning",
             "wrinkles_around_mouth"
         ]
-    },
-    {
-        "drug": "juxtapid",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "kadian",
@@ -29843,13 +29204,6 @@
         ]
     },
     {
-        "drug": "l-methylfolate calcium",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "l-methylfolate forte",
         "diseases": [
             "depression"
@@ -30164,13 +29518,6 @@
             "racing_thoughts",
             "suicidal_thoughts"
         ]
-    },
-    {
-        "drug": "lamictal xr",
-        "diseases": [
-            "seizure_prevention"
-        ],
-        "symptoms": []
     },
     {
         "drug": "lanacane",
@@ -30570,13 +29917,6 @@
         ]
     },
     {
-        "drug": "lecithin",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "legatrin pm",
         "diseases": [
             "insomnia"
@@ -30631,27 +29971,6 @@
         ]
     },
     {
-        "drug": "leqvio",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "lescol",
-        "diseases": [
-            "25_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "lescol xl",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "lesinurad",
         "diseases": [
             "gout"
@@ -30700,13 +30019,6 @@
             "unexplained_weight_gain",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "letermovir",
-        "diseases": [
-            "cmv_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "letrozole",
@@ -31231,14 +30543,6 @@
         ]
     },
     {
-        "drug": "lexiscan",
-        "diseases": [
-            "diagnosis_and_investigation",
-            "radionuclide_myocardial_perfusion_study"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "librium",
         "diseases": [
             "alcohol_withdrawal",
@@ -31711,13 +31015,6 @@
         ]
     },
     {
-        "drug": "liquid co-q10",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "lisdexamfetamine",
         "diseases": [
             "adhd",
@@ -31837,14 +31134,6 @@
             "social_withdrawal",
             "suicidal_thoughts"
         ]
-    },
-    {
-        "drug": "livalo",
-        "diseases": [
-            "cholesterol",
-            "high_cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "lmx 4",
@@ -32231,14 +31520,6 @@
         ]
     },
     {
-        "drug": "lopid",
-        "diseases": [
-            "cholesterol",
-            "high_cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "loprox",
         "diseases": [
             "seborrheic_dermatitis"
@@ -32458,13 +31739,6 @@
         ]
     },
     {
-        "drug": "lotrimin af athlete's foot powder",
-        "diseases": [
-            "1_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "lovastatin",
         "diseases": [
             "cholesterol",
@@ -32483,13 +31757,6 @@
             "shortness_of_breath",
             "xanthomas"
         ]
-    },
-    {
-        "drug": "lovastatin / niacin",
-        "diseases": [
-            "high_cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "low-ogestrel-21",
@@ -33232,20 +32499,6 @@
         ]
     },
     {
-        "drug": "lymphoseek",
-        "diseases": [
-            "diagnosis_and_investigation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "lypqozet",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "lysine",
         "diseases": [
             "aphthous_ulce",
@@ -33352,13 +32605,6 @@
         ]
     },
     {
-        "drug": "macimorelin",
-        "diseases": [
-            "growth_hormone_reserve_test"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "macugen",
         "diseases": [
             "macular_degeneration"
@@ -33422,13 +32668,6 @@
             "tenderness",
             "throbbing_pain"
         ]
-    },
-    {
-        "drug": "magnesium aspartate",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "magnesium citrate",
@@ -33495,20 +32734,6 @@
             "urgency_to_defecate",
             "watery_diarrhea"
         ]
-    },
-    {
-        "drug": "magnevist",
-        "diseases": [
-            "cns_magnetic_resonance_imaging"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "makena",
-        "diseases": [
-            "premature_lab"
-        ],
-        "symptoms": []
     },
     {
         "drug": "malathion",
@@ -33720,13 +32945,6 @@
         ]
     },
     {
-        "drug": "maxidex",
-        "diseases": [
-            "4_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "maxidone",
         "diseases": [
             "pain"
@@ -33762,29 +32980,6 @@
             "sensitivity_to_light",
             "tearing"
         ]
-    },
-    {
-        "drug": "mct",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "measles virus vaccine",
-        "diseases": [
-            "measles_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "measles virus vaccine / mumps virus vaccine / rubella virus vaccine",
-        "diseases": [
-            "measles_prophylaxis",
-            "mumps_prophylaxis",
-            "rubella_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "mebaral",
@@ -33882,13 +33077,6 @@
             "tenderness",
             "throbbing_pain"
         ]
-    },
-    {
-        "drug": "medium chain triglycerides",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "medrox",
@@ -34244,13 +33432,6 @@
         ]
     },
     {
-        "drug": "menactra",
-        "diseases": [
-            "meningococcal_meningitis_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "menest",
         "diseases": [
             "osteoporosis",
@@ -34278,13 +33459,6 @@
         ]
     },
     {
-        "drug": "meningococcal conjugate vaccine",
-        "diseases": [
-            "meningococcal_meningitis_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "meningococcal group b vaccine",
         "diseases": [
             "meningitis,_meningococcal",
@@ -34304,13 +33478,6 @@
             "sudden_high_fever",
             "vomiting"
         ]
-    },
-    {
-        "drug": "menopur",
-        "diseases": [
-            "llicle_stimulation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "menotropins",
@@ -34761,20 +33928,6 @@
         ]
     },
     {
-        "drug": "metformin / rosiglitazone",
-        "diseases": [
-            "min_/_rosiglitazone)"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "methacholine",
-        "diseases": [
-            "diagnosis_and_investigation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "methadone",
         "diseases": [
             "chronic_pain",
@@ -35016,13 +34169,6 @@
             "vomiting",
             "yawning"
         ]
-    },
-    {
-        "drug": "methohexital",
-        "diseases": [
-            "anesthetic_adjunct"
-        ],
-        "symptoms": []
     },
     {
         "drug": "methsuximide",
@@ -35311,13 +34457,6 @@
         ]
     },
     {
-        "drug": "metyrapone",
-        "diseases": [
-            "diagnosis_and_investigation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "metyrosine",
         "diseases": [
             "pheochromocytoma"
@@ -35333,14 +34472,6 @@
             "severe_headache",
             "tremor"
         ]
-    },
-    {
-        "drug": "mevacor",
-        "diseases": [
-            "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous"
-        ],
-        "symptoms": []
     },
     {
         "drug": "mexitil",
@@ -35717,13 +34848,6 @@
             "tremors",
             "vertical_gaze_palsy"
         ]
-    },
-    {
-        "drug": "milk thistle",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "milnacipran",
@@ -36656,13 +35780,6 @@
         ]
     },
     {
-        "drug": "moxatag",
-        "diseases": [
-            "bacterial_endocarditis_prevention"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "moxetumomab pasudotox",
         "diseases": [
             "hairy_cell_leukemia"
@@ -36904,28 +36021,6 @@
         ]
     },
     {
-        "drug": "multivitamin, prenatal",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "mumps virus vaccine",
-        "diseases": [
-            "mumps_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "muromonab-cd3",
-        "diseases": [
-            "rejection_prophylaxis",
-            "rejection_reversal"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "muse",
         "diseases": [
             "erectile_dysfunction"
@@ -36935,13 +36030,6 @@
             "inability_to_maintain_an_erection",
             "reduced_sexual_desire"
         ]
-    },
-    {
-        "drug": "mvi adult",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "my way",
@@ -37632,13 +36720,6 @@
         ]
     },
     {
-        "drug": "natelle one",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "natesto",
         "diseases": [
             "hypogonadism,_male"
@@ -37752,13 +36833,6 @@
             "spotting",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "neevo dha",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "nefazodone",
@@ -38168,13 +37242,6 @@
             "skin_peeling",
             "skin_rash"
         ]
-    },
-    {
-        "drug": "niacor",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "niaspan",
@@ -38699,13 +37766,6 @@
             "nausea",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "nor-qd",
-        "diseases": [
-            "6_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
     },
     {
         "drug": "nora-be",
@@ -39317,13 +38377,6 @@
         ]
     },
     {
-        "drug": "ob complete gold",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "obeticholic acid",
         "diseases": [
             "primary_biliary_cholangitis"
@@ -39702,13 +38755,6 @@
             "shortness_of_breath",
             "unintended_weight_loss"
         ]
-    },
-    {
-        "drug": "omnipaque 350",
-        "diseases": [
-            "body_imaging"
-        ],
-        "symptoms": []
     },
     {
         "drug": "omnitrope",
@@ -40165,13 +39211,6 @@
             "unexplained_weight_gain",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "ortho d",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "ortho evra",
@@ -42546,13 +41585,6 @@
         ]
     },
     {
-        "drug": "pennyroyal",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "pentafluoropropane / tetrafluoroethane",
         "diseases": [
             "pain"
@@ -42818,13 +41850,6 @@
             "mood_disturbances",
             "waking_up_too_early"
         ]
-    },
-    {
-        "drug": "perflutren",
-        "diseases": [
-            "echocardiography"
-        ],
-        "symptoms": []
     },
     {
         "drug": "peri-colace",
@@ -43523,13 +42548,6 @@
         ]
     },
     {
-        "drug": "phillips colon health",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "phillips' cramp-free",
         "diseases": [
             "constipation"
@@ -43543,13 +42561,6 @@
             "rectal_blockage_sensation",
             "straining_during_bowel_movements"
         ]
-    },
-    {
-        "drug": "phisohex",
-        "diseases": [
-            "skin_disinfection,_preoperative"
-        ],
-        "symptoms": []
     },
     {
         "drug": "phoslo",
@@ -43747,15 +42758,6 @@
         ]
     },
     {
-        "drug": "pitavastatin",
-        "diseases": [
-            "cholesterol",
-            "dyslipidemia",
-            "high_cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "pitocin",
         "diseases": [
             "labor_induction"
@@ -43907,20 +42909,6 @@
         ]
     },
     {
-        "drug": "pneumococcal 13-valent vaccine",
-        "diseases": [
-            "pneumococcal_disease_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "pneumococcal 23-polyvalent vaccine",
-        "diseases": [
-            "pneumococcal_disease_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "podofilox",
         "diseases": [
             "condylomata_acuminata"
@@ -43964,13 +42952,6 @@
             "shortness_of_breath",
             "unexplained_weight_loss"
         ]
-    },
-    {
-        "drug": "poliovirus vaccine, inactivated",
-        "diseases": [
-            "poliomyelitis_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "polmon",
@@ -44427,13 +43408,6 @@
         ]
     },
     {
-        "drug": "pr natal 400",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "prabotulinumtoxina",
         "diseases": [
             "forehead_lines"
@@ -44675,13 +43649,6 @@
             "swollen_red_bumps",
             "visible_blood_vessels_on_face"
         ]
-    },
-    {
-        "drug": "pravachol",
-        "diseases": [
-            "high_cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "prax",
@@ -44937,27 +43904,6 @@
         ]
     },
     {
-        "drug": "prenatabs fa",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "prenatal plus",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "prenexa",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "prepopik",
         "diseases": [
             "bowel_preparation"
@@ -44999,13 +43945,6 @@
         ]
     },
     {
-        "drug": "prevident 5000 plus",
-        "diseases": [
-            "prevention_of_dental_caries"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "previfem",
         "diseases": [
             "abnormal_uterine_bleeding",
@@ -45043,13 +43982,6 @@
             "unexplained_weight_gain",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "prevnar 13",
-        "diseases": [
-            "pneumococcal_disease_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "prevpac",
@@ -45296,13 +44228,6 @@
             "severe_infections",
             "swollen_lymph_nodes"
         ]
-    },
-    {
-        "drug": "pro-den rx",
-        "diseases": [
-            "prevention_of_dental_caries"
-        ],
-        "symptoms": []
     },
     {
         "drug": "proamatine",
@@ -46042,20 +44967,6 @@
             "vision_changes",
             "weight_gain"
         ]
-    },
-    {
-        "drug": "provida dha",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "provocholine",
-        "diseases": [
-            "diagnosis_and_investigation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "prozac",
@@ -46906,27 +45817,6 @@
         ]
     },
     {
-        "drug": "rabies immune globulin, human",
-        "diseases": [
-            "rabies_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "rabies vaccine, human diploid cell",
-        "diseases": [
-            "rabies_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "rabies vaccine, purified chick embryo cell",
-        "diseases": [
-            "rabies_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "radiaguard",
         "diseases": [
             "pain"
@@ -47219,20 +46109,6 @@
         ]
     },
     {
-        "drug": "readi-cat",
-        "diseases": [
-            "computed_tomography"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "readi-cat 2",
-        "diseases": [
-            "computed_tomography"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "rebif",
         "diseases": [
             "multiple_sclerosis"
@@ -47323,13 +46199,6 @@
         ]
     },
     {
-        "drug": "red yeast rice",
-        "diseases": [
-            "high_cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "reese's pinworm medicine",
         "diseases": [
             "pinworm_infection_(enterobius_vermicularis)"
@@ -47378,14 +46247,6 @@
         ]
     },
     {
-        "drug": "regadenoson",
-        "diseases": [
-            "diagnosis_and_investigation",
-            "radionuclide_myocardial_perfusion_study"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "regen-cov",
         "diseases": [
             "covid_19"
@@ -47425,13 +46286,6 @@
             "tenderness",
             "throbbing_pain"
         ]
-    },
-    {
-        "drug": "regimex",
-        "diseases": [
-            "6_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
     },
     {
         "drug": "regorafenib",
@@ -48660,13 +47514,6 @@
         ]
     },
     {
-        "drug": "roszet",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "rotigotine",
         "diseases": [
             "parkinson's_disease",
@@ -48844,13 +47691,6 @@
         ]
     },
     {
-        "drug": "royal jelly",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "rozerem",
         "diseases": [
             "insomnia"
@@ -48900,13 +47740,6 @@
             "sneezing",
             "watery_eyes"
         ]
-    },
-    {
-        "drug": "rubidium chloride rb-82",
-        "diseases": [
-            "positron_emission_tomography_imaging"
-        ],
-        "symptoms": []
     },
     {
         "drug": "ruconest",
@@ -49296,14 +48129,6 @@
         ]
     },
     {
-        "drug": "salicylic acid / urea",
-        "diseases": [
-            "foot_care",
-            "t_care"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "saliva substitutes",
         "diseases": [
             "mucositis",
@@ -49385,13 +48210,6 @@
             "tenderness",
             "throbbing_pain"
         ]
-    },
-    {
-        "drug": "salvax duo",
-        "diseases": [
-            "t_care"
-        ],
-        "symptoms": []
     },
     {
         "drug": "sani-supp",
@@ -49906,13 +48724,6 @@
             "unintentional_weight_loss",
             "weakness"
         ]
-    },
-    {
-        "drug": "scullcap",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "seasonale",
@@ -51464,21 +50275,6 @@
         ]
     },
     {
-        "drug": "slippery elm",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "slo-niacin",
-        "diseases": [
-            "cholesterol",
-            "high_cholesterol"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "slow fe",
         "diseases": [
             "iron_deficiency_anemia"
@@ -51496,28 +50292,6 @@
             "unusual_cravings_for_ice_or_dirt",
             "weakness"
         ]
-    },
-    {
-        "drug": "smallpox and monkeypox vaccine",
-        "diseases": [
-            "monkeypox_prophylaxis",
-            "smallpox_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "smallpox vaccine",
-        "diseases": [
-            "smallpox_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "smoothie readi-cat 2",
-        "diseases": [
-            "computed_tomography"
-        ],
-        "symptoms": []
     },
     {
         "drug": "sodium benzoate / sodium phenylacetate",
@@ -51559,13 +50333,6 @@
             "urgency_to_defecate",
             "watery_diarrhea"
         ]
-    },
-    {
-        "drug": "sodium chondroitin sulfate / sodium hyaluronate",
-        "diseases": [
-            "ophthalmic_viscoelastic_agent"
-        ],
-        "symptoms": []
     },
     {
         "drug": "sodium ferric gluconate complex",
@@ -53659,13 +52426,6 @@
         ]
     },
     {
-        "drug": "tandem dha",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "tarceva",
         "diseases": [
             "non-small_cell_lung_cance"
@@ -54583,13 +53343,6 @@
         ]
     },
     {
-        "drug": "tetrofosmin",
-        "diseases": [
-            "diagnosis_and_investigation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "tev-tropin",
         "diseases": [
             "pediatric_growth_hormone_deficiency"
@@ -54708,13 +53461,6 @@
             "increased_tearing",
             "itching"
         ]
-    },
-    {
-        "drug": "theratears nutrition",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "thiamine",
@@ -54850,13 +53596,6 @@
         ]
     },
     {
-        "drug": "thrombin",
-        "diseases": [
-            "hemostasis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "tiagabine",
         "diseases": [
             "bipolar_disorde",
@@ -54983,13 +53722,6 @@
             "skipped_heartbeats",
             "weakness"
         ]
-    },
-    {
-        "drug": "tilmanocept",
-        "diseases": [
-            "diagnosis_and_investigation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "timoptic ocudose",
@@ -55314,13 +54046,6 @@
             "tooth_sensitivity",
             "toothache"
         ]
-    },
-    {
-        "drug": "topiragen",
-        "diseases": [
-            "seizure_prevention"
-        ],
-        "symptoms": []
     },
     {
         "drug": "toposar",
@@ -56582,13 +55307,6 @@
         ]
     },
     {
-        "drug": "trypan blue",
-        "diseases": [
-            "ophthalmic_surgical_staining"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "tryptophan",
         "diseases": [
             "depression",
@@ -56623,20 +55341,6 @@
             "thoughts_of_death_or_suicide",
             "waking_up_too_early"
         ]
-    },
-    {
-        "drug": "tuberculin purified protein derivative",
-        "diseases": [
-            "diagnosis_and_investigation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "turmeric",
-        "diseases": [
-            "herbal_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "tussigon",
@@ -56892,13 +55596,6 @@
             "skin_swelling",
             "skin_thickening"
         ]
-    },
-    {
-        "drug": "ubiquinone",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "ulesfia",
@@ -57285,13 +55982,6 @@
         ]
     },
     {
-        "drug": "uroqid-acid no2",
-        "diseases": [
-            "6_users_found_this_comment_helpful."
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "uroxatral",
         "diseases": [
             "benign_prostatic_hyperplasia"
@@ -57427,13 +56117,6 @@
             "rocking_movements",
             "tongue_protrusion"
         ]
-    },
-    {
-        "drug": "valcyte",
-        "diseases": [
-            "cmv_prophylaxis"
-        ],
-        "symptoms": []
     },
     {
         "drug": "valerian",
@@ -57709,13 +56392,6 @@
         ]
     },
     {
-        "drug": "vasculera",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "vasodilan",
         "diseases": [
             "raynaud's_syndrome"
@@ -57730,13 +56406,6 @@
             "skin_discoloration",
             "tingling_in_affected_areas"
         ]
-    },
-    {
-        "drug": "vectibix",
-        "diseases": [
-            "colorectal_cance"
-        ],
-        "symptoms": []
     },
     {
         "drug": "vecuronium",
@@ -58512,20 +57181,6 @@
         ]
     },
     {
-        "drug": "vitafol ultra",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "vitafol-ob+dha",
-        "diseases": [
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "vitamin a",
         "diseases": [
             "vitamin_a_deficiency"
@@ -58608,13 +57263,6 @@
             "tingling_in_hands_and_feet",
             "weakness"
         ]
-    },
-    {
-        "drug": "vitamin c",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "vitamin d2",
@@ -58885,13 +57533,6 @@
         ]
     },
     {
-        "drug": "volumen",
-        "diseases": [
-            "computed_tomography"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "von willebrand factor",
         "diseases": [
             "von_willebrand_disease"
@@ -59112,15 +57753,6 @@
             "skin_swelling",
             "skin_thickening"
         ]
-    },
-    {
-        "drug": "vytorin",
-        "diseases": [
-            "cholesterol",
-            "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous"
-        ],
-        "symptoms": []
     },
     {
         "drug": "vyvanse",
@@ -60036,13 +58668,6 @@
         ]
     },
     {
-        "drug": "yellow fever vaccine",
-        "diseases": [
-            "yellow_fever_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "yohimbine",
         "diseases": [
             "erectile_dysfunction",
@@ -60326,15 +58951,6 @@
         ]
     },
     {
-        "drug": "zetia",
-        "diseases": [
-            "cholesterol",
-            "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "zetonna",
         "diseases": [
             "hayfever"
@@ -60453,13 +59069,6 @@
             "skin_rashes",
             "tremor"
         ]
-    },
-    {
-        "drug": "zinc gluconate",
-        "diseases": [
-            "dietary_supplementation"
-        ],
-        "symptoms": []
     },
     {
         "drug": "zinc oxide",
@@ -60591,14 +59200,6 @@
             "red_eye",
             "sensitivity_to_light"
         ]
-    },
-    {
-        "drug": "zocor",
-        "diseases": [
-            "cholesterol",
-            "high_cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "zodex",
@@ -60999,27 +59600,6 @@
         ]
     },
     {
-        "drug": "zostavax",
-        "diseases": [
-            "herpes_zoster,_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "zoster vaccine live",
-        "diseases": [
-            "herpes_zoster,_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
-        "drug": "zoster vaccine, inactivated",
-        "diseases": [
-            "herpes_zoster,_prophylaxis"
-        ],
-        "symptoms": []
-    },
-    {
         "drug": "zovia",
         "diseases": [
             "birth_control"
@@ -61246,13 +59826,6 @@
             "swelling_around_eye",
             "tearing"
         ]
-    },
-    {
-        "drug": "zypitamag",
-        "diseases": [
-            "cholesterol"
-        ],
-        "symptoms": []
     },
     {
         "drug": "zyprexa",
