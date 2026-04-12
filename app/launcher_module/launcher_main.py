@@ -114,6 +114,6 @@ def end_background_threads():
 def app_run() -> None:
     """主程序入口"""
 
-    from dataset_module import json_to_dataframe_main
+    from dataset_module.extract_unlabeled_diseases import extract_unlabeled_diseases
 
-    json_to_dataframe_main()
+    extract_unlabeled_diseases()

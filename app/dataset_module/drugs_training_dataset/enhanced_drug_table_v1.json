@@ -1919,7 +1919,7 @@
     "related_drugs": {},
     "avg_rating": 8.78,
     "total_reviews": 178.0,
-    "original_conditions": ["Headache", "Not Listed / Othe"],
+    "original_conditions": ["Headache"],
     "medical_condition_description": "",
     "matched_disease_keys": ["migraine"],
     "matched_symptoms": [
@@ -3582,7 +3582,7 @@
     "original_conditions": [
       "Back Pain",
       "Cough",
-      "Not Listed / Othe",
+
       "Pain",
       "Rheumatoid Arthritis"
     ],
@@ -3666,7 +3666,7 @@
     },
     "avg_rating": 8.37,
     "total_reviews": 954.0,
-    "original_conditions": ["Chronic Pain", "Not Listed / Othe", "Pain"],
+    "original_conditions": ["Chronic Pain", "Pain"],
     "medical_condition_description": "Pain An unpleasant sensory and emotional experience associated with actual or potential tissue damage or described in terms of such damage.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -3906,7 +3906,7 @@
     "related_drugs": {},
     "avg_rating": 8.0,
     "total_reviews": 3.0,
-    "original_conditions": ["Headache", "Not Listed / Othe", "Sinus Symptoms"],
+    "original_conditions": ["Headache", "Sinus Symptoms"],
     "medical_condition_description": "",
     "matched_disease_keys": ["migraine"],
     "matched_symptoms": [
@@ -4067,7 +4067,7 @@
     "related_drugs": {},
     "avg_rating": 7.58,
     "total_reviews": 73.0,
-    "original_conditions": ["Not Listed / Othe", "Osteoarthritis", "Pain"],
+    "original_conditions": ["Osteoarthritis", "Pain"],
     "medical_condition_description": "",
     "matched_disease_keys": ["arthritis"],
     "matched_symptoms": [
@@ -4138,11 +4138,7 @@
     "related_drugs": {},
     "avg_rating": 7.18,
     "total_reviews": 98.0,
-    "original_conditions": [
-      "Not Listed / Othe",
-      "Pain",
-      "Rheumatoid Arthritis"
-    ],
+    "original_conditions": ["Pain", "Rheumatoid Arthritis"],
     "medical_condition_description": "Pain An unpleasant sensory and emotional experience associated with actual or potential tissue damage or described in terms of such damage.",
     "matched_disease_keys": ["arthritis"],
     "matched_symptoms": [
@@ -6297,7 +6293,7 @@
       "Herpetic Keratitis",
       "Infectious Mononucleosis",
       "Mononucleosis",
-      "Not Listed / Othe",
+
       "Ramsay Hunt Syndrome",
       "Varicella-Zoster"
     ],
@@ -6516,7 +6512,7 @@
       "Crohn's Disease, Maintenance",
       "Hidradenitis Suppurativa",
       "Juvenile Idiopathic Arthritis",
-      "Not Listed / Othe",
+
       "Plaque Psoriasis",
       "Psoriasis",
       "Psoriatic Arthritis",
@@ -6980,7 +6976,7 @@
     "total_reviews": 6.0,
     "original_conditions": [
       "Atrial Tachycardia",
-      "Not Listed / Othe",
+
       "Radionuclide Myocardial Perfusion Study",
       "Supraventricular Tachycardia",
       "Wolff-Parkinson-White Syndrome"
@@ -11182,10 +11178,7 @@
     "related_drugs": {},
     "avg_rating": 5.89,
     "total_reviews": 46.0,
-    "original_conditions": [
-      "Benign Prostatic Hyperplasia",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Benign Prostatic Hyperplasia"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -14214,7 +14207,7 @@
       "Borderline Personality Disorder",
       "Depression",
       "Dysautonomia",
-      "Not Listed / Othe",
+
       "Panic Disorde",
       "Panic Disorder",
       "Tinnitus"
@@ -16205,7 +16198,7 @@
       "Joint Infection",
       "Meningitis",
       "Nosocomial Pneumonia",
-      "Not Listed / Othe",
+
       "Pneumonia",
       "Tuberculosis, Active",
       "Urinary Tract Infection"
@@ -16883,7 +16876,7 @@
       "Migraine Prevention (Migraine Prophylaxis)",
       "Neuropathic Pain",
       "Neurotic Depression",
-      "Not Listed / Othe",
+
       "Pain",
       "Persistent Depressive Disorde",
       "Persistent Depressive Disorder",
@@ -16979,7 +16972,7 @@
     "related_drugs": {},
     "avg_rating": 9.68,
     "total_reviews": 12.0,
-    "original_conditions": ["Anxiety", "Depression", "Not Listed / Othe"],
+    "original_conditions": ["Anxiety", "Depression"],
     "medical_condition_description": "Anxiety Other names: Anxiety States; Nerves; Nervousness Anxiety is an emotion characterized by feelings of tension, worried thoughts, and accompanied by physical symptoms such as sweating, trembling, voice changes, or increased blood pressure. It may also be called nervousness. Occasional anxiety concerning a stressful or uncomfortable event is normal. However, if a person feels disproportionate levels of anxiety or it is present almost continuously, it might be diagnosed as an anxiety disorder. What Causes Anxiety? Anxiety is part of our survival response and is the way our body responds to potentially harmful or worrying triggers. Strong emotions or fear cause a surge of epinephrine (also called adrenaline) from our adrenal glands. This increases our heartbeat, increases our sensitivity to our surroundings, and prepares us for physical confrontation or to flee if we perceive any threats to our safety. This is often called the fight or flight response. Anxieties today mostly revolve around family, friends, health, money, or work. People more at risk of anxiety disorders include those: With relationship problems Whose jobs involve long hours, high workloads, little support, or danger With family members with anxiety disorders With medical conditions that result in significant lifestyle adjustments, pain, or restricted movement Who have experienced stressful or traumatic events Withdrawing from alcohol, opioids, or other substances. What are the Symptoms of an Anxiety Disorder? Symptoms of an anxiety disorder are usually out of proportion to the original trigger or stressor. If these are accompanied by significant physical symptoms such as increased sweating or increased blood pressure then a person is more likely to have an anxiety disorder rather than stimulus-appropriate anxiety. Generalized anxiety disorder (GAD) is a chronic, ongoing condition with excessive worry over normal life events, whether minor or major. These feelings are usually out of proportion to the trouble that you may encounter in your everyday life. With GAD, feelings come on gradually and are present each day, not in one individual attack, and last for months, even years. Worry may be so excessive that it interferes with your daily life. GAD may also be accompanied by depression and substance abuse disorders. Symptoms of GAD include: Excessive and uncontrollable worry Increased irritability Difficulty concentrating Restlessness or a feeling of being on edge Rapid breathing Excessive perspiration and sweating Trembling, quivering Fatigue Trouble concentrating Headaches, stomach upset Avoidance of circumstances that might trigger severe anxiety Sleep difficulties. Other anxiety disorders include panic disorder, phobias, selective mutism, social anxiety disorder, and separation anxiety disorder. How is Anxiety or an Anxiety Disorder Treated? Treatment depends on the severity and type of anxiety disorder and if it is interfering with everyday life. Treatments may include: Stress management Relaxation techniques Mental imagery (replacing negative thoughts with positive ones) Cognitive Behavioral therapy Counseling Support Exercise Medications.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -17190,7 +17183,7 @@
       "High Blood Pressure (Hypertension)",
       "Migraine Prevention",
       "Migraine Prevention (Migraine Prophylaxis)",
-      "Not Listed / Othe",
+
       "Raynaud's Syndrome"
     ],
     "medical_condition_description": "Angina Other names: Accelerating Angina; Angina Pectoris; Angina, chronic; Angina, stable; Angina, unstable; Heart pains; New-Onset Angina; Progressive Angina; Stable Angina; Unstable Angina Angina pectoris is the medical term for chest pain or discomfort due to coronary heart disease. Angina is a symptom of a condition called myocardial ischemia. It occurs when the heart muscle (myocardium) doesn't get as much blood (hence as much oxygen) as it needs. This usually happens because one or more of the heart's arteries (blood vessels that supply blood to the heart muscle) is narrowed or blocked. Insufficient blood supply is called ischemia. Typical angina is uncomfortable pressure, fullness, squeezing or pain in the center of the chest. The discomfort also may be felt in the neck, jaw, shoulder, back or arm. Many types of chest discomfort aren't related to angina. Acid reflux (heartburn) and lung infection or inflammation are examples.",
@@ -17305,11 +17298,7 @@
     },
     "avg_rating": 6.01,
     "total_reviews": 81.0,
-    "original_conditions": [
-      "High Blood Pressure",
-      "Hypertension",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["High Blood Pressure", "Hypertension"],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension"],
     "matched_symptoms": [
@@ -17999,7 +17988,7 @@
       "Lyme Disease, Carditis",
       "Lyme Disease, Erythema Chronicum Migrans",
       "Lyme Disease, Neurologic",
-      "Not Listed / Othe",
+
       "Otitis Media",
       "Pneumonia",
       "Sinusitis",
@@ -18207,7 +18196,7 @@
       "Kidney Infections",
       "Kidney Infections (Pyelonephritis)",
       "Melioidosis",
-      "Not Listed / Othe",
+
       "Otitis Media",
       "Pneumonia",
       "Sinusitis",
@@ -18499,7 +18488,7 @@
       "ADHD (Attention Deficit Hyperactivity Disorder)",
       "Fatigue",
       "Narcolepsy",
-      "Not Listed / Othe",
+
       "atigue"
     ],
     "medical_condition_description": "ADHD (Attention Deficit Hyperactivity Disorder) Other names: ADD; Attention Deficit Disorder; Attention-Deficit Hyperactivity Disorder (ADHD); Childhood Hyperkinesis Attention deficit hyperactivity disorder (ADHD) is a common behavioral disorder diagnosed in roughly 10 percent of school-aged children and adolescents. There are three main subgroups of ADHD: Predominantly inattentive ADHD: inattention is the main characteristic, daydreaming is common Predominantly hyperactive/impulsive ADHD: hyperactivity and impulsiveness predominate Combined ADHD: all three behaviors (inattention, hyperactivity and impulsiveness) are present. What are the Symptoms of ADHD? Each person varies in the severity and frequency of their symptoms. Originally it was thought that ADHD was more common in boys; however, experts believe girls are more likely to present with inattentive characteristics and are more likely overlooked. ADHD occurs across all races and socioeconomic groups. Symptoms can be grouped depending on the predominant behavior. Examples of inattentive behavior include: Being easily distracted Daydreaming Disorganization Making silly mistakes Often late Short attention span. Examples of hyperactive behavior include: Constantly moving Fidgeting High energy levels Restlessness Trouble sitting still Trouble switching off/sleeping. Examples of impulsive behavior include: Acting without thinking Blurting out answers/secrets Interrupting Prone to accidents. Other symptoms that are common to people with ADHD include: Creativity High Intelligence Delayed social maturity Enthusiasm Sensitivity. What Causes ADHD? The causes of ADHD are not fully known, but research is actively ongoing. There does appear to be a link between a family history of ADHD (genetics) with over 25% of relatives of families with a child with ADHD who also had the condition. There is also an 82% chance that identical twins will both have ADHD if at least one of them has the condition compared to a 38% chance among fraternal twins. Other factors that have been identified as possibly contributing to ADHD include: Brain injury from a traumatic event (eg, stroke, head trauma, tumor) Exposure to lead after birth Low birth weight Fetal exposure to alcohol or cigarette smoke Herbicides Pesticides. There is no evidence that poor parenting, certain foods, sugar, or vaccinations cause ADHD. How is ADHD Diagnosed? If your child has symptoms suggestive of ADHD then talk with your doctor or pediatrician. They will talk with you, your child, and possibly your child’s school and ask questions that focus on: Ability to control emotions Attentiveness Focus Home and school relationships Hyperactivity. They will ask if your family has any other family members with ADHD. Most cases of ADHD are diagnosed at age 7 or 8, but symptoms may begin sooner. ADHD usually still persists into adulthood; however, some people have learned how to manage their symptoms better so it may not be as noticeable. How is ADHD Treated? Behavioral education should be considered as first-line treatment for any case of ADHD, particularly in children aged less than 6 years of age, with mild symptoms, or if the family prefers this option over drug therapy. Pharmacological treatments for ADHD include: Atomoxetine Amphetamine and dextroamphetamine salts Methylphenidate Other treatments, such as clonidine or guanfacine.",
@@ -21358,7 +21347,7 @@
       "Deep Vein Thrombosis Prophylaxis after Hip Replacement Surgery",
       "Deep Vein Thrombosis Prophylaxis after Knee Replacement Surgery",
       "Deep Vein Thrombosis, Prophylaxis",
-      "Not Listed / Othe",
+
       "Prevention of Thromboembolism in Atrial Fibrillation",
       "Pulmonary Embolism",
       "Thromboembolic Stroke Prophylaxis",
@@ -21659,7 +21648,7 @@
     "total_reviews": 195.0,
     "original_conditions": [
       "Behcet's Disease",
-      "Not Listed / Othe",
+
       "Plaque Psoriasis",
       "Psoriatic Arthritis"
     ],
@@ -22856,7 +22845,7 @@
       "Borderline Personality Disorder",
       "Depression",
       "Major Depressive Disorde",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Post Traumatic Stress Disorde",
@@ -23210,7 +23199,7 @@
       "Hypersomnia",
       "Jet Lag",
       "Narcolepsy",
-      "Not Listed / Othe",
+
       "Obstructive Sleep Apnea/Hypopnea Syndrome",
       "Shift Work Sleep Disorde",
       "Shift Work Sleep Disorder",
@@ -23912,7 +23901,7 @@
       "Bipolar Disorder",
       "Borderline Personality Disorde",
       "Borderline Personality Disorder",
-      "Not Listed / Othe",
+
       "Post Traumatic Stress Disorde",
       "Post Traumatic Stress Disorder",
       "Schizoaffective Disorde",
@@ -24533,12 +24522,7 @@
     },
     "avg_rating": 8.75,
     "total_reviews": 161.0,
-    "original_conditions": [
-      "Headache",
-      "Migraine",
-      "Not Listed / Othe",
-      "Pain"
-    ],
+    "original_conditions": ["Headache", "Migraine", "Pain"],
     "medical_condition_description": "Migraine Other names: Basilar Artery Migraine; Basilar-Type Migraine; Complicated Migraine; Hemiplegic Migraine; Migraine Headache Migraine headaches are a type of headache that some people get repeatedly over time. Migraines are different from other headaches because they occur with symptoms such as nausea, vomiting, or sensitivity to light. Some people who get migraines have warning symptoms, called an aura, before the actual headache begins. Most people, however, do not have such warning symptoms.",
     "matched_disease_keys": ["migraine"],
     "matched_symptoms": [
@@ -25851,7 +25835,7 @@
       "Migraine Prevention",
       "Migraine Prevention (Migraine Prophylaxis)",
       "Mitral Valve Prolapse",
-      "Not Listed / Othe",
+
       "Supraventricular Tachycardia",
       "Ventricular Tachycardia"
     ],
@@ -26427,7 +26411,7 @@
       "AV Heart Block",
       "Anticholinesterase Poisoning",
       "Bradyarrhythmia",
-      "Not Listed / Othe",
+
       "Organophosphate Poisoning",
       "Pupillary Dilation",
       "Refraction, Assessment",
@@ -29511,8 +29495,7 @@
     "original_conditions": [
       "Allergic Rhinitis",
       "Conjunctivitis, Allergic",
-      "Hayfever",
-      "Not Listed / Othe"
+      "Hayfever"
     ],
     "medical_condition_description": "Allergic Rhinitis Other names: Hay Fever; Nasal Allergies A collection of symptoms, predominantly in the nose and eyes, that occur after exposure to airborne particles of dust or dander or to pollens of certain seasonal plants in people that are allergic to these substances (see also allergies; asthma; allergy to mold, dander, dust).",
     "matched_disease_keys": ["allergy", "common_cold"],
@@ -29860,7 +29843,7 @@
       "Mycoplasma Pneumonia",
       "Neonatal Conjunctivitis",
       "Nongonococcal Urethritis",
-      "Not Listed / Othe",
+
       "Otitis Media",
       "Pelvic Inflammatory Disease",
       "Pertussis",
@@ -30766,7 +30749,7 @@
       "Hordeolum",
       "Keratitis",
       "Keratoconjunctivitis",
-      "Not Listed / Othe",
+
       "Paronychia"
     ],
     "medical_condition_description": "",
@@ -31009,7 +30992,7 @@
       "Muscle Twitching",
       "Muscle Twitching (Fasciculations)",
       "Neuralgia",
-      "Not Listed / Othe",
+
       "Periodic Limb Movement Disorde",
       "Periodic Limb Movement Disorder",
       "Spasticity",
@@ -31622,7 +31605,7 @@
     "total_reviews": 19.0,
     "original_conditions": [
       "Crohn's Disease",
-      "Not Listed / Othe",
+
       "Ulcerative Colitis",
       "Ulcerative Colitis, Active"
     ],
@@ -35562,7 +35545,7 @@
     },
     "avg_rating": 8.09,
     "total_reviews": 78.0,
-    "original_conditions": ["Acne", "Not Listed / Othe", "Perioral Dermatitis"],
+    "original_conditions": ["Acne", "Perioral Dermatitis"],
     "medical_condition_description": "Acne Other names: Acne Vulgaris; Blackheads; Breakouts; Cystic acne; Pimples; Whiteheads; Zits Acne is a skin condition caused by dead skin cells sticking together and clogging up pores. Bacteria can play a role, too. A big trigger for the onset of acne is puberty. Better nutrition and living standards have seen the age of puberty, especially in girls, decrease significantly over the past 40 years. It is now not uncommon for girls as young as 7 to develop acne. Acne is also affecting more adults later in life and doctors are not sure why. A growing number of women have acne in their 30s, 40s, 50s, and beyond. What Causes Acne? Our body constantly makes and sheds skin. Normally, dead skin cells rise to the surface of the pore and just flake off our body. At puberty, hormones trigger the production of sebum - an oily substance that helps moisturize our skin. Sebum sticks dead skin cells together, increasing their chances of becoming trapped inside a pore. Clogged pores become blackheads, whiteheads or pimples. If bacteria are also present, redness and swelling can occur resulting in the progression of the pimple into a cyst or nodule. Who is More at Risk of Acne? Unfortunately, some people suffer from acne worse than others. Bad acne tends to run in families - your mother, father, aunt or uncle probably had severe breakouts when they were a teenager. Some people also have naturally higher hormone levels and make more sebum, so their skin pores are always clogging up. If you live in an area that gets very humid or have a job which exposes you to moist heat (such as in a food kitchen) or grease or tar (a mechanic or road worker) then you are more likely to get acne. Chin straps, headbands, and even hair products applied too close to the skin can precipitate a break out as several different medicines - most notably prednisone, phenytoin, and certain hormonal contraceptives that are high in androgens (for example, Microgestin 1.5/30 and the Depo-Provera shot). What are the Symptoms of Acne? Acne may appear on the face, forehead, chest, upper back or shoulders. The symptoms and severity of acne vary from person to person but may include: Whiteheads Blackheads Papules (small, red, tender bumps) Pimples (papules with pus at their tips) Nodules (large solid painful lumps beneath the skin surface Cystic lesions (painful pus-filled lumps beneath the skin’s surface). How is Acne Diagnosed? If your acne makes you shy or embarrassed, if you have a lot of acne, cysts or nodules on your face or back, or if over the counter products do not seem to work, see your doctor or a dermatologist as soon as you can. They can prescribe stronger topical or oral treatments that are much more effective than products you can buy at a drug store. Your doctor will look at your skin and ask about the history of your acne. It is a myth that you have to let acne run its course. Treatment helps prevent dark spots and permanent scars from forming as the acne clears. How is Acne Treated? The most important thing you can do to reduce the chance of breakouts is to take good care of your skin. This doesn't mean scrubbing it raw several times a day with soap. It means gently cleansing it with a mild soap-free wash twice a day, every day. If you play a lot of sport or work in a greasy or humid environment, cleanse your skin as soon as you finish training or right after work. Be gentle. You aim to cleanse away excess sebum and dead skin cells so they don't clog up your pores - not to irritate your skin even further. The first step to clear skin is clean skin. Look for a cleanser that is soap-free and does not contain any harsh detergents such as sodium lauryl or laureth sulfates, which can cause redness, irritation, and inflammation. Avoid pore-clogging ingredients as well, such as algae extract, carrageenan, lanolin, myristyl myristate, octyl palmitate, octyl stearate-5, and oleth-3. Anti-acne ingredients work by removing dead skin cells, unclogging pores, or reducing bacteria numbers on the skin. Acne treatments usually contain one of the following ingredients (some of which are only available on prescription): Benzoyl peroxide Salicyclic acid Resorcinol Azelaic acid Dapsone gel Retinoids and retinoid-like creams, gels, and lotions Topical antibiotics Oral antibiotics (eg, tetracyclines, Combined oral contraceptives Oral isotretinoin Spironolactone Lasers and photodynamic therapy Chemical peels Steroid injections. If you have severe acne you need to be very proactive with skin cleansing and using acne treatment. Seeing a dermatologist early on for prescription products lessens the chances of being left with permanent scars. How Can I Prevent Acne? Gently wash your face twice a day and after sweating. Shampoo your hair regularly. Do not pick or squeeze your acne; this increases the risk of scars. Keep your hands off your face. Wash your hands before applying make-up. Be careful what you put on your face, and avoid ingredients that promote acne. Stay out of the sun and off tanning beds; excess tanning can damage your skin. See a dermatologist if you feel shy or products don't work.",
     "matched_disease_keys": ["acne"],
     "matched_symptoms": [
@@ -36406,7 +36389,7 @@
       "Inflammatory Conditions",
       "Lichen Planus",
       "Lichen Sclerosus",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Plaque Psoriasis",
       "Psoriasis"
@@ -36777,7 +36760,7 @@
     "original_conditions": [
       "Abdominal Distension",
       "GERD (Heartburn)",
-      "Not Listed / Othe",
+
       "Urinary Retention"
     ],
     "medical_condition_description": "GERD Other names: Acid reflux; Esophageal Reflux; Gastroesophageal Reflux Disease; Heartburn; Pyrosis; Reflux Gastroesophageal reflux disease (GERD) is when food or liquid travels from the stomach back up into the esophagus (the tube from the mouth to the stomach). This partially digested material is usually acidic and can irritate the esophagus, often causing heartburn and other symptoms.",
@@ -38104,7 +38087,7 @@
     "related_drugs": {},
     "avg_rating": 5.9,
     "total_reviews": 10.0,
-    "original_conditions": ["Dietary Supplementation", "Not Listed / Othe"],
+    "original_conditions": ["Dietary Supplementation"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [],
@@ -40245,7 +40228,7 @@
     "original_conditions": [
       "Depression",
       "Major Depressive Disorde",
-      "Not Listed / Othe",
+
       "Schizophrenia"
     ],
     "medical_condition_description": "Depression Depression is a mood condition characterized by persistent and overwhelming feelings of sadness that can affect your day-to-day activities and how you think, feel, and behave. Sometimes it can affect your outlook on life and make you feel that life isn’t worth living. Depression may also be called major depressive disorder or clinical depression. What Causes Depression? Experts aren’t exactly sure what causes depression but believe it is due to a combination of different factors, such as genetic vulnerability, faulty mood regulation by the brain, stress, chemicals in the brain, medications, or medical problems, that all interact together to bring on depression. The risk of developing depression is higher in women and people: Aged 45 to 64 years of age or the elderly With chronic or acute health conditions Who are undergoing a major life event, such as a job loss, divorce, workplace stress, or physical or mental abuse With severe grief due to the death of a loved one Taking prescription drugs that may cause a low mood Abusing alcohol or drugs. What are the Symptoms of Depression? Depression is not just feeling blue occasionally. It affects daily feelings, thoughts, and actions over a longer period. (MDD), can result in difficulties with family life, work, and social activities. Symptoms may vary depending on how severe a person’s depression is but may include: A prolonged and persistent low mood, tearfulness, or a sense of hopelessness that has lasted for at least 2 weeks Irritability Anxiety Agitation or restlessness Avoidance or refusal to participate in activities that were previously enjoyed Withdrawal socially, from family, friends, and relationships Changes in sleeping or eating habits Unexplained physical problems, such as back pain or headaches Alcohol, drug, or substance abuse Engaging in risky or destructive behaviors Self-harm or attempts at suicide. In children and teens, symptoms may include clinginess, worry, aches and pain, and refusal to go to school. In older adults, symptoms may be less obvious and include memory difficulties or personality changes, physical aches and pains, and fatigue. How is Depression Diagnosed? If your mood has been low for a while and you are having difficulty coping with day to day activities, talk to your doctor or a trusted professional. Your doctor will ask you questions about your symptoms and your medical history and may ask you to complete a questionnaire that may help to diagnose depression or refer you to a psychiatrist. You can also call the National Suicide Prevention Hotline at 1-800-273-8255, 24 hours a day, 7 days a week, or have an online chat (http://suicidepreventionlifeline.org/). All information is confidential and free. How is Depression Treated? Depression is treatable with high rates of success. Treatments may include: Psychotherapy Antidepressants, such as Selective Serotonin Reuptake Inhibitors (SSRIs), Serotonin Norepinephrine Reuptake Inhibitors (SNRIs), tricyclic antidepressants (TCAs), monoamine oxidase inhibitors (MAOIs). Responses to antidepressants vary, and most antidepressants take 4 to 6 weeks for full effect. About 50% of patients respond to the first treatment, whereas others may have to try a few different types of antidepressants before they find the best one for them. There are several things you can do to help with your symptoms as well, such as: Setting realistic and daily goals Developing strategies to work through crises situations Developing coping and problem-solving skills Learning how to develop positive relationships Replacing negative thoughts with positive ones.",
@@ -40455,7 +40438,7 @@
       "Eye Redness",
       "Glaucoma, Open Angle",
       "Intraocular Hypertension",
-      "Not Listed / Othe",
+
       "Rosacea"
     ],
     "medical_condition_description": "",
@@ -42409,7 +42392,7 @@
     "total_reviews": 504.0,
     "original_conditions": [
       "Chronic Pain",
-      "Not Listed / Othe",
+
       "Opiate Dependence",
       "Opiate Dependence - Induction",
       "Opiate Dependence - Maintenance",
@@ -42481,7 +42464,7 @@
     "related_drugs": {},
     "avg_rating": 8.58,
     "total_reviews": 607.0,
-    "original_conditions": ["Not Listed / Othe", "Opiate Dependence"],
+    "original_conditions": ["Opiate Dependence"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -42572,7 +42555,7 @@
       "Major Depressive Disorde",
       "Major Depressive Disorder",
       "Migraine Prevention",
-      "Not Listed / Othe",
+
       "Obesity",
       "Panic Disorde",
       "Panic Disorder",
@@ -42795,7 +42778,7 @@
       "Anxiety",
       "Borderline Personality Disorde",
       "Borderline Personality Disorder",
-      "Not Listed / Othe",
+
       "Panic Disorde",
       "Panic Disorder",
       "Sexual Dysfunction, SSRI Induced"
@@ -45977,12 +45960,7 @@
     "related_drugs": {},
     "avg_rating": 5.2,
     "total_reviews": 5.0,
-    "original_conditions": [
-      "Colds & Flu",
-      "Minor Skin Irritation",
-      "Not Listed / Othe",
-      "Pain"
-    ],
+    "original_conditions": ["Colds & Flu", "Minor Skin Irritation", "Pain"],
     "medical_condition_description": "Cold Symptoms Other names: Cold; Common Cold; Coryza Symptoms of a viral infection involving the upper respiratory tract and characterized by congestion of the nasal mucous membrane, watery nasal rhinorrhea, and general malaise, with a duration of 3–5 days.",
     "matched_disease_keys": ["common_cold"],
     "matched_symptoms": [
@@ -47167,7 +47145,7 @@
     "original_conditions": [
       "Burning Mouth Syndrome (Glossopyrosis)",
       "Diabetic Peripheral Neuropathy",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pain",
       "Peripheral Neuropathy",
@@ -47943,7 +47921,7 @@
       "Diabetic Peripheral Neuropathy",
       "Dystonia",
       "Epilepsy",
-      "Not Listed / Othe",
+
       "Occipital Neuralgia",
       "Peripheral Neuropathy",
       "Reflex Sympathetic Dystrophy Syndrome",
@@ -48964,8 +48942,7 @@
     "original_conditions": [
       "Muscle Spasm",
       "Muscle Spasm (Involuntary Hypertonicity)",
-      "Nocturnal Leg Cramps",
-      "Not Listed / Othe"
+      "Nocturnal Leg Cramps"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
@@ -49253,8 +49230,7 @@
       "Heart Failure (Congestive Heart Failure)",
       "High Blood Pressure",
       "High Blood Pressure (Hypertension)",
-      "Left Ventricular Dysfunction",
-      "Not Listed / Othe"
+      "Left Ventricular Dysfunction"
     ],
     "medical_condition_description": "Angina Other names: Accelerating Angina; Angina Pectoris; Angina, chronic; Angina, stable; Angina, unstable; Heart pains; New-Onset Angina; Progressive Angina; Stable Angina; Unstable Angina Angina pectoris is the medical term for chest pain or discomfort due to coronary heart disease. Angina is a symptom of a condition called myocardial ischemia. It occurs when the heart muscle (myocardium) doesn't get as much blood (hence as much oxygen) as it needs. This usually happens because one or more of the heart's arteries (blood vessels that supply blood to the heart muscle) is narrowed or blocked. Insufficient blood supply is called ischemia. Typical angina is uncomfortable pressure, fullness, squeezing or pain in the center of the chest. The discomfort also may be felt in the neck, jaw, shoulder, back or arm. Many types of chest discomfort aren't related to angina. Acid reflux (heartburn) and lung infection or inflammation are examples.",
     "matched_disease_keys": ["heart_attack", "hypertension"],
@@ -51652,7 +51628,7 @@
       "Fibromatosis",
       "Juvenile Rheumatoid Arthritis",
       "Migraine",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pain",
       "Period Pain",
@@ -52790,7 +52766,7 @@
       "Conjunctivitis, Allergic",
       "Eustachian Tube Dysfunction",
       "Hayfever",
-      "Not Listed / Othe",
+
       "Physical Urticaria",
       "Urticaria"
     ],
@@ -55494,12 +55470,7 @@
     "related_drugs": {},
     "avg_rating": 9.02,
     "total_reviews": 118.0,
-    "original_conditions": [
-      "Cold Symptoms",
-      "Colds & Flu",
-      "Cough",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Cold Symptoms", "Colds & Flu", "Cough"],
     "medical_condition_description": "Cold Symptoms Other names: Cold; Common Cold; Coryza Symptoms of a viral infection involving the upper respiratory tract and characterized by congestion of the nasal mucous membrane, watery nasal rhinorrhea, and general malaise, with a duration of 3–5 days.",
     "matched_disease_keys": ["common_cold"],
     "matched_symptoms": [
@@ -56570,7 +56541,7 @@
       "Hyperlipoproteinemia Type IIa, Elevated LDL",
       "Hyperlipoproteinemia Type IIb, Elevated LDL   VLDL",
       "Irritable Bowel Syndrome",
-      "Not Listed / Othe",
+
       "Post-Cholecystectomy Diarrhea",
       "Pruritus of Partial Biliary Obstruction"
     ],
@@ -58193,7 +58164,7 @@
       "Meningococcal Meningitis Prophylaxis",
       "Mycobacterium avium-intracellulare, Treatment",
       "Nosocomial Pneumonia",
-      "Not Listed / Othe",
+
       "Ophthalmic Surgery",
       "Peritonitis",
       "Plague",
@@ -58679,7 +58650,7 @@
       "Generalized Anxiety Disorder",
       "Hot Flashes",
       "Neuralgia",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Occipital Neuralgia",
@@ -59660,7 +59631,7 @@
       "Mycobacterium avium-intracellulare, Treatment",
       "Mycoplasma Pneumonia",
       "Nongonococcal Urethritis",
-      "Not Listed / Othe",
+
       "Otitis Media",
       "Pertussis",
       "Pertussis Prophylaxis",
@@ -61360,7 +61331,7 @@
       "Joint Infection",
       "Lemierre's Syndrome",
       "Malaria",
-      "Not Listed / Othe",
+
       "Pelvic Inflammatory Disease",
       "Perioral Dermatitis",
       "Peritonitis",
@@ -61794,7 +61765,7 @@
       "Lichen Planus",
       "Lichen Sclerosus",
       "Necrobiosis Lipoidica Diabeticorum",
-      "Not Listed / Othe",
+
       "Plantar Fibromatosis",
       "Psoriasis",
       "Seborrheic Dermatitis"
@@ -62378,7 +62349,7 @@
     "original_conditions": [
       "Depression",
       "Irritable Bowel Syndrome",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Panic Disorde",
@@ -62443,7 +62414,7 @@
       "Migraine Prevention",
       "Migraine Prevention (Migraine Prophylaxis)",
       "Night Terrors",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Panic Disorde",
@@ -62843,7 +62814,7 @@
     "original_conditions": [
       "Borderline Personality Disorde",
       "Borderline Personality Disorder",
-      "Not Listed / Othe",
+
       "Paranoid Disorde",
       "Paranoid Disorder",
       "Schizophrenia"
@@ -68876,7 +68847,7 @@
     "related_drugs": {},
     "avg_rating": 4.0,
     "total_reviews": 2.0,
-    "original_conditions": ["Herbal Supplementation", "Not Listed / Othe"],
+    "original_conditions": ["Herbal Supplementation"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [],
@@ -69799,7 +69770,7 @@
       "Migraine",
       "Muscle Spasm",
       "Muscle Spasm (Involuntary Hypertonicity)",
-      "Not Listed / Othe",
+
       "Sciatica",
       "Temporomandibular Joint Disorde",
       "Temporomandibular Joint Disorder",
@@ -70395,7 +70366,7 @@
       "Failure to Thrive",
       "Hayfever",
       "Migraine",
-      "Not Listed / Othe",
+
       "Pruritus",
       "Sexual Dysfunction, SSRI Induced",
       "Urticaria",
@@ -72533,8 +72504,7 @@
     "original_conditions": [
       "Acute Lymphoblastic Leukemia",
       "Chronic Myelogenous Leukemia",
-      "Leukemia",
-      "Not Listed / Othe"
+      "Leukemia"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
@@ -75631,11 +75601,7 @@
     "related_drugs": {},
     "avg_rating": 5.45,
     "total_reviews": 20.0,
-    "original_conditions": [
-      "Not Listed / Othe",
-      "acial Lipoatrophy",
-      "acial Wrinkles"
-    ],
+    "original_conditions": ["acial Lipoatrophy", "acial Wrinkles"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -76328,7 +76294,7 @@
       "Diabetes Insipidus",
       "Hemophilia A",
       "Nocturia",
-      "Not Listed / Othe",
+
       "Primary Nocturnal Enuresis",
       "von Willebrand Disease",
       "von Willebrand's Disease"
@@ -76887,7 +76853,7 @@
       "Major Depressive Disorde",
       "Narcolepsy",
       "Neuralgia",
-      "Not Listed / Othe",
+
       "Obesity",
       "Panic Disorde",
       "Post Traumatic Stress Disorde",
@@ -77423,7 +77389,7 @@
       "Mycosis Fungoides",
       "Nausea/Vomiting, Chemotherapy Induced",
       "Neurosarcoidosis",
-      "Not Listed / Othe",
+
       "Pemphigus",
       "Plaque Psoriasis",
       "Postoperative Ocular Inflammation",
@@ -79814,7 +79780,7 @@
       "Muscle Spasm",
       "Muscle Spasm (Involuntary Hypertonicity)",
       "Night Terrors",
-      "Not Listed / Othe",
+
       "Seizure Prevention",
       "Seizure Prevention (Seizure Prophylaxis)",
       "Seizures",
@@ -80244,7 +80210,7 @@
       "Keratosis",
       "Migraine",
       "Muscle Pain",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pain",
       "Period Pain",
@@ -80948,7 +80914,7 @@
     "related_drugs": {},
     "avg_rating": 8.91,
     "total_reviews": 267.0,
-    "original_conditions": ["Not Listed / Othe", "Obesity", "Weight Loss"],
+    "original_conditions": ["Obesity", "Weight Loss"],
     "medical_condition_description": "Weight Loss (Obesity/Overweight) More than half of the U.S. population is overweight. But being obese is different from being overweight. An individual is considered obese when weight is 20% (25% in women) or more over the maximum desirable for their height. When an adult is more than 100 pounds overweight, it is considered morbid obesity. Obesity is also defined as a BMI (body mass index) over 30 kg/m2. Patients with a BMI between 25 and 29.9 are considered overweight, but not obese. See also diet and calories.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -81787,7 +81753,7 @@
       "Atrial Flutter",
       "High Blood Pressure",
       "Hypertension",
-      "Not Listed / Othe",
+
       "Raynaud's Syndrome",
       "Supraventricular Tachycardia"
     ],
@@ -81898,12 +81864,7 @@
     "related_drugs": {},
     "avg_rating": 9.23,
     "total_reviews": 51.0,
-    "original_conditions": [
-      "Insomnia",
-      "Motion Sickness",
-      "Nausea/Vomiting",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Insomnia", "Motion Sickness", "Nausea/Vomiting"],
     "medical_condition_description": "Insomnia Other names: Difficulty sleeping; Dyssomnia; Inability to sleep; Sleeplessness; Wakefulness Inability to sleep, abnormal wakefulness.",
     "matched_disease_keys": ["gastroenteritis"],
     "matched_symptoms": ["dehydration", "diarrhoea", "sunken_eyes", "vomiting"],
@@ -82163,7 +82124,7 @@
     "related_drugs": {},
     "avg_rating": 10.0,
     "total_reviews": 1.0,
-    "original_conditions": ["Interstitial Cystitis", "Not Listed / Othe"],
+    "original_conditions": ["Interstitial Cystitis"],
     "medical_condition_description": "",
     "matched_disease_keys": ["urinary_tract_infection"],
     "matched_symptoms": [
@@ -83772,8 +83733,7 @@
       "Hyperekplexia",
       "Mania",
       "Migraine Prevention",
-      "Migraine Prevention (Migraine Prophylaxis)",
-      "Not Listed / Othe"
+      "Migraine Prevention (Migraine Prophylaxis)"
     ],
     "medical_condition_description": "Bipolar Disorder Other names: Bipolar Affective Disorder; Bipolar Affective Mood Disorder; Bipolar I Disorder; Bipolar II Disorder; Manic Depression; Manic Depressive Disorder; Manic Depressive Illness; Mood Disorder Bipolar disorder is a type of mood disorder. People with bipolar disorder fluctuate from feeling down and depressed to feeling super-charged or manic. The disorder used to be called manic depression or manic-depressive illness. However, nowadays, several types of bipolar disorder are recognized: bipolar I, bipolar II, cyclothymic disorder, mixed features, and rapid-cycling disorder. What are the Symptoms of Bipolar Disorder? Symptoms vary among people with bipolar disorder, depending on what type of bipolar disorder they have. All have slightly different symptoms. Symptoms reflect mood opposites and may include: Periods of high or irritable mood High energy levels Scattered and unproductive activity sometimes with painful or embarrassing consequences Little, if any, need for sleep Thinking that is out of step with reality Psychotic symptoms, such as false beliefs (delusions) or false perceptions (hallucinations) Very low mood Deep depression Self-loathing Feelings of hopelessness or despair Refusal to get out of bed. Some people only develop milder symptoms of mania without psychotic symptoms. This is called hypomania. People who don’t have full blown episodes of mania are more likely to have bipolar II disorder. These mood swings are much more severe than the normal ups and downs most people go through. In between mood swings, most people with bipolar disorder can lead relatively normal lives. The time spent in each mood state (ie, mania or depression) varies depending on the type of bipolar disorder but can range from days to months. The severity of the mood state can also vary significantly, with some people only ever experiencing mild symptoms. What Causes Bipolar Disorder? Although the exact cause is unknown, there does seem to be a genetic link, and you are more likely to get bipolar disorder if you have another family member with the condition. Symptoms are often triggered by a stressful situation or circumstance. This may take the form of a relationship breakdown; physical, sexual, or emotional abuse; money problems; or the death of a close family member or loved one. Symptoms are thought to be due to changes in the balance of some neurotransmitters in the brain, specifically noradrenaline, serotonin, and dopamine. It can be hard to recognize bipolar disorder initially. During a manic phase, a person with bipolar disorder may be incredibly fun to be around. However, as the condition progresses, these manic episodes become more extreme. Some people with bipolar disorder only experience slight mania and are mainly depressed. Misdiagnosis as depression is common. If an antidepressant is prescribed without a mood stabilizer, it will often catapult the person into a full-on manic state. Recognizing bipolar illness is important for treatment, as mood stabilizing agents are the best type of medication. How is Bipolar Disorder Treated? Bipolar disorder can be treated. For best results, medication needs to be combined with therapy sessions and the instigation of good routines. The most effective treatment for bipolar disorder is a mood stabilizing agent. These medications even out the troughs and the peaks of mood swings to keep you on a more even keel. Other treatments may include antipsychotics or antidepressants. Medications should be combined with nonpharmacological treatments, such as: Cognitive-behavioral therapy: This looks into any negative thought patterns you may have and challenges them in order to change your behavior. Interpersonal and social rhythm therapy: This aims to improve disruptions to your biological or social rhythms (such as sleep disturbances and relationship issues). Family focused therapy: This involves your family in your treatment, educating them and allowing them to support you fully.",
     "matched_disease_keys": ["malaria", "migraine"],
@@ -84092,7 +84052,7 @@
     "related_drugs": {},
     "avg_rating": 1.0,
     "total_reviews": 1.0,
-    "original_conditions": ["Not Listed / Othe", "Shock"],
+    "original_conditions": ["Shock"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -85705,7 +85665,7 @@
       "Benign Prostatic Hyperplasia",
       "High Blood Pressure",
       "Hypertension",
-      "Not Listed / Othe",
+
       "Raynaud's Syndrome"
     ],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
@@ -85763,7 +85723,7 @@
       "Lichen Simplex Chronicus",
       "Major Depressive Disorde",
       "Neuropathic Pain",
-      "Not Listed / Othe",
+
       "Pruritus",
       "Reflex Sympathetic Dystrophy Syndrome",
       "Urticaria"
@@ -86203,7 +86163,7 @@
       "Melioidosis",
       "Mycoplasma Pneumonia",
       "Nongonococcal Urethritis",
-      "Not Listed / Othe",
+
       "Ocular Rosacea",
       "Ornithosis",
       "Pelvic Inflammatory Disease",
@@ -86413,7 +86373,7 @@
       "Allergies",
       "Conjunctivitis, Allergic",
       "Insomnia",
-      "Not Listed / Othe",
+
       "Rhinorrhea"
     ],
     "medical_condition_description": "Allergies Other names: Allergy; Dust Mite Allergy Allergies are an overreaction by your immune system to a substance or food that is not considered harmful to most other people. Substances that cause allergies are called allergens or “triggers”. What Causes Allergies? When you have allergies, your immune system mistakes normally harmless substances for dangerous invaders and produces antibodies to fight them. These antibodies release chemicals, such as histamine, that cause allergy symptoms. The most common allergens are: Animal fur or hair (such as that from cats, dogs, horses, or rabbits) Dust mites Food, especially cow’s milk, eggs, peanuts, seafood, soy, tree nuts (almonds, Brazil nuts, cashews) and wheat Insect stings Latex Medicines Mould Pollen. An allergen for one person may not cause any problems in another person. There is a link between allergy and asthma. What are the Symptoms of Allergies? Reactions to the same allergen vary among individuals and depend on how the allergen entered the body (for example, being bitten by a mosquito causes a localized reaction on the skin whereas exposure to pollen may cause a tickly throat and itchy eyes). Symptoms may include: Abdominal pain, diarrhea, nausea, vomiting (food allergies) Areas of swelling and redness where a person has been stung or bitten (for insect bites/stings) Cough, chest tightness, wheezing or shortness of breath Itching of the nose, eyes or roof of the mouth A skin rash or hives, usually accompanied by body-wide itching Runny, stuffy nose Sneezing Swelling of the lips, tongue, face, or throat Tingling of the mouth Watery, red or swollen eyes (conjunctivitis) Wheezing. Some types of allergies can trigger a severe reaction known as anaphylaxis. Symptoms of anaphylaxis include: Loss of consciousness A drop in blood pressure Severe shortness of breath Skin rash Lightheadedness A rapid, weak pulse Nausea and vomiting. When Should I See a Doctor for my Allergies? Many allergies can be effectively treated with over-the-counter medications. See your doctor if you have persistent allergies that are interfering with your day to day life if you have severe reactions, or over the counter, remedies are not effective. People who develop anaphylaxis should always carry an epinephrine auto-injector 24 hours a day and know how to use it. People should also visit the emergency department after using the auto-injector to ensure symptoms don't return when the effects of the injection wear off. How Are Allergies Treated? Treatment depends on what is the most troublesome or predominant symptom. Treatments may include: Antihistamines (oral, nasal, topical) Corticosteroids (oral, nasal, topical) Decongestants (oral, nasal) Saline nasal rinses Immunotherapy. People with known allergies should try and avoid known triggers and wear a medical alert bracelet (or necklace) that lets others know that you have a serious allergy in case you have a reaction and you're unable to communicate.",
@@ -88042,7 +88002,7 @@
       "Hot Flashes",
       "Major Depressive Disorde",
       "Major Depressive Disorder",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pain",
       "Peripheral Neuropathy",
@@ -91441,8 +91401,7 @@
     "original_conditions": [
       "AIDS/HIV",
       "HIV Infection",
-      "Nonoccupational Exposure",
-      "Not Listed / Othe"
+      "Nonoccupational Exposure"
     ],
     "medical_condition_description": "HIV Infection Other names: Acquired Immune Deficiency Syndrome; Acquired Immunodeficiency Syndrome; Acute HIV Infection; Acute Retroviral Syndrome; AIDS; AIDS-Related Complex; ARC; Chronic Symptomatic HIV Infection; HIV; HIV Infection, Acute; HIV Seroconversion Syndrome; HIV/AIDS; Human Immunodeficiency Virus Infection; Primary HIV Infection HIV stands for human immunodeficiency virus. It is a virus that attacks the immune system, specifically CD4 cells (also called T cells), which eventually reduces a person’s ability to fight infection. HIV can progress to AIDS (acquired immunodeficiency syndrome) if left untreated. What Causes HIV? HIV is thought to have originally mutated from a virus that infects chimpanzees, called simian immunodeficiency virus. Research has indicated that the virus probably mutated into HIV, which is a version that could infect humans, as far back as the late 1800s when the chimpanzees were hunted for meat. HIV has been present in the United States since the mid to late 1970s. Who is at Risk for HIV? HIV can infect any person, no matter their age or gender or sexual preference. It is spread sexually, and by contact with infected blood, from mother to child during pregnancy, during childbirth, or through breast-feeding. People have a higher risk of contracting HIV if they: Have sex. Even condoms don’t provide 100% protection against HIV and the virus can enter your body through mouth sores following oral sex. Have a blood transfusion, especially in certain countries overseas. The risk in America is very small as hospitals and blood banks now screen the blood supply for HIV antibodies. Share needles. IV drug paraphernalia (needles and syringes) may be contaminated with HIV or other infectious diseases, such as hepatitis Are pregnant and are HIV positive. Treatment for HIV during pregnancy significantly lowers the risk of passing on the infection to their babies Have a sexually transmitted infection (STI). STIs act as a gateway to HIV infection because they compromise tissues or break the skin barrier in your genital area Are an uncircumcised man. Research has shown this increases the transmission of HIV. HIV cannot be spread through hugging, kissing, dancing or shaking hands with someone who has the infection. It is also not spread through insect bites, air, or water. What are the Symptoms of HIV? The symptoms of HIV and AIDS vary, depending on the phase of infection. When you first acquire HIV it may take a month or two before symptoms show and these may last a week or two. Even then these may easily be confused with another type of viral illness, such as the flu, or so mild as not to be noticed initially. Symptoms of an initial acute HIV infection may include: Fever Headache Muscle aches and joint pain Painful mouth sores Rash Sore throat Swollen lymph glands, mainly on the neck. The infection is easily spread during this stage. The next stage of HIV infection is called clinical latent infection . Generally, there are few signs or symptoms during this stage which may last approximately 10 years, although some people may develop persistent swelling of the lymph nodes or more severe disease sooner. HIV persists in the bloodstream and white blood cells. Infections start to become more common as the virus continues to multiply and destroy your immune cells. Signs and symptoms of symptomatic HIV infection include: Fever Fatigue Diarrhea Weight loss Yeast infection (eg, oral thrush) Shingles Swollen lymph nodes. If left untreated, HIV usually progresses to AIDS (also known as stage 3 HIV ) in about 10 years, although some people never develop AIDS despite never having treatment. A person is said to have AIDS when their CD4 count (a protein found on the surface of immune cells) falls below 200 (or the CD4 percentage falls below 14%) or when they develop certain opportunistic infections or cancers. How is HIV Treated? Although there is no cure for HIV, medications can dramatically slow the progression of the disease and people can live a relatively infection-free life. Few people die of AIDS these days thanks to effective treatments. Medications used to treat HIV are called antiretrovirals (also referred to as ART or ARV). Most people with HIV take combination ART every day. ART also reduces the risk of HIV transmission. Approved ARV treatments are grouped into seven drug classes as follows: Nucleoside reverse transcriptase inhibitors (NRTIs) Non-nucleoside reverse transcriptase inhibitors (NNRTIs) Protease inhibitors (PIs) Fusion inhibitors CCR5 antagonists Post-attachment inhibitors Integrase strand transfer inhibitors (INSTIs).",
     "matched_disease_keys": ["aids"],
@@ -92124,7 +92083,7 @@
     "related_drugs": {},
     "avg_rating": 4.33,
     "total_reviews": 6.0,
-    "original_conditions": ["Diarrhea", "Heat Stress", "Not Listed / Othe"],
+    "original_conditions": ["Diarrhea", "Heat Stress"],
     "medical_condition_description": "Diarrhea Other names: Frequent bowel movements; Loose bowel movements; Watery stools Diarrhea is defined as loose, watery, and frequent stools. Diarrhea is considered chronic (ongoing or prolonged) when you have had loose or frequent stools for longer than four weeks.",
     "matched_disease_keys": ["gastroenteritis"],
     "matched_symptoms": ["dehydration", "diarrhoea", "sunken_eyes", "vomiting"],
@@ -97535,7 +97494,7 @@
       "Irritable Bowel Syndrome",
       "Major Depressive Disorde",
       "Major Depressive Disorder",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Premenstrual Dysphoric Disorde",
@@ -98078,7 +98037,7 @@
       "Helicobacter Pylori Infection",
       "NSAID-Induced Gastric Ulce",
       "NSAID-Induced Gastric Ulcer",
-      "Not Listed / Othe",
+
       "Pathological Hypersecretory Conditions",
       "Zollinger-Ellison Syndrome"
     ],
@@ -98340,7 +98299,7 @@
     "original_conditions": [
       "Breast Cancer, Palliative",
       "Hypoestrogenism",
-      "Not Listed / Othe",
+
       "Oophorectomy",
       "Osteoporosis",
       "Postmenopausal Symptoms",
@@ -98614,7 +98573,7 @@
       "Dyspareunia",
       "Gender Dysphoria",
       "Hypoestrogenism",
-      "Not Listed / Othe",
+
       "Oophorectomy",
       "Osteoporosis",
       "Postmenopausal Symptoms",
@@ -99167,7 +99126,7 @@
       "Juvenile Idiopathic Arthritis",
       "Juvenile Rheumatoid Arthritis",
       "Macrophage Activation Syndrome",
-      "Not Listed / Othe",
+
       "Plaque Psoriasis",
       "Psoriasis",
       "Psoriatic Arthritis",
@@ -99654,11 +99613,7 @@
     "related_drugs": {},
     "avg_rating": 6.63,
     "total_reviews": 835.0,
-    "original_conditions": [
-      "Abnormal Uterine Bleeding",
-      "Birth Control",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Abnormal Uterine Bleeding", "Birth Control"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -99745,7 +99700,7 @@
       "Emergency Contraception (Postcoital Contraception)",
       "Endometriosis",
       "Gonadotropin Inhibition",
-      "Not Listed / Othe",
+
       "Ovarian Cysts",
       "Polycystic Ovary Syndrome",
       "Premenstrual Syndrome"
@@ -99888,7 +99843,7 @@
       "Endometriosis",
       "Gonadotropin Inhibition",
       "Menstrual Disorders",
-      "Not Listed / Othe",
+
       "Polycystic Ovary Syndrome",
       "Postmenopausal Symptoms",
       "Prevention of Osteoporosis"
@@ -99932,7 +99887,7 @@
       "Birth Control (Contraception)",
       "Endometriosis",
       "Gonadotropin Inhibition",
-      "Not Listed / Othe",
+
       "Ovarian Cysts"
     ],
     "medical_condition_description": "Acne Other names: Acne Vulgaris; Blackheads; Breakouts; Cystic acne; Pimples; Whiteheads; Zits Acne is a skin condition caused by dead skin cells sticking together and clogging up pores. Bacteria can play a role, too. A big trigger for the onset of acne is puberty. Better nutrition and living standards have seen the age of puberty, especially in girls, decrease significantly over the past 40 years. It is now not uncommon for girls as young as 7 to develop acne. Acne is also affecting more adults later in life and doctors are not sure why. A growing number of women have acne in their 30s, 40s, 50s, and beyond. What Causes Acne? Our body constantly makes and sheds skin. Normally, dead skin cells rise to the surface of the pore and just flake off our body. At puberty, hormones trigger the production of sebum - an oily substance that helps moisturize our skin. Sebum sticks dead skin cells together, increasing their chances of becoming trapped inside a pore. Clogged pores become blackheads, whiteheads or pimples. If bacteria are also present, redness and swelling can occur resulting in the progression of the pimple into a cyst or nodule. Who is More at Risk of Acne? Unfortunately, some people suffer from acne worse than others. Bad acne tends to run in families - your mother, father, aunt or uncle probably had severe breakouts when they were a teenager. Some people also have naturally higher hormone levels and make more sebum, so their skin pores are always clogging up. If you live in an area that gets very humid or have a job which exposes you to moist heat (such as in a food kitchen) or grease or tar (a mechanic or road worker) then you are more likely to get acne. Chin straps, headbands, and even hair products applied too close to the skin can precipitate a break out as several different medicines - most notably prednisone, phenytoin, and certain hormonal contraceptives that are high in androgens (for example, Microgestin 1.5/30 and the Depo-Provera shot). What are the Symptoms of Acne? Acne may appear on the face, forehead, chest, upper back or shoulders. The symptoms and severity of acne vary from person to person but may include: Whiteheads Blackheads Papules (small, red, tender bumps) Pimples (papules with pus at their tips) Nodules (large solid painful lumps beneath the skin surface Cystic lesions (painful pus-filled lumps beneath the skin’s surface). How is Acne Diagnosed? If your acne makes you shy or embarrassed, if you have a lot of acne, cysts or nodules on your face or back, or if over the counter products do not seem to work, see your doctor or a dermatologist as soon as you can. They can prescribe stronger topical or oral treatments that are much more effective than products you can buy at a drug store. Your doctor will look at your skin and ask about the history of your acne. It is a myth that you have to let acne run its course. Treatment helps prevent dark spots and permanent scars from forming as the acne clears. How is Acne Treated? The most important thing you can do to reduce the chance of breakouts is to take good care of your skin. This doesn't mean scrubbing it raw several times a day with soap. It means gently cleansing it with a mild soap-free wash twice a day, every day. If you play a lot of sport or work in a greasy or humid environment, cleanse your skin as soon as you finish training or right after work. Be gentle. You aim to cleanse away excess sebum and dead skin cells so they don't clog up your pores - not to irritate your skin even further. The first step to clear skin is clean skin. Look for a cleanser that is soap-free and does not contain any harsh detergents such as sodium lauryl or laureth sulfates, which can cause redness, irritation, and inflammation. Avoid pore-clogging ingredients as well, such as algae extract, carrageenan, lanolin, myristyl myristate, octyl palmitate, octyl stearate-5, and oleth-3. Anti-acne ingredients work by removing dead skin cells, unclogging pores, or reducing bacteria numbers on the skin. Acne treatments usually contain one of the following ingredients (some of which are only available on prescription): Benzoyl peroxide Salicyclic acid Resorcinol Azelaic acid Dapsone gel Retinoids and retinoid-like creams, gels, and lotions Topical antibiotics Oral antibiotics (eg, tetracyclines, Combined oral contraceptives Oral isotretinoin Spironolactone Lasers and photodynamic therapy Chemical peels Steroid injections. If you have severe acne you need to be very proactive with skin cleansing and using acne treatment. Seeing a dermatologist early on for prescription products lessens the chances of being left with permanent scars. How Can I Prevent Acne? Gently wash your face twice a day and after sweating. Shampoo your hair regularly. Do not pick or squeeze your acne; this increases the risk of scars. Keep your hands off your face. Wash your hands before applying make-up. Be careful what you put on your face, and avoid ingredients that promote acne. Stay out of the sun and off tanning beds; excess tanning can damage your skin. See a dermatologist if you feel shy or products don't work.",
@@ -99971,8 +99926,7 @@
       "Abnormal Uterine Bleeding",
       "Birth Control",
       "Emergency Contraception (Postcoital Contraception)",
-      "Endometriosis",
-      "Not Listed / Othe"
+      "Endometriosis"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
@@ -101958,11 +101912,7 @@
     },
     "avg_rating": 6.74,
     "total_reviews": 654.0,
-    "original_conditions": [
-      "Diabetes (Type 2)",
-      "Diabetes, Type 2",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Diabetes (Type 2)", "Diabetes, Type 2"],
     "medical_condition_description": "Diabetes, Type 2 Other names: Diabetes; Noninsulin-dependent Diabetes; Type 2 Diabetes Type 2 diabetes is the most common type of diabetes and is characterized by high levels of glucose (sugar) in the blood. Although some symptoms may be similar, it is a different condition to type 1 diabetes. Unlike people with type 1 diabetes, most people with type 2 diabetes still produce insulin. However, it is either not enough to deal with all the glucose that is in their blood or their cells are unable to recognize the insulin and use it properly (this is called insulin resistance). Type 2 diabetes usually affects people who are middle-aged or older, and obesity is by far the biggest risk factor. In the past two decades, the condition has become more prevalent in younger people, including children, mainly because of the rising rates of obesity in children. People who do little exercise or of certain ethnicities (such as Native Americans, African-Americans, and Hispanics) are also at higher risk of developing type 2 diabetes. What are the Symptoms of Type 2 Diabetes? Symptoms of type 2 Diabetes usually come on gradually and may be so subtle that many people do not realize they have the condition. Symptoms may include: Always feeling thirsty Feeling hungry, even though you eat regularly Going to the toilet (urinating) often Getting sick frequently, or frequent skin infections, particularly yeast or fungal infections Infections take longer to heal Feeling tired all the time or lacking in energy Blurred or deteriorating vision. How is Type 2 Diabetes Diagnosed? Some doctors screen for diabetes in people of a certain age and it is usually always screened for in pregnant women. If you or your doctor suspects you have type 2 diabetes then they may perform a blood test on the spot that tests for blood sugar levels using a fingerprick or order a blood test that tests for blood sugar levels in the morning after an overnight fast. Your doctor will also perform an examination and measure your blood pressure. Tests for cholesterol may also be conducted because approximately one-third of people with type 2 diabetes also have high blood pressure and high cholesterol as well. How is Type 2 Diabetes Treated? Even though symptoms of type 2 diabetes are barely noticeable in some people, constantly high blood sugar levels cause permanent damage to all the blood vessels and nerves in the body. Untreated diabetes can lead to an increased risk of heart attack and stroke, erectile dysfunction, foot problems, gum disease, eye and kidney disease, and many other problems. If treatment is not started early, it is too late to reverse any damage once symptoms become more noticeable. Treatments for Type 2 diabetes include: Metformin Sulfonylureas Meglitinides Thiazolidinediones DPP-4 inhibitors GLP-1 receptor agonists SGLT2 inhibitors Insulin.",
     "matched_disease_keys": ["diabetes"],
     "matched_symptoms": [
@@ -102871,7 +102821,7 @@
       "Hiatal Hernia",
       "Indigestion",
       "Laryngopharyngeal Reflux",
-      "Not Listed / Othe",
+
       "Pathological Hypersecretory Conditions",
       "Peptic Ulce",
       "Peptic Ulcer",
@@ -104170,8 +104120,7 @@
       "Hyperlipoproteinemia Type IIb, Elevated LDL   VLDL",
       "Hyperlipoproteinemia Type IV, Elevated VLDL",
       "Hyperlipoproteinemia Type V, Elevated Chylomicrons   VLDL",
-      "Hypertriglyceridemia",
-      "Not Listed / Othe"
+      "Hypertriglyceridemia"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["hypoglycemia"],
@@ -104479,7 +104428,7 @@
       "Breakthrough Pain",
       "Chronic Pain",
       "Dercum's Disease",
-      "Not Listed / Othe",
+
       "Pain",
       "Postoperative Pain",
       "Sedation"
@@ -105347,7 +105296,7 @@
     "original_conditions": [
       "Allergic Rhinitis",
       "Hayfever",
-      "Not Listed / Othe",
+
       "Physical Urticaria",
       "Urticaria"
     ],
@@ -105421,11 +105370,7 @@
     },
     "avg_rating": 6.94,
     "total_reviews": 89.0,
-    "original_conditions": [
-      "Allergic Rhinitis",
-      "Hayfever",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Allergic Rhinitis", "Hayfever"],
     "medical_condition_description": "Allergic Rhinitis Other names: Hay Fever; Nasal Allergies A collection of symptoms, predominantly in the nose and eyes, that occur after exposure to airborne particles of dust or dander or to pollens of certain seasonal plants in people that are allergic to these substances (see also allergies; asthma; allergy to mold, dander, dust).",
     "matched_disease_keys": ["common_cold"],
     "matched_symptoms": [
@@ -106532,7 +106477,7 @@
     "original_conditions": [
       "Dysuria",
       "Incontinence",
-      "Not Listed / Othe",
+
       "Overactive Bladde",
       "Urinary Frequency"
     ],
@@ -108918,7 +108863,7 @@
       "Intermittent Explosive Disorder",
       "Major Depressive Disorde",
       "Major Depressive Disorder",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "PANDAS Syndrome",
@@ -109196,8 +109141,7 @@
       "Bipolar Disorde",
       "Bipolar Disorder",
       "Depression",
-      "Major Depressive Disorde",
-      "Not Listed / Othe"
+      "Major Depressive Disorde"
     ],
     "medical_condition_description": "Bipolar Disorder Other names: Bipolar Affective Disorder; Bipolar Affective Mood Disorder; Bipolar I Disorder; Bipolar II Disorder; Manic Depression; Manic Depressive Disorder; Manic Depressive Illness; Mood Disorder Bipolar disorder is a type of mood disorder. People with bipolar disorder fluctuate from feeling down and depressed to feeling super-charged or manic. The disorder used to be called manic depression or manic-depressive illness. However, nowadays, several types of bipolar disorder are recognized: bipolar I, bipolar II, cyclothymic disorder, mixed features, and rapid-cycling disorder. What are the Symptoms of Bipolar Disorder? Symptoms vary among people with bipolar disorder, depending on what type of bipolar disorder they have. All have slightly different symptoms. Symptoms reflect mood opposites and may include: Periods of high or irritable mood High energy levels Scattered and unproductive activity sometimes with painful or embarrassing consequences Little, if any, need for sleep Thinking that is out of step with reality Psychotic symptoms, such as false beliefs (delusions) or false perceptions (hallucinations) Very low mood Deep depression Self-loathing Feelings of hopelessness or despair Refusal to get out of bed. Some people only develop milder symptoms of mania without psychotic symptoms. This is called hypomania. People who don’t have full blown episodes of mania are more likely to have bipolar II disorder. These mood swings are much more severe than the normal ups and downs most people go through. In between mood swings, most people with bipolar disorder can lead relatively normal lives. The time spent in each mood state (ie, mania or depression) varies depending on the type of bipolar disorder but can range from days to months. The severity of the mood state can also vary significantly, with some people only ever experiencing mild symptoms. What Causes Bipolar Disorder? Although the exact cause is unknown, there does seem to be a genetic link, and you are more likely to get bipolar disorder if you have another family member with the condition. Symptoms are often triggered by a stressful situation or circumstance. This may take the form of a relationship breakdown; physical, sexual, or emotional abuse; money problems; or the death of a close family member or loved one. Symptoms are thought to be due to changes in the balance of some neurotransmitters in the brain, specifically noradrenaline, serotonin, and dopamine. It can be hard to recognize bipolar disorder initially. During a manic phase, a person with bipolar disorder may be incredibly fun to be around. However, as the condition progresses, these manic episodes become more extreme. Some people with bipolar disorder only experience slight mania and are mainly depressed. Misdiagnosis as depression is common. If an antidepressant is prescribed without a mood stabilizer, it will often catapult the person into a full-on manic state. Recognizing bipolar illness is important for treatment, as mood stabilizing agents are the best type of medication. How is Bipolar Disorder Treated? Bipolar disorder can be treated. For best results, medication needs to be combined with therapy sessions and the instigation of good routines. The most effective treatment for bipolar disorder is a mood stabilizing agent. These medications even out the troughs and the peaks of mood swings to keep you on a more even keel. Other treatments may include antipsychotics or antidepressants. Medications should be combined with nonpharmacological treatments, such as: Cognitive-behavioral therapy: This looks into any negative thought patterns you may have and challenges them in order to change your behavior. Interpersonal and social rhythm therapy: This aims to improve disruptions to your biological or social rhythms (such as sleep disturbances and relationship issues). Family focused therapy: This involves your family in your treatment, educating them and allowing them to support you fully.",
     "matched_disease_keys": ["others"],
@@ -109295,7 +109239,7 @@
     "related_drugs": {},
     "avg_rating": 6.75,
     "total_reviews": 8.0,
-    "original_conditions": ["Not Listed / Othe", "Psychosis"],
+    "original_conditions": ["Psychosis"],
     "medical_condition_description": "",
     "matched_disease_keys": ["psoriasis"],
     "matched_symptoms": [
@@ -109625,7 +109569,7 @@
       "Hayfever",
       "Lichen Sclerosus",
       "Nasal Polyps",
-      "Not Listed / Othe",
+
       "Rhinitis"
     ],
     "medical_condition_description": "Allergic Rhinitis Other names: Hay Fever; Nasal Allergies A collection of symptoms, predominantly in the nose and eyes, that occur after exposure to airborne particles of dust or dander or to pollens of certain seasonal plants in people that are allergic to these substances (see also allergies; asthma; allergy to mold, dander, dust).",
@@ -109899,7 +109843,7 @@
       "Anxiety and Stress",
       "Body Dysmorphic Disorder",
       "Depression",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Persistent Depressive Disorde",
@@ -112091,7 +112035,7 @@
       "Migraine",
       "Nausea/Vomiting, Chemotherapy Induced",
       "Neuropathic Pain",
-      "Not Listed / Othe",
+
       "Occipital Neuralgia",
       "Pain",
       "Periodic Limb Movement Disorde",
@@ -112197,7 +112141,7 @@
     "total_reviews": 24.0,
     "original_conditions": [
       "Alcoholism",
-      "Not Listed / Othe",
+
       "Postherpetic Neuralgia",
       "Restless Legs Syndrome"
     ],
@@ -113132,11 +113076,7 @@
     "related_drugs": {},
     "avg_rating": 8.33,
     "total_reviews": 6.0,
-    "original_conditions": [
-      "Conjunctivitis",
-      "Not Listed / Othe",
-      "Ophthalmic Surgery"
-    ],
+    "original_conditions": ["Conjunctivitis", "Ophthalmic Surgery"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -114347,11 +114287,7 @@
     "related_drugs": {},
     "avg_rating": 8.0,
     "total_reviews": 2.0,
-    "original_conditions": [
-      "Fungal Infection Prophylaxis",
-      "Not Listed / Othe",
-      "Oral Thrush"
-    ],
+    "original_conditions": ["Fungal Infection Prophylaxis", "Oral Thrush"],
     "medical_condition_description": "",
     "matched_disease_keys": ["fungal_infection"],
     "matched_symptoms": [
@@ -115337,11 +115273,7 @@
     "related_drugs": {},
     "avg_rating": 6.34,
     "total_reviews": 103.0,
-    "original_conditions": [
-      "Diabetes (Type 2)",
-      "Diabetes, Type 2",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Diabetes (Type 2)", "Diabetes, Type 2"],
     "medical_condition_description": "Diabetes, Type 2 Other names: Diabetes; Noninsulin-dependent Diabetes; Type 2 Diabetes Type 2 diabetes is the most common type of diabetes and is characterized by high levels of glucose (sugar) in the blood. Although some symptoms may be similar, it is a different condition to type 1 diabetes. Unlike people with type 1 diabetes, most people with type 2 diabetes still produce insulin. However, it is either not enough to deal with all the glucose that is in their blood or their cells are unable to recognize the insulin and use it properly (this is called insulin resistance). Type 2 diabetes usually affects people who are middle-aged or older, and obesity is by far the biggest risk factor. In the past two decades, the condition has become more prevalent in younger people, including children, mainly because of the rising rates of obesity in children. People who do little exercise or of certain ethnicities (such as Native Americans, African-Americans, and Hispanics) are also at higher risk of developing type 2 diabetes. What are the Symptoms of Type 2 Diabetes? Symptoms of type 2 Diabetes usually come on gradually and may be so subtle that many people do not realize they have the condition. Symptoms may include: Always feeling thirsty Feeling hungry, even though you eat regularly Going to the toilet (urinating) often Getting sick frequently, or frequent skin infections, particularly yeast or fungal infections Infections take longer to heal Feeling tired all the time or lacking in energy Blurred or deteriorating vision. How is Type 2 Diabetes Diagnosed? Some doctors screen for diabetes in people of a certain age and it is usually always screened for in pregnant women. If you or your doctor suspects you have type 2 diabetes then they may perform a blood test on the spot that tests for blood sugar levels using a fingerprick or order a blood test that tests for blood sugar levels in the morning after an overnight fast. Your doctor will also perform an examination and measure your blood pressure. Tests for cholesterol may also be conducted because approximately one-third of people with type 2 diabetes also have high blood pressure and high cholesterol as well. How is Type 2 Diabetes Treated? Even though symptoms of type 2 diabetes are barely noticeable in some people, constantly high blood sugar levels cause permanent damage to all the blood vessels and nerves in the body. Untreated diabetes can lead to an increased risk of heart attack and stroke, erectile dysfunction, foot problems, gum disease, eye and kidney disease, and many other problems. If treatment is not started early, it is too late to reverse any damage once symptoms become more noticeable. Treatments for Type 2 diabetes include: Metformin Sulfonylureas Meglitinides Thiazolidinediones DPP-4 inhibitors GLP-1 receptor agonists SGLT2 inhibitors Insulin.",
     "matched_disease_keys": ["diabetes"],
     "matched_symptoms": [
@@ -117645,7 +117577,7 @@
       "Bronchitis",
       "Cough",
       "Fibromyalgia",
-      "Not Listed / Othe",
+
       "ibromyalgia"
     ],
     "medical_condition_description": "Bronchitis Bronchitis is a type of infection that affects your lungs. It causes inflammation in the lining of your bronchial tubes - these are the tubes that carry air from your trachea (windpipe) into your lungs. Bronchitis is most often caused by viruses, usually the same ones that cause a cold or the flu, although sometimes bacteria are to blame. Some people are more prone to getting bronchitis than others. People at higher risk include those who: Smoke Have a weak immune system Have gastroesophageal reflux disease (GERD) Work around airborne irritants such as chemical fumes or dust Live in cities or areas with high amounts of air pollution Are not vaccinated against the flu (the flu can lead to bronchitis). Symptoms of Bronchitis Symptoms of bronchitis can vary from mild to severe but usually include: A nagging productive cough that persists for several days to weeks Increased mucus production from the lungs. This is thicker than normal and may be discolored (yellowish-grey, green, rarely blood-streaked) Fatigue Chest tightness or discomfort Shortness of breath. Bronchitis is not usually accompanied by a fever. If you have a fever, you may have pneumonia or the flu instead. Bronchitis can develop into pneumonia in some people. Bronchitis may be described as acute or chronic. Acute bronchitis usually follows a cold or the flu and symptoms usually get better within a week although you may be left with a cough that lingers for several weeks. If your cough lasts for at least three months and you get recurring bouts of bronchitis over a period of two years it is referred to as chronic bronchitis. Chronic bronchitis is often due to smoking and is one of the conditions included in chronic obstructive pulmonary disease (COPD). Diagnosis of Bronchitis See a doctor if your cough lasts more than three weeks, is accompanied by a fever, is blood-tinged, or associated with wheezing or shortness of breath. Your doctor will perform a physical exam and listen to your lungs as you breathe with a stethoscope. A chest X-ray, sputum tests, or pulmonary function tests may also be conducted to help with the diagnosis. Treatment of Bronchitis Bronchitis is most often caused by viruses, so antibiotics will not help treat the condition. Most cases of acute bronchitis get better by themselves without treatment within a couple of weeks. Cough medications may help with sleep at night and people with other conditions (such as asthma or COPD) may benefit from bronchodilators and corticosteroids to open up their airways and reduce inflammation. People with chronic bronchitis may benefit from pulmonary rehabilitation – this is where a respiratory therapist teaches you exercises to help you breathe more easily and increase your ability to partake in physical activity. Nonpharmacological treatments can also help you feel better, such as: Warm lemon and honey drinks Humidifiers – these produce warm moist air which loosens mucus in the airway allowing you to cough it up easier Wearing a mask or a buff over your mouth outside if you are exposed to cold air, smoke, fumes, or other pollutants.",
@@ -117788,7 +117720,7 @@
     "related_drugs": {},
     "avg_rating": 6.57,
     "total_reviews": 179.0,
-    "original_conditions": ["Cough and Nasal Congestion", "Not Listed / Othe"],
+    "original_conditions": ["Cough and Nasal Congestion"],
     "medical_condition_description": "",
     "matched_disease_keys": ["common_cold"],
     "matched_symptoms": [
@@ -119148,7 +119080,7 @@
       "ICU Agitation",
       "Mania",
       "Nausea/Vomiting",
-      "Not Listed / Othe",
+
       "Psychosis",
       "Tourette's Syndrome"
     ],
@@ -120815,7 +120747,7 @@
     "related_drugs": {},
     "avg_rating": 4.67,
     "total_reviews": 3.0,
-    "original_conditions": ["Not Listed / Othe", "Precocious Puberty"],
+    "original_conditions": ["Precocious Puberty"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -122750,11 +122682,7 @@
     },
     "avg_rating": 6.58,
     "total_reviews": 94.0,
-    "original_conditions": [
-      "High Blood Pressure",
-      "Hypertension",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["High Blood Pressure", "Hypertension"],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension"],
     "matched_symptoms": [
@@ -122901,11 +122829,7 @@
     "related_drugs": {},
     "avg_rating": 6.46,
     "total_reviews": 56.0,
-    "original_conditions": [
-      "High Blood Pressure",
-      "Hypertension",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["High Blood Pressure", "Hypertension"],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension"],
     "matched_symptoms": [
@@ -123030,11 +122954,7 @@
     },
     "avg_rating": 7.2,
     "total_reviews": 30.0,
-    "original_conditions": [
-      "High Blood Pressure",
-      "Hypertension",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["High Blood Pressure", "Hypertension"],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension"],
     "matched_symptoms": [
@@ -123069,12 +122989,7 @@
     "related_drugs": {},
     "avg_rating": 5.85,
     "total_reviews": 87.0,
-    "original_conditions": [
-      "Edema",
-      "High Blood Pressure",
-      "Hypertension",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Edema", "High Blood Pressure", "Hypertension"],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension"],
     "matched_symptoms": [
@@ -123181,7 +123096,7 @@
     },
     "avg_rating": 5.68,
     "total_reviews": 309.0,
-    "original_conditions": ["Not Listed / Othe", "Pain"],
+    "original_conditions": ["Pain"],
     "medical_condition_description": "Pain An unpleasant sensory and emotional experience associated with actual or potential tissue damage or described in terms of such damage.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -123542,7 +123457,7 @@
       "Conjunctivitis, Bacterial",
       "Keratitis",
       "Keratoconjunctivitis",
-      "Not Listed / Othe",
+
       "Otitis Externa",
       "Otitis Media"
     ],
@@ -123817,7 +123732,7 @@
       "Anesthetic Adjunct",
       "Chronic Pain",
       "Cough",
-      "Not Listed / Othe",
+
       "Pain"
     ],
     "medical_condition_description": "Pain An unpleasant sensory and emotional experience associated with actual or potential tissue damage or described in terms of such damage.",
@@ -124003,7 +123918,7 @@
       "Lyme Disease, Arthritis",
       "Malaria",
       "Malaria Prevention (Malaria Prophylaxis)",
-      "Not Listed / Othe",
+
       "Rheumatoid Arthritis",
       "Sjogren's Syndrome",
       "Systemic Lupus Erythematosus",
@@ -124205,7 +124120,7 @@
       "Cervical Cancer",
       "Chronic Myelogenous Leukemia",
       "Glioblastoma Multiforme",
-      "Not Listed / Othe",
+
       "Plaque Psoriasis",
       "Polycythemia Vera",
       "Psoriasis",
@@ -124255,7 +124170,7 @@
       "Anxiety",
       "Interstitial Cystitis",
       "Nausea/Vomiting",
-      "Not Listed / Othe",
+
       "Pain",
       "Pruritus",
       "Sedation"
@@ -125547,7 +125462,7 @@
       "Juvenile Rheumatoid Arthritis",
       "Muscle Pain",
       "Neck Pain",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pain",
       "Patent Ductus Arteriosus",
@@ -127856,11 +127771,7 @@
     "related_drugs": {},
     "avg_rating": 4.58,
     "total_reviews": 20.0,
-    "original_conditions": [
-      "High Blood Pressure",
-      "Hypertension",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["High Blood Pressure", "Hypertension"],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension"],
     "matched_symptoms": [
@@ -128159,7 +128070,7 @@
       "Gitelman Syndrome",
       "Gout, Acute",
       "Langerhans' Cell Histiocytosis",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pain",
       "Patent Ductus Arteriosus",
@@ -131765,8 +131676,7 @@
       "Diabetic Kidney Disease",
       "Diabetic Kidney Disease (Diabetic Nephropathy)",
       "High Blood Pressure",
-      "Hypertension",
-      "Not Listed / Othe"
+      "Hypertension"
     ],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["diabetes", "hypertension"],
@@ -132724,7 +132634,7 @@
       "Acute Nonlymphocytic Leukemia",
       "Granuloma Annulare",
       "Melanoma, Metastatic",
-      "Not Listed / Othe",
+
       "Pityriasis rubra pilaris",
       "Rosacea"
     ],
@@ -132999,7 +132909,7 @@
       "Fungal Infection Prophylaxis",
       "Histoplasmosis",
       "Microsporidiosis",
-      "Not Listed / Othe",
+
       "Onychomycosis, Fingernail",
       "Onychomycosis, Toenail",
       "Oral Thrush",
@@ -135659,12 +135569,7 @@
     },
     "avg_rating": 6.79,
     "total_reviews": 38.0,
-    "original_conditions": [
-      "Anesthesia",
-      "Depression",
-      "Not Listed / Othe",
-      "Pain"
-    ],
+    "original_conditions": ["Anesthesia", "Depression", "Pain"],
     "medical_condition_description": "Depression Depression is a mood condition characterized by persistent and overwhelming feelings of sadness that can affect your day-to-day activities and how you think, feel, and behave. Sometimes it can affect your outlook on life and make you feel that life isn’t worth living. Depression may also be called major depressive disorder or clinical depression. What Causes Depression? Experts aren’t exactly sure what causes depression but believe it is due to a combination of different factors, such as genetic vulnerability, faulty mood regulation by the brain, stress, chemicals in the brain, medications, or medical problems, that all interact together to bring on depression. The risk of developing depression is higher in women and people: Aged 45 to 64 years of age or the elderly With chronic or acute health conditions Who are undergoing a major life event, such as a job loss, divorce, workplace stress, or physical or mental abuse With severe grief due to the death of a loved one Taking prescription drugs that may cause a low mood Abusing alcohol or drugs. What are the Symptoms of Depression? Depression is not just feeling blue occasionally. It affects daily feelings, thoughts, and actions over a longer period. (MDD), can result in difficulties with family life, work, and social activities. Symptoms may vary depending on how severe a person’s depression is but may include: A prolonged and persistent low mood, tearfulness, or a sense of hopelessness that has lasted for at least 2 weeks Irritability Anxiety Agitation or restlessness Avoidance or refusal to participate in activities that were previously enjoyed Withdrawal socially, from family, friends, and relationships Changes in sleeping or eating habits Unexplained physical problems, such as back pain or headaches Alcohol, drug, or substance abuse Engaging in risky or destructive behaviors Self-harm or attempts at suicide. In children and teens, symptoms may include clinginess, worry, aches and pain, and refusal to go to school. In older adults, symptoms may be less obvious and include memory difficulties or personality changes, physical aches and pains, and fatigue. How is Depression Diagnosed? If your mood has been low for a while and you are having difficulty coping with day to day activities, talk to your doctor or a trusted professional. Your doctor will ask you questions about your symptoms and your medical history and may ask you to complete a questionnaire that may help to diagnose depression or refer you to a psychiatrist. You can also call the National Suicide Prevention Hotline at 1-800-273-8255, 24 hours a day, 7 days a week, or have an online chat (http://suicidepreventionlifeline.org/). All information is confidential and free. How is Depression Treated? Depression is treatable with high rates of success. Treatments may include: Psychotherapy Antidepressants, such as Selective Serotonin Reuptake Inhibitors (SSRIs), Serotonin Norepinephrine Reuptake Inhibitors (SNRIs), tricyclic antidepressants (TCAs), monoamine oxidase inhibitors (MAOIs). Responses to antidepressants vary, and most antidepressants take 4 to 6 weeks for full effect. About 50% of patients respond to the first treatment, whereas others may have to try a few different types of antidepressants before they find the best one for them. There are several things you can do to help with your symptoms as well, such as: Setting realistic and daily goals Developing strategies to work through crises situations Developing coping and problem-solving skills Learning how to develop positive relationships Replacing negative thoughts with positive ones.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -135737,7 +135642,7 @@
       "Dermatophytosis",
       "Esophageal Candidiasis",
       "Histoplasmosis",
-      "Not Listed / Othe",
+
       "Onychomycosis, Fingernail",
       "Onychomycosis, Toenail",
       "Oral Thrush",
@@ -137147,8 +137052,7 @@
     "original_conditions": [
       "Constipation, Acute",
       "Constipation, Chronic",
-      "Hepatic Encephalopathy",
-      "Not Listed / Othe"
+      "Hepatic Encephalopathy"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
@@ -137772,7 +137676,7 @@
       "Depression",
       "Epilepsy",
       "Migraine Prevention",
-      "Not Listed / Othe",
+
       "Post Traumatic Stress Disorde",
       "Post Traumatic Stress Disorder",
       "Restless Legs Syndrome",
@@ -140225,7 +140129,7 @@
       "Hyperekplexia",
       "Neuralgia",
       "New Daily Persistent Headache",
-      "Not Listed / Othe",
+
       "Seizures",
       "Seizures (Convulsions)"
     ],
@@ -140528,12 +140432,7 @@
     },
     "avg_rating": 5.47,
     "total_reviews": 381.0,
-    "original_conditions": [
-      "Allergic Rhinitis",
-      "Allergies",
-      "Not Listed / Othe",
-      "Urticaria"
-    ],
+    "original_conditions": ["Allergic Rhinitis", "Allergies", "Urticaria"],
     "medical_condition_description": "Allergies Other names: Allergy; Dust Mite Allergy Allergies are an overreaction by your immune system to a substance or food that is not considered harmful to most other people. Substances that cause allergies are called allergens or “triggers”. What Causes Allergies? When you have allergies, your immune system mistakes normally harmless substances for dangerous invaders and produces antibodies to fight them. These antibodies release chemicals, such as histamine, that cause allergy symptoms. The most common allergens are: Animal fur or hair (such as that from cats, dogs, horses, or rabbits) Dust mites Food, especially cow’s milk, eggs, peanuts, seafood, soy, tree nuts (almonds, Brazil nuts, cashews) and wheat Insect stings Latex Medicines Mould Pollen. An allergen for one person may not cause any problems in another person. There is a link between allergy and asthma. What are the Symptoms of Allergies? Reactions to the same allergen vary among individuals and depend on how the allergen entered the body (for example, being bitten by a mosquito causes a localized reaction on the skin whereas exposure to pollen may cause a tickly throat and itchy eyes). Symptoms may include: Abdominal pain, diarrhea, nausea, vomiting (food allergies) Areas of swelling and redness where a person has been stung or bitten (for insect bites/stings) Cough, chest tightness, wheezing or shortness of breath Itching of the nose, eyes or roof of the mouth A skin rash or hives, usually accompanied by body-wide itching Runny, stuffy nose Sneezing Swelling of the lips, tongue, face, or throat Tingling of the mouth Watery, red or swollen eyes (conjunctivitis) Wheezing. Some types of allergies can trigger a severe reaction known as anaphylaxis. Symptoms of anaphylaxis include: Loss of consciousness A drop in blood pressure Severe shortness of breath Skin rash Lightheadedness A rapid, weak pulse Nausea and vomiting. When Should I See a Doctor for my Allergies? Many allergies can be effectively treated with over-the-counter medications. See your doctor if you have persistent allergies that are interfering with your day to day life if you have severe reactions, or over the counter, remedies are not effective. People who develop anaphylaxis should always carry an epinephrine auto-injector 24 hours a day and know how to use it. People should also visit the emergency department after using the auto-injector to ensure symptoms don't return when the effects of the injection wear off. How Are Allergies Treated? Treatment depends on what is the most troublesome or predominant symptom. Treatments may include: Antihistamines (oral, nasal, topical) Corticosteroids (oral, nasal, topical) Decongestants (oral, nasal) Saline nasal rinses Immunotherapy. People with known allergies should try and avoid known triggers and wear a medical alert bracelet (or necklace) that lets others know that you have a serious allergy in case you have a reaction and you're unable to communicate.",
     "matched_disease_keys": ["allergy", "common_cold"],
     "matched_symptoms": [
@@ -140661,7 +140560,7 @@
       "Kidney Infections (Pyelonephritis)",
       "Nongonococcal Urethritis",
       "Nosocomial Pneumonia",
-      "Not Listed / Othe",
+
       "Ophthalmic Surgery",
       "Otitis Media",
       "Pelvic Inflammatory Disease",
@@ -140897,8 +140796,7 @@
       "Birth Control",
       "Birth Control (Contraception)",
       "Emergency Contraception",
-      "Emergency Contraception (Postcoital Contraception)",
-      "Not Listed / Othe"
+      "Emergency Contraception (Postcoital Contraception)"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
@@ -141174,7 +141072,7 @@
       "Hypothyroidism, After Thyroid Removal",
       "Hypothyroidism, After Thyroid Removal (Hypothyroidism, Post-Thyroidectomy)",
       "Myxedema Coma",
-      "Not Listed / Othe",
+
       "TSH Suppression",
       "Thyroid Suppression Test",
       "Underactive Thyroid",
@@ -141846,7 +141744,7 @@
       "Local Anesthesia",
       "Manscaping Pain",
       "Neuropathic Pain",
-      "Not Listed / Othe",
+
       "Ophthalmic Surgery",
       "Pain",
       "Postherpetic Neuralgia",
@@ -143330,7 +143228,7 @@
       "Diabetes (Type 2)",
       "Diabetes, Type 1",
       "Diabetes, Type 2",
-      "Not Listed / Othe",
+
       "Obesity",
       "Weight Loss"
     ],
@@ -143387,7 +143285,7 @@
       "Chronic Fatigue Syndrome",
       "Depression",
       "Narcolepsy",
-      "Not Listed / Othe",
+
       "Oppositional Defiant Disorde",
       "Oppositional Defiant Disorder"
     ],
@@ -143504,7 +143402,7 @@
       "Migraine Prevention",
       "Migraine Prevention (Migraine Prophylaxis)",
       "Nephropathy",
-      "Not Listed / Othe",
+
       "Polycystic Kidney Disease"
     ],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
@@ -143609,7 +143507,7 @@
       "Depression",
       "Intermittent Explosive Disorder",
       "Mania",
-      "Not Listed / Othe",
+
       "Schizoaffective Disorde",
       "Schizoaffective Disorder"
     ],
@@ -145305,7 +145203,7 @@
       "Allergic Reactions",
       "Allergic Rhinitis",
       "Allergies",
-      "Not Listed / Othe",
+
       "Physical Urticaria",
       "Urticaria"
     ],
@@ -145563,7 +145461,7 @@
       "Light Anesthesia",
       "Nausea/Vomiting",
       "Nausea/Vomiting, Chemotherapy Induced",
-      "Not Listed / Othe",
+
       "Panic Disorde",
       "Panic Disorder",
       "Sedation",
@@ -146031,8 +145929,7 @@
       "Diabetic Kidney Disease (Diabetic Nephropathy)",
       "High Blood Pressure",
       "High Blood Pressure (Hypertension)",
-      "Hypertension",
-      "Not Listed / Othe"
+      "Hypertension"
     ],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["diabetes", "hypertension"],
@@ -146722,12 +146619,7 @@
     },
     "avg_rating": 6.0,
     "total_reviews": 21.0,
-    "original_conditions": [
-      "Agitated State",
-      "Agitation",
-      "Not Listed / Othe",
-      "Schizophrenia"
-    ],
+    "original_conditions": ["Agitated State", "Agitation", "Schizophrenia"],
     "medical_condition_description": "Schizophrenia Other names: Catatonic Schizophrenia; Disorganized Schizophrenia; Paranoid Schizophrenia; Residual Schizophrenia; Schizophrenia, catatonic; Schizophrenia, disorganized; Schizophrenia, paranoid; Schizophrenia, residual; Schizophrenia, undifferentiated; Undifferentiated Schizophrenia Schizophrenia is a serious brain disorder. It is a disease that makes it difficult for a person to tell the difference between real and unreal experiences, to think logically, to have normal emotional responses to others, and to behave normally in social situations.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -147257,7 +147149,7 @@
       "Bipolar Disorder",
       "Borderline Personality Disorde",
       "Borderline Personality Disorder",
-      "Not Listed / Othe",
+
       "Schizoaffective Disorde",
       "Schizoaffective Disorder",
       "Schizophrenia"
@@ -148860,7 +148752,7 @@
     },
     "avg_rating": 8.8,
     "total_reviews": 687.0,
-    "original_conditions": ["Constipation", "Not Listed / Othe"],
+    "original_conditions": ["Constipation"],
     "medical_condition_description": "Constipation Other names: Difficulty passing stool; Irregularity of bowels Constipation is the term used to describe difficulty or infrequency in passing feces (poo). When people are constipated, they have difficulty emptying their bowels or strain when they go to the toilet. Most people empty their bowels at least once a day or every other day. Constipation is generally defined as having less bowel movements per normal per week. What Causes Constipation? Our bowel is the part of our gastrointestinal tract that removes solid waste (poo) left over from the food we eat from our body. When we pass feces it is called having a bowel movement or motion. Constipation can either occur from a lack of fiber or fluid in the diet, or if the movements of the bowel slow down, due to disease, medications, hormones, or trauma, causing a longer transit for feces through the bowel. Common causes of constipation include: Anal fissures Bowel cancer Dehydration Diabetes Hypothyroidism Inflammatory bowel diseases such as Crohn’s disease or ulcerative colitis Irritable bowel syndrome Lack of fiber Lack of physical activity Laxative abuse Medications such as opioids, diuretics, calcium channel blockers Neurological problems caused by conditions such as multiple sclerosis, Parkinson’s disease, brain or spinal cord injuries, or stroke Pregnancy Rectocele Weak pelvic muscles. What are the Symptoms of Constipation? Symptoms of constipation may include: Dry, hard, and lumpy feces (look like rabbit poo) Passing fewer than three stools per week Having to strain or push hard when having a bowel movement Feeling like something is stuck in your bowel preventing you from having a bowel movement Feeling like you can’t fully empty your bowels. Other conditions, such as hemorrhoids (piles) or anal fissures may occur as a result of repeated straining to have a bowel motion. Untreated constipation may lead to fecal impaction (a hardened stool becomes lodged in the colon) or a rectal prolapse (which is when straining causes some of the intestine to protrude from the anus). How is Constipation Diagnosed? See your doctor if you are experiencing constipation and over the counter treatments have not worked. You should see your GP if you experience or observe the following: Abdominal pain or bloating Blood in your stools Constipation that alternates with diarrhea Weight loss for no apparent reason. Your doctor will ask you questions about your history of constipation and what medications you take. They may perform a physical examination and further tests may be performed depending on what they think is the underlying cause of the constipation. How is Constipation Treated? Improving your diet, fiber and fluid intake may resolve mild forms of constipation. Medicines that treat constipation are called laxatives and there are many different types, such as: Bulk-forming laxatives (such as fibers or psyllium). These absorb water in the bowel and swell to bulk out the stool making it softer and easier to pass Emollient stool softeners (such as docusate). These moisten and lubricate the stool making it easier to pass Osmotic laxatives (such as lactulose) draw fluid into the bowel and soften stools Stimulant laxatives (such as senna or bisacodyl) which promote contraction of the intestines, promoting the movement of stools through the bowel. People should eat more vegetables and fruit, exercise daily, reduce their consumption of constipation-causing foods (such as unripe bananas, milk, red meat), and exercise daily.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -148996,7 +148888,7 @@
     "original_conditions": [
       "Constipation",
       "Hypomagnesemia",
-      "Not Listed / Othe",
+
       "Pathological Hypersecretory Disorder",
       "Urinary Tract Stones"
     ],
@@ -149161,7 +149053,7 @@
     "related_drugs": {},
     "avg_rating": 7.43,
     "total_reviews": 823.0,
-    "original_conditions": ["Bowel Preparation", "Not Listed / Othe"],
+    "original_conditions": ["Bowel Preparation"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -150742,7 +150634,7 @@
     "original_conditions": [
       "Motion Sickness",
       "Nausea/Vomiting",
-      "Not Listed / Othe",
+
       "Vertig",
       "Vertigo"
     ],
@@ -151355,7 +151247,7 @@
       "Endometrial Hyperplasia, Prophylaxis",
       "Endometriosis",
       "Gender Dysphoria",
-      "Not Listed / Othe",
+
       "Renal Cell Carcinoma"
     ],
     "medical_condition_description": "",
@@ -151445,7 +151337,6 @@
     "avg_rating": 5.84,
     "total_reviews": 42.0,
     "original_conditions": [
-      "Not Listed / Othe",
       "Pain",
       "Period Pain",
       "Period Pain (Dysmenorrhea)"
@@ -151749,7 +151640,7 @@
     "related_drugs": {},
     "avg_rating": 6.88,
     "total_reviews": 131.0,
-    "original_conditions": ["Insomnia", "Jet Lag", "Not Listed / Othe"],
+    "original_conditions": ["Insomnia", "Jet Lag"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -151825,7 +151716,7 @@
       "Fibromyalgia",
       "Inflammatory Conditions",
       "Juvenile Rheumatoid Arthritis",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Rheumatoid Arthritis",
       "Tendonitis",
@@ -151995,8 +151886,7 @@
       "Alzheimer's",
       "Alzheimer's Disease",
       "Autism",
-      "Migraine",
-      "Not Listed / Othe"
+      "Migraine"
     ],
     "medical_condition_description": "Alzheimer's Disease Other names: Presenile Dementia; SDAT; Senile dementia Alzheimer's Type A progressive, neurodegenerative disease characterised by loss of function and death of nerve cells in several areas of the brain leading to loss of cognitive function such as memory and language. The cause of nerve cell death is unknown but the cells are recognised by the appearance of unusual helical protein filaments in the nerve cells.",
     "matched_disease_keys": ["migraine", "urinary_tract_infection"],
@@ -153749,12 +153639,7 @@
     "related_drugs": {},
     "avg_rating": 8.79,
     "total_reviews": 608.0,
-    "original_conditions": [
-      "Chronic Pain",
-      "Not Listed / Othe",
-      "Opiate Withdrawal",
-      "Pain"
-    ],
+    "original_conditions": ["Chronic Pain", "Opiate Withdrawal", "Pain"],
     "medical_condition_description": "Pain An unpleasant sensory and emotional experience associated with actual or potential tissue damage or described in terms of such damage.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -154246,7 +154131,7 @@
     "original_conditions": [
       "Muscle Spasm",
       "Muscle Spasm (Involuntary Hypertonicity)",
-      "Not Listed / Othe",
+
       "Opiate Withdrawal",
       "Tetanus"
     ],
@@ -154471,7 +154356,7 @@
     "original_conditions": [
       "Dumping Syndrome",
       "Irritable Bowel Syndrome",
-      "Not Listed / Othe",
+
       "Peptic Ulcer"
     ],
     "medical_condition_description": "",
@@ -154977,7 +154862,7 @@
       "Depression",
       "Fatigue",
       "Narcolepsy",
-      "Not Listed / Othe",
+
       "Obesity",
       "Postural Orthostatic Tachycardia Syndrome",
       "Severe Mood Dysregulation",
@@ -155038,7 +154923,7 @@
       "Inflammatory Conditions",
       "Nephropathy",
       "Neuralgia",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Plaque Psoriasis",
       "Rheumatoid Arthritis",
@@ -155291,7 +155176,7 @@
       "Nausea/Vomiting",
       "Nausea/Vomiting, Chemotherapy Induced",
       "Nausea/Vomiting, Postoperative",
-      "Not Listed / Othe",
+
       "Radiographic Exam",
       "Small Intestine Intubation"
     ],
@@ -155450,7 +155335,7 @@
       "Migraine Prevention",
       "Migraine Prevention (Migraine Prophylaxis)",
       "Mitral Valve Prolapse",
-      "Not Listed / Othe",
+
       "Premature Ventricular Depolarizations",
       "Supraventricular Tachycardia",
       "Tapering Regimen"
@@ -155736,7 +155621,7 @@
       "Lemierre's Syndrome",
       "Meningitis",
       "Nongonococcal Urethritis",
-      "Not Listed / Othe",
+
       "Pelvic Inflammatory Disease",
       "Perioral Dermatitis",
       "Peritonitis",
@@ -157450,7 +157335,7 @@
     "related_drugs": {},
     "avg_rating": 8.25,
     "total_reviews": 4.0,
-    "original_conditions": ["Herbal Supplementation", "Not Listed / Othe"],
+    "original_conditions": ["Herbal Supplementation"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [],
@@ -157946,7 +157831,7 @@
       "Granuloma Inguinale",
       "Meningitis, Meningococcal",
       "Mycoplasma Pneumonia",
-      "Not Listed / Othe",
+
       "Ocular Rosacea",
       "Pemphigoid",
       "Pemphigus",
@@ -158134,7 +158019,7 @@
       "Hair Loss",
       "High Blood Pressure",
       "Hypertension",
-      "Not Listed / Othe",
+
       "Women (minoxidil)"
     ],
     "medical_condition_description": "Alopecia Other names: Alopecia Areata; Balding; Baldness; Baldness, female pattern; Hair Loss 1. Baldness, absence of the hair from skin areas where it normally is present. 2. Hair loss as a result of chemotherapy or radiation therapy administered to the head. Hair loss from chemotherapy is temporary. Hair loss from radiation is usually permanent.",
@@ -158610,7 +158495,7 @@
       "Insomnia",
       "Major Depressive Disorde",
       "Major Depressive Disorder",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Post Traumatic Stress Disorde",
@@ -158747,7 +158632,7 @@
       "Gynecological Conditions",
       "Labor Induction",
       "NSAID-Induced Ulcer Prophylaxis",
-      "Not Listed / Othe",
+
       "Postpartum Bleeding",
       "Stomach Ulcer (Gastric Ulcer)"
     ],
@@ -159126,7 +159011,7 @@
       "Hypersomnia",
       "Multiple Sclerosis",
       "Narcolepsy",
-      "Not Listed / Othe",
+
       "Obstructive Sleep Apnea/Hypopnea Syndrome",
       "Shift Work Sleep Disorde",
       "Shift Work Sleep Disorder",
@@ -159444,7 +159329,7 @@
       "Eczema",
       "Hayfever",
       "Nasal Polyps",
-      "Not Listed / Othe",
+
       "Psoriasis",
       "Sinus Symptoms"
     ],
@@ -160070,7 +159955,7 @@
     "original_conditions": [
       "Chronic Pain",
       "Neonatal Abstinence Syndrome",
-      "Not Listed / Othe",
+
       "Pain"
     ],
     "medical_condition_description": "Pain An unpleasant sensory and emotional experience associated with actual or potential tissue damage or described in terms of such damage.",
@@ -161953,7 +161838,7 @@
     "total_reviews": 16.0,
     "original_conditions": [
       "Anemia",
-      "Not Listed / Othe",
+
       "Vitamin/Mineral Supplementation and Deficiency"
     ],
     "medical_condition_description": "",
@@ -162093,7 +161978,7 @@
       "Impetig",
       "Impetigo",
       "Nasal Carriage of Staphylococcus aureus",
-      "Not Listed / Othe",
+
       "Paronychia",
       "Secondary Cutaneous Bacterial Infections",
       "Skin and Structure Infection"
@@ -163171,7 +163056,7 @@
       "Back Pain",
       "Frozen Shoulder",
       "Muscle Pain",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Rheumatoid Arthritis",
       "Sciatica",
@@ -164327,7 +164212,7 @@
       "Juvenile Rheumatoid Arthritis",
       "Muscle Pain",
       "Neck Pain",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pain",
       "Period Pain",
@@ -165522,8 +165407,7 @@
     "original_conditions": [
       "High Blood Pressure",
       "Hypertension",
-      "Mitral Valve Prolapse",
-      "Not Listed / Othe"
+      "Mitral Valve Prolapse"
     ],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension"],
@@ -167784,7 +167668,7 @@
     "related_drugs": {},
     "avg_rating": 8.45,
     "total_reviews": 117.0,
-    "original_conditions": ["Not Listed / Othe", "Smoking Cessation"],
+    "original_conditions": ["Smoking Cessation"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -167962,7 +167846,7 @@
       "Hypertension",
       "Hypertensive Emergency",
       "Hypertrophic Cardiomyopathy",
-      "Not Listed / Othe",
+
       "Premature Lab",
       "Premature Labor",
       "Raynaud's Syndrome"
@@ -168834,7 +168718,7 @@
     "total_reviews": 1907.0,
     "original_conditions": [
       "Bladder Infection",
-      "Not Listed / Othe",
+
       "Prevention of Bladder infection",
       "Prevention of Bladder infection (Cystitis Prophylaxis)",
       "UTI",
@@ -169915,8 +169799,7 @@
       "Amenorrhea",
       "Birth Control",
       "Birth Control (Contraception)",
-      "Endometriosis",
-      "Not Listed / Othe"
+      "Endometriosis"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
@@ -170570,7 +170453,7 @@
       "Migraine Prevention (Migraine Prophylaxis)",
       "Neuralgia",
       "Neurosis",
-      "Not Listed / Othe",
+
       "Pain",
       "Panic Disorde",
       "Postherpetic Neuralgia",
@@ -172523,7 +172406,7 @@
     "related_drugs": {},
     "avg_rating": 9.88,
     "total_reviews": 8.0,
-    "original_conditions": ["Cutaneous Candidiasis", "Not Listed / Othe"],
+    "original_conditions": ["Cutaneous Candidiasis"],
     "medical_condition_description": "",
     "matched_disease_keys": ["fungal_infection"],
     "matched_symptoms": [
@@ -173396,7 +173279,7 @@
       "Insomnia",
       "Major Depressive Disorde",
       "Nausea/Vomiting, Chemotherapy Induced",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Paranoid Disorde",
@@ -173665,8 +173548,7 @@
       "High Blood Pressure",
       "Hypertension",
       "Migraine Prevention",
-      "Migraine Prevention (Migraine Prophylaxis)",
-      "Not Listed / Othe"
+      "Migraine Prevention (Migraine Prophylaxis)"
     ],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension", "migraine"],
@@ -173730,7 +173612,7 @@
     },
     "avg_rating": 5.5,
     "total_reviews": 8.0,
-    "original_conditions": ["COPD", "Not Listed / Othe"],
+    "original_conditions": ["COPD"],
     "medical_condition_description": "COPD Other names: Bronchitis with Airway Obstruction; Bronchitis, Chronic; Chronic Bronchitis; Chronic Obstructive Airway Disease; Chronic Obstructive Lung Disease; Chronic Obstructive Pulmonary Disease; Emphysema A group of lung diseases characterized by limited airflow with variable degrees of air sack enlargement and lung tissue destruction. Emphysema and chronic bronchitis are the most common forms of chronic obstructive pulmonary disease.",
     "matched_disease_keys": ["bronchial_asthma"],
     "matched_symptoms": [
@@ -174881,7 +174763,7 @@
       "Nausea/Vomiting, Chemotherapy Induced",
       "Nausea/Vomiting, Postoperative",
       "Nausea/Vomiting, Radiation Induced",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorder",
       "Postanesthetic Shivering",
       "Pruritus"
@@ -175386,7 +175268,7 @@
     "related_drugs": {},
     "avg_rating": 9.35,
     "total_reviews": 45.0,
-    "original_conditions": ["Diarrhea", "Not Listed / Othe"],
+    "original_conditions": ["Diarrhea"],
     "medical_condition_description": "Diarrhea Other names: Frequent bowel movements; Loose bowel movements; Watery stools Diarrhea is defined as loose, watery, and frequent stools. Diarrhea is considered chronic (ongoing or prolonged) when you have had loose or frequent stools for longer than four weeks.",
     "matched_disease_keys": ["gastroenteritis"],
     "matched_symptoms": ["dehydration", "diarrhoea", "sunken_eyes", "vomiting"],
@@ -176005,7 +175887,7 @@
     "total_reviews": 573.0,
     "original_conditions": [
       "Nonalcoholic Fatty Liver Disease",
-      "Not Listed / Othe",
+
       "Obesity",
       "Weight Loss"
     ],
@@ -177858,7 +177740,7 @@
       "Cyclothymic Disorder",
       "Epilepsy",
       "Neuropathic Pain",
-      "Not Listed / Othe",
+
       "Seizures",
       "Seizures (Convulsions)",
       "Trigeminal Neuralgia"
@@ -178263,7 +178145,7 @@
       "Dysuria",
       "Hyperhidrosis",
       "Incontinence",
-      "Not Listed / Othe",
+
       "Overactive Bladde",
       "Prostatitis",
       "Spina bifida",
@@ -178341,7 +178223,7 @@
     },
     "avg_rating": 8.46,
     "total_reviews": 1100.0,
-    "original_conditions": ["Chronic Pain", "Not Listed / Othe", "Pain"],
+    "original_conditions": ["Chronic Pain", "Pain"],
     "medical_condition_description": "Pain An unpleasant sensory and emotional experience associated with actual or potential tissue damage or described in terms of such damage.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -181075,7 +180957,7 @@
       "Hot Flashes",
       "Intermittent Explosive Disorder",
       "Major Depressive Disorde",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Panic Disorde",
@@ -183308,7 +183190,7 @@
       "Clostridioides difficile Infection",
       "Fusospirochetosis, Trench Mouth",
       "Lyme Disease, Erythema Chronicum Migrans",
-      "Not Listed / Othe",
+
       "Pneumonia",
       "Rat-bite Feve",
       "Rat-bite Fever",
@@ -185650,11 +185532,7 @@
     "related_drugs": {},
     "avg_rating": 7.32,
     "total_reviews": 94.0,
-    "original_conditions": [
-      "Dysuria",
-      "Interstitial Cystitis",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Dysuria", "Interstitial Cystitis"],
     "medical_condition_description": "",
     "matched_disease_keys": ["urinary_tract_infection"],
     "matched_symptoms": [
@@ -185731,7 +185609,7 @@
     },
     "avg_rating": 8.33,
     "total_reviews": 274.0,
-    "original_conditions": ["Not Listed / Othe", "Obesity", "Weight Loss"],
+    "original_conditions": ["Obesity", "Weight Loss"],
     "medical_condition_description": "Weight Loss (Obesity/Overweight) More than half of the U.S. population is overweight. But being obese is different from being overweight. An individual is considered obese when weight is 20% (25% in women) or more over the maximum desirable for their height. When an adult is more than 100 pounds overweight, it is considered morbid obesity. Obesity is also defined as a BMI (body mass index) over 30 kg/m2. Patients with a BMI between 25 and 29.9 are considered overweight, but not obese. See also diet and calories.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -186220,7 +186098,7 @@
     "related_drugs": {},
     "avg_rating": 8.73,
     "total_reviews": 5019.0,
-    "original_conditions": ["Not Listed / Othe", "Obesity", "Weight Loss"],
+    "original_conditions": ["Obesity", "Weight Loss"],
     "medical_condition_description": "Weight Loss (Obesity/Overweight) More than half of the U.S. population is overweight. But being obese is different from being overweight. An individual is considered obese when weight is 20% (25% in women) or more over the maximum desirable for their height. When an adult is more than 100 pounds overweight, it is considered morbid obesity. Obesity is also defined as a BMI (body mass index) over 30 kg/m2. Patients with a BMI between 25 and 29.9 are considered overweight, but not obese. See also diet and calories.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -186799,7 +186677,7 @@
       "Epilepsy",
       "Myotonia Congenita",
       "Neurosurgery",
-      "Not Listed / Othe",
+
       "Peripheral Neuropathy",
       "Seizure Prophylaxis During or Following Neurosurgery",
       "Seizures",
@@ -189214,8 +189092,7 @@
     "original_conditions": [
       "Bowel Preparation",
       "Constipation, Chronic",
-      "Gastrointestinal Decontamination",
-      "Not Listed / Othe"
+      "Gastrointestinal Decontamination"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
@@ -190404,7 +190281,6 @@
     "avg_rating": 7.27,
     "total_reviews": 135.0,
     "original_conditions": [
-      "Not Listed / Othe",
       "Parkinson's Disease",
       "Periodic Limb Movement Disorde",
       "Periodic Limb Movement Disorder",
@@ -191514,7 +191390,7 @@
       "Mycosis Fungoides",
       "Nephrotic Syndrome",
       "Neurosarcoidosis",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pemphigoid",
       "Pemphigus",
@@ -191757,7 +191633,7 @@
       "Migraine Prevention",
       "Neuralgia",
       "Neuropathic Pain",
-      "Not Listed / Othe",
+
       "Occipital Neuralgia",
       "Pain",
       "Peripheral Neuropathy",
@@ -195242,7 +195118,7 @@
       "Light Sedation",
       "Motion Sickness",
       "Nausea/Vomiting",
-      "Not Listed / Othe",
+
       "Opiate Adjunct",
       "Sedation",
       "Urticaria",
@@ -195550,7 +195426,7 @@
     "original_conditions": [
       "Atrial Fibrillation",
       "Atrial Flutter",
-      "Not Listed / Othe",
+
       "Ventricular Tachycardia",
       "Wolff-Parkinson-White Syndrome"
     ],
@@ -195704,7 +195580,7 @@
     "related_drugs": {},
     "avg_rating": 8.08,
     "total_reviews": 264.0,
-    "original_conditions": ["Anesthesia", "Not Listed / Othe"],
+    "original_conditions": ["Anesthesia"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -195797,7 +195673,7 @@
       "Migraine Prevention",
       "Migraine Prevention (Migraine Prophylaxis)",
       "Mitral Valve Prolapse",
-      "Not Listed / Othe",
+
       "Panic Disorde",
       "Panic Disorder",
       "Pe",
@@ -197080,7 +196956,7 @@
     "related_drugs": {},
     "avg_rating": 7.41,
     "total_reviews": 44.0,
-    "original_conditions": ["Nasal Congestion", "Not Listed / Othe"],
+    "original_conditions": ["Nasal Congestion"],
     "medical_condition_description": "",
     "matched_disease_keys": ["common_cold"],
     "matched_symptoms": [
@@ -197783,7 +197659,7 @@
       "Dysautonomia",
       "Myasthenia Gravis",
       "Nerve Agent Pretreatment",
-      "Not Listed / Othe",
+
       "Reversal of Nondepolarizing Muscle Relaxants"
     ],
     "medical_condition_description": "",
@@ -198536,7 +198412,7 @@
     },
     "avg_rating": 9.7,
     "total_reviews": 18.0,
-    "original_conditions": ["Insomnia", "Not Listed / Othe"],
+    "original_conditions": ["Insomnia"],
     "medical_condition_description": "Insomnia Other names: Difficulty sleeping; Dyssomnia; Inability to sleep; Sleeplessness; Wakefulness Inability to sleep, abnormal wakefulness.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -198709,7 +198585,7 @@
       "Intermittent Explosive Disorde",
       "Intermittent Explosive Disorder",
       "Major Depressive Disorde",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Paranoid Disorde",
@@ -200132,7 +200008,7 @@
       "Hiatal Hernia",
       "Indigestion",
       "Laryngopharyngeal Reflux",
-      "Not Listed / Othe",
+
       "Pathological Hypersecretory Conditions",
       "Stomach Ulce",
       "Stomach Ulcer (Gastric Ulcer)",
@@ -201183,7 +201059,7 @@
     "total_reviews": 10.0,
     "original_conditions": [
       "Diagnosis and Investigation",
-      "Not Listed / Othe",
+
       "Radionuclide Myocardial Perfusion Study"
     ],
     "medical_condition_description": "",
@@ -205155,7 +205031,7 @@
       "Head Injury",
       "Mania",
       "Nightmares",
-      "Not Listed / Othe",
+
       "Paranoid Disorde",
       "Paranoid Disorder",
       "Post Traumatic Stress Disorde",
@@ -205664,7 +205540,7 @@
     "related_drugs": {},
     "avg_rating": 8.56,
     "total_reviews": 520.0,
-    "original_conditions": ["Migraine", "Not Listed / Othe"],
+    "original_conditions": ["Migraine"],
     "medical_condition_description": "Migraine Other names: Basilar Artery Migraine; Basilar-Type Migraine; Complicated Migraine; Hemiplegic Migraine; Migraine Headache Migraine headaches are a type of headache that some people get repeatedly over time. Migraines are different from other headaches because they occur with symptoms such as nausea, vomiting, or sensitivity to light. Some people who get migraines have warning symptoms, called an aura, before the actual headache begins. Most people, however, do not have such warning symptoms.",
     "matched_disease_keys": ["migraine"],
     "matched_symptoms": [
@@ -206605,7 +206481,6 @@
     "avg_rating": 6.46,
     "total_reviews": 198.0,
     "original_conditions": [
-      "Not Listed / Othe",
       "Parkinson's Disease",
       "Periodic Limb Movement Disorde",
       "Periodic Limb Movement Disorder",
@@ -206868,7 +206743,7 @@
       "Hyperlipoproteinemia Type IIb, Elevated LDL   VLDL",
       "Hyperlipoproteinemia Type IV, Elevated VLDL",
       "Hypertriglyceridemia",
-      "Not Listed / Othe",
+
       "Prevention of Cardiovascular Disease"
     ],
     "medical_condition_description": "High Cholesterol Other names: Cholesteremia; Cholesterol, Elevated Levels; Cholesterol, High; Cholesterolemia; Familial Hypercholesterolemia; Hypercholesterolemia; Hypercholesterolemia, Familial; Hyperlipidemia; Lipid Metabolism Disorders Acquired lipid disorders is a group of disorders characterized by an excess of fatty substances, such as cholesterol, triglycerides, and lipoproteins present in the blood.",
@@ -208329,7 +208204,7 @@
     "original_conditions": [
       "Depression",
       "Herbal Supplementation",
-      "Not Listed / Othe",
+
       "Osteoarthritis"
     ],
     "medical_condition_description": "",
@@ -213026,7 +212901,7 @@
       "Generalized Anxiety Disorder",
       "Major Depressive Disorde",
       "Major Depressive Disorder",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Panic Disorde",
@@ -213997,7 +213872,7 @@
     "related_drugs": {},
     "avg_rating": 9.81,
     "total_reviews": 47.0,
-    "original_conditions": ["Burns, External", "Not Listed / Othe"],
+    "original_conditions": ["Burns, External"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -215916,7 +215791,7 @@
       "Dermatitis",
       "Dermatologic Lesion",
       "Mucositis",
-      "Not Listed / Othe",
+
       "Ophthalmic Viscoelastic Agent",
       "Osteoarthritis"
     ],
@@ -217511,7 +217386,7 @@
       "Hepatic Tum",
       "Hepatic Tumor",
       "Hepatocellular Carcinoma",
-      "Not Listed / Othe",
+
       "Renal Cell Carcinoma",
       "Thyroid Cance",
       "Thyroid Cancer"
@@ -218706,7 +218581,7 @@
     "related_drugs": {},
     "avg_rating": 8.64,
     "total_reviews": 55.0,
-    "original_conditions": ["Depression", "Night Terrors", "Not Listed / Othe"],
+    "original_conditions": ["Depression", "Night Terrors"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -220285,7 +220160,7 @@
       "GERD",
       "GERD (Heartburn)",
       "Hyperphosphatemia of Renal Failure",
-      "Not Listed / Othe",
+
       "Stomach Ulce",
       "Stomach Ulcer (Gastric Ulcer)",
       "Stomatitis",
@@ -221515,7 +221390,7 @@
       "Melioidosis",
       "Meningitis",
       "Nocardiosis",
-      "Not Listed / Othe",
+
       "Otitis Media",
       "Pneumocystis Pneumonia",
       "Pneumocystis Pneumonia Prophylaxis",
@@ -222087,8 +221962,7 @@
       "Cluster Headaches",
       "Cyclic Vomiting Syndrome",
       "Migraine",
-      "New Daily Persistent Headache",
-      "Not Listed / Othe"
+      "New Daily Persistent Headache"
     ],
     "medical_condition_description": "Migraine Other names: Basilar Artery Migraine; Basilar-Type Migraine; Complicated Migraine; Hemiplegic Migraine; Migraine Headache Migraine headaches are a type of headache that some people get repeatedly over time. Migraines are different from other headaches because they occur with symptoms such as nausea, vomiting, or sensitivity to light. Some people who get migraines have warning symptoms, called an aura, before the actual headache begins. Most people, however, do not have such warning symptoms.",
     "matched_disease_keys": ["gastroenteritis", "migraine"],
@@ -224218,7 +224092,7 @@
     "original_conditions": [
       "Benign Prostatic Hyperplasia",
       "Erectile Dysfunction",
-      "Not Listed / Othe",
+
       "Pulmonary Hypertension"
     ],
     "medical_condition_description": "Erectile Dysfunction Other names: ED; Erection Problems; Impotence; Sexual Dysfunction, Male A consistent inability to sustain an erection sufficient for sexual intercourse. Also commonly known as impotence. Medically, the term erectile dysfunction is used to differentiate impotence from other problems that interfere with sexual intercourse",
@@ -224947,7 +224821,7 @@
       "Breast Cancer, Palliative",
       "Breast Cancer, Prevention",
       "McCune-Albright Syndrome",
-      "Not Listed / Othe",
+
       "Precocious Puberty"
     ],
     "medical_condition_description": "",
@@ -226807,7 +226681,7 @@
     "related_drugs": {},
     "avg_rating": 6.56,
     "total_reviews": 662.0,
-    "original_conditions": ["Insomnia", "Not Listed / Othe"],
+    "original_conditions": ["Insomnia"],
     "medical_condition_description": "Insomnia Other names: Difficulty sleeping; Dyssomnia; Inability to sleep; Sleeplessness; Wakefulness Inability to sleep, abnormal wakefulness.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -227865,7 +227739,7 @@
     "total_reviews": 225.0,
     "original_conditions": [
       "Cutaneous Candidiasis",
-      "Not Listed / Othe",
+
       "Onychomycosis, Fingernail",
       "Onychomycosis, Toenail",
       "Tinea Capitis",
@@ -228027,11 +227901,7 @@
     },
     "avg_rating": 5.46,
     "total_reviews": 206.0,
-    "original_conditions": [
-      "Hypoparathyroidism",
-      "Not Listed / Othe",
-      "Osteoporosis"
-    ],
+    "original_conditions": ["Hypoparathyroidism", "Osteoporosis"],
     "medical_condition_description": "Osteoporosis Other names: Bone Thinning Osteoporosis is the thinning of bone tissue and loss of bone density over time.",
     "matched_disease_keys": ["hypothyroidism"],
     "matched_symptoms": [
@@ -228244,7 +228114,7 @@
       "Gender Dysphoria",
       "Hypogonadism, Male",
       "Klinefelter Syndrome",
-      "Not Listed / Othe",
+
       "Postpartum Breast Pain"
     ],
     "medical_condition_description": "",
@@ -230146,7 +230016,7 @@
       "Hashimoto's disease (Chronic Lymphocytic Thyroiditis)",
       "Hypothyroidism, After Thyroid Removal",
       "Hypothyroidism, After Thyroid Removal (Hypothyroidism, Post-Thyroidectomy)",
-      "Not Listed / Othe",
+
       "TSH Suppression",
       "Thyroid Cance",
       "Thyroid Cancer",
@@ -231651,8 +231521,7 @@
     "original_conditions": [
       "Cluster Headaches",
       "Muscle Spasm",
-      "Muscle Spasm (Involuntary Hypertonicity)",
-      "Not Listed / Othe"
+      "Muscle Spasm (Involuntary Hypertonicity)"
     ],
     "medical_condition_description": "",
     "matched_disease_keys": ["migraine"],
@@ -232604,7 +232473,7 @@
       "Lennox-Gastaut Syndrome",
       "Migraine Prevention",
       "Migraine Prevention (Migraine Prophylaxis)",
-      "Not Listed / Othe",
+
       "Obesity",
       "Seizure Prevention",
       "Seizure Prevention (Seizure Prophylaxis)",
@@ -233459,7 +233328,7 @@
       "Chronic Pain",
       "Depression",
       "Fibromyalgia",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Opiate Withdrawal",
@@ -233658,11 +233527,7 @@
     },
     "avg_rating": 9.22,
     "total_reviews": 9.0,
-    "original_conditions": [
-      "High Blood Pressure",
-      "Hypertension",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["High Blood Pressure", "Hypertension"],
     "medical_condition_description": "High Blood Pressure (Hypertension) Other names: Drug-Induced Hypertension High blood pressure is a term that is used to acknowledge that a person’s blood pressure is above what is considered normal. High blood pressure is also called hypertension. Measuring somebody's blood pressure gives us an indication of how effectively their heart is working to pump blood around their body. If their heart and blood vessels are working efficiently, then their blood pressure will be normal or slightly below normal. If their heart is having to work very hard to pump blood around their body, then their blood pressure will be high. Blood pressure is composed of two measurements. The first recording is called the systolic pressure and it measures the force the heart must pump against to get blood to flow around the body. It can indicate how flexible or stiff the blood vessels are. During this measurement, the blood pressure cuff inflates to a certain extent and records what pressure around the arm stops blood flow. The second recording is called diastolic pressure. This measures the resting pressure when the heart relaxes between heartbeats. It is recorded while the blood pressure cuff is deflating. Most experts consider a normal blood pressure to be 120/80 mm Hg. Ideally, everybody’s blood pressure should be below 130/80 mm Hg. If the first number is above 130 or the second number is above 80 then a person is said to have high blood pressure. What are the symptoms of high blood pressure? Most people experience no symptoms when their blood pressure is high. Sometimes people may develop a headache or feel unwell; however, most do not connect these vague symptoms as having to do with their heart. If high blood pressure is left untreated, it can damage the blood vessels and increase a person’s risk of having a stroke or a heart attack. It also causes the heart to enlarge and weaken because it essentially wears itself out from having to work so hard to push blood around the body. People with high blood pressure are also more likely to develop high cholesterol, kidney and eye problems, and have poor circulation in the legs and feet. How is High Blood Pressure Diagnosed? It is not uncommon for your blood pressure to go high occasionally; however, it is persistently high blood pressure that is a concern. For this reason, if a doctor or nurse takes your blood pressure and it is high but you don’t have any risk factors or symptoms, then at least two other separate measurements should be taken before you are diagnosed with high blood pressure. Before getting your blood pressure taken you should avoid the following for at least an hour before the measurement: Strenuous exercise Smoking Caffeine Eating Stressful situations. Sit down for at least five minutes before the reading is taken and don’t talk while it is being measured. Other tests may be ordered if your doctor concludes you have high blood pressure. These may include blood tests, an electrocardiogram, and sometimes a chest x-ray. How is High Blood Pressure Treated? Treatment depends on how high your blood pressure is. For people whose systolic reading falls in the range 120 to 129 and the diastolic reading is equal to or less than 80, lifestyle changes are usually recommended over medications. These may include: Losing weight if you are overweight Eating a diet rich in fruits and vegetables Eating less salt Eating less saturated fats Increased physical activity More physical activity Limiting alcohol. If treatment is considered necessary, sometimes more than one medication is prescribed. high blood pressure include: Diuretics Beta-blockers ACE inhibitors Angiotensin-receptor blockers Calcium channel blockers Alpha-blockers.",
     "matched_disease_keys": ["hypertension"],
     "matched_symptoms": [
@@ -234318,7 +234183,7 @@
       "Insomnia",
       "Major Depressive Disorde",
       "Major Depressive Disorder",
-      "Not Listed / Othe",
+
       "Reflex Sympathetic Dystrophy Syndrome",
       "Sedation",
       "ibromyalgia"
@@ -235318,7 +235183,7 @@
       "Meningitis",
       "Nephrotic Syndrome",
       "Neuritis",
-      "Not Listed / Othe",
+
       "Osteoarthritis",
       "Pityriasis rubra pilaris",
       "Plantar Fibromatosis",
@@ -235733,7 +235598,7 @@
     },
     "avg_rating": 8.55,
     "total_reviews": 98.0,
-    "original_conditions": ["Insomnia", "Not Listed / Othe"],
+    "original_conditions": ["Insomnia"],
     "medical_condition_description": "Insomnia Other names: Difficulty sleeping; Dyssomnia; Inability to sleep; Sleeplessness; Wakefulness Inability to sleep, abnormal wakefulness.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -236229,7 +236094,7 @@
     "original_conditions": [
       "Cerebral Spasticity",
       "Extrapyramidal Reaction",
-      "Not Listed / Othe",
+
       "Parkinson's Disease"
     ],
     "medical_condition_description": "",
@@ -238108,7 +237973,7 @@
     "related_drugs": {},
     "avg_rating": 9.6,
     "total_reviews": 5.0,
-    "original_conditions": ["Herbal Supplementation", "Not Listed / Othe"],
+    "original_conditions": ["Herbal Supplementation"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [],
@@ -241265,7 +241130,6 @@
     "avg_rating": 6.75,
     "total_reviews": 4.0,
     "original_conditions": [
-      "Not Listed / Othe",
       "Onychomycosis",
       "Tinea Corporis",
       "Tinea Cruris",
@@ -244200,7 +244064,7 @@
       "Meningitis",
       "Methicillin-Resistant Staphylococcus Aureus Infection",
       "Nosocomial Pneumonia",
-      "Not Listed / Othe",
+
       "Peritonitis",
       "Pneumonia",
       "Prevention of Perinatal Group B Streptococcal Disease",
@@ -244712,7 +244576,7 @@
     "related_drugs": {},
     "avg_rating": 8.8,
     "total_reviews": 1090.0,
-    "original_conditions": ["Not Listed / Othe", "Smoking Cessation"],
+    "original_conditions": ["Smoking Cessation"],
     "medical_condition_description": "",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -245702,7 +245566,7 @@
       "Major Depressive Disorde",
       "Major Depressive Disorder",
       "Migraine",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Panic Disorde",
@@ -248055,7 +247919,7 @@
       "Anxiety",
       "Depression",
       "Major Depressive Disorde",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde"
     ],
     "medical_condition_description": "Anxiety Other names: Anxiety States; Nerves; Nervousness Anxiety is an emotion characterized by feelings of tension, worried thoughts, and accompanied by physical symptoms such as sweating, trembling, voice changes, or increased blood pressure. It may also be called nervousness. Occasional anxiety concerning a stressful or uncomfortable event is normal. However, if a person feels disproportionate levels of anxiety or it is present almost continuously, it might be diagnosed as an anxiety disorder. What Causes Anxiety? Anxiety is part of our survival response and is the way our body responds to potentially harmful or worrying triggers. Strong emotions or fear cause a surge of epinephrine (also called adrenaline) from our adrenal glands. This increases our heartbeat, increases our sensitivity to our surroundings, and prepares us for physical confrontation or to flee if we perceive any threats to our safety. This is often called the fight or flight response. Anxieties today mostly revolve around family, friends, health, money, or work. People more at risk of anxiety disorders include those: With relationship problems Whose jobs involve long hours, high workloads, little support, or danger With family members with anxiety disorders With medical conditions that result in significant lifestyle adjustments, pain, or restricted movement Who have experienced stressful or traumatic events Withdrawing from alcohol, opioids, or other substances. What are the Symptoms of an Anxiety Disorder? Symptoms of an anxiety disorder are usually out of proportion to the original trigger or stressor. If these are accompanied by significant physical symptoms such as increased sweating or increased blood pressure then a person is more likely to have an anxiety disorder rather than stimulus-appropriate anxiety. Generalized anxiety disorder (GAD) is a chronic, ongoing condition with excessive worry over normal life events, whether minor or major. These feelings are usually out of proportion to the trouble that you may encounter in your everyday life. With GAD, feelings come on gradually and are present each day, not in one individual attack, and last for months, even years. Worry may be so excessive that it interferes with your daily life. GAD may also be accompanied by depression and substance abuse disorders. Symptoms of GAD include: Excessive and uncontrollable worry Increased irritability Difficulty concentrating Restlessness or a feeling of being on edge Rapid breathing Excessive perspiration and sweating Trembling, quivering Fatigue Trouble concentrating Headaches, stomach upset Avoidance of circumstances that might trigger severe anxiety Sleep difficulties. Other anxiety disorders include panic disorder, phobias, selective mutism, social anxiety disorder, and separation anxiety disorder. How is Anxiety or an Anxiety Disorder Treated? Treatment depends on the severity and type of anxiety disorder and if it is interfering with everyday life. Treatments may include: Stress management Relaxation techniques Mental imagery (replacing negative thoughts with positive ones) Cognitive Behavioral therapy Counseling Support Exercise Medications.",
@@ -250192,11 +250056,7 @@
     },
     "avg_rating": 6.0,
     "total_reviews": 1567.0,
-    "original_conditions": [
-      "Depression",
-      "Major Depressive Disorde",
-      "Not Listed / Othe"
-    ],
+    "original_conditions": ["Depression", "Major Depressive Disorde"],
     "medical_condition_description": "Depression Depression is a mood condition characterized by persistent and overwhelming feelings of sadness that can affect your day-to-day activities and how you think, feel, and behave. Sometimes it can affect your outlook on life and make you feel that life isn’t worth living. Depression may also be called major depressive disorder or clinical depression. What Causes Depression? Experts aren’t exactly sure what causes depression but believe it is due to a combination of different factors, such as genetic vulnerability, faulty mood regulation by the brain, stress, chemicals in the brain, medications, or medical problems, that all interact together to bring on depression. The risk of developing depression is higher in women and people: Aged 45 to 64 years of age or the elderly With chronic or acute health conditions Who are undergoing a major life event, such as a job loss, divorce, workplace stress, or physical or mental abuse With severe grief due to the death of a loved one Taking prescription drugs that may cause a low mood Abusing alcohol or drugs. What are the Symptoms of Depression? Depression is not just feeling blue occasionally. It affects daily feelings, thoughts, and actions over a longer period. (MDD), can result in difficulties with family life, work, and social activities. Symptoms may vary depending on how severe a person’s depression is but may include: A prolonged and persistent low mood, tearfulness, or a sense of hopelessness that has lasted for at least 2 weeks Irritability Anxiety Agitation or restlessness Avoidance or refusal to participate in activities that were previously enjoyed Withdrawal socially, from family, friends, and relationships Changes in sleeping or eating habits Unexplained physical problems, such as back pain or headaches Alcohol, drug, or substance abuse Engaging in risky or destructive behaviors Self-harm or attempts at suicide. In children and teens, symptoms may include clinginess, worry, aches and pain, and refusal to go to school. In older adults, symptoms may be less obvious and include memory difficulties or personality changes, physical aches and pains, and fatigue. How is Depression Diagnosed? If your mood has been low for a while and you are having difficulty coping with day to day activities, talk to your doctor or a trusted professional. Your doctor will ask you questions about your symptoms and your medical history and may ask you to complete a questionnaire that may help to diagnose depression or refer you to a psychiatrist. You can also call the National Suicide Prevention Hotline at 1-800-273-8255, 24 hours a day, 7 days a week, or have an online chat (http://suicidepreventionlifeline.org/). All information is confidential and free. How is Depression Treated? Depression is treatable with high rates of success. Treatments may include: Psychotherapy Antidepressants, such as Selective Serotonin Reuptake Inhibitors (SSRIs), Serotonin Norepinephrine Reuptake Inhibitors (SNRIs), tricyclic antidepressants (TCAs), monoamine oxidase inhibitors (MAOIs). Responses to antidepressants vary, and most antidepressants take 4 to 6 weeks for full effect. About 50% of patients respond to the first treatment, whereas others may have to try a few different types of antidepressants before they find the best one for them. There are several things you can do to help with your symptoms as well, such as: Setting realistic and daily goals Developing strategies to work through crises situations Developing coping and problem-solving skills Learning how to develop positive relationships Replacing negative thoughts with positive ones.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -253470,7 +253330,7 @@
     "total_reviews": 9.0,
     "original_conditions": [
       "Erectile Dysfunction",
-      "Not Listed / Othe",
+
       "Sexual Dysfunction, SSRI Induced"
     ],
     "medical_condition_description": "",
@@ -253755,7 +253615,7 @@
     },
     "avg_rating": 5.37,
     "total_reviews": 208.0,
-    "original_conditions": ["Insomnia", "Not Listed / Othe"],
+    "original_conditions": ["Insomnia"],
     "medical_condition_description": "Insomnia Other names: Difficulty sleeping; Dyssomnia; Inability to sleep; Sleeplessness; Wakefulness Inability to sleep, abnormal wakefulness.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
@@ -255904,7 +255764,7 @@
       "Bipolar Disorder",
       "Body Dysmorphic Disorde",
       "Body Dysmorphic Disorder",
-      "Not Listed / Othe",
+
       "Obsessive Compulsive Disorde",
       "Obsessive Compulsive Disorder",
       "Paranoid Disorde",
@@ -256603,8 +256463,7 @@
     "original_conditions": [
       "Cluster Headaches",
       "Cyclic Vomiting Syndrome",
-      "Migraine",
-      "Not Listed / Othe"
+      "Migraine"
     ],
     "medical_condition_description": "Migraine Other names: Basilar Artery Migraine; Basilar-Type Migraine; Complicated Migraine; Hemiplegic Migraine; Migraine Headache Migraine headaches are a type of headache that some people get repeatedly over time. Migraines are different from other headaches because they occur with symptoms such as nausea, vomiting, or sensitivity to light. Some people who get migraines have warning symptoms, called an aura, before the actual headache begins. Most people, however, do not have such warning symptoms.",
     "matched_disease_keys": ["gastroenteritis", "migraine"],
@@ -256814,7 +256673,7 @@
     },
     "avg_rating": 7.07,
     "total_reviews": 1640.0,
-    "original_conditions": ["Insomnia", "Not Listed / Othe"],
+    "original_conditions": ["Insomnia"],
     "medical_condition_description": "Insomnia Other names: Difficulty sleeping; Dyssomnia; Inability to sleep; Sleeplessness; Wakefulness Inability to sleep, abnormal wakefulness.",
     "matched_disease_keys": ["others"],
     "matched_symptoms": [
