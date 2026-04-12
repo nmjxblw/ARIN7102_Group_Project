@@ -47,7 +47,7 @@ def extract_unlabeled_diseases():
             continue
         original_conditions.sort()
         original_conditions = [
-            str(condition).lower().strip().replace(" ", "_")
+            re.sub(r"[^a-zA-Z0-9]+", "_", str(condition).lower().strip())
             for condition in original_conditions
         ]
         drug_name = entry.get("drug_name", "")
@@ -58,7 +58,7 @@ def extract_unlabeled_diseases():
             continue
         matched_symptoms.sort()
         matched_symptoms = [
-            str(symptom).lower().strip().replace(" ", "_")
+            re.sub(r"[^a-zA-Z0-9]+", "_", str(symptom).lower().strip())
             for symptom in matched_symptoms
         ]
         disease_symptoms_combination_key = (

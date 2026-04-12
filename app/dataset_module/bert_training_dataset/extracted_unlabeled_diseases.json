@@ -784,7 +784,7 @@
             "head_lice",
             "otitis_externa",
             "wound_cleansing",
-            "wound_cleansing_(wound_debridement)"
+            "wound_cleansing_wound_debridement_"
         ],
         "symptoms": [
             "burning_during_urination",
@@ -872,7 +872,7 @@
             "acetaminophen_overdose",
             "diagnostic_bronchograms",
             "expectoration",
-            "expectoration_(mucolysis)"
+            "expectoration_mucolysis_"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -972,7 +972,7 @@
         ],
         "diseases": [
             "osteoporosis",
-            "paget's_disease"
+            "paget_s_disease"
         ],
         "symptoms": [
             "back_pain",
@@ -1163,7 +1163,7 @@
             "atrial_tachycardia",
             "radionuclide_myocardial_perfusion_study",
             "supraventricular_tachycardia",
-            "wolff-parkinson-white_syndrome"
+            "wolff_parkinson_white_syndrome"
         ],
         "symptoms": [
             "anxiety",
@@ -1324,7 +1324,7 @@
             "razadyne"
         ],
         "diseases": [
-            "alzheimer's"
+            "alzheimer_s"
         ],
         "symptoms": [
             "confusion",
@@ -1454,7 +1454,7 @@
             "xalkori"
         ],
         "diseases": [
-            "non-small_cell_lung_cance"
+            "non_small_cell_lung_cance"
         ],
         "symptoms": [
             "chest_pain",
@@ -1669,7 +1669,7 @@
             "reese's pinworm medicine"
         ],
         "diseases": [
-            "pinworm_infection_(enterobius_vermicularis)"
+            "pinworm_infection_enterobius_vermicularis_"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -1708,7 +1708,7 @@
             "pink_growth",
             "plantar_warts",
             "rough_skin_patches",
-            "scar-like_area",
+            "scar_like_area",
             "shiny_skin_bump",
             "skin_discoloration",
             "skin_sore_that_bleeds",
@@ -1724,7 +1724,7 @@
         ],
         "diseases": [
             "melanoma",
-            "melanoma,_metastatic",
+            "melanoma_metastatic",
             "renal_cell_carcinoma"
         ],
         "symptoms": [
@@ -1768,7 +1768,7 @@
         "diseases": [
             "aseptic_necrosis",
             "osteoporosis",
-            "paget's_disease",
+            "paget_s_disease",
             "prevention_of_osteoporosis"
         ],
         "symptoms": [
@@ -1897,8 +1897,8 @@
             "cardiovascular_risk_reduction",
             "cholesterol",
             "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous",
-            "high_cholesterol,_familial_homozygous"
+            "high_cholesterol_familial_heterozygous",
+            "high_cholesterol_familial_homozygous"
         ],
         "symptoms": [
             "chest_pain",
@@ -1917,7 +1917,7 @@
             "alitretinoin"
         ],
         "diseases": [
-            "kaposi's_sarcoma"
+            "kaposi_s_sarcoma"
         ],
         "symptoms": [
             "cough",
@@ -2071,7 +2071,7 @@
             "silver sulfadiazine"
         ],
         "diseases": [
-            "burns,_external"
+            "burns_external"
         ],
         "symptoms": [
             "blistering",
@@ -2088,7 +2088,7 @@
             "alpelisib"
         ],
         "diseases": [
-            "breast_cancer,_male"
+            "breast_cancer_male"
         ],
         "symptoms": [
             "breast_lump",
@@ -2107,7 +2107,7 @@
             "zemaira"
         ],
         "diseases": [
-            "alpha-1_proteinase_inhibitor_deficiency"
+            "alpha_1_proteinase_inhibitor_deficiency"
         ],
         "symptoms": [
             "chronic_cough",
@@ -2132,7 +2132,7 @@
             "trusopt"
         ],
         "diseases": [
-            "glaucoma,_open_angle"
+            "glaucoma_open_angle"
         ],
         "symptoms": [
             "blurred_vision",
@@ -2489,7 +2489,7 @@
             "amifampridine"
         ],
         "diseases": [
-            "lambert-eaton_myasthenic_syndrome"
+            "lambert_eaton_myasthenic_syndrome"
         ],
         "symptoms": [
             "autonomic_dysfunction",
@@ -2663,10 +2663,10 @@
         ],
         "diseases": [
             "constipation",
-            "constipation,_chronic",
-            "constipation,_drug_induced",
+            "constipation_chronic",
+            "constipation_drug_induced",
             "irritable_bowel_syndrome",
-            "opioid-induced_constipation"
+            "opioid_induced_constipation"
         ],
         "symptoms": [
             "abdominal_bloating",
@@ -2818,7 +2818,7 @@
         ],
         "diseases": [
             "dry_skin",
-            "dry_skin_(xerosis)",
+            "dry_skin_xerosis_",
             "ichthyosis",
             "pruritus"
         ],
@@ -2916,7 +2916,7 @@
         ],
         "diseases": [
             "adhd",
-            "adhd_(attention_deficit_hyperactivity_disorder)",
+            "adhd_attention_deficit_hyperactivity_disorder_",
             "narcolepsy"
         ],
         "symptoms": [
@@ -2947,7 +2947,7 @@
         ],
         "diseases": [
             "adhd",
-            "adhd_(attention_deficit_hyperactivity_disorder)",
+            "adhd_attention_deficit_hyperactivity_disorder_",
             "fatigue",
             "narcolepsy",
             "atigue"
@@ -2988,9 +2988,9 @@
             "amphotericin b liposomal"
         ],
         "diseases": [
-            "aspergillosis,_invasive",
+            "aspergillosis_invasive",
             "candidemia",
-            "cryptococcal_meningitis,_immunosuppressed_host",
+            "cryptococcal_meningitis_immunosuppressed_host",
             "cryptococcosis",
             "febrile_neutropenia",
             "leishmaniasis"
@@ -3163,10 +3163,10 @@
         "diseases": [
             "breast_cance",
             "breast_cancer",
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "endometrial_cance",
             "endometrial_cancer",
-            "mccune-albright_syndrome",
+            "mccune_albright_syndrome",
             "pubertal_gynecomastia"
         ],
         "symptoms": [
@@ -3232,7 +3232,7 @@
             "testopel"
         ],
         "diseases": [
-            "hypogonadism,_male"
+            "hypogonadism_male"
         ],
         "symptoms": [
             "decreased_body_hair",
@@ -3292,7 +3292,7 @@
         "diseases": [
             "hemophilia_a",
             "von_willebrand_disease",
-            "von_willebrand's_disease"
+            "von_willebrand_s_disease"
         ],
         "symptoms": [
             "bleeding_after_injury",
@@ -3469,7 +3469,7 @@
             "zelapar"
         ],
         "diseases": [
-            "parkinson's_disease"
+            "parkinson_s_disease"
         ],
         "symptoms": [
             "anxiety",
@@ -3493,7 +3493,7 @@
             "apomorphine"
         ],
         "diseases": [
-            "parkinson's_disease",
+            "parkinson_s_disease",
             "tardive_dyskinesia"
         ],
         "symptoms": [
@@ -3592,7 +3592,7 @@
         ],
         "diseases": [
             "anemia_associated_with_chronic_renal_failure",
-            "anemia,_chemotherapy_induced"
+            "anemia_chemotherapy_induced"
         ],
         "symptoms": [
             "chest_pain",
@@ -3610,7 +3610,7 @@
             "argatroban"
         ],
         "diseases": [
-            "thrombotic/thromboembolic_disorder"
+            "thrombotic_thromboembolic_disorder"
         ],
         "symptoms": [
             "chest_pain",
@@ -3635,8 +3635,8 @@
             "razadyne er"
         ],
         "diseases": [
-            "alzheimer's",
-            "alzheimer's_disease"
+            "alzheimer_s",
+            "alzheimer_s_disease"
         ],
         "symptoms": [
             "confusion",
@@ -3656,8 +3656,8 @@
             "aricept odt"
         ],
         "diseases": [
-            "alzheimer's",
-            "alzheimer's_disease",
+            "alzheimer_s",
+            "alzheimer_s_disease",
             "mild_cognitive_impairment"
         ],
         "symptoms": [
@@ -3686,7 +3686,7 @@
         ],
         "diseases": [
             "breast_cance",
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "endometrial_cance"
         ],
         "symptoms": [
@@ -3716,7 +3716,7 @@
         ],
         "diseases": [
             "deep_vein_thrombosis",
-            "deep_vein_thrombosis,_prophylaxis",
+            "deep_vein_thrombosis_prophylaxis",
             "pulmonary_embolism"
         ],
         "symptoms": [
@@ -3783,7 +3783,7 @@
         ],
         "diseases": [
             "extrapyramidal_reaction",
-            "parkinson's_disease"
+            "parkinson_s_disease"
         ],
         "symptoms": [
             "abnormal_posturing",
@@ -4017,7 +4017,7 @@
         "diseases": [
             "muscle_pain",
             "muscle_spasm",
-            "muscle_spasm_(involuntary_hypertonicity)"
+            "muscle_spasm_involuntary_hypertonicity_"
         ],
         "symptoms": [
             "cramping_sensation",
@@ -4046,7 +4046,7 @@
         ],
         "diseases": [
             "muscle_spasm",
-            "muscle_spasm_(involuntary_hypertonicity)",
+            "muscle_spasm_involuntary_hypertonicity_",
             "pain"
         ],
         "symptoms": [
@@ -4148,7 +4148,7 @@
         ],
         "diseases": [
             "adhd",
-            "adhd_(attention_deficit_hyperactivity_disorder)",
+            "adhd_attention_deficit_hyperactivity_disorder_",
             "depression",
             "social_anxiety_disorde",
             "social_anxiety_disorder"
@@ -4199,13 +4199,13 @@
         "diseases": [
             "cholesterol",
             "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous",
-            "high_cholesterol,_familial_homozygous",
+            "high_cholesterol_familial_heterozygous",
+            "high_cholesterol_familial_homozygous",
             "hyperlipoproteinemia",
-            "hyperlipoproteinemia_type_iii,_elevated_beta-vldl___idl",
-            "hyperlipoproteinemia_type_iia,_elevated_ldl",
-            "hyperlipoproteinemia_type_iib,_elevated_ldl___vldl",
-            "hyperlipoproteinemia_type_iv,_elevated_vldl",
+            "hyperlipoproteinemia_type_iii_elevated_beta_vldl_idl",
+            "hyperlipoproteinemia_type_iia_elevated_ldl",
+            "hyperlipoproteinemia_type_iib_elevated_ldl_vldl",
+            "hyperlipoproteinemia_type_iv_elevated_vldl",
             "prevention_of_cardiovascular_disease"
         ],
         "symptoms": [
@@ -4244,7 +4244,7 @@
             "bradyarrhythmia",
             "organophosphate_poisoning",
             "pupillary_dilation",
-            "refraction,_assessment",
+            "refraction_assessment",
             "uveitis"
         ],
         "symptoms": [
@@ -4457,12 +4457,12 @@
             "avastin"
         ],
         "diseases": [
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "colorectal_cance",
             "glioblastoma_multiforme",
             "macular_degeneration",
             "malignant_glioma",
-            "non-small_cell_lung_cance",
+            "non_small_cell_lung_cance",
             "ovarian_cance",
             "pancreatic_cance",
             "renal_cell_carcinoma"
@@ -4688,7 +4688,7 @@
             "polatuzumab vedotin"
         ],
         "diseases": [
-            "diffuse_large_b-cell_lymphoma"
+            "diffuse_large_b_cell_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain_or_swelling",
@@ -4776,8 +4776,8 @@
             "azasan"
         ],
         "diseases": [
-            "crohn's_disease",
-            "ibd_(bowel)",
+            "crohn_s_disease",
+            "ibd_bowel_",
             "systemic_lupus_erythematosus"
         ],
         "symptoms": [
@@ -4815,7 +4815,7 @@
             "tobrex"
         ],
         "diseases": [
-            "conjunctivitis,_bacterial"
+            "conjunctivitis_bacterial"
         ],
         "symptoms": [
             "crusty_eyelids",
@@ -4836,7 +4836,7 @@
             "facial_wrinkles"
         ],
         "symptoms": [
-            "crow's_feet",
+            "crow_s_feet",
             "deep_creases",
             "fine_lines",
             "forehead_lines",
@@ -4898,7 +4898,7 @@
             "bacterial_skin_infection",
             "blepharitis",
             "blepharoconjunctivitis",
-            "conjunctivitis,_bacterial",
+            "conjunctivitis_bacterial",
             "hordeolum",
             "keratoconjunctivitis"
         ],
@@ -5020,7 +5020,7 @@
             "rufinamide"
         ],
         "diseases": [
-            "lennox-gastaut_syndrome"
+            "lennox_gastaut_syndrome"
         ],
         "symptoms": [
             "behavioral_problems",
@@ -5118,7 +5118,7 @@
             "istodax"
         ],
         "diseases": [
-            "peripheral_t-cell_lymphoma"
+            "peripheral_t_cell_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -5168,7 +5168,7 @@
         ],
         "diseases": [
             "chronic_lymphocytic_leukemia",
-            "non-hodgkin's_lymphoma"
+            "non_hodgkin_s_lymphoma"
         ],
         "symptoms": [
             "abdominal_fullness",
@@ -5336,7 +5336,7 @@
         ],
         "diseases": [
             "sore_throat",
-            "tonsillitis/pharyngitis"
+            "tonsillitis_pharyngitis"
         ],
         "symptoms": [
             "bad_breath",
@@ -5467,7 +5467,7 @@
             "vigamox"
         ],
         "diseases": [
-            "conjunctivitis,_bacterial",
+            "conjunctivitis_bacterial",
             "ophthalmic_surgery"
         ],
         "symptoms": [
@@ -5566,7 +5566,7 @@
             "bevacizumab"
         ],
         "diseases": [
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "cervical_cancer",
             "colorectal_cance",
             "colorectal_cancer",
@@ -5576,8 +5576,8 @@
             "macular_degeneration",
             "malignant_glioma",
             "neurofibromatosis",
-            "non-small_cell_lung_cance",
-            "non-small_cell_lung_cancer",
+            "non_small_cell_lung_cance",
+            "non_small_cell_lung_cancer",
             "ovarian_cance",
             "ovarian_cancer",
             "pancreatic_cance",
@@ -5679,7 +5679,7 @@
             "vorinostat"
         ],
         "diseases": [
-            "cutaneous_t-cell_lymphoma"
+            "cutaneous_t_cell_lymphoma"
         ],
         "symptoms": [
             "enlarged_lymph_nodes",
@@ -5851,9 +5851,9 @@
             "bleomycin"
         ],
         "diseases": [
-            "hodgkin's_lymphoma",
+            "hodgkin_s_lymphoma",
             "malignant_pleural_effusion",
-            "non-hodgkin's_lymphoma",
+            "non_hodgkin_s_lymphoma",
             "squamous_cell_carcinoma",
             "testicular_cancer"
         ],
@@ -5887,7 +5887,7 @@
             "testicular_swelling",
             "unexplained_weight_loss",
             "unintended_weight_loss",
-            "wart-like_growth"
+            "wart_like_growth"
         ]
     },
     {
@@ -6035,7 +6035,7 @@
         ],
         "symptoms": [
             "creased_skin_on_cheeks",
-            "crow's_feet_around_eyes",
+            "crow_s_feet_around_eyes",
             "deep_furrows_on_forehead",
             "dry_skin",
             "fine_lines_on_face",
@@ -6388,8 +6388,8 @@
         "diseases": [
             "chronic_pain",
             "opiate_dependence",
-            "opiate_dependence_-_induction",
-            "opiate_dependence_-_maintenance",
+            "opiate_dependence_induction",
+            "opiate_dependence_maintenance",
             "pain"
         ],
         "symptoms": [
@@ -6470,7 +6470,7 @@
             "burosumab"
         ],
         "diseases": [
-            "x-linked_hypophosphatemia"
+            "x_linked_hypophosphatemia"
         ],
         "symptoms": [
             "bone_pain",
@@ -6490,7 +6490,7 @@
         "diseases": [
             "anxiety",
             "panic_disorde",
-            "sexual_dysfunction,_ssri_induced"
+            "sexual_dysfunction_ssri_induced"
         ],
         "symptoms": [
             "chest_pain",
@@ -6535,7 +6535,7 @@
             "borderline_personality_disorder",
             "panic_disorde",
             "panic_disorder",
-            "sexual_dysfunction,_ssri_induced"
+            "sexual_dysfunction_ssri_induced"
         ],
         "symptoms": [
             "chest_pain",
@@ -6702,7 +6702,7 @@
             "itching",
             "localized_pain",
             "lower_back_pain",
-            "menstrual-like_cramps",
+            "menstrual_like_cramps",
             "muscle_aches",
             "nausea",
             "pain_relieved_by_rest",
@@ -6890,7 +6890,7 @@
         ],
         "diseases": [
             "dravet_syndrome",
-            "lennox-gastaut_syndrome"
+            "lennox_gastaut_syndrome"
         ],
         "symptoms": [
             "autonomic_nervous_system_dysfunction",
@@ -6934,7 +6934,7 @@
             "anal_cancer",
             "breast_cance",
             "breast_cancer",
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "colorectal_cance",
             "colorectal_cancer",
             "pancreatic_cancer",
@@ -7088,7 +7088,7 @@
             "rough_skin_patches",
             "scaly_or_crusty_patch_of_skin",
             "scaly_or_crusty_surface",
-            "scar-like_area",
+            "scar_like_area",
             "shiny_bump_or_nodule",
             "shiny_skin_bump",
             "skin_discoloration",
@@ -7168,7 +7168,7 @@
             "depressed_mood",
             "difficulty_concentrating",
             "difficulty_with_motor_tasks",
-            "déjà_vu",
+            "d_j_vu",
             "electric_shock_like_pain",
             "elevated_mood",
             "fatigue",
@@ -7207,7 +7207,7 @@
             "carbidopa"
         ],
         "diseases": [
-            "gtp-ch_deficiency",
+            "gtp_ch_deficiency",
             "neuroleptic_malignant_syndrome",
             "parkinsonian_tremor"
         ],
@@ -7242,9 +7242,9 @@
             "carbidopa / levodopa"
         ],
         "diseases": [
-            "gtp-ch_deficiency",
+            "gtp_ch_deficiency",
             "neuroleptic_malignant_syndrome",
-            "parkinson's_disease",
+            "parkinson_s_disease",
             "restless_legs_syndrome"
         ],
         "symptoms": [
@@ -7300,7 +7300,7 @@
             "back_pain",
             "feeling_faint",
             "fever",
-            "foul-smelling_vaginal_discharge",
+            "foul_smelling_vaginal_discharge",
             "heavy_vaginal_bleeding",
             "passage_of_tissue_from_vagina",
             "passing_large_clots",
@@ -7399,7 +7399,7 @@
         ],
         "diseases": [
             "muscle_spasm",
-            "muscle_spasm_(involuntary_hypertonicity)",
+            "muscle_spasm_involuntary_hypertonicity_",
             "nocturnal_leg_cramps"
         ],
         "symptoms": [
@@ -7460,9 +7460,9 @@
         "diseases": [
             "brain_tumor",
             "glioblastoma_multiforme",
-            "hodgkin's_lymphoma",
+            "hodgkin_s_lymphoma",
             "malignant_glioma",
-            "non-hodgkin's_lymphoma"
+            "non_hodgkin_s_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -7635,7 +7635,7 @@
             "rough_or_scaly_red_patch",
             "skin_sore_that_does_not_heal",
             "tenderness_or_pain_at_the_site",
-            "wart-like_growth"
+            "wart_like_growth"
         ]
     },
     {
@@ -7780,7 +7780,7 @@
             "tenderness_or_pain_at_the_site",
             "unexplained_weight_loss",
             "vomiting",
-            "wart-like_growth",
+            "wart_like_growth",
             "weakness"
         ]
     },
@@ -7790,7 +7790,7 @@
             "evoxac"
         ],
         "diseases": [
-            "sjogren's_syndrome"
+            "sjogren_s_syndrome"
         ],
         "symptoms": [
             "dental_cavities",
@@ -7904,7 +7904,7 @@
         "diseases": [
             "cancer",
             "chronic_lymphocytic_leukemia",
-            "hodgkin's_lymphoma",
+            "hodgkin_s_lymphoma",
             "lymphoma"
         ],
         "symptoms": [
@@ -7943,7 +7943,7 @@
         "diseases": [
             "alcohol_withdrawal",
             "anxiety",
-            "burning_mouth_syndrome_(glossopyrosis)",
+            "burning_mouth_syndrome_glossopyrosis_",
             "light_sedation",
             "opiate_withdrawal",
             "tardive_dyskinesia"
@@ -8014,7 +8014,7 @@
             "gingivitis",
             "mucositis",
             "periodontitis",
-            "skin_disinfection,_preoperative"
+            "skin_disinfection_preoperative"
         ],
         "symptoms": [
             "bad_breath",
@@ -8047,7 +8047,7 @@
         ],
         "diseases": [
             "muscle_spasm",
-            "muscle_spasm_(involuntary_hypertonicity)"
+            "muscle_spasm_involuntary_hypertonicity_"
         ],
         "symptoms": [
             "cramping_sensation",
@@ -8108,7 +8108,7 @@
             "questran"
         ],
         "diseases": [
-            "crohn's_disease",
+            "crohn_s_disease",
             "irritable_bowel_syndrome"
         ],
         "symptoms": [
@@ -8155,7 +8155,7 @@
         ],
         "diseases": [
             "female_infertility",
-            "hypogonadism,_male",
+            "hypogonadism_male",
             "obesity",
             "ovulation_induction",
             "prepubertal_cryptorchidism",
@@ -8408,7 +8408,7 @@
             "brain_tumor",
             "cervical_cancer",
             "neuroblastoma",
-            "non-small_cell_lung_cancer",
+            "non_small_cell_lung_cancer",
             "osteogenic_sarcoma",
             "ovarian_cancer",
             "testicular_cancer"
@@ -8625,7 +8625,7 @@
             "loss_of_interest",
             "loss_of_interest_in_activities",
             "low_energy",
-            "low_self-esteem",
+            "low_self_esteem",
             "low_self_esteem",
             "memory_gaps",
             "mental_rituals",
@@ -8673,7 +8673,7 @@
             "scalp_irritation",
             "scalp_tenderness",
             "seeking_reassurance_about_appearance",
-            "self-harm",
+            "self_harm",
             "self_harming_behavior",
             "sensation_of_raw_skin",
             "sense_of_detachment_from_self",
@@ -8771,7 +8771,7 @@
         ],
         "diseases": [
             "constipation",
-            "constipation,_acute"
+            "constipation_acute"
         ],
         "symptoms": [
             "abdominal_bloating",
@@ -8818,13 +8818,13 @@
         ],
         "diseases": [
             "epilepsy",
-            "lennox-gastaut_syndrome"
+            "lennox_gastaut_syndrome"
         ],
         "symptoms": [
             "behavioral_problems",
             "cognitive_impairment",
             "developmental_delay",
-            "déjà_vu",
+            "d_j_vu",
             "fear_or_anxiety",
             "frequent_seizures",
             "injury_from_falls",
@@ -8843,9 +8843,9 @@
         ],
         "diseases": [
             "leprosy",
-            "leprosy,_dapsone-resistant",
-            "leprosy,_dapsone-sensitive",
-            "leprosy,_erythema_nodosum_leprosum"
+            "leprosy_dapsone_resistant",
+            "leprosy_dapsone_sensitive",
+            "leprosy_erythema_nodosum_leprosum"
         ],
         "symptoms": [
             "dry_skin",
@@ -8951,7 +8951,7 @@
             "alcohol_withdrawal",
             "anxiety",
             "seizure_prevention",
-            "seizure_prevention_(seizure_prophylaxis)"
+            "seizure_prevention_seizure_prophylaxis_"
         ],
         "symptoms": [
             "agitation",
@@ -9088,7 +9088,7 @@
         ],
         "diseases": [
             "factor_vii_deficiency",
-            "glanzmann's_disease",
+            "glanzmann_s_disease",
             "hemophilia_b"
         ],
         "symptoms": [
@@ -9166,7 +9166,7 @@
             "zelboraf"
         ],
         "diseases": [
-            "melanoma,_metastatic"
+            "melanoma_metastatic"
         ],
         "symptoms": [
             "abdominal_pain_or_swelling",
@@ -9207,18 +9207,18 @@
         ],
         "diseases": [
             "amyloidosis",
-            "aphthous_stomatitis,_recurrent",
-            "behcet's_disease",
-            "constipation,_chronic",
+            "aphthous_stomatitis_recurrent",
+            "behcet_s_disease",
+            "constipation_chronic",
             "familial_mediterranean_fever",
             "fibromatosis",
-            "gout,_acute",
-            "gout,_prophylaxis",
+            "gout_acute",
+            "gout_prophylaxis",
             "linear_iga_disease",
             "primary_biliary_cholangitis",
-            "pseudogout,_prophylaxis",
+            "pseudogout_prophylaxis",
             "sarcoidosis",
-            "sweet's_syndrome",
+            "sweet_s_syndrome",
             "amilial_mediterranean_feve"
         ],
         "symptoms": [
@@ -9307,8 +9307,8 @@
             "colcrys"
         ],
         "diseases": [
-            "gout,_acute",
-            "gout,_prophylaxis",
+            "gout_acute",
+            "gout_prophylaxis",
             "amilial_mediterranean_feve"
         ],
         "symptoms": [
@@ -9338,8 +9338,8 @@
         ],
         "diseases": [
             "hyperlipoproteinemia",
-            "hyperlipoproteinemia_type_iia,_elevated_ldl",
-            "hyperlipoproteinemia_type_iib,_elevated_ldl___vldl"
+            "hyperlipoproteinemia_type_iia_elevated_ldl",
+            "hyperlipoproteinemia_type_iib_elevated_ldl_vldl"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -9387,8 +9387,8 @@
             "xiaflex"
         ],
         "diseases": [
-            "dupuytren's_contracture",
-            "peyronie's_disease"
+            "dupuytren_s_contracture",
+            "peyronie_s_disease"
         ],
         "symptoms": [
             "difficulty_straightening_fingers",
@@ -9513,7 +9513,7 @@
             "constulose"
         ],
         "diseases": [
-            "constipation,_chronic"
+            "constipation_chronic"
         ],
         "symptoms": [
             "abdominal_bloating",
@@ -9579,7 +9579,7 @@
         ],
         "diseases": [
             "adrenocortical_insufficiency",
-            "ibd_(bowel)"
+            "ibd_bowel_"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -9607,7 +9607,7 @@
             "corticorelin"
         ],
         "diseases": [
-            "cushing's_syndrome"
+            "cushing_s_syndrome"
         ],
         "symptoms": [
             "easy_bruising",
@@ -9627,7 +9627,7 @@
             "solu-cortef"
         ],
         "diseases": [
-            "ibd_(bowel)"
+            "ibd_bowel_"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -9724,11 +9724,11 @@
             "antiphospholipid_syndrome",
             "deep_vein_thrombosis_prophylaxis_after_hip_replacement_surgery",
             "deep_vein_thrombosis_prophylaxis_after_knee_replacement_surgery",
-            "deep_vein_thrombosis,_first_event",
-            "deep_vein_thrombosis,_recurrent_event",
+            "deep_vein_thrombosis_first_event",
+            "deep_vein_thrombosis_recurrent_event",
             "prevention_of_thromboembolism_in_atrial_fibrillation",
-            "prosthetic_heart_valves,_tissue_valves_-_thrombosis_prophylaxis",
-            "pulmonary_embolism,_first_event"
+            "prosthetic_heart_valves_tissue_valves_thrombosis_prophylaxis",
+            "pulmonary_embolism_first_event"
         ],
         "symptoms": [
             "anxiety",
@@ -9787,7 +9787,7 @@
             "crizanlizumab"
         ],
         "diseases": [
-            "anemia,_sickle_cell"
+            "anemia_sickle_cell"
         ],
         "symptoms": [
             "delayed_growth",
@@ -9806,8 +9806,8 @@
             "gefitinib"
         ],
         "diseases": [
-            "non-small_cell_lung_cance",
-            "non-small_cell_lung_cancer"
+            "non_small_cell_lung_cance",
+            "non_small_cell_lung_cancer"
         ],
         "symptoms": [
             "chest_pain",
@@ -9928,7 +9928,7 @@
         ],
         "diseases": [
             "pupillary_dilation",
-            "refraction,_assessment",
+            "refraction_assessment",
             "uveitis"
         ],
         "symptoms": [
@@ -10000,7 +10000,7 @@
             "leukemia",
             "mantle_cell_lymphoma",
             "meningeal_leukemia",
-            "non-hodgkin's_lymphoma"
+            "non_hodgkin_s_lymphoma"
         ],
         "symptoms": [
             "abdominal_fullness_or_pain",
@@ -10087,7 +10087,7 @@
             "brain_tum",
             "chronic_myelogenous_leukemia",
             "multiple_sclerosis",
-            "wegener's_granulomatosis"
+            "wegener_s_granulomatosis"
         ],
         "symptoms": [
             "abdominal_fullness_or_pain",
@@ -10158,8 +10158,8 @@
         ],
         "diseases": [
             "deep_vein_thrombosis",
-            "deep_vein_thrombosis,_prophylaxis",
-            "deep_vein_thrombosis/pulmonary_embolism_prophylaxis_following_hip_replacement_surgery",
+            "deep_vein_thrombosis_prophylaxis",
+            "deep_vein_thrombosis_pulmonary_embolism_prophylaxis_following_hip_replacement_surgery",
             "prevention_of_thromboembolism_in_atrial_fibrillation",
             "pulmonary_embolism"
         ],
@@ -10186,9 +10186,9 @@
             "dacarbazine"
         ],
         "diseases": [
-            "hodgkin's_lymphoma",
+            "hodgkin_s_lymphoma",
             "melanoma",
-            "melanoma,_metastatic"
+            "melanoma_metastatic"
         ],
         "symptoms": [
             "abdominal_pain_or_swelling",
@@ -10230,12 +10230,12 @@
         ],
         "diseases": [
             "cancer",
-            "ewing's_sarcoma",
+            "ewing_s_sarcoma",
             "osteosarcoma",
             "rhabdomyosarcoma",
             "testicular_cancer",
             "trophoblastic_disease",
-            "wilms'_tumor_(nephroblastoma)"
+            "wilms_tumor_nephroblastoma_"
         ],
         "symptoms": [
             "abdominal_mass",
@@ -10297,7 +10297,7 @@
             "dalfopristin / quinupristin"
         ],
         "diseases": [
-            "methicillin-resistant_staphylococcus_aureus_infection"
+            "methicillin_resistant_staphylococcus_aureus_infection"
         ],
         "symptoms": [
             "cellulitis",
@@ -10317,7 +10317,7 @@
         "diseases": [
             "angioedema",
             "endometriosis",
-            "evan's_syndrome",
+            "evan_s_syndrome",
             "fibrocystic_breast_disease",
             "ibrocystic_breast_disease"
         ],
@@ -10658,8 +10658,8 @@
             "deferoxamine"
         ],
         "diseases": [
-            "iron_poisoning,_acute",
-            "iron_poisoning,_chronic"
+            "iron_poisoning_acute",
+            "iron_poisoning_chronic"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -10689,7 +10689,7 @@
             "defibrotide"
         ],
         "diseases": [
-            "hepatic_veno-occlusive_disease"
+            "hepatic_veno_occlusive_disease"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -10928,7 +10928,7 @@
             "abnormal_uterine_bleeding",
             "amenorrhea",
             "birth_control",
-            "endometrial_hyperplasia,_prophylaxis",
+            "endometrial_hyperplasia_prophylaxis",
             "endometriosis"
         ],
         "symptoms": [
@@ -11004,7 +11004,7 @@
             "aging_appearance",
             "asymmetric_facial_appearance",
             "creased_skin_on_cheeks",
-            "crow's_feet_around_eyes",
+            "crow_s_feet_around_eyes",
             "deep_furrows_on_forehead",
             "deepened_nasolabial_folds",
             "difficulty_wearing_glasses_properly",
@@ -11485,7 +11485,7 @@
             "tetrabenazine"
         ],
         "diseases": [
-            "huntington's_disease",
+            "huntington_s_disease",
             "tardive_dyskinesia"
         ],
         "symptoms": [
@@ -11631,7 +11631,7 @@
         "diseases": [
             "cough",
             "expectoration",
-            "expectoration_(mucolysis)"
+            "expectoration_mucolysis_"
         ],
         "symptoms": [
             "chest_congestion",
@@ -11676,7 +11676,7 @@
         "diseases": [
             "adhd",
             "narcolepsy",
-            "sexual_dysfunction,_ssri_induced"
+            "sexual_dysfunction_ssri_induced"
         ],
         "symptoms": [
             "automatic_behavior",
@@ -11712,7 +11712,7 @@
         "diseases": [
             "epilepsy",
             "glaucoma",
-            "mountain_sickness_/_altitude_sickness",
+            "mountain_sickness_altitude_sickness",
             "pseudotumor_cerebri"
         ],
         "symptoms": [
@@ -11720,7 +11720,7 @@
             "difficulty_sleeping",
             "dizziness",
             "double_vision",
-            "déjà_vu",
+            "d_j_vu",
             "eye_pain",
             "eye_redness",
             "fatigue",
@@ -11814,14 +11814,14 @@
             "icu_agitation",
             "light_anesthesia",
             "light_sedation",
-            "meniere's_disease",
+            "meniere_s_disease",
             "muscle_spasm",
-            "muscle_spasm_(involuntary_hypertonicity)",
+            "muscle_spasm_involuntary_hypertonicity_",
             "night_terrors",
             "seizure_prevention",
-            "seizure_prevention_(seizure_prophylaxis)",
+            "seizure_prevention_seizure_prophylaxis_",
             "seizures",
-            "seizures_(convulsions)",
+            "seizures_convulsions_",
             "status_epilepticus",
             "temporomandibular_joint_disorde",
             "temporomandibular_joint_disorder",
@@ -12114,7 +12114,7 @@
         "diseases": [
             "atrial_fibrillation",
             "heart_failure",
-            "heart_failure_(congestive_heart_failure)"
+            "heart_failure_congestive_heart_failure_"
         ],
         "symptoms": [
             "anxiety",
@@ -12176,7 +12176,7 @@
             "confusion",
             "difficulty_concentrating",
             "dizziness",
-            "déjà_vu",
+            "d_j_vu",
             "electric_shock_like_pain",
             "excessive_worry",
             "extreme_sensitivity_to_touch",
@@ -12300,7 +12300,7 @@
         ],
         "diseases": [
             "arsenic_poisoning",
-            "gold_poisoning,_severe",
+            "gold_poisoning_severe",
             "mercury_poisoning"
         ],
         "symptoms": [
@@ -12566,7 +12566,7 @@
             "senokot s"
         ],
         "diseases": [
-            "constipation,_acute"
+            "constipation_acute"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -12583,7 +12583,7 @@
         ],
         "diseases": [
             "breast_cance",
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "gastric_cancer",
             "head_and_neck_cancer",
             "prostate_cancer",
@@ -12696,8 +12696,8 @@
             "donepezil"
         ],
         "diseases": [
-            "alzheimer's",
-            "alzheimer's_disease",
+            "alzheimer_s",
+            "alzheimer_s_disease",
             "lewy_body_dementia",
             "mild_cognitive_impairment"
         ],
@@ -12836,7 +12836,7 @@
             "doxorubicin liposomal"
         ],
         "diseases": [
-            "kaposi's_sarcoma",
+            "kaposi_s_sarcoma",
             "ovarian_cancer"
         ],
         "symptoms": [
@@ -13026,7 +13026,7 @@
             "vasodilan"
         ],
         "diseases": [
-            "raynaud's_syndrome"
+            "raynaud_s_syndrome"
         ],
         "symptoms": [
             "cold_fingers",
@@ -13129,8 +13129,8 @@
             "edetate calcium disodium"
         ],
         "diseases": [
-            "lead_poisoning,_mild",
-            "lead_poisoning,_severe"
+            "lead_poisoning_mild",
+            "lead_poisoning_severe"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -13476,7 +13476,7 @@
         ],
         "diseases": [
             "dry_skin",
-            "dry_skin_(xerosis)",
+            "dry_skin_xerosis_",
             "vaginal_dryness"
         ],
         "symptoms": [
@@ -13539,7 +13539,7 @@
             "zinc sulfate"
         ],
         "diseases": [
-            "vitamin/mineral_supplementation_and_deficiency"
+            "vitamin_mineral_supplementation_and_deficiency"
         ],
         "symptoms": [
             "bleeding_gums",
@@ -13564,11 +13564,11 @@
             "entocort ec"
         ],
         "diseases": [
-            "crohn's_disease",
-            "crohn's_disease,_acute",
-            "crohn's_disease,_maintenance",
+            "crohn_s_disease",
+            "crohn_s_disease_acute",
+            "crohn_s_disease_maintenance",
             "eosinophilic_esophagitis",
-            "ibd_(bowel)",
+            "ibd_bowel_",
             "inflammatory_bowel_disease"
         ],
         "symptoms": [
@@ -13647,7 +13647,7 @@
             "neratinib"
         ],
         "diseases": [
-            "breast_cancer,_adjuvant"
+            "breast_cancer_adjuvant"
         ],
         "symptoms": [
             "breast_lump",
@@ -13679,7 +13679,7 @@
             "decreased_need_for_sleep",
             "depressed_mood",
             "difficulty_concentrating",
-            "déjà_vu",
+            "d_j_vu",
             "electric_shock_like_pain",
             "elevated_mood",
             "extreme_sensitivity_to_touch",
@@ -13779,7 +13779,7 @@
             "rough_or_scaly_red_patch",
             "skin_sore_that_does_not_heal",
             "tenderness_or_pain_at_the_site",
-            "wart-like_growth"
+            "wart_like_growth"
         ]
     },
     {
@@ -13808,8 +13808,8 @@
             "ergoloid mesylates"
         ],
         "diseases": [
-            "alzheimer's",
-            "alzheimer's_disease",
+            "alzheimer_s",
+            "alzheimer_s_disease",
             "arteriosclerotic_dementia",
             "dementia"
         ],
@@ -13838,7 +13838,7 @@
             "eribulin"
         ],
         "diseases": [
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "liposarcoma"
         ],
         "symptoms": [
@@ -13865,8 +13865,8 @@
             "erlotinib"
         ],
         "diseases": [
-            "non-small_cell_lung_cance",
-            "non-small_cell_lung_cancer",
+            "non_small_cell_lung_cance",
+            "non_small_cell_lung_cancer",
             "pancreatic_cance",
             "pancreatic_cancer"
         ],
@@ -14281,8 +14281,8 @@
         "diseases": [
             "abnormal_uterine_bleeding",
             "birth_control",
-            "birth_control_(contraception)",
-            "emergency_contraception_(postcoital_contraception)",
+            "birth_control_contraception_",
+            "emergency_contraception_postcoital_contraception_",
             "endometriosis",
             "gonadotropin_inhibition",
             "ovarian_cysts",
@@ -14349,7 +14349,7 @@
         "diseases": [
             "abnormal_uterine_bleeding",
             "birth_control",
-            "emergency_contraception_(postcoital_contraception)",
+            "emergency_contraception_postcoital_contraception_",
             "endometriosis"
         ],
         "symptoms": [
@@ -14410,7 +14410,7 @@
             "epilepsy"
         ],
         "symptoms": [
-            "déjà_vu",
+            "d_j_vu",
             "fear_or_anxiety",
             "loss_of_consciousness",
             "seizures",
@@ -14425,10 +14425,10 @@
             "etidronate"
         ],
         "diseases": [
-            "heterotopic_ossification,_spinal_cord_injury",
-            "heterotopic_ossification,_total_hip_arthroplasty",
+            "heterotopic_ossification_spinal_cord_injury",
+            "heterotopic_ossification_total_hip_arthroplasty",
             "hypercalcemia_of_malignancy",
-            "paget's_disease"
+            "paget_s_disease"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -14501,7 +14501,7 @@
         ],
         "diseases": [
             "cancer",
-            "hodgkin's_lymphoma",
+            "hodgkin_s_lymphoma",
             "small_cell_lung_cancer",
             "testicular_cancer"
         ],
@@ -14548,7 +14548,7 @@
             "hot_flashes",
             "postmenopausal_symptoms",
             "premenstrual_dysphoric_disorde",
-            "sjogren's_syndrome"
+            "sjogren_s_syndrome"
         ],
         "symptoms": [
             "anxiety",
@@ -14605,7 +14605,7 @@
             "raloxifene"
         ],
         "diseases": [
-            "breast_cancer,_prevention",
+            "breast_cancer_prevention",
             "osteoporosis",
             "prevention_of_osteoporosis"
         ],
@@ -14676,9 +14676,9 @@
             "exelon"
         ],
         "diseases": [
-            "alzheimer's",
-            "alzheimer's_disease",
-            "parkinson's_disease"
+            "alzheimer_s",
+            "alzheimer_s_disease",
+            "parkinson_s_disease"
         ],
         "symptoms": [
             "anxiety",
@@ -14742,7 +14742,7 @@
         "diseases": [
             "cholesterol",
             "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous",
+            "high_cholesterol_familial_heterozygous",
             "sitosterolemia"
         ],
         "symptoms": [
@@ -14764,8 +14764,8 @@
         "diseases": [
             "cholesterol",
             "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous",
-            "high_cholesterol,_familial_homozygous"
+            "high_cholesterol_familial_heterozygous",
+            "high_cholesterol_familial_homozygous"
         ],
         "symptoms": [
             "chest_pain",
@@ -14840,7 +14840,7 @@
             "tykerb"
         ],
         "diseases": [
-            "breast_cancer,_metastatic"
+            "breast_cancer_metastatic"
         ],
         "symptoms": [
             "abdominal_swelling",
@@ -14882,8 +14882,8 @@
         ],
         "diseases": [
             "breast_cance",
-            "breast_cancer,_adjuvant",
-            "breast_cancer,_metastatic",
+            "breast_cancer_adjuvant",
+            "breast_cancer_metastatic",
             "emale_infertility"
         ],
         "symptoms": [
@@ -14973,7 +14973,7 @@
             "anesthetic_adjunct",
             "breakthrough_pain",
             "chronic_pain",
-            "dercum's_disease",
+            "dercum_s_disease",
             "pain",
             "postoperative_pain",
             "sedation"
@@ -15077,7 +15077,7 @@
         "diseases": [
             "anemia_associated_with_chronic_renal_failure",
             "iron_deficiency_anemia",
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
+            "vitamin_mineral_supplementation_during_pregnancy_lactation"
         ],
         "symptoms": [
             "brittle_nails",
@@ -15120,8 +15120,8 @@
         "diseases": [
             "anemia_associated_with_chronic_renal_failure",
             "iron_deficiency_anemia",
-            "vitamin/mineral_supplementation_and_deficiency",
-            "vitamin/mineral_supplementation_during_pregnancy/lactation"
+            "vitamin_mineral_supplementation_and_deficiency",
+            "vitamin_mineral_supplementation_during_pregnancy_lactation"
         ],
         "symptoms": [
             "bleeding_gums",
@@ -15363,7 +15363,7 @@
             "florinef acetate"
         ],
         "diseases": [
-            "addison's_disease",
+            "addison_s_disease",
             "postural_orthostatic_tachycardia_syndrome"
         ],
         "symptoms": [
@@ -15436,7 +15436,7 @@
             "chronic_lymphocytic_leukemia",
             "chronic_myelogenous_leukemia",
             "leukemia",
-            "non-hodgkin's_lymphoma",
+            "non_hodgkin_s_lymphoma",
             "stem_cell_transplant_conditioning"
         ],
         "symptoms": [
@@ -15484,7 +15484,7 @@
             "fludrocortisone"
         ],
         "diseases": [
-            "addison's_disease",
+            "addison_s_disease",
             "adrenogenital_syndrome",
             "dysautonomia",
             "postural_orthostatic_tachycardia_syndrome"
@@ -15577,7 +15577,7 @@
         ],
         "diseases": [
             "eye_redness",
-            "eye_redness/itching",
+            "eye_redness_itching",
             "eyelash_hypotrichosis",
             "steroid_responsive_inflammatory_conditions"
         ],
@@ -15639,7 +15639,7 @@
             "actinic_keratosis",
             "anal_cancer",
             "basal_cell_carcinoma",
-            "breast_cancer,_palliative",
+            "breast_cancer_palliative",
             "cancer",
             "cervical_cancer",
             "colorectal_cancer",
@@ -15714,7 +15714,7 @@
             "scaly_or_crusty_patch_of_skin",
             "scaly_or_crusty_surface",
             "scaly_red_patch",
-            "scar-like_area",
+            "scar_like_area",
             "shiny_bump_or_nodule",
             "shiny_skin_bump",
             "shortness_of_breath",
@@ -15901,7 +15901,7 @@
             "loss_of_interest",
             "loss_of_interest_in_activities",
             "low_energy",
-            "low_self-esteem",
+            "low_self_esteem",
             "low_self_esteem",
             "manic_mood",
             "memory_gaps",
@@ -15952,7 +15952,7 @@
             "road_rage",
             "scalp_irritation",
             "seeking_reassurance_about_appearance",
-            "self-harm",
+            "self_harm",
             "self_harming_behavior",
             "self_induced_vomiting",
             "sensation_of_raw_skin",
@@ -16045,8 +16045,8 @@
             "fluoxymesterone"
         ],
         "diseases": [
-            "breast_cancer,_palliative",
-            "delayed_puberty,_male"
+            "breast_cancer_palliative",
+            "delayed_puberty_male"
         ],
         "symptoms": [
             "confusion",
@@ -16077,9 +16077,9 @@
         "diseases": [
             "cholesterol",
             "dyslipidemia",
-            "high_cholesterol,_familial_heterozygous",
-            "hyperlipoproteinemia_type_iia,_elevated_ldl",
-            "hyperlipoproteinemia_type_iib,_elevated_ldl___vldl"
+            "high_cholesterol_familial_heterozygous",
+            "hyperlipoproteinemia_type_iia_elevated_ldl",
+            "hyperlipoproteinemia_type_iib_elevated_ldl_vldl"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -16096,7 +16096,7 @@
             "fluvoxamine"
         ],
         "diseases": [
-            "anorexia/feeding_problems",
+            "anorexia_feeding_problems",
             "anxiety_and_stress",
             "body_dysmorphic_disorder",
             "depression",
@@ -16173,7 +16173,7 @@
             "loss_of_interest",
             "loss_of_interest_in_activities",
             "low_energy",
-            "low_self-esteem",
+            "low_self_esteem",
             "low_self_esteem",
             "memory_problems",
             "mental_rituals",
@@ -16259,9 +16259,9 @@
             "folic acid"
         ],
         "diseases": [
-            "anemia,_megaloblastic",
+            "anemia_megaloblastic",
             "folic_acid_deficiency",
-            "vitamin/mineral_supplementation_and_deficiency",
+            "vitamin_mineral_supplementation_and_deficiency",
             "lic_acid_deficiency"
         ],
         "symptoms": [
@@ -16299,7 +16299,7 @@
         ],
         "diseases": [
             "follicle_stimulation",
-            "hypogonadism,_male",
+            "hypogonadism_male",
             "ovulation_induction",
             "llicle_stimulation"
         ],
@@ -16359,7 +16359,7 @@
             "deep_vein_thrombosis_prophylaxis_after_abdominal_surgery",
             "deep_vein_thrombosis_prophylaxis_after_hip_replacement_surgery",
             "deep_vein_thrombosis_prophylaxis_after_knee_replacement_surgery",
-            "deep_vein_thrombosis,_prophylaxis",
+            "deep_vein_thrombosis_prophylaxis",
             "pulmonary_embolism"
         ],
         "symptoms": [
@@ -16411,7 +16411,7 @@
         "symptoms": [
             "cognitive_or_emotional_symptoms",
             "confusion",
-            "déjà_vu",
+            "d_j_vu",
             "fear_or_anxiety",
             "loss_of_bladder_control",
             "loss_of_consciousness",
@@ -16558,7 +16558,7 @@
             "gastrocrom"
         ],
         "diseases": [
-            "ibd_(bowel)",
+            "ibd_bowel_",
             "systemic_mastocytosis"
         ],
         "symptoms": [
@@ -16613,7 +16613,7 @@
         ],
         "diseases": [
             "bowel_preparation",
-            "constipation,_chronic"
+            "constipation_chronic"
         ],
         "symptoms": [
             "abdominal_bloating",
@@ -16640,7 +16640,7 @@
             "gemcitabine"
         ],
         "diseases": [
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "ovarian_cancer",
             "pancreatic_cance",
             "pancreatic_cancer"
@@ -16684,9 +16684,9 @@
             "cholesterol",
             "high_cholesterol",
             "hyperlipoproteinemia",
-            "hyperlipoproteinemia_type_iib,_elevated_ldl___vldl",
-            "hyperlipoproteinemia_type_iv,_elevated_vldl",
-            "hyperlipoproteinemia_type_v,_elevated_chylomicrons___vldl"
+            "hyperlipoproteinemia_type_iib_elevated_ldl_vldl",
+            "hyperlipoproteinemia_type_iv_elevated_vldl",
+            "hyperlipoproteinemia_type_v_elevated_chylomicrons_vldl"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -16710,7 +16710,7 @@
             "gemzar"
         ],
         "diseases": [
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "pancreatic_cance"
         ],
         "symptoms": [
@@ -16740,7 +16740,7 @@
             "generlac"
         ],
         "diseases": [
-            "constipation,_chronic",
+            "constipation_chronic",
             "hepatic_encephalopathy"
         ],
         "symptoms": [
@@ -16917,7 +16917,7 @@
             "glutamine"
         ],
         "diseases": [
-            "anemia,_sickle_cell",
+            "anemia_sickle_cell",
             "dietary_supplementation",
             "short_bowel_syndrome"
         ],
@@ -16993,7 +16993,7 @@
             "gonal-f"
         ],
         "diseases": [
-            "hypogonadism,_male",
+            "hypogonadism_male",
             "llicle_stimulation"
         ],
         "symptoms": [
@@ -17016,7 +17016,7 @@
         "diseases": [
             "bleeding_disorde",
             "bleeding_disorder",
-            "breast_cancer,_palliative",
+            "breast_cancer_palliative",
             "endometriosis",
             "prostate_cance",
             "prostate_cancer"
@@ -17147,7 +17147,7 @@
         ],
         "diseases": [
             "iron_deficiency_anemia",
-            "vitamin/mineral_supplementation_and_deficiency"
+            "vitamin_mineral_supplementation_and_deficiency"
         ],
         "symptoms": [
             "bleeding_gums",
@@ -17181,8 +17181,8 @@
         ],
         "diseases": [
             "breast_cance",
-            "breast_cancer,_adjuvant",
-            "breast_cancer,_metastatic",
+            "breast_cancer_adjuvant",
+            "breast_cancer_metastatic",
             "salivary_gland_cance"
         ],
         "symptoms": [
@@ -17246,7 +17246,7 @@
             "homatropine"
         ],
         "diseases": [
-            "refraction,_assessment",
+            "refraction_assessment",
             "uveitis"
         ],
         "symptoms": [
@@ -17287,7 +17287,7 @@
             "stimate"
         ],
         "diseases": [
-            "von_willebrand's_disease"
+            "von_willebrand_s_disease"
         ],
         "symptoms": [
             "bleeding_gums",
@@ -17325,7 +17325,7 @@
             "adult_human_growth_hormone_deficiency",
             "pediatric_growth_hormone_deficiency",
             "short_stature_for_age",
-            "turner's_syndrome"
+            "turner_s_syndrome"
         ],
         "symptoms": [
             "absent_or_irregular_menstrual_periods",
@@ -17393,7 +17393,7 @@
             "hyaluronidase / rituximab"
         ],
         "diseases": [
-            "diffuse_large_b-cell_lymphoma",
+            "diffuse_large_b_cell_lymphoma",
             "follicular_lymphoma"
         ],
         "symptoms": [
@@ -17416,7 +17416,7 @@
             "hydrea"
         ],
         "diseases": [
-            "anemia,_sickle_cell",
+            "anemia_sickle_cell",
             "chronic_myelogenous_leukemia",
             "thrombocythemia"
         ],
@@ -17450,7 +17450,7 @@
             "hydrocortone"
         ],
         "diseases": [
-            "addison's_disease"
+            "addison_s_disease"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -17609,7 +17609,7 @@
         "symptoms": [
             "change_in_vaginal_discharge",
             "low_backache",
-            "menstrual-like_cramps",
+            "menstrual_like_cramps",
             "pelvic_pressure",
             "regular_contractions",
             "vaginal_spotting_or_bleeding",
@@ -17621,7 +17621,7 @@
             "hydroxypropyl methylcellulose"
         ],
         "diseases": [
-            "dry_eye_disease_(keratoconjunctivitis_sicca)"
+            "dry_eye_disease_keratoconjunctivitis_sicca_"
         ],
         "symptoms": [
             "blurred_vision",
@@ -17674,7 +17674,7 @@
             "questran light"
         ],
         "diseases": [
-            "crohn's_disease"
+            "crohn_s_disease"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -17694,7 +17694,7 @@
         ],
         "diseases": [
             "anesthesia",
-            "crohn's_disease",
+            "crohn_s_disease",
             "endoscopy_or_radiology_premedication",
             "incontinence",
             "irritable_bowel_syndrome",
@@ -17745,7 +17745,7 @@
             "treanda"
         ],
         "diseases": [
-            "non-hodgkin's_lymphoma"
+            "non_hodgkin_s_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -17766,11 +17766,11 @@
         ],
         "diseases": [
             "chronic_lymphocytic_leukemia",
-            "graft-versus-host_disease",
+            "graft_versus_host_disease",
             "lymphoma",
             "mantle_cell_lymphoma",
-            "non-hodgkin's_lymphoma",
-            "waldenström_macroglobulinemia"
+            "non_hodgkin_s_lymphoma",
+            "waldenstr_m_macroglobulinemia"
         ],
         "symptoms": [
             "abdominal_cramps",
@@ -17906,7 +17906,7 @@
         "diseases": [
             "chronic_lymphocytic_leukemia",
             "follicular_lymphoma",
-            "non-hodgkin's_lymphoma"
+            "non_hodgkin_s_lymphoma"
         ],
         "symptoms": [
             "abdominal_fullness",
@@ -18181,7 +18181,7 @@
             "pink_growth",
             "plantar_warts",
             "rough_skin_patches",
-            "scar-like_area",
+            "scar_like_area",
             "shiny_skin_bump",
             "skin_discoloration",
             "skin_sore_that_bleeds",
@@ -18460,7 +18460,7 @@
             "cerebral_arteriography",
             "computed_tomography",
             "coronary_arteriography",
-            "intra-arterial_digital_subtraction_angiography",
+            "intra_arterial_digital_subtraction_angiography",
             "peripheral_arteriography",
             "renal_arteriography",
             "urography",
@@ -18523,7 +18523,7 @@
         "diseases": [
             "cerebral_arteriography",
             "coronary_arteriography",
-            "intra-arterial_digital_subtraction_angiography",
+            "intra_arterial_digital_subtraction_angiography",
             "left_ventriculography",
             "peripheral_arteriography",
             "urography",
@@ -18551,7 +18551,7 @@
             "cerebral_arteriography",
             "coronary_arteriography",
             "head_imaging",
-            "intra-arterial_digital_subtraction_angiography",
+            "intra_arterial_digital_subtraction_angiography",
             "intravenous_digital_subtraction_angiography",
             "intravenous_urography",
             "left_ventriculography",
@@ -18581,7 +18581,7 @@
         ],
         "diseases": [
             "melanoma",
-            "melanoma,_metastatic"
+            "melanoma_metastatic"
         ],
         "symptoms": [
             "abdominal_pain_or_swelling",
@@ -18661,7 +18661,7 @@
         "diseases": [
             "cerebrovascular_insufficiency",
             "coronary_artery_disease",
-            "raynaud's_syndrome"
+            "raynaud_s_syndrome"
         ],
         "symptoms": [
             "chest_pain",
@@ -18796,7 +18796,7 @@
             "kemadrin"
         ],
         "diseases": [
-            "parkinson's_disease",
+            "parkinson_s_disease",
             "parkinsonism"
         ],
         "symptoms": [
@@ -18890,8 +18890,8 @@
         "diseases": [
             "head_and_neck_cance",
             "melanoma",
-            "melanoma,_metastatic",
-            "non-small_cell_lung_cance"
+            "melanoma_metastatic",
+            "non_small_cell_lung_cance"
         ],
         "symptoms": [
             "abdominal_pain_or_swelling",
@@ -18932,7 +18932,7 @@
         "diseases": [
             "covid_19",
             "schnitzler_syndrome",
-            "still's_disease"
+            "still_s_disease"
         ],
         "symptoms": [
             "bone_pain",
@@ -18955,7 +18955,7 @@
             "muscle_pain",
             "nausea",
             "runny_nose",
-            "salmon-pink_rash",
+            "salmon_pink_rash",
             "shortness_of_breath",
             "sore_throat",
             "swollen_lymph_nodes",
@@ -19166,8 +19166,8 @@
             "lactulose"
         ],
         "diseases": [
-            "constipation,_acute",
-            "constipation,_chronic",
+            "constipation_acute",
+            "constipation_chronic",
             "hepatic_encephalopathy"
         ],
         "symptoms": [
@@ -19223,7 +19223,7 @@
             "difficulty_sleeping",
             "disorganized_thinking",
             "distractibility",
-            "déjà_vu",
+            "d_j_vu",
             "elevated_mood",
             "emotional_numbness",
             "fatigue",
@@ -19500,8 +19500,8 @@
         "diseases": [
             "breast_cance",
             "breast_cancer",
-            "breast_cancer,_adjuvant",
-            "breast_cancer,_metastatic",
+            "breast_cancer_adjuvant",
+            "breast_cancer_metastatic",
             "female_infertility",
             "emale_infertility"
         ],
@@ -19668,9 +19668,9 @@
         "diseases": [
             "abnormal_uterine_bleeding",
             "birth_control",
-            "birth_control_(contraception)",
+            "birth_control_contraception_",
             "emergency_contraception",
-            "emergency_contraception_(postcoital_contraception)"
+            "emergency_contraception_postcoital_contraception_"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -19703,7 +19703,7 @@
             "levsin sl"
         ],
         "diseases": [
-            "crohn's_disease",
+            "crohn_s_disease",
             "irritable_bowel_syndrome",
             "urinary_incontinence"
         ],
@@ -19907,7 +19907,7 @@
         ],
         "diseases": [
             "dry_eye_disease",
-            "dry_eye_disease_(keratoconjunctivitis_sicca)"
+            "dry_eye_disease_keratoconjunctivitis_sicca_"
         ],
         "symptoms": [
             "blurred_vision",
@@ -19929,7 +19929,7 @@
         ],
         "diseases": [
             "constipation",
-            "constipation,_chronic",
+            "constipation_chronic",
             "irritable_bowel_syndrome"
         ],
         "symptoms": [
@@ -20016,8 +20016,8 @@
         "diseases": [
             "cholesterol",
             "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous",
-            "high_cholesterol,_familial_homozygous",
+            "high_cholesterol_familial_heterozygous",
+            "high_cholesterol_familial_homozygous",
             "prevention_of_cardiovascular_disease"
         ],
         "symptoms": [
@@ -20038,7 +20038,7 @@
         ],
         "diseases": [
             "adhd",
-            "adhd_(attention_deficit_hyperactivity_disorder)",
+            "adhd_attention_deficit_hyperactivity_disorder_",
             "asperger_syndrome",
             "binge_eating_disorde",
             "binge_eating_disorder",
@@ -20295,7 +20295,7 @@
         ],
         "diseases": [
             "cholesterol",
-            "high_cholesterol,_familial_homozygous"
+            "high_cholesterol_familial_homozygous"
         ],
         "symptoms": [
             "chest_pain",
@@ -20439,10 +20439,10 @@
         "diseases": [
             "cholesterol",
             "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous",
+            "high_cholesterol_familial_heterozygous",
             "hyperlipoproteinemia",
-            "hyperlipoproteinemia_type_iia,_elevated_ldl",
-            "hyperlipoproteinemia_type_iib,_elevated_ldl___vldl"
+            "hyperlipoproteinemia_type_iia_elevated_ldl",
+            "hyperlipoproteinemia_type_iib_elevated_ldl_vldl"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -20553,7 +20553,7 @@
             "lupron"
         ],
         "diseases": [
-            "breast_cancer,_adjuvant",
+            "breast_cancer_adjuvant",
             "endometriosis",
             "prostate_cance",
             "uterine_fibroids",
@@ -20806,7 +20806,7 @@
             "luvox cr"
         ],
         "diseases": [
-            "anorexia/feeding_problems",
+            "anorexia_feeding_problems",
             "anxiety_and_stress",
             "depression",
             "obsessive_compulsive_disorde",
@@ -20948,7 +20948,7 @@
             "aphthous_ulce",
             "herbal_supplementation",
             "herpes_simplex",
-            "herpes_simplex,_suppression"
+            "herpes_simplex_suppression"
         ],
         "symptoms": [
             "burning_or_tingling_sensation_before_ulcer_appears",
@@ -20956,7 +20956,7 @@
             "cold_sores",
             "difficulty_eating_or_drinking",
             "fever",
-            "flu-like_symptoms_during_initial_outbreak",
+            "flu_like_symptoms_during_initial_outbreak",
             "genital_sores",
             "headache",
             "itching",
@@ -21114,7 +21114,7 @@
             "mecasermin"
         ],
         "diseases": [
-            "primary_igf-1_deficiency"
+            "primary_igf_1_deficiency"
         ],
         "symptoms": [
             "decreased_muscle_mass",
@@ -21137,9 +21137,9 @@
             "abnormal_uterine_bleeding",
             "amenorrhea",
             "birth_control",
-            "birth_control_(contraception)",
+            "birth_control_contraception_",
             "endometrial_cancer",
-            "endometrial_hyperplasia,_prophylaxis",
+            "endometrial_hyperplasia_prophylaxis",
             "endometriosis",
             "gender_dysphoria",
             "renal_cell_carcinoma"
@@ -21200,7 +21200,7 @@
         "diseases": [
             "pain",
             "period_pain",
-            "period_pain_(dysmenorrhea)"
+            "period_pain_dysmenorrhea_"
         ],
         "symptoms": [
             "burning_sensation",
@@ -21402,7 +21402,7 @@
             "meningococcal group b vaccine"
         ],
         "diseases": [
-            "meningitis,_meningococcal",
+            "meningitis_meningococcal",
             "meningococcal_meningitis_prophylaxis"
         ],
         "symptoms": [
@@ -21584,7 +21584,7 @@
         "diseases": [
             "fibromyalgia",
             "muscle_spasm",
-            "muscle_spasm_(involuntary_hypertonicity)",
+            "muscle_spasm_involuntary_hypertonicity_",
             "ibromyalgia"
         ],
         "symptoms": [
@@ -21623,7 +21623,7 @@
         ],
         "diseases": [
             "muscle_spasm",
-            "muscle_spasm_(involuntary_hypertonicity)",
+            "muscle_spasm_involuntary_hypertonicity_",
             "opiate_withdrawal",
             "tetanus"
         ],
@@ -21737,9 +21737,9 @@
             "relistor"
         ],
         "diseases": [
-            "constipation,_chronic",
-            "constipation,_drug_induced",
-            "opioid-induced_constipation"
+            "constipation_chronic",
+            "constipation_drug_induced",
+            "opioid_induced_constipation"
         ],
         "symptoms": [
             "abdominal_bloating",
@@ -21764,9 +21764,9 @@
             "methyltestosterone"
         ],
         "diseases": [
-            "breast_cancer,_palliative",
-            "delayed_puberty,_male",
-            "hypogonadism,_male",
+            "breast_cancer_palliative",
+            "delayed_puberty_male",
+            "hypogonadism_male",
             "postpartum_breast_pain"
         ],
         "symptoms": [
@@ -22034,7 +22034,7 @@
         ],
         "diseases": [
             "abortion",
-            "cushing's_syndrome"
+            "cushing_s_syndrome"
         ],
         "symptoms": [
             "abdominal_cramping",
@@ -22059,7 +22059,7 @@
         ],
         "diseases": [
             "gaucher_disease",
-            "niemann-pick_disease"
+            "niemann_pick_disease"
         ],
         "symptoms": [
             "anemia",
@@ -22153,7 +22153,7 @@
         "diseases": [
             "bowel_preparation",
             "constipation",
-            "constipation,_acute"
+            "constipation_acute"
         ],
         "symptoms": [
             "abdominal_bloating",
@@ -22184,7 +22184,7 @@
             "requip"
         ],
         "diseases": [
-            "parkinson's_disease",
+            "parkinson_s_disease",
             "periodic_limb_movement_disorde",
             "restless_legs_syndrome"
         ],
@@ -22389,7 +22389,7 @@
             "acute_nonlymphocytic_leukemia",
             "mantle_cell_lymphoma",
             "multiple_sclerosis",
-            "non-hodgkin's_lymphoma"
+            "non_hodgkin_s_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -22523,7 +22523,7 @@
         ],
         "diseases": [
             "bowel_preparation",
-            "constipation,_chronic",
+            "constipation_chronic",
             "gastrointestinal_decontamination"
         ],
         "symptoms": [
@@ -22551,7 +22551,7 @@
             "moxidectin"
         ],
         "diseases": [
-            "onchocerciasis,_river_blindness"
+            "onchocerciasis_river_blindness"
         ],
         "symptoms": [
             "blindness",
@@ -22665,7 +22665,7 @@
         "diseases": [
             "dermatomyositis",
             "rejection_prophylaxis",
-            "tic_(mycophenolic_acid)"
+            "tic_mycophenolic_acid_"
         ],
         "symptoms": [
             "difficulty_swallowing",
@@ -22768,7 +22768,7 @@
             "naldemedine"
         ],
         "diseases": [
-            "opioid-induced_constipation"
+            "opioid_induced_constipation"
         ],
         "symptoms": [
             "abdominal_bloating",
@@ -22878,7 +22878,7 @@
             "visine-a"
         ],
         "diseases": [
-            "eye_redness/itching"
+            "eye_redness_itching"
         ],
         "symptoms": [
             "burning_sensation",
@@ -22894,7 +22894,7 @@
             "naproxen / pseudoephedrine"
         ],
         "diseases": [
-            "pain/fever",
+            "pain_fever",
             "sinus_symptoms"
         ],
         "symptoms": [
@@ -22928,7 +22928,7 @@
             "abdominal_cramping",
             "intensifying_contractions",
             "lower_back_pain",
-            "menstrual-like_cramps",
+            "menstrual_like_cramps",
             "pelvic_pressure",
             "radiating_pain_to_thighs"
         ]
@@ -22938,7 +22938,7 @@
             "natalizumab"
         ],
         "diseases": [
-            "crohn's_disease,_maintenance",
+            "crohn_s_disease_maintenance",
             "multiple_sclerosis"
         ],
         "symptoms": [
@@ -23014,7 +23014,7 @@
         ],
         "diseases": [
             "blepharitis",
-            "conjunctivitis,_bacterial"
+            "conjunctivitis_bacterial"
         ],
         "symptoms": [
             "blurred_vision",
@@ -23064,7 +23064,7 @@
             "sinemet"
         ],
         "diseases": [
-            "parkinson's_disease",
+            "parkinson_s_disease",
             "restless_legs_syndrome"
         ],
         "symptoms": [
@@ -23129,8 +23129,8 @@
             "depression",
             "high_cholesterol",
             "hyperlipoproteinemia",
-            "hyperlipoproteinemia_type_iv,_elevated_vldl",
-            "hyperlipoproteinemia_type_v,_elevated_chylomicrons___vldl",
+            "hyperlipoproteinemia_type_iv_elevated_vldl",
+            "hyperlipoproteinemia_type_v_elevated_chylomicrons_vldl",
             "niacin_deficiency",
             "pellagra"
         ],
@@ -23226,7 +23226,7 @@
             "cholesterol",
             "high_cholesterol",
             "hyperlipoproteinemia",
-            "hyperlipoproteinemia_type_iv,_elevated_vldl"
+            "hyperlipoproteinemia_type_iv_elevated_vldl"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -23246,7 +23246,7 @@
         ],
         "diseases": [
             "idiopathic_pulmonary_fibrosis",
-            "systemic_sclerosis-associated_interstitial_lung_disease"
+            "systemic_sclerosis_associated_interstitial_lung_disease"
         ],
         "symptoms": [
             "aching_muscles_and_joints",
@@ -23343,7 +23343,7 @@
         ],
         "symptoms": [
             "abdominal_distension",
-            "cabbage-like_odor",
+            "cabbage_like_odor",
             "diarrhea",
             "enlarged_liver",
             "failure_to_thrive",
@@ -23388,11 +23388,11 @@
         "diseases": [
             "head_and_neck_cancer",
             "hepatocellular_carcinoma",
-            "hodgkin's_lymphoma",
+            "hodgkin_s_lymphoma",
             "melanoma",
-            "melanoma,_metastatic",
-            "non-small_cell_lung_cance",
-            "non-small_cell_lung_cancer",
+            "melanoma_metastatic",
+            "non_small_cell_lung_cance",
+            "non_small_cell_lung_cancer",
             "renal_cell_carcinoma",
             "small_cell_lung_cancer",
             "urothelial_carcinoma"
@@ -23510,7 +23510,7 @@
         ],
         "diseases": [
             "adult_human_growth_hormone_deficiency",
-            "turner's_syndrome"
+            "turner_s_syndrome"
         ],
         "symptoms": [
             "absent_or_irregular_menstrual_periods",
@@ -23547,7 +23547,7 @@
             "abnormal_uterine_bleeding",
             "amenorrhea",
             "birth_control",
-            "birth_control_(contraception)",
+            "birth_control_contraception_",
             "endometriosis"
         ],
         "symptoms": [
@@ -23805,7 +23805,7 @@
         ],
         "diseases": [
             "melanoma",
-            "non-small_cell_lung_cance",
+            "non_small_cell_lung_cance",
             "renal_cell_carcinoma"
         ],
         "symptoms": [
@@ -23876,7 +23876,7 @@
             "pimozide"
         ],
         "diseases": [
-            "tourette's_syndrome"
+            "tourette_s_syndrome"
         ],
         "symptoms": [
             "anxiety",
@@ -24155,7 +24155,7 @@
             "epilepsy",
             "neuropathic_pain",
             "seizures",
-            "seizures_(convulsions)",
+            "seizures_convulsions_",
             "trigeminal_neuralgia"
         ],
         "symptoms": [
@@ -24178,8 +24178,8 @@
             "distorted_self_image",
             "distractibility",
             "dizziness",
-            "déjà_vu",
-            "electric_shock-like_pain",
+            "d_j_vu",
+            "electric_shock_like_pain",
             "electric_shock_like_pain",
             "elevated_mood",
             "emotional_instability",
@@ -24295,7 +24295,7 @@
             "intermittent_pain",
             "localized_pain",
             "lower_back_pain",
-            "menstrual-like_cramps",
+            "menstrual_like_cramps",
             "pain_relieved_by_rest",
             "pain_worsened_by_movement",
             "pelvic_pressure",
@@ -24324,7 +24324,7 @@
             "fatigue",
             "feeling_faint",
             "fever",
-            "foul-smelling_vaginal_discharge",
+            "foul_smelling_vaginal_discharge",
             "heavy_vaginal_bleeding",
             "nausea",
             "passage_of_tissue_from_vagina",
@@ -24367,14 +24367,14 @@
         "diseases": [
             "breast_cance",
             "breast_cancer",
-            "breast_cancer,_adjuvant",
-            "breast_cancer,_metastatic",
-            "kaposi's_sarcoma",
-            "non-small_cell_lung_cance",
-            "non-small_cell_lung_cancer",
+            "breast_cancer_adjuvant",
+            "breast_cancer_metastatic",
+            "kaposi_s_sarcoma",
+            "non_small_cell_lung_cance",
+            "non_small_cell_lung_cancer",
             "ovarian_cance",
             "ovarian_cancer",
-            "wilms'_tumor_(nephroblastoma)"
+            "wilms_tumor_nephroblastoma_"
         ],
         "symptoms": [
             "abdominal_bloating",
@@ -24480,8 +24480,8 @@
             "palbociclib"
         ],
         "diseases": [
-            "breast_cancer,_male",
-            "breast_cancer,_metastatic",
+            "breast_cancer_male",
+            "breast_cancer_metastatic",
             "liposarcoma"
         ],
         "symptoms": [
@@ -24755,7 +24755,7 @@
             "loss_of_interest",
             "loss_of_interest_in_activities",
             "low_energy",
-            "low_self-esteem",
+            "low_self_esteem",
             "memory_problems",
             "mental_rituals",
             "mind_going_blank",
@@ -24846,7 +24846,7 @@
         ],
         "diseases": [
             "acromegaly",
-            "cushing's_syndrome"
+            "cushing_s_syndrome"
         ],
         "symptoms": [
             "coarsened_facial_features",
@@ -25208,10 +25208,10 @@
             "head_and_neck_cancer",
             "hepatocellular_carcinoma",
             "melanoma",
-            "melanoma,_metastatic",
+            "melanoma_metastatic",
             "merkel_cell_carcinoma",
-            "non-small_cell_lung_cance",
-            "primary_mediastinal_large_b-cell_lymphoma",
+            "non_small_cell_lung_cance",
+            "primary_mediastinal_large_b_cell_lymphoma",
             "small_cell_lung_cancer",
             "solid_tumors",
             "urothelial_carcinoma"
@@ -25309,8 +25309,8 @@
         ],
         "diseases": [
             "malignant_pleural_mesothelioma",
-            "non-small_cell_lung_cance",
-            "non-small_cell_lung_cancer"
+            "non_small_cell_lung_cance",
+            "non_small_cell_lung_cancer"
         ],
         "symptoms": [
             "chest_pain",
@@ -25455,7 +25455,7 @@
             "insomnia",
             "sedation",
             "seizures",
-            "seizures_(convulsions)"
+            "seizures_convulsions_"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -25498,7 +25498,7 @@
             "phentolamine"
         ],
         "diseases": [
-            "dermal_necrosis,_treatment",
+            "dermal_necrosis_treatment",
             "pheochromocytoma",
             "pheochromocytoma_diagnosis",
             "reversal_of_anesthesia"
@@ -25537,14 +25537,14 @@
         "diseases": [
             "anxiety",
             "arrhythmia",
-            "cluster-tic_syndrome",
+            "cluster_tic_syndrome",
             "epilepsy",
             "myotonia_congenita",
             "neurosurgery",
             "peripheral_neuropathy",
             "seizure_prophylaxis_during_or_following_neurosurgery",
             "seizures",
-            "seizures_(convulsions)",
+            "seizures_convulsions_",
             "status_epilepticus",
             "trigeminal_neuralgia"
         ],
@@ -25561,7 +25561,7 @@
             "difficulty_concentrating",
             "difficulty_with_sudden_movements",
             "dizziness",
-            "déjà_vu",
+            "d_j_vu",
             "electric_shock_like_pain",
             "excessive_worry",
             "extreme_sensitivity_to_touch",
@@ -25650,9 +25650,9 @@
             "phytonadione"
         ],
         "diseases": [
-            "hypoprothrombinemia,_anticoagulant_induced",
-            "hypoprothrombinemia,_not_associated_with_anticoagulant_therapy",
-            "hypoprothrombinemia,_prophylaxis",
+            "hypoprothrombinemia_anticoagulant_induced",
+            "hypoprothrombinemia_not_associated_with_anticoagulant_therapy",
+            "hypoprothrombinemia_prophylaxis",
             "vitamin_k_deficiency"
         ],
         "symptoms": [
@@ -25674,7 +25674,7 @@
             "pimavanserin"
         ],
         "diseases": [
-            "parkinson's_disease_psychosis"
+            "parkinson_s_disease_psychosis"
         ],
         "symptoms": [
             "agitation",
@@ -25847,7 +25847,7 @@
         ],
         "diseases": [
             "blepharoconjunctivitis",
-            "conjunctivitis,_bacterial"
+            "conjunctivitis_bacterial"
         ],
         "symptoms": [
             "blurred_vision",
@@ -25922,7 +25922,7 @@
             "posaconazole"
         ],
         "diseases": [
-            "aspergillosis,_invasive",
+            "aspergillosis_invasive",
             "candidemia",
             "oral_thrush"
         ],
@@ -26025,7 +26025,7 @@
         ],
         "diseases": [
             "deep_vein_thrombosis",
-            "deep_vein_thrombosis,_prophylaxis",
+            "deep_vein_thrombosis_prophylaxis",
             "prevention_of_thromboembolism_in_atrial_fibrillation",
             "pulmonary_embolism"
         ],
@@ -26053,7 +26053,7 @@
         ],
         "diseases": [
             "lymphoma",
-            "peripheral_t-cell_lymphoma"
+            "peripheral_t_cell_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -26114,7 +26114,7 @@
             "ropinirole"
         ],
         "diseases": [
-            "parkinson's_disease",
+            "parkinson_s_disease",
             "periodic_limb_movement_disorde",
             "periodic_limb_movement_disorder",
             "restless_legs_syndrome",
@@ -26319,9 +26319,9 @@
             "prevalite"
         ],
         "diseases": [
-            "crohn's_disease",
+            "crohn_s_disease",
             "hyperlipoproteinemia",
-            "hyperlipoproteinemia_type_iia,_elevated_ldl"
+            "hyperlipoproteinemia_type_iia_elevated_ldl"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -26347,7 +26347,7 @@
             "benign_essential_trem",
             "benign_essential_tremor",
             "seizures",
-            "seizures_(convulsions)"
+            "seizures_convulsions_"
         ],
         "symptoms": [
             "balance_problems",
@@ -26557,7 +26557,7 @@
             "anaplastic_astrocytoma",
             "anaplastic_oligodendroglioma",
             "glioblastoma_multiforme",
-            "hodgkin's_lymphoma"
+            "hodgkin_s_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain_or_swelling",
@@ -26591,7 +26591,7 @@
         ],
         "diseases": [
             "extrapyramidal_reaction",
-            "parkinson's_disease",
+            "parkinson_s_disease",
             "parkinsonism"
         ],
         "symptoms": [
@@ -26627,7 +26627,7 @@
         ],
         "diseases": [
             "amenorrhea",
-            "endometrial_hyperplasia,_prophylaxis",
+            "endometrial_hyperplasia_prophylaxis",
             "endometriosis",
             "gender_dysphoria",
             "perimenopausal_symptoms",
@@ -26669,7 +26669,7 @@
             "loss_of_consciousness",
             "low_backache",
             "low_libido",
-            "menstrual-like_cramps",
+            "menstrual_like_cramps",
             "milky_nipple_discharge",
             "mood_swings",
             "nausea",
@@ -26705,8 +26705,8 @@
             "prograf"
         ],
         "diseases": [
-            "organ_transplant,_rejection_prophylaxis",
-            "organ_transplant,_rejection_reversal"
+            "organ_transplant_rejection_prophylaxis",
+            "organ_transplant_rejection_reversal"
         ],
         "symptoms": [
             "cough",
@@ -26876,7 +26876,7 @@
             "frequent_nosebleeds",
             "heavy_or_prolonged_menstrual_bleeding",
             "joint_pain_and_swelling_from_bleeding",
-            "large_blood-filled_skin_lesions",
+            "large_blood_filled_skin_lesions",
             "pale_skin",
             "prolonged_bleeding_from_cuts",
             "unexplained_bruising"
@@ -27170,7 +27170,7 @@
             "schizoaffective_disorde",
             "schizoaffective_disorder",
             "schizophrenia",
-            "tourette's_syndrome"
+            "tourette_s_syndrome"
         ],
         "symptoms": [
             "agitation",
@@ -27580,7 +27580,7 @@
             "requip xl"
         ],
         "diseases": [
-            "parkinson's_disease",
+            "parkinson_s_disease",
             "periodic_limb_movement_disorde"
         ],
         "symptoms": [
@@ -27687,7 +27687,7 @@
         ],
         "diseases": [
             "idiopathic_thrombocytopenic_purpura",
-            "rh-isoimmunization"
+            "rh_isoimmunization"
         ],
         "symptoms": [
             "bleeding_gums",
@@ -27763,7 +27763,7 @@
             "rimabotulinumtoxinb"
         ],
         "diseases": [
-            "cervical_dystonia_(spasmodic_torticollis)",
+            "cervical_dystonia_spasmodic_torticollis_",
             "sialorrhea"
         ],
         "symptoms": [
@@ -27790,7 +27790,7 @@
         ],
         "diseases": [
             "osteoporosis",
-            "paget's_disease",
+            "paget_s_disease",
             "prevention_of_osteoporosis"
         ],
         "symptoms": [
@@ -27824,12 +27824,12 @@
             "deep_vein_thrombosis",
             "deep_vein_thrombosis_prophylaxis_after_hip_replacement_surgery",
             "deep_vein_thrombosis_prophylaxis_after_knee_replacement_surgery",
-            "deep_vein_thrombosis,_prophylaxis",
-            "deep_vein_thrombosis,_recurrent_event",
+            "deep_vein_thrombosis_prophylaxis",
+            "deep_vein_thrombosis_recurrent_event",
             "peripheral_arterial_disease",
             "prevention_of_thromboembolism_in_atrial_fibrillation",
             "pulmonary_embolism",
-            "pulmonary_embolism,_recurrent_event"
+            "pulmonary_embolism_recurrent_event"
         ],
         "symptoms": [
             "anxiety",
@@ -27877,10 +27877,10 @@
             "rivastigmine"
         ],
         "diseases": [
-            "alzheimer's",
-            "alzheimer's_disease",
+            "alzheimer_s",
+            "alzheimer_s_disease",
             "lewy_body_dementia",
-            "parkinson's_disease"
+            "parkinson_s_disease"
         ],
         "symptoms": [
             "anxiety",
@@ -27975,8 +27975,8 @@
             "romidepsin"
         ],
         "diseases": [
-            "cutaneous_t-cell_lymphoma",
-            "peripheral_t-cell_lymphoma"
+            "cutaneous_t_cell_lymphoma",
+            "peripheral_t_cell_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -28018,7 +28018,7 @@
             "intensifying_contractions",
             "loss_of_sensation",
             "lower_back_pain",
-            "menstrual-like_cramps",
+            "menstrual_like_cramps",
             "numbness",
             "pain_at_incision_site",
             "pelvic_pressure",
@@ -28064,7 +28064,7 @@
             "ruxolitinib"
         ],
         "diseases": [
-            "graft-versus-host_disease",
+            "graft_versus_host_disease",
             "myelofibrosis",
             "myeloproliferative_disorders",
             "polycythemia_vera"
@@ -28196,7 +28196,7 @@
             "sacrosidase"
         ],
         "diseases": [
-            "sucrase-isomaltase_deficiency"
+            "sucrase_isomaltase_deficiency"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -28294,8 +28294,8 @@
         "diseases": [
             "aplastic_anemia",
             "bone_marrow_transplantation",
-            "bone_marrow_transplantation,_failure_or_engraftment_delay",
-            "bone_marrow_transplantation,_myeloid_reconstruction",
+            "bone_marrow_transplantation_failure_or_engraftment_delay",
+            "bone_marrow_transplantation_myeloid_reconstruction",
             "neutropenia_associated_with_chemotherapy",
             "neutropenia_associated_with_radiation"
         ],
@@ -28521,7 +28521,7 @@
             "adhd",
             "depression",
             "major_depressive_disorde",
-            "parkinson's_disease"
+            "parkinson_s_disease"
         ],
         "symptoms": [
             "anxiety",
@@ -28613,7 +28613,7 @@
             "post_traumatic_stress_disorde",
             "schizoaffective_disorde",
             "schizophrenia",
-            "tourette's_syndrome"
+            "tourette_s_syndrome"
         ],
         "symptoms": [
             "agitation",
@@ -28963,7 +28963,7 @@
             "loss_of_interest_in_activities",
             "loss_of_time",
             "low_energy",
-            "low_self-esteem",
+            "low_self_esteem",
             "low_self_esteem",
             "memory_gaps",
             "memory_problems",
@@ -29010,7 +29010,7 @@
             "restlessness",
             "scalp_irritation",
             "seeking_reassurance_about_appearance",
-            "self-harm",
+            "self_harm",
             "self_consciousness",
             "self_harming_behavior",
             "sensation_of_raw_skin",
@@ -29055,7 +29055,7 @@
             "siltuximab"
         ],
         "diseases": [
-            "multicentric_castleman’s_disease"
+            "multicentric_castleman_s_disease"
         ],
         "symptoms": [
             "enlarged_liver_and_spleen",
@@ -29107,13 +29107,13 @@
             "cardiovascular_risk_reduction",
             "cholesterol",
             "high_cholesterol",
-            "high_cholesterol,_familial_heterozygous",
-            "high_cholesterol,_familial_homozygous",
+            "high_cholesterol_familial_heterozygous",
+            "high_cholesterol_familial_homozygous",
             "hyperlipoproteinemia",
-            "hyperlipoproteinemia_type_iii,_elevated_beta-vldl___idl",
-            "hyperlipoproteinemia_type_iia,_elevated_ldl",
-            "hyperlipoproteinemia_type_iib,_elevated_ldl___vldl",
-            "hyperlipoproteinemia_type_iv,_elevated_vldl",
+            "hyperlipoproteinemia_type_iii_elevated_beta_vldl_idl",
+            "hyperlipoproteinemia_type_iia_elevated_ldl",
+            "hyperlipoproteinemia_type_iib_elevated_ldl_vldl",
+            "hyperlipoproteinemia_type_iv_elevated_vldl",
             "prevention_of_cardiovascular_disease"
         ],
         "symptoms": [
@@ -29200,7 +29200,7 @@
         ],
         "diseases": [
             "lymphangioleiomyomatosis",
-            "organ_transplant,_rejection_prophylaxis"
+            "organ_transplant_rejection_prophylaxis"
         ],
         "symptoms": [
             "chest_pain",
@@ -29356,7 +29356,7 @@
             "solarcaine first aid medicated spray"
         ],
         "diseases": [
-            "burns,_external",
+            "burns_external",
             "pain"
         ],
         "symptoms": [
@@ -29388,7 +29388,7 @@
         ],
         "diseases": [
             "narcolepsy",
-            "obstructive_sleep_apnea/hypopnea_syndrome"
+            "obstructive_sleep_apnea_hypopnea_syndrome"
         ],
         "symptoms": [
             "automatic_behavior",
@@ -29474,7 +29474,7 @@
         "symptoms": [
             "itching",
             "pink_growth",
-            "scar-like_area",
+            "scar_like_area",
             "shiny_skin_bump",
             "skin_sore_that_bleeds",
             "skin_sore_that_does_not_heal",
@@ -29811,7 +29811,7 @@
             "succimer"
         ],
         "diseases": [
-            "lead_poisoning,_severe"
+            "lead_poisoning_severe"
         ],
         "symptoms": [
             "coma",
@@ -29906,7 +29906,7 @@
         "diseases": [
             "rheumatic_fever_prophylaxis",
             "toxoplasmosis",
-            "toxoplasmosis,_prophylaxis"
+            "toxoplasmosis_prophylaxis"
         ],
         "symptoms": [
             "blurred_vision",
@@ -30058,12 +30058,12 @@
         "diseases": [
             "breast_cance",
             "breast_cancer",
-            "breast_cancer,_adjuvant",
-            "breast_cancer,_male",
-            "breast_cancer,_metastatic",
-            "breast_cancer,_palliative",
-            "breast_cancer,_prevention",
-            "mccune-albright_syndrome",
+            "breast_cancer_adjuvant",
+            "breast_cancer_male",
+            "breast_cancer_metastatic",
+            "breast_cancer_palliative",
+            "breast_cancer_prevention",
+            "mccune_albright_syndrome",
             "precocious_puberty"
         ],
         "symptoms": [
@@ -30129,7 +30129,7 @@
         ],
         "diseases": [
             "insomnia",
-            "non-24-hour_sleep_wake_disorder"
+            "non_24_hour_sleep_wake_disorder"
         ],
         "symptoms": [
             "anxiety_about_sleeping",
@@ -30156,8 +30156,8 @@
         ],
         "diseases": [
             "breast_cance",
-            "breast_cancer,_metastatic",
-            "non-small_cell_lung_cance",
+            "breast_cancer_metastatic",
+            "non_small_cell_lung_cance",
             "ovarian_cance"
         ],
         "symptoms": [
@@ -30202,7 +30202,7 @@
         ],
         "diseases": [
             "breast_cance",
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "solid_tumors"
         ],
         "symptoms": [
@@ -30290,7 +30290,7 @@
             "zelnorm"
         ],
         "diseases": [
-            "constipation,_chronic",
+            "constipation_chronic",
             "irritable_bowel_syndrome"
         ],
         "symptoms": [
@@ -30337,7 +30337,7 @@
             "difficulty_concentrating",
             "difficulty_with_motor_tasks",
             "disorganized_thinking",
-            "déjà_vu",
+            "d_j_vu",
             "electric_shock_like_pain",
             "elevated_mood",
             "extreme_sensitivity_to_touch",
@@ -30401,7 +30401,7 @@
             "decreased_need_for_sleep",
             "depressed_mood",
             "difficulty_concentrating",
-            "déjà_vu",
+            "d_j_vu",
             "electric_shock_like_pain",
             "elevated_mood",
             "fatigue",
@@ -30438,7 +30438,7 @@
             "anaplastic_astrocytoma",
             "anaplastic_oligodendroglioma",
             "glioblastoma_multiforme",
-            "melanoma,_metastatic"
+            "melanoma_metastatic"
         ],
         "symptoms": [
             "abdominal_pain_or_swelling",
@@ -30476,7 +30476,7 @@
             "glioblastoma_multi",
             "glioblastoma_multiforme",
             "melanoma",
-            "melanoma,_metastatic",
+            "melanoma_metastatic",
             "me"
         ],
         "symptoms": [
@@ -30523,10 +30523,10 @@
             "testosterone"
         ],
         "diseases": [
-            "breast_cancer,_palliative",
-            "delayed_puberty,_male",
+            "breast_cancer_palliative",
+            "delayed_puberty_male",
             "gender_dysphoria",
-            "hypogonadism,_male",
+            "hypogonadism_male",
             "klinefelter_syndrome",
             "postpartum_breast_pain"
         ],
@@ -30608,7 +30608,7 @@
             "thalidomide"
         ],
         "diseases": [
-            "leprosy,_erythema_nodosum_leprosum",
+            "leprosy_erythema_nodosum_leprosum",
             "multiple_myeloma"
         ],
         "symptoms": [
@@ -30640,8 +30640,8 @@
         "diseases": [
             "beriberi",
             "vitamin_b1_deficiency",
-            "vitamin/mineral_supplementation_and_deficiency",
-            "wernicke's_encephalopathy"
+            "vitamin_mineral_supplementation_and_deficiency",
+            "wernicke_s_encephalopathy"
         ],
         "symptoms": [
             "bleeding_gums",
@@ -30776,7 +30776,7 @@
             "ticlopidine"
         ],
         "diseases": [
-            "cerebral_thrombosis/embolism"
+            "cerebral_thrombosis_embolism"
         ],
         "symptoms": [
             "sudden_confusion",
@@ -30902,7 +30902,7 @@
         ],
         "diseases": [
             "b_cell_lymphoma",
-            "diffuse_large_b-cell_lymphoma"
+            "diffuse_large_b_cell_lymphoma"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -30927,7 +30927,7 @@
             "tobradex"
         ],
         "diseases": [
-            "conjunctivitis,_bacterial",
+            "conjunctivitis_bacterial",
             "postoperative_ocular_inflammation"
         ],
         "symptoms": [
@@ -31184,8 +31184,8 @@
         "diseases": [
             "breast_cance",
             "breast_cancer",
-            "breast_cancer,_adjuvant",
-            "breast_cancer,_metastatic",
+            "breast_cancer_adjuvant",
+            "breast_cancer_metastatic",
             "esophageal_carcinoma",
             "gastric_cancer",
             "salivary_gland_cance",
@@ -31303,7 +31303,7 @@
             "trientine"
         ],
         "diseases": [
-            "wilson's_disease"
+            "wilson_s_disease"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -31344,7 +31344,7 @@
         "diseases": [
             "cerebral_spasticity",
             "extrapyramidal_reaction",
-            "parkinson's_disease"
+            "parkinson_s_disease"
         ],
         "symptoms": [
             "abnormal_posture",
@@ -31472,7 +31472,7 @@
             "trocaine"
         ],
         "diseases": [
-            "tonsillitis/pharyngitis"
+            "tonsillitis_pharyngitis"
         ],
         "symptoms": [
             "bad_breath",
@@ -31516,7 +31516,7 @@
         "diseases": [
             "organophosphate_poisoning",
             "pupillary_dilation",
-            "refraction,_assessment"
+            "refraction_assessment"
         ],
         "symptoms": [
             "blurred_vision",
@@ -31615,7 +31615,7 @@
         ],
         "diseases": [
             "emergency_contraception",
-            "emergency_contraception_(postcoital_contraception)",
+            "emergency_contraception_postcoital_contraception_",
             "uterine_fibroids"
         ],
         "symptoms": [
@@ -31774,7 +31774,7 @@
         "diseases": [
             "deep_vein_thrombosis",
             "pulmonary_embolism",
-            "thrombotic/thromboembolic_disorder"
+            "thrombotic_thromboembolic_disorder"
         ],
         "symptoms": [
             "anxiety",
@@ -31921,7 +31921,7 @@
             "endoscopy_or_radiology_premedication",
             "light_anesthesia",
             "light_sedation",
-            "meniere's_disease",
+            "meniere_s_disease",
             "muscle_spasm",
             "night_terrors",
             "seizure_prevention",
@@ -32040,8 +32040,8 @@
             "vemurafenib"
         ],
         "diseases": [
-            "erdheim-chester_disease",
-            "melanoma,_metastatic"
+            "erdheim_chester_disease",
+            "melanoma_metastatic"
         ],
         "symptoms": [
             "abdominal_pain_or_swelling",
@@ -32158,7 +32158,7 @@
         ],
         "diseases": [
             "erectile_dysfunction",
-            "sexual_dysfunction,_ssri_induced"
+            "sexual_dysfunction_ssri_induced"
         ],
         "symptoms": [
             "decreased_libido",
@@ -32368,9 +32368,9 @@
             "vitamin e"
         ],
         "diseases": [
-            "alzheimer's",
-            "alzheimer's_disease",
-            "anemia,_sickle_cell",
+            "alzheimer_s",
+            "alzheimer_s_disease",
+            "anemia_sickle_cell",
             "cystic_fibrosis",
             "dietary_supplementation",
             "nocturnal_leg_cramps",
@@ -32867,11 +32867,11 @@
             "atrial_fibrillation",
             "deep_vein_thrombosis",
             "deep_vein_thrombosis_prophylaxis_after_hip_replacement_surgery",
-            "deep_vein_thrombosis,_prophylaxis",
-            "deep_vein_thrombosis,_recurrent_event",
+            "deep_vein_thrombosis_prophylaxis",
+            "deep_vein_thrombosis_recurrent_event",
             "prevention_of_thromboembolism_in_atrial_fibrillation",
             "pulmonary_embolism",
-            "pulmonary_embolism,_recurrent_event"
+            "pulmonary_embolism_recurrent_event"
         ],
         "symptoms": [
             "anxiety",
@@ -32907,7 +32907,7 @@
         ],
         "diseases": [
             "breast_cance",
-            "breast_cancer,_metastatic",
+            "breast_cancer_metastatic",
             "colorectal_cance",
             "stomach_cance"
         ],
@@ -33032,7 +33032,7 @@
             "zinc acetate"
         ],
         "diseases": [
-            "wilson's_disease",
+            "wilson_s_disease",
             "zinc_deficiency"
         ],
         "symptoms": [
@@ -33158,7 +33158,7 @@
         ],
         "diseases": [
             "bleeding_disorde",
-            "breast_cancer,_palliative",
+            "breast_cancer_palliative",
             "endometriosis",
             "prostate_cance"
         ],
@@ -33213,7 +33213,7 @@
             "osteolytic_bone_lesions_of_multiple_myeloma",
             "osteolytic_bone_metastases_of_solid_tumors",
             "osteoporosis",
-            "paget's_disease",
+            "paget_s_disease",
             "prevention_of_osteoporosis"
         ],
         "symptoms": [
@@ -33390,7 +33390,7 @@
             "osteolytic_bone_lesions_of_multiple_myeloma",
             "osteolytic_bone_metastases_of_solid_tumors",
             "osteoporosis",
-            "paget's_disease"
+            "paget_s_disease"
         ],
         "symptoms": [
             "abdominal_pain",
@@ -33439,7 +33439,7 @@
         "diseases": [
             "herpes",
             "herpes_simplex",
-            "herpes_simplex,_suppression",
+            "herpes_simplex_suppression",
             "herpes_zoste"
         ],
         "symptoms": [
@@ -33450,7 +33450,7 @@
             "cold_sores",
             "fatigue",
             "fever",
-            "flu-like_symptoms_during_initial_outbreak",
+            "flu_like_symptoms_during_initial_outbreak",
             "genital_sores",
             "headache",
             "itching",
@@ -33486,7 +33486,7 @@
             "paranoid_disorde",
             "schizoaffective_disorde",
             "schizophrenia",
-            "tourette's_syndrome"
+            "tourette_s_syndrome"
         ],
         "symptoms": [
             "agitation",
