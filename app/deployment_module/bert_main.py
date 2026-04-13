@@ -622,7 +622,12 @@ def predict(
     threshold: float = 1 / (1 + math.pow(math.e, -(0))),
     device: torch.device = TORCH_DEVICE,
 ) -> dict[str, Any]:
-    """给定输入文本，返回预测的疾病、症状和是否需要急救的结果"""
+    """给定输入文本，返回简化的预测结果：
+    仅包含 diseases 和 symptoms 列表。
+    每个元素格式为 {"name": "...", "confidence": float}。
+    diseases 自动处理 "others" 逻辑（多标签时丢弃 others、仅 others 时保留、无任何标签时强制添加 others 且 confidence=1.0）。
+    confidence 保留原有的中位数归一化计算逻辑。
+    """
     # 加载
     inference_device = device
     tokenizer = load_tokenizer_compat(model_path)
@@ -681,7 +686,7 @@ def predict(
     symptom_mask = symptom_probs >= threshold
 
     # 5. 构造带置信信息的返回结果
-    diseases_result = []
+    diseases_result_temp = []
     for idx in np.where(disease_mask)[0]:
         label_name = mlb_d.classes_[idx]
         prob = float(disease_probs[idx])
@@ -692,13 +697,30 @@ def predict(
         else:
             norm_conf = 1.0 if prob >= median else (prob - 0.5) / (median - 0.5)
         norm_conf = float(np.clip(norm_conf, 0.0, 1.0))
-        diseases_result.append({
+        diseases_result_temp.append({
             "label": label_name,
-            "probability": round(prob, 4),
-            "median_positive": round(median, 4),
-            "confidence": norm_conf,  # 与中位数比较得出的置信等级
-            "above_median": prob >= median
+            # "probability": round(prob, 4),
+            # "median_positive": round(median, 4),
+            "confidence": round(norm_conf, 2),  # 与中位数比较得出的置信等级
+            # "above_median": prob >= median
         })
+    # === others 特殊处理逻辑 ===
+    others_name: str = "others"
+    predicted_diseases = diseases_result_temp[:]  # 浅拷贝
+    has_others = any(d.get("name") == others_name for d in predicted_diseases)
+    num_pred = len(predicted_diseases)
+
+    if has_others:
+        if num_pred > 1:
+            # 有 others + 其他疾病 → 丢弃 others
+            predicted_diseases = [d for d in predicted_diseases if d.get("name") != others_name]
+        # else: 只有 others → 保留
+    else:
+        if num_pred == 0:
+            # 没有任何疾病标签 → 强制添加 others，置信度=1.0
+            predicted_diseases = [{"name": others_name, "confidence": 1.0}]
+
+    diseases_result = predicted_diseases
 
     symptoms_result = []
     for idx in np.where(symptom_mask)[0]:
@@ -712,10 +734,10 @@ def predict(
         norm_conf = float(np.clip(norm_conf, 0.0, 1.0))
         symptoms_result.append({
             "label": label_name,
-            "probability": round(prob, 4),
-            "median_positive": round(median, 4),
+            # "probability": round(prob, 4),
+            # "median_positive": round(median, 4),
             "confidence": norm_conf,
-            "above_median": prob >= median
+            # "above_median": prob >= median
         })
 
     # 急救（二分类）
@@ -730,13 +752,7 @@ def predict(
     result = {
         "diseases": diseases_result,  # 每个正类疾病都带 probability + median + confidence
         "symptoms": symptoms_result,
-        "need_first_aid": {
-            "value": need_first_aid,
-            "probability": round(first_aid_prob, 4),
-            "median_positive": round(fa_median, 4),
-            "confidence": fa_norm_conf,
-            "above_median": first_aid_prob >= fa_median if need_first_aid else None,
-        },
+        "need_first_aid": need_first_aid,
     }
 
     return result
