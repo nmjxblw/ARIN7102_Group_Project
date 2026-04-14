@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 from sklearn.model_selection import train_test_split
 from torch import FloatTensor
 import torch
@@ -337,6 +338,7 @@ def compute_metrics(eval_pred: EvalPrediction) -> dict[str, float]:
         "acc_first_aid": float(accuracy_score(first_aid_labels, first_aid_predicts)),
     }
 
+
 # ====================== 新增：计算每个 label 正样本的中位数 ======================
 def compute_label_medians(
     model: DistilBertForMultitaskLearning,
@@ -412,13 +414,16 @@ def compute_label_medians(
         else:
             symptom_medians[label_name] = 0.5
 
-    first_aid_median = float(np.median(first_aid_probs_pos)) if first_aid_probs_pos else 0.5
+    first_aid_median = (
+        float(np.median(first_aid_probs_pos)) if first_aid_probs_pos else 0.5
+    )
 
     return {
         "disease": disease_medians,
         "symptom": symptom_medians,
         "first_aid": first_aid_median,
     }
+
 
 # ====================== 5. 开始训练 (手动循环) ======================
 
@@ -616,8 +621,11 @@ def train_bert():
 
 
 # ====================== 6. 推理函数 ======================
+PER_HEATED: bool = False
+
+
 def predict(
-    text: str,
+    text_input: str,
     model_path: str | Path = SAVE_PATH,
     threshold: float = 1 / (1 + math.pow(math.e, -(0))),
     device: torch.device = TORCH_DEVICE,
@@ -628,7 +636,29 @@ def predict(
     diseases 自动处理 "others" 逻辑（多标签时丢弃 others、仅 others 时保留、无任何标签时强制添加 others 且 confidence=1.0）。
     confidence 保留原有的中位数归一化计算逻辑。
     """
+
     # 加载
+    inference_device, tokenizer, inference_model, mlb_d, mlb_s, medians = preload(
+        model_path, device
+    )
+    # 预测
+    if isinstance(text_input, str):
+        return predict_with_preload(
+            text_input,
+            tokenizer,
+            inference_device,
+            inference_model,
+            mlb_d,
+            mlb_s,
+            medians,
+            threshold,
+        )
+
+    return {}
+
+
+def preload(model_path: str | Path = SAVE_PATH, device: torch.device = TORCH_DEVICE):
+    """模型预测前预加载，加载模型、分词器和标签编码器，并将模型移动到指定设备。"""
     inference_device = device
     tokenizer = load_tokenizer_compat(model_path)
     inference_model = cast(
@@ -641,8 +671,9 @@ def predict(
         torch.nn.Module.cuda(inference_model)
     else:
         torch.nn.Module.cpu(inference_model)
+    encoders: Any = None
     with open(f"{model_path}/label_encoders.pkl", "rb") as f:
-        encoders: Any = pickle.load(f)
+        encoders = pickle.load(f)
         # 验证encoders的类型
     if isinstance(encoders, list):
         logger.debug("警告：encoders是列表类型，尝试转换为字典")
@@ -652,6 +683,20 @@ def predict(
     mlb_d: MultiLabelBinarizer = encoders["disease"]
     mlb_s: MultiLabelBinarizer = encoders["symptom"]
     medians: dict = encoders.get("medians", {})
+    return inference_device, tokenizer, inference_model, mlb_d, mlb_s, medians
+
+
+def predict_with_preload(
+    text: str,
+    tokenizer: DistilBertTokenizer,
+    inference_device: torch.device,
+    inference_model: DistilBertForMultitaskLearning,
+    mlb_d: MultiLabelBinarizer,
+    mlb_s: MultiLabelBinarizer,
+    medians: dict,
+    threshold: float = 1 / (1 + math.pow(math.e, -(0))),
+) -> dict[str, Any]:
+    """使用预加载的模型和相关组件进行预测，返回带置信度的疾病和症状列表。"""
     # 预处理
     inputs: BatchEncoding = tokenizer(
         text,
@@ -673,9 +718,9 @@ def predict(
     disease_logits = disease_logits.detach().cpu()
     symptoms_logits = symptoms_logits.detach().cpu()
     first_aid_logits = first_aid_logits.detach().cpu()
-    logger.debug(f"disease_logits: {disease_logits}\n")
-    logger.debug(f"symptoms_logits: {symptoms_logits}\n")
-    logger.debug(f"first_aid_logits: {first_aid_logits}\n")
+    # logger.debug(f"disease_logits: {disease_logits}\n")
+    # logger.debug(f"symptoms_logits: {symptoms_logits}\n")
+    # logger.debug(f"first_aid_logits: {first_aid_logits}\n")
 
     disease_probs = torch.sigmoid(disease_logits).cpu().numpy()[0]  # (num_diseases,)
     symptom_probs = torch.sigmoid(symptoms_logits).cpu().numpy()[0]  # (num_symptoms,)
@@ -697,13 +742,15 @@ def predict(
         else:
             norm_conf = 1.0 if prob >= median else (prob - 0.5) / (median - 0.5)
         norm_conf = float(np.clip(norm_conf, 0.0, 1.0))
-        diseases_result_temp.append({
-            "label": label_name,
-            # "probability": round(prob, 4),
-            # "median_positive": round(median, 4),
-            "confidence": round(norm_conf, 2),  # 与中位数比较得出的置信等级
-            # "above_median": prob >= median
-        })
+        diseases_result_temp.append(
+            {
+                "label": label_name,
+                # "probability": round(prob, 4),
+                # "median_positive": round(median, 4),
+                "confidence": round(norm_conf, 2),  # 与中位数比较得出的置信等级
+                # "above_median": prob >= median
+            }
+        )
     # === others 特殊处理逻辑 ===
     others_name: str = "others"
     predicted_diseases = diseases_result_temp[:]  # 浅拷贝
@@ -713,7 +760,9 @@ def predict(
     if has_others:
         if num_pred > 1:
             # 有 others + 其他疾病 → 丢弃 others
-            predicted_diseases = [d for d in predicted_diseases if d.get("name") != others_name]
+            predicted_diseases = [
+                d for d in predicted_diseases if d.get("name") != others_name
+            ]
         # else: 只有 others → 保留
     else:
         if num_pred == 0:
@@ -732,13 +781,15 @@ def predict(
         else:
             norm_conf = 1.0 if prob >= median else (prob - 0.5) / (median - 0.5)
         norm_conf = float(np.clip(norm_conf, 0.0, 1.0))
-        symptoms_result.append({
-            "label": label_name,
-            # "probability": round(prob, 4),
-            # "median_positive": round(median, 4),
-            "confidence": norm_conf,
-            # "above_median": prob >= median
-        })
+        symptoms_result.append(
+            {
+                "label": label_name,
+                # "probability": round(prob, 4),
+                # "median_positive": round(median, 4),
+                "confidence": norm_conf,
+                # "above_median": prob >= median
+            }
+        )
 
     # 急救（二分类）
     need_first_aid = int(first_aid_prob >= threshold)
@@ -746,7 +797,11 @@ def predict(
     if fa_median <= 0.5:
         fa_norm_conf = 1.0 if first_aid_prob >= 0.5 else 0.0
     else:
-        fa_norm_conf = 1.0 if first_aid_prob >= fa_median else (first_aid_prob - 0.5) / (fa_median - 0.5)
+        fa_norm_conf = (
+            1.0
+            if first_aid_prob >= fa_median
+            else (first_aid_prob - 0.5) / (fa_median - 0.5)
+        )
     fa_norm_conf = float(np.clip(fa_norm_conf, 0.0, 1.0))
 
     result = {
@@ -757,9 +812,10 @@ def predict(
 
     return result
 
+
 # 测试推理
 if __name__ == "__main__":
-    #train_bert()
+    # train_bert()
     test_text = "I feel dizzy and nauseous"
     result = predict(test_text)
     msg = f"输入文本：{test_text}\n推理测试结果:"
