@@ -17,7 +17,7 @@ from .recommendation_pipeline import (
     safe_cosine_scores,
 )
 from .cross_encoder_reranker import CrossEncoderReranker
-from .dual_recall_pipeline import DualRecallDrugRecommender, WeightedLabel, parse_weighted_labels
+from .dual_recall_pipeline import DualRecallDrugRecommender, PipelineTrace, WeightedLabel, parse_weighted_labels
 
 __all__ = [
     "baseline_filter",
@@ -31,6 +31,7 @@ __all__ = [
     "safe_cosine_scores",
     "CrossEncoderReranker",
     "DualRecallDrugRecommender",
+    "PipelineTrace",
     "WeightedLabel",
     "parse_weighted_labels",
 ]

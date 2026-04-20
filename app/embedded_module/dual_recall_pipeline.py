@@ -11,11 +11,18 @@ Pipeline stages:
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+import os
+import sys
+import time
+from dataclasses import dataclass, field
 from typing import Any, Iterable
 
 import numpy as np
 import pandas as pd
+
+# Import pipeline config (project root level)
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parents[2]))
+from pipeline_config import cfg
 
 from .cross_encoder_reranker import CrossEncoderReranker
 from .recommendation_pipeline import (
@@ -24,6 +31,61 @@ from .recommendation_pipeline import (
     prepare_drug_dataframe,
     safe_cosine_scores,
 )
+
+
+@dataclass
+class PipelineTrace:
+    """Data tracing / instrumentation for a single recommend() call."""
+
+    # Timing (seconds)
+    time_semantic_recall: float = 0.0
+    time_label_recall: float = 0.0
+    time_fuse: float = 0.0
+    time_rerank: float = 0.0
+    time_total: float = 0.0
+
+    # Candidate counts
+    count_semantic_candidates: int = 0
+    count_label_candidates: int = 0
+    count_fused_candidates: int = 0
+    count_final: int = 0
+
+    # Score distributions (top-k results)
+    score_semantic_mean: float = 0.0
+    score_label_mean: float = 0.0
+    score_cross_encoder_mean: float = 0.0
+    score_business_mean: float = 0.0
+    score_final_mean: float = 0.0
+    score_final_max: float = 0.0
+    score_final_min: float = 0.0
+
+    # Input metadata
+    query_length: int = 0
+    num_disease_labels: int = 0
+    num_symptom_labels: int = 0
+
+    def to_dict(self) -> dict[str, float | int]:
+        return {
+            "time_semantic_recall_ms": round(self.time_semantic_recall * 1000, 2),
+            "time_label_recall_ms": round(self.time_label_recall * 1000, 2),
+            "time_fuse_ms": round(self.time_fuse * 1000, 2),
+            "time_rerank_ms": round(self.time_rerank * 1000, 2),
+            "time_total_ms": round(self.time_total * 1000, 2),
+            "count_semantic_candidates": self.count_semantic_candidates,
+            "count_label_candidates": self.count_label_candidates,
+            "count_fused_candidates": self.count_fused_candidates,
+            "count_final": self.count_final,
+            "score_semantic_mean": round(self.score_semantic_mean, 4),
+            "score_label_mean": round(self.score_label_mean, 4),
+            "score_cross_encoder_mean": round(self.score_cross_encoder_mean, 4),
+            "score_business_mean": round(self.score_business_mean, 4),
+            "score_final_mean": round(self.score_final_mean, 4),
+            "score_final_max": round(self.score_final_max, 4),
+            "score_final_min": round(self.score_final_min, 4),
+            "query_length": self.query_length,
+            "num_disease_labels": self.num_disease_labels,
+            "num_symptom_labels": self.num_symptom_labels,
+        }
 
 
 @dataclass(frozen=True)
@@ -132,9 +194,13 @@ class DualRecallDrugRecommender:
         disease_items: Iterable[Any],
         symptom_items: Iterable[Any],
         top_k: int = 300,
-        disease_weight: float = 0.55,
-        symptom_weight: float = 0.45,
+        disease_weight: float | None = None,
+        symptom_weight: float | None = None,
     ) -> pd.DataFrame:
+        if disease_weight is None:
+            disease_weight = cfg.label_disease_weight
+        if symptom_weight is None:
+            symptom_weight = cfg.label_symptom_weight
         diseases = parse_weighted_labels(disease_items, normalize_symptom=False)
         symptoms = parse_weighted_labels(symptom_items, normalize_symptom=True)
         disease_conf = _build_confidence_map(diseases)
@@ -232,7 +298,9 @@ class DualRecallDrugRecommender:
         else:
             price_score = pd.Series(np.zeros(len(candidates), dtype=np.float32), index=candidates.index)
 
-        return 0.55 * rating_score + 0.30 * reviews_score + 0.15 * price_score
+        return (cfg.biz_weight_rating * rating_score
+                + cfg.biz_weight_reviews * reviews_score
+                + cfg.biz_weight_price * price_score)
 
     def rerank(
         self,
@@ -241,10 +309,16 @@ class DualRecallDrugRecommender:
         disease_items: Iterable[Any],
         symptom_items: Iterable[Any],
         top_k: int = 20,
-        final_weight_recall: float = 0.35,
-        final_weight_cross_encoder: float = 0.50,
-        final_weight_business: float = 0.15,
+        final_weight_recall: float | None = None,
+        final_weight_cross_encoder: float | None = None,
+        final_weight_business: float | None = None,
     ) -> pd.DataFrame:
+        if final_weight_recall is None:
+            final_weight_recall = cfg.final_weight_recall
+        if final_weight_cross_encoder is None:
+            final_weight_cross_encoder = cfg.final_weight_cross_encoder
+        if final_weight_business is None:
+            final_weight_business = cfg.final_weight_business
         if len(fused_candidates) == 0:
             return fused_candidates
 
@@ -272,18 +346,55 @@ class DualRecallDrugRecommender:
         symptom_text: str,
         disease_items: Iterable[Any],
         symptom_items: Iterable[Any],
-        recall_top_k_each: int = 300,
-        fused_top_k: int = 300,
-        top_k: int = 20,
-        recall_weight_semantic: float = 0.5,
-        recall_weight_label: float = 0.5,
-    ) -> pd.DataFrame:
+        recall_top_k_each: int | None = None,
+        fused_top_k: int | None = None,
+        top_k: int | None = None,
+        recall_weight_semantic: float | None = None,
+        recall_weight_label: float | None = None,
+        enable_trace: bool = False,
+    ) -> pd.DataFrame | tuple[pd.DataFrame, PipelineTrace]:
+        if recall_top_k_each is None:
+            recall_top_k_each = cfg.recall_top_k_each
+        if fused_top_k is None:
+            fused_top_k = cfg.fused_top_k
+        if top_k is None:
+            top_k = cfg.top_k
+        if recall_weight_semantic is None:
+            recall_weight_semantic = cfg.recall_weight_semantic
+        if recall_weight_label is None:
+            recall_weight_label = cfg.recall_weight_label
+        trace = PipelineTrace() if enable_trace else None
+        t_total_start = time.perf_counter()
+
+        # Materialize iterables so they can be reused
+        disease_items_list = list(disease_items)
+        symptom_items_list = list(symptom_items)
+
+        if trace:
+            trace.query_length = len(str(symptom_text or "").strip())
+            trace.num_disease_labels = len(disease_items_list)
+            trace.num_symptom_labels = len(symptom_items_list)
+
+        # --- Semantic recall ---
+        t0 = time.perf_counter()
         semantic_candidates = self.semantic_recall(symptom_text=symptom_text, top_k=recall_top_k_each)
+        if trace:
+            trace.time_semantic_recall = time.perf_counter() - t0
+            trace.count_semantic_candidates = len(semantic_candidates)
+
+        # --- Label recall ---
+        t0 = time.perf_counter()
         label_candidates = self.label_recall(
-            disease_items=disease_items,
-            symptom_items=symptom_items,
+            disease_items=disease_items_list,
+            symptom_items=symptom_items_list,
             top_k=recall_top_k_each,
         )
+        if trace:
+            trace.time_label_recall = time.perf_counter() - t0
+            trace.count_label_candidates = len(label_candidates)
+
+        # --- Fusion ---
+        t0 = time.perf_counter()
         fused_candidates = self.fuse_recalls(
             semantic_candidates=semantic_candidates,
             label_candidates=label_candidates,
@@ -291,10 +402,33 @@ class DualRecallDrugRecommender:
             label_weight=recall_weight_label,
             top_k=fused_top_k,
         )
-        return self.rerank(
+        if trace:
+            trace.time_fuse = time.perf_counter() - t0
+            trace.count_fused_candidates = len(fused_candidates)
+
+        # --- Rerank ---
+        t0 = time.perf_counter()
+        result = self.rerank(
             fused_candidates=fused_candidates,
             symptom_text=symptom_text,
-            disease_items=disease_items,
-            symptom_items=symptom_items,
+            disease_items=disease_items_list,
+            symptom_items=symptom_items_list,
             top_k=top_k,
         )
+        if trace:
+            trace.time_rerank = time.perf_counter() - t0
+            trace.count_final = len(result)
+            trace.time_total = time.perf_counter() - t_total_start
+            # Score stats from final result
+            if len(result) > 0:
+                trace.score_semantic_mean = float(result["semantic_score"].mean()) if "semantic_score" in result.columns else 0.0
+                trace.score_label_mean = float(result["label_score"].mean()) if "label_score" in result.columns else 0.0
+                trace.score_cross_encoder_mean = float(result["cross_encoder_score"].mean())
+                trace.score_business_mean = float(result["business_score"].mean())
+                trace.score_final_mean = float(result["final_score"].mean())
+                trace.score_final_max = float(result["final_score"].max())
+                trace.score_final_min = float(result["final_score"].min())
+
+        if trace:
+            return result, trace
+        return result

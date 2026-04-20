@@ -17,8 +17,9 @@ def health_check() -> dict[str, str]:
 @router.post("/drugs", response_model=RecommendResponse)
 def recommend_drugs(payload: RecommendRequest) -> RecommendResponse:
     service = get_recommendation_service()
+    trace_data = None
     try:
-        result_df = service.recommend(
+        result = service.recommend(
             symptom_text=payload.symptom_text,
             diseases=[item.model_dump() if hasattr(item, "model_dump") else item for item in payload.diseases],
             symptoms=[item.model_dump() if hasattr(item, "model_dump") else item for item in payload.symptoms],
@@ -27,7 +28,14 @@ def recommend_drugs(payload: RecommendRequest) -> RecommendResponse:
             fused_top_k=payload.fused_top_k,
             recall_weight_semantic=payload.recall_weight_semantic,
             recall_weight_label=payload.recall_weight_label,
+            use_bert_prediction=payload.use_bert_prediction,
+            enable_trace=payload.enable_trace,
         )
+        if payload.enable_trace:
+            result_df, trace_obj = result
+            trace_data = trace_obj.to_dict()
+        else:
+            result_df = result
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"recommendation failed: {exc}") from exc
 
@@ -76,4 +84,4 @@ def recommend_drugs(payload: RecommendRequest) -> RecommendResponse:
             )
         )
 
-    return RecommendResponse(count=len(results), results=results)
+    return RecommendResponse(count=len(results), results=results, trace=trace_data)

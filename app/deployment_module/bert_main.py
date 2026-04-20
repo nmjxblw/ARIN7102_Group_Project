@@ -744,7 +744,7 @@ def predict_with_preload(
         norm_conf = float(np.clip(norm_conf, 0.0, 1.0))
         diseases_result_temp.append(
             {
-                "label": label_name,
+                "name": label_name,
                 # "probability": round(prob, 4),
                 # "median_positive": round(median, 4),
                 "confidence": round(norm_conf, 2),  # 与中位数比较得出的置信等级
@@ -783,7 +783,7 @@ def predict_with_preload(
         norm_conf = float(np.clip(norm_conf, 0.0, 1.0))
         symptoms_result.append(
             {
-                "label": label_name,
+                "name": label_name,
                 # "probability": round(prob, 4),
                 # "median_positive": round(median, 4),
                 "confidence": norm_conf,
