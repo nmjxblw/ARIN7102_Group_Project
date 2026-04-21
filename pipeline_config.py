@@ -14,6 +14,11 @@ _CONFIG_PATH = _PROJECT_ROOT / "pipeline_config.env"
 if _CONFIG_PATH.exists():
     load_dotenv(_CONFIG_PATH, override=False)
 
+# 加载根目录 .env（提供 OPENAI_API_KEY 等回退配置）
+_ROOT_ENV = _PROJECT_ROOT / ".env"
+if _ROOT_ENV.exists():
+    load_dotenv(_ROOT_ENV, override=False)
+
 
 def _float(key: str, default: float) -> float:
     return float(os.getenv(key, str(default)))
@@ -96,6 +101,43 @@ class PipelineConfig:
         """默认返回的药物数量"""
         return _int("TOP_K", 10)
 
+    # ── 模型配置 ──────────────────────────────────────────
+    @property
+    def medbert_model_name(self) -> str:
+        """语义编码模型名称"""
+        return os.getenv("MEDBERT_MODEL_NAME", "pritamdeka/S-PubMedBert-MS-MARCO")
+
+    @property
+    def embedding_max_length(self) -> int:
+        """编码最大 token 长度"""
+        return _int("EMBEDDING_MAX_LENGTH", 512)
+
+    @property
+    def embedding_pooling(self) -> str:
+        """向量池化策略: 'cls' 或 'mean'"""
+        return os.getenv("EMBEDDING_POOLING", "mean").strip().lower()
+
+    # ── LLM 术语扩展 ──────────────────────────────────────────
+    @property
+    def enable_llm_query_expansion(self) -> bool:
+        """是否启用 LLM 医学术语扩展"""
+        return os.getenv("ENABLE_LLM_QUERY_EXPANSION", "false").strip().lower() == "true"
+
+    @property
+    def llm_api_key(self) -> str:
+        """LLM API Key（优先专用配置，回退到 OPENAI_API_KEY）"""
+        return os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY", "")
+
+    @property
+    def llm_base_url(self) -> str:
+        """LLM Base URL（优先专用配置，回退到 OPENAI_BASE_URL）"""
+        return os.getenv("LLM_BASE_URL") or os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+
+    @property
+    def llm_model(self) -> str:
+        """LLM 模型名称（优先专用配置，回退到 OPENAI_MODEL）"""
+        return os.getenv("LLM_MODEL") or os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
+
     def summary(self) -> dict:
         """返回所有配置的字典形式（用于日志/调试）"""
         return {
@@ -112,6 +154,11 @@ class PipelineConfig:
             "biz_weight_reviews": self.biz_weight_reviews,
             "biz_weight_price": self.biz_weight_price,
             "top_k": self.top_k,
+            "medbert_model_name": self.medbert_model_name,
+            "embedding_max_length": self.embedding_max_length,
+            "embedding_pooling": self.embedding_pooling,
+            "enable_llm_query_expansion": self.enable_llm_query_expansion,
+            "llm_model": self.llm_model,
         }
 
 

@@ -15,9 +15,9 @@
   - 示例：`"I have severe headache with fever and sore throat"`
 
 ### 处理流程
-1. 使用 PubMedBERT 将 `symptom_text` 编码为 768 维向量
+1. 使用 S-PubMedBert-MS-MARCO (bi-encoder, mean pooling) 将 `symptom_text` 编码为 768 维向量
 2. 与药物库的预计算向量（`drug_embeddings`）计算余弦相似度
-3. 按相似度降序排序，取 Top-K（默认 300）
+3. 按相似度降序排序，取 Top-K（默认 200）
 
 ### 输出
 - DataFrame，包含字段：
@@ -49,7 +49,7 @@
 3. 计算加权分数：
    - `label_score_raw = 0.55 × disease_conf_overlap + 0.45 × symptom_conf_overlap`
 4. 过滤：保留 `disease_conf_overlap > 0 OR symptom_conf_overlap > 0` 的药物
-5. 归一化并取 Top-K（默认 300）
+5. 归一化并取 Top-K（默认 200）
 
 ### 输出
 - DataFrame，包含字段：
@@ -79,7 +79,7 @@
    ```
    recall_fused_score = w_semantic × semantic_score + w_label × label_score
    ```
-4. 按融合分数降序排序，取 Top-K（默认 300）
+4. 按融合分数降序排序，取 Top-K（默认 200）
 
 ### 输出
 - DataFrame，包含字段：

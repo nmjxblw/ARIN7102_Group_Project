@@ -80,7 +80,7 @@ label_score_raw = 0.55 × disease_overlap + 0.45 × symptom_overlap
 1. **引入 IDF 加权**：对高频 disease（如 acne 出现在 300+ 药物中）降权
 2. **症状覆盖率**：`symptom_overlap / len(drug.symptom_list)` 避免通用药占优
 3. **负向惩罚**：药物标注的 disease 中有与 query 不匹配的，适当减分
-4. **TF-IDF 或 BM25 替代精确匹配**
+4. **引入 IDF 加权 / 覆盖率评分**替代精确匹配
 
 ---
 

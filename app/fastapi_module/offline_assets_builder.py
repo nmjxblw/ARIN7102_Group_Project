@@ -10,9 +10,12 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 APP_ROOT = REPO_ROOT / "app"
 if str(APP_ROOT) not in sys.path:
     sys.path.insert(0, str(APP_ROOT))
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from embedded_module.drug_embedding_engine import DrugEmbeddingEngine
 from embedded_module.recommendation_pipeline import prepare_drug_dataframe
+from pipeline_config import cfg
 
 
 def build_assets(
@@ -43,7 +46,50 @@ def build_assets(
 
     print(f"[offline] building embeddings with model: {model_name}")
     engine = DrugEmbeddingEngine(model_name=model_name)
-    embeddings = engine.encode(structured_df["semantic_text"].tolist())
+
+    import numpy as np
+
+    # 只编码 View 1 (disease_description), 输出 (N, 768)
+    texts_dd = structured_df["semantic_text_dd"].tolist()
+    n_drugs = len(structured_df)
+
+    # ── 去重 + 按长度排序编码 ──
+    unique_texts: dict[str, int] = {}  # text -> index in unique list
+    text_idx: list[int] = []
+
+    for text in texts_dd:
+        if text not in unique_texts:
+            unique_texts[text] = len(unique_texts)
+        text_idx.append(unique_texts[text])
+
+    unique_list = [""] * len(unique_texts)
+    for text, idx in unique_texts.items():
+        unique_list[idx] = text
+
+    dedup_count = len(unique_list)
+    saved_pct = (1 - dedup_count / n_drugs) * 100
+    print(f"[offline] 去重: {n_drugs} 条文本 -> {dedup_count} 条唯一文本 (节省 {saved_pct:.1f}%)")
+
+    # 按 token 长度排序，让短文本 batch 快速通过
+    sort_keys = sorted(range(dedup_count), key=lambda k: len(unique_list[k]))
+    sorted_texts = [unique_list[k] for k in sort_keys]
+
+    print(f"[offline] 文本已按长度排序 (shortest: {len(sorted_texts[0])} chars, longest: {len(sorted_texts[-1])} chars)")
+    print(f"[offline] 开始编码 {dedup_count} 条唯一文本...")
+    all_embs = engine.encode(sorted_texts)  # (dedup_count, 768)
+
+    # 按原始顺序重新排列
+    all_embs_reordered = np.empty_like(all_embs)
+    for new_idx, old_idx in enumerate(sort_keys):
+        all_embs_reordered[old_idx] = all_embs[new_idx]
+
+    # 组装 (N, 768) — 单向量
+    emb_dim = all_embs.shape[1]
+    embeddings = np.empty((n_drugs, emb_dim), dtype=np.float32)
+    for i in range(n_drugs):
+        embeddings[i] = all_embs_reordered[text_idx[i]]
+
+    print(f"[offline] single-view embeddings shape: {embeddings.shape}")
     engine.save(embeddings, str(output_embeddings_npy))
     print(f"[offline] embeddings saved: {output_embeddings_npy}")
 
@@ -63,7 +109,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--model-name",
         type=str,
-        default="microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract",
+        default=cfg.medbert_model_name,
     )
     parser.add_argument(
         "--force-rebuild-embeddings",

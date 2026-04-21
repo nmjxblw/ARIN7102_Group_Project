@@ -1,10 +1,9 @@
-"""
-Dual-recall drug recommendation pipeline.
+"""Dual-recall drug recommendation pipeline.
 
 Pipeline stages:
 1) Semantic recall from raw symptom description with MedBERT embeddings.
 2) Label-confidence recall from disease/symptom labels.
-3) Weighted fusion of the two recall results.
+3) Weighted fusion of recall results.
 4) Cross-encoder reranking.
 5) Business-factor adjustment (rating/reviews/price if present).
 """
@@ -124,6 +123,9 @@ def parse_weighted_labels(items: Iterable[Any], normalize_symptom: bool = False)
             if "name" in item:
                 name = str(item.get("name", "")).strip()
                 confidence = _to_float(item.get("confidence"), default=0.0)
+            elif "label" in item:
+                name = str(item.get("label", "")).strip()
+                confidence = _to_float(item.get("confidence"), default=0.0)
             elif len(item) == 1:
                 key = next(iter(item))
                 name = str(key).strip()
@@ -144,15 +146,20 @@ def _build_confidence_map(labels: list[WeightedLabel]) -> dict[str, float]:
     return confidence_map
 
 
-def _build_rerank_query(
+def _build_combined_query(
     symptom_text: str, diseases: list[WeightedLabel], symptoms: list[WeightedLabel]
 ) -> str:
+    """Dynamically concatenate symptom_text, disease labels, and symptom labels.
+
+    Used by both semantic_recall and cross-encoder reranking to build a richer
+    query from all available inputs.
+    """
     disease_terms = [x.name for x in diseases]
     symptom_terms = [x.name for x in symptoms]
     label_text = build_query_text(disease_terms, symptom_terms)
     symptom_text = str(symptom_text or "").strip()
     if symptom_text and label_text != "[MASK]":
-        return f"User symptom description: {symptom_text}. {label_text}"
+        return f"{symptom_text} {label_text}"
     if symptom_text:
         return symptom_text
     return label_text
@@ -166,7 +173,7 @@ class DualRecallDrugRecommender:
         embedding_engine,
         cross_encoder_reranker: CrossEncoderReranker,
     ):
-        if len(df) != len(drug_embeddings):
+        if len(df) != drug_embeddings.shape[0]:
             raise ValueError(
                 "df and drug_embeddings should align by row index. "
                 f"Got len(df)={len(df)}, len(drug_embeddings)={len(drug_embeddings)}"
@@ -182,7 +189,13 @@ class DualRecallDrugRecommender:
     def semantic_recall(self, symptom_text: str, top_k: int = 300) -> pd.DataFrame:
         query_text = str(symptom_text or "").strip() or "[MASK]"
         query_vec = self.embedding_engine.encode_query(query_text).astype(np.float32)
-        semantic_scores = safe_cosine_scores(self.drug_embeddings, query_vec)
+
+        # Support both legacy 3D (N,2,768) and current 2D (N,768) embeddings
+        if self.drug_embeddings.ndim == 3:
+            emb_2d = self.drug_embeddings[:, 1, :]  # View 1: disease_description
+        else:
+            emb_2d = self.drug_embeddings
+        semantic_scores = safe_cosine_scores(emb_2d, query_vec)
         candidates = self.df.copy()
         candidates["semantic_score_raw"] = semantic_scores
         candidates = candidates.sort_values("semantic_score_raw", ascending=False).head(top_k).copy()
@@ -264,15 +277,19 @@ class DualRecallDrugRecommender:
         fused = self.df.copy()
         fused = fused.join(semantic_scores, how="left")
         fused = fused.join(label_scores, how="left")
+
         fused["semantic_score"] = fused["semantic_score"].fillna(0.0)
         fused["label_score"] = fused["label_score"].fillna(0.0)
         fused["disease_conf_overlap"] = fused["disease_conf_overlap"].fillna(0.0)
         fused["symptom_conf_overlap"] = fused["symptom_conf_overlap"].fillna(0.0)
-        fused = fused[(fused["semantic_score"] > 0) | (fused["label_score"] > 0)].copy()
+        fused = fused[
+            (fused["semantic_score"] > 0) | (fused["label_score"] > 0)
+        ].copy()
         if len(fused) == 0:
             return fused
         fused["recall_fused_score"] = (
-            semantic_weight * fused["semantic_score"] + label_weight * fused["label_score"]
+            semantic_weight * fused["semantic_score"]
+            + label_weight * fused["label_score"]
         )
         fused = fused.sort_values("recall_fused_score", ascending=False).head(top_k).copy()
         return fused
@@ -324,7 +341,7 @@ class DualRecallDrugRecommender:
 
         diseases = parse_weighted_labels(disease_items, normalize_symptom=False)
         symptoms = parse_weighted_labels(symptom_items, normalize_symptom=True)
-        query_text = _build_rerank_query(symptom_text, diseases, symptoms)
+        query_text = _build_combined_query(symptom_text, diseases, symptoms)
         cross_scores = self.cross_encoder.score_pairs(
             query=query_text,
             candidate_texts=fused_candidates["semantic_text"].tolist(),
@@ -375,9 +392,19 @@ class DualRecallDrugRecommender:
             trace.num_disease_labels = len(disease_items_list)
             trace.num_symptom_labels = len(symptom_items_list)
 
+        # --- Build enriched query (symptom_text + disease/symptom labels) ---
+        diseases_parsed = parse_weighted_labels(disease_items_list, normalize_symptom=False)
+        symptoms_parsed = parse_weighted_labels(symptom_items_list, normalize_symptom=True)
+        enriched_query = _build_combined_query(symptom_text, diseases_parsed, symptoms_parsed)
+
+        # --- LLM query expansion (optional) ---
+        if cfg.enable_llm_query_expansion:
+            from .query_expander import expand_query_with_llm
+            enriched_query = expand_query_with_llm(enriched_query)
+
         # --- Semantic recall ---
         t0 = time.perf_counter()
-        semantic_candidates = self.semantic_recall(symptom_text=symptom_text, top_k=recall_top_k_each)
+        semantic_candidates = self.semantic_recall(symptom_text=enriched_query, top_k=recall_top_k_each)
         if trace:
             trace.time_semantic_recall = time.perf_counter() - t0
             trace.count_semantic_candidates = len(semantic_candidates)
