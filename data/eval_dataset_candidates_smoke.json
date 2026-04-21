@@ -1,0 +1,788 @@
+[
+  {
+    "query_id": "eval_0001",
+    "symptom_text": "I have a headache and my nose is blocked, plus I'm really irritable. Could it be stress or something else?",
+    "diseases": [
+      {
+        "name": "common_cold",
+        "confidence": 0.97
+      },
+      {
+        "name": "hypertension",
+        "confidence": 0.74
+      },
+      {
+        "name": "migraine",
+        "confidence": 0.81
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "congestion",
+        "confidence": 1.0
+      },
+      {
+        "name": "headache",
+        "confidence": 1.0
+      },
+      {
+        "name": "irritability",
+        "confidence": 1.0
+      },
+      {
+        "name": "lack_of_concentration",
+        "confidence": 0.46
+      }
+    ],
+    "relevant_drugs": [
+      "prednisone",
+      "cyproheptadine",
+      "diltiazem",
+      "propranolol",
+      "spironolactone",
+      "clonidine",
+      "benicar",
+      "olmesartan",
+      "verapamil"
+    ],
+    "relevance_scores": {
+      "prednisone": 3,
+      "cyproheptadine": 2,
+      "diltiazem": 2,
+      "propranolol": 2,
+      "spironolactone": 2,
+      "clonidine": 2,
+      "benicar": 2,
+      "olmesartan": 2,
+      "verapamil": 2
+    }
+  },
+  {
+    "query_id": "eval_0002",
+    "symptom_text": "The blackheads and rash on my skin make me self-conscious. How can I clear this up quickly?",
+    "diseases": [
+      {
+        "name": "acne",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "blackheads",
+        "confidence": 1.0
+      },
+      {
+        "name": "skin_rash",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "isotretinoin",
+      "accutane",
+      "adapalene / benzoyl peroxide"
+    ],
+    "relevance_scores": {
+      "isotretinoin": 3,
+      "accutane": 2,
+      "adapalene / benzoyl peroxide": 2
+    }
+  },
+  {
+    "query_id": "eval_0003",
+    "symptom_text": "I have pain in my stomach and my knees are swollen. I'm not sure if these issues are related or separate.",
+    "diseases": [
+      {
+        "name": "alcoholic_hepatitis",
+        "confidence": 0.34
+      },
+      {
+        "name": "arthritis",
+        "confidence": 1.0
+      },
+      {
+        "name": "peptic_ulcer_diseae",
+        "confidence": 0.23
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "abdominal_pain",
+        "confidence": 0.62
+      },
+      {
+        "name": "swelling_joints",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "prednisone",
+      "methylprednisolone",
+      "triamcinolone",
+      "diclofenac",
+      "doxycycline",
+      "adalimumab",
+      "humira",
+      "infliximab",
+      "remicade"
+    ],
+    "relevance_scores": {
+      "prednisone": 3,
+      "methylprednisolone": 2,
+      "triamcinolone": 2,
+      "diclofenac": 2,
+      "doxycycline": 2,
+      "adalimumab": 2,
+      "humira": 2,
+      "infliximab": 2,
+      "remicade": 2
+    }
+  },
+  {
+    "query_id": "eval_0004",
+    "symptom_text": "I have a runny nose, sneezing, and a slight cough. Could it be allergies or just a cold?",
+    "diseases": [
+      {
+        "name": "allergy",
+        "confidence": 0.95
+      },
+      {
+        "name": "common_cold",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "continuous_sneezing",
+        "confidence": 0.89
+      },
+      {
+        "name": "cough",
+        "confidence": 1.0
+      },
+      {
+        "name": "runny_nose",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "prednisone",
+      "promethazine",
+      "cyproheptadine",
+      "doxycycline",
+      "valacyclovir",
+      "valtrex"
+    ],
+    "relevance_scores": {
+      "prednisone": 3,
+      "promethazine": 2,
+      "cyproheptadine": 2,
+      "doxycycline": 2,
+      "valacyclovir": 2,
+      "valtrex": 2
+    }
+  },
+  {
+    "query_id": "eval_0005",
+    "symptom_text": "I heard that my neighbor's kid has a runny nose and a nasty cough, and he's all congested. Probably just a cold.",
+    "diseases": [
+      {
+        "name": "common_cold",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "congestion",
+        "confidence": 0.88
+      },
+      {
+        "name": "cough",
+        "confidence": 0.97
+      },
+      {
+        "name": "runny_nose",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "doxycycline",
+      "valacyclovir",
+      "valtrex"
+    ],
+    "relevance_scores": {
+      "doxycycline": 3,
+      "valacyclovir": 2,
+      "valtrex": 2
+    }
+  },
+  {
+    "query_id": "eval_0006",
+    "symptom_text": "My aunt is having continuous sneezing along with severe vomiting and diarrhea, she looks pale.",
+    "diseases": [
+      {
+        "name": "allergy",
+        "confidence": 0.99
+      },
+      {
+        "name": "gastroenteritis",
+        "confidence": 0.93
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "continuous_sneezing",
+        "confidence": 1.0
+      },
+      {
+        "name": "diarrhoea",
+        "confidence": 1.0
+      },
+      {
+        "name": "vomiting",
+        "confidence": 0.32
+      }
+    ],
+    "relevant_drugs": [
+      "prednisone",
+      "promethazine",
+      "hydroxyzine",
+      "doxycycline",
+      "sulfamethoxazole / trimethoprim",
+      "lansoprazole"
+    ],
+    "relevance_scores": {
+      "prednisone": 3,
+      "promethazine": 2,
+      "hydroxyzine": 2,
+      "doxycycline": 2,
+      "sulfamethoxazole / trimethoprim": 2,
+      "lansoprazole": 2
+    }
+  },
+  {
+    "query_id": "eval_0007",
+    "symptom_text": "I've been vomiting non-stop, my eyes look hollow, and I feel like I'm drying up. I need advice.",
+    "diseases": [
+      {
+        "name": "gastroenteritis",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "dehydration",
+        "confidence": 1.0
+      },
+      {
+        "name": "sunken_eyes",
+        "confidence": 1.0
+      },
+      {
+        "name": "vomiting",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "lorazepam",
+      "gabapentin",
+      "amitriptyline"
+    ],
+    "relevance_scores": {
+      "lorazepam": 3,
+      "gabapentin": 2,
+      "amitriptyline": 2
+    }
+  },
+  {
+    "query_id": "eval_0008",
+    "symptom_text": "I've been getting these awful headaches, and on top of that, it hurts when I pee. What a week!",
+    "diseases": [
+      {
+        "name": "migraine",
+        "confidence": 0.99
+      },
+      {
+        "name": "urinary_tract_infection",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "burning_micturition",
+        "confidence": 1.0
+      },
+      {
+        "name": "headache",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "amitriptyline",
+      "venlafaxine",
+      "elavil",
+      "doxycycline",
+      "spironolactone",
+      "azithromycin"
+    ],
+    "relevance_scores": {
+      "amitriptyline": 3,
+      "venlafaxine": 2,
+      "elavil": 2,
+      "doxycycline": 2,
+      "spironolactone": 2,
+      "azithromycin": 2
+    }
+  },
+  {
+    "query_id": "eval_0009",
+    "symptom_text": "I've lost weight suddenly, my vision is distorted, and I have severe headaches. I'm really scared.",
+    "diseases": [
+      {
+        "name": "diabetes",
+        "confidence": 0.33
+      },
+      {
+        "name": "migraine",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "blurred_and_distorted_vision",
+        "confidence": 0.95
+      },
+      {
+        "name": "headache",
+        "confidence": 1.0
+      },
+      {
+        "name": "weight_loss",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "gabapentin",
+      "pregabalin",
+      "topiramate",
+      "amitriptyline",
+      "prednisone",
+      "clonidine"
+    ],
+    "relevance_scores": {
+      "gabapentin": 3,
+      "pregabalin": 2,
+      "topiramate": 2,
+      "amitriptyline": 2,
+      "prednisone": 2,
+      "clonidine": 2
+    }
+  },
+  {
+    "query_id": "eval_0010",
+    "symptom_text": "My neck hurts when I turn my head, and my fingers are stiff in the morning. Could it be arthritis?",
+    "diseases": [
+      {
+        "name": "osteoarthristis",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "joint_pain",
+        "confidence": 0.82
+      },
+      {
+        "name": "neck_pain",
+        "confidence": 0.27
+      }
+    ],
+    "relevant_drugs": [
+      "doxycycline",
+      "naproxen",
+      "sulfamethoxazole / trimethoprim"
+    ],
+    "relevance_scores": {
+      "doxycycline": 3,
+      "naproxen": 2,
+      "sulfamethoxazole / trimethoprim": 2
+    }
+  },
+  {
+    "query_id": "eval_0011",
+    "symptom_text": "I can't breathe properly, my heart is pounding, and I have a high fever. I'm really worried.",
+    "diseases": [
+      {
+        "name": "bronchial_asthma",
+        "confidence": 0.19
+      },
+      {
+        "name": "pneumonia",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "breathlessness",
+        "confidence": 1.0
+      },
+      {
+        "name": "fast_heart_rate",
+        "confidence": 1.0
+      },
+      {
+        "name": "high_fever",
+        "confidence": 0.72
+      }
+    ],
+    "relevant_drugs": [
+      "doxycycline",
+      "azithromycin",
+      "prednisone",
+      "metronidazole",
+      "dapsone",
+      "clindamycin"
+    ],
+    "relevance_scores": {
+      "doxycycline": 3,
+      "azithromycin": 2,
+      "prednisone": 2,
+      "metronidazole": 2,
+      "dapsone": 2,
+      "clindamycin": 2
+    }
+  },
+  {
+    "query_id": "eval_0012",
+    "symptom_text": "I have these rough, itchy patches on my skin that are sometimes red and sometimes have silvery bits. They don't seem to go away.",
+    "diseases": [
+      {
+        "name": "acne",
+        "confidence": 0.23
+      },
+      {
+        "name": "fungal_infection",
+        "confidence": 0.78
+      },
+      {
+        "name": "psoriasis",
+        "confidence": 0.97
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "itching",
+        "confidence": 0.91
+      },
+      {
+        "name": "silver_like_dusting",
+        "confidence": 0.95
+      },
+      {
+        "name": "skin_rash",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "doxycycline",
+      "minocycline",
+      "clindamycin",
+      "prednisone",
+      "methotrexate",
+      "dexamethasone",
+      "chloramphenicol",
+      "enbrel",
+      "stelara"
+    ],
+    "relevance_scores": {
+      "doxycycline": 3,
+      "minocycline": 2,
+      "clindamycin": 2,
+      "prednisone": 2,
+      "methotrexate": 2,
+      "dexamethasone": 2,
+      "chloramphenicol": 2,
+      "enbrel": 2,
+      "stelara": 2
+    }
+  },
+  {
+    "query_id": "eval_0013",
+    "symptom_text": "My skin is so itchy, and I see some dark spots appearing. Also, I've been feeling like I need to urinate frequently.",
+    "diseases": [
+      {
+        "name": "fungal_infection",
+        "confidence": 1.0
+      },
+      {
+        "name": "urinary_tract_infection",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "continuous_feel_of_urine",
+        "confidence": 1.0
+      },
+      {
+        "name": "itching",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "doxycycline",
+      "azithromycin",
+      "sulfamethoxazole / trimethoprim",
+      "minocycline",
+      "bactrim",
+      "fluconazole"
+    ],
+    "relevance_scores": {
+      "doxycycline": 3,
+      "azithromycin": 2,
+      "sulfamethoxazole / trimethoprim": 2,
+      "minocycline": 2,
+      "bactrim": 2,
+      "fluconazole": 2
+    }
+  },
+  {
+    "query_id": "eval_0014",
+    "symptom_text": "Sometimes after eating, I feel a tightness in my chest and find it hard to breathe. Is this normal?",
+    "diseases": [
+      {
+        "name": "gerd",
+        "confidence": 0.7
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "breathlessness",
+        "confidence": 0.63
+      },
+      {
+        "name": "chest_pain",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "aciphex",
+      "dexlansoprazole",
+      "rabeprazole"
+    ],
+    "relevance_scores": {
+      "aciphex": 3,
+      "dexlansoprazole": 2,
+      "rabeprazole": 2
+    }
+  },
+  {
+    "query_id": "eval_0015",
+    "symptom_text": "Shortness of breath with mucus, tips for better breathing?",
+    "diseases": [
+      {
+        "name": "bronchial_asthma",
+        "confidence": 0.99
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "breathlessness",
+        "confidence": 1.0
+      },
+      {
+        "name": "mucoid_sputum",
+        "confidence": 0.84
+      }
+    ],
+    "relevant_drugs": [
+      "doxycycline",
+      "azithromycin",
+      "prednisone"
+    ],
+    "relevance_scores": {
+      "doxycycline": 3,
+      "azithromycin": 2,
+      "prednisone": 2
+    }
+  },
+  {
+    "query_id": "eval_0016",
+    "symptom_text": "I've been losing weight even though I'm eating more than usual, and I feel tired all the time. What could this be?",
+    "diseases": [
+      {
+        "name": "hyperthyroidism",
+        "confidence": 0.53
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "excessive_hunger",
+        "confidence": 0.98
+      },
+      {
+        "name": "fatigue",
+        "confidence": 0.94
+      },
+      {
+        "name": "weight_loss",
+        "confidence": 0.99
+      }
+    ],
+    "relevant_drugs": [
+      "gabapentin",
+      "aluminum chloride hexahydrate",
+      "amitriptyline"
+    ],
+    "relevance_scores": {
+      "gabapentin": 3,
+      "aluminum chloride hexahydrate": 2,
+      "amitriptyline": 2
+    }
+  },
+  {
+    "query_id": "eval_0017",
+    "symptom_text": "The pain in my stomach is sharp and constant, and I threw up blood today. I don't know what to do.",
+    "diseases": [
+      {
+        "name": "peptic_ulcer_diseae",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "abdominal_pain",
+        "confidence": 1.0
+      },
+      {
+        "name": "stomach_pain",
+        "confidence": 1.0
+      },
+      {
+        "name": "vomiting",
+        "confidence": 0.86
+      }
+    ],
+    "relevant_drugs": [
+      "rabeprazole",
+      "esomeprazole",
+      "lansoprazole"
+    ],
+    "relevance_scores": {
+      "rabeprazole": 3,
+      "esomeprazole": 2,
+      "lansoprazole": 2
+    }
+  },
+  {
+    "query_id": "eval_0018",
+    "symptom_text": "My chest is tight, I'm wheezing, and coughing up thick phlegm. Breathing is a struggle.",
+    "diseases": [
+      {
+        "name": "bronchial_asthma",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "breathlessness",
+        "confidence": 1.0
+      },
+      {
+        "name": "chest_pain",
+        "confidence": 0.16
+      },
+      {
+        "name": "cough",
+        "confidence": 0.95
+      },
+      {
+        "name": "mucoid_sputum",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "doxycycline",
+      "azithromycin",
+      "prednisone"
+    ],
+    "relevance_scores": {
+      "doxycycline": 3,
+      "azithromycin": 2,
+      "prednisone": 2
+    }
+  },
+  {
+    "query_id": "eval_0019",
+    "symptom_text": "Walking downstairs is becoming painful, and my ankles feel swollen at times.",
+    "diseases": [
+      {
+        "name": "arthritis",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "painful_walking",
+        "confidence": 1.0
+      },
+      {
+        "name": "swelling_joints",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "diclofenac",
+      "tramadol",
+      "acetaminophen / hydrocodone"
+    ],
+    "relevance_scores": {
+      "diclofenac": 3,
+      "tramadol": 2,
+      "acetaminophen / hydrocodone": 2
+    }
+  },
+  {
+    "query_id": "eval_0020",
+    "symptom_text": "I get pain in my upper belly, especially after eating, along with acid reflux and indigestion.",
+    "diseases": [
+      {
+        "name": "gerd",
+        "confidence": 1.0
+      },
+      {
+        "name": "peptic_ulcer_diseae",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "abdominal_pain",
+        "confidence": 0.59
+      },
+      {
+        "name": "acidity",
+        "confidence": 0.48
+      },
+      {
+        "name": "indigestion",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "rabeprazole",
+      "esomeprazole",
+      "lansoprazole",
+      "diclofenac",
+      "prednisone",
+      "clonidine"
+    ],
+    "relevance_scores": {
+      "rabeprazole": 3,
+      "esomeprazole": 2,
+      "lansoprazole": 2,
+      "diclofenac": 2,
+      "prednisone": 2,
+      "clonidine": 2
+    }
+  }
+]

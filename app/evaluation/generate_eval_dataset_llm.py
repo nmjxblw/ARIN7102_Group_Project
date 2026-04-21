@@ -3,8 +3,7 @@ Generate evaluation dataset using LLM to create natural language queries.
 """
 
 from __future__ import annotations
-import sys
-import os
+
 import argparse
 import json
 import random
@@ -14,8 +13,15 @@ from pathlib import Path
 import pandas as pd
 from tqdm import tqdm
 
-from .llm_client import LLMClient
-from static_module import DRUGS_TRAINING_DATASET_FOLDER
+try:
+    from .llm_client import LLMClient
+except ImportError:
+    from llm_client import LLMClient  # type: ignore[no-redef]
+
+try:
+    from static_module import DRUGS_TRAINING_DATASET_FOLDER
+except ImportError:
+    DRUGS_TRAINING_DATASET_FOLDER = "app/dataset_module/drugs_training_dataset"
 
 
 def parse_list_field(value) -> list[str]:
@@ -67,8 +73,8 @@ def generate_query_with_llm(
             response = llm_client.generate(prompt, temperature=0.8, max_tokens=150)
             if response and len(response) > 10:
                 return response
-        except Exception as e:
-            print(f"  LLM error (attempt {attempt+1}/{retry}): {e}")
+        except Exception as exc:
+            print(f"  LLM error (attempt {attempt + 1}/{retry}): {exc}")
             if attempt < retry - 1:
                 time.sleep(2)
 
@@ -129,7 +135,7 @@ def generate_eval_samples_llm(
 
         samples.append(
             {
-                "query_id": f"eval_{idx+1:04d}",
+                "query_id": f"eval_{idx + 1:04d}",
                 "symptom_text": symptom_text,
                 "diseases": disease_items,
                 "symptoms": symptom_items,
@@ -146,11 +152,8 @@ def generate_eval_dataset_llm_main():
     input_csv_default: Path = (
         Path.cwd()
         / DRUGS_TRAINING_DATASET_FOLDER
-        / r"enhanced_drug_table_v1_structured.csv"
+        / "enhanced_drug_table_v1_structured.csv"
     )
-    if not input_csv_default.exists():
-        print(f"Warning: Default input CSV not found at {input_csv_default}")
-        raise
     parser.add_argument(
         "--input-csv",
         type=Path,
@@ -174,7 +177,7 @@ def generate_eval_dataset_llm_main():
     parser.add_argument("--confidence-max", type=float, default=0.75)
     args = parser.parse_args()
 
-    if not os.path.exists(args.input_csv):
+    if not args.input_csv.exists():
         raise FileNotFoundError(f"Input CSV not found: {args.input_csv}")
 
     llm_client = LLMClient(

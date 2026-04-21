@@ -231,5 +231,7 @@ app/deployment_module/trained_bert/checkpoint-*
 app/dataset_module/bert_training_dataset/generated_medical_dataset.csv
 *.safetensors
 
-#
+# 
 interaction/
+.DS_Store
+app/interactions/app_interactions_evaluation_delivery.ipynb_\350\247\243\351\207\212.md
