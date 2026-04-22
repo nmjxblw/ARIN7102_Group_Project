@@ -67,25 +67,49 @@ def safe_cosine_scores(candidate_vecs, query_vec, debug: bool = False) -> np.nda
     return np.nan_to_num(scores, nan=0.0, posinf=0.0, neginf=0.0)
 
 
-def build_semantic_text(row: pd.Series) -> str:
+def _base_info_text(row: pd.Series) -> str:
+    """Build base info part: drug name, ingredient, class, diseases, symptoms."""
     parts: list[str] = []
     if clean_text(row.get("drug_name")):
-        parts.append(f"Drug name: {clean_text(row.get('drug_name'))}.")
+        parts.append(f"Drug: {clean_text(row.get('drug_name'))}.")
     if clean_text(row.get("generic_name")):
-        parts.append(f"Generic ingredient: {clean_text(row.get('generic_name'))}.")
+        parts.append(f"Ingredient: {clean_text(row.get('generic_name'))}.")
     if clean_text(row.get("drug_classes")):
-        parts.append(f"Drug classes: {clean_text(row.get('drug_classes'))}.")
+        parts.append(f"Class: {clean_text(row.get('drug_classes'))}.")
     if row.get("disease_key_list"):
-        parts.append("Related diseases: " + ", ".join(row["disease_key_list"]) + ".")
+        parts.append("Diseases: " + ", ".join(row["disease_key_list"]) + ".")
     if row.get("symptom_list_normalized"):
-        parts.append("Target symptoms: " + ", ".join(row["symptom_list_normalized"][:20]) + ".")
-    if clean_text(row.get("medical_condition_description")):
-        parts.append(f"Medical condition context: {clean_text(row.get('medical_condition_description'))}.")
-    if clean_text(row.get("disease_description")):
-        parts.append(f"Disease description: {clean_text(row.get('disease_description'))}.")
-    if clean_text(row.get("side_effects")):
-        parts.append(f"Known side effects: {clean_text(row.get('side_effects'))}.")
-    return " ".join(parts) if parts else "[MASK]"
+        parts.append("Symptoms: " + ", ".join(row["symptom_list_normalized"][:15]) + ".")
+    return " ".join(parts) if parts else ""
+
+
+def build_semantic_text(row: pd.Series) -> str:
+    """Build base semantic text (no description). Used for cross-encoder reranking."""
+    return _base_info_text(row) or "[MASK]"
+
+
+def build_semantic_text_mcd(row: pd.Series) -> str:
+    """Build semantic text: base info + medical_condition_description.
+
+    medical_condition_description 偏口语/患者视角，包含通俗症状描述。
+    """
+    base = _base_info_text(row)
+    mcd = clean_text(row.get("medical_condition_description"))
+    if mcd:
+        return f"{base} Description: {mcd}" if base else f"Description: {mcd}"
+    return base or "[MASK]"
+
+
+def build_semantic_text_dd(row: pd.Series) -> str:
+    """Build semantic text: base info + disease_description.
+
+    disease_description 偏医学/临床视角，包含专业病理描述。
+    """
+    base = _base_info_text(row)
+    dd = clean_text(row.get("disease_description"))
+    if dd:
+        return f"{base} Description: {dd}" if base else f"Description: {dd}"
+    return base or "[MASK]"
 
 
 def prepare_drug_dataframe(df: pd.DataFrame) -> pd.DataFrame:
@@ -96,17 +120,19 @@ def prepare_drug_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         lambda items: [normalize_symptom_name(x) for x in items]
     )
     result["semantic_text"] = result.apply(build_semantic_text, axis=1)
+    result["semantic_text_dd"] = result.apply(build_semantic_text_dd, axis=1)
     return result
 
 
 def build_query_text(disease_labels: Iterable[str], symptom_terms: Iterable[str]) -> str:
+    """Build query text from labels, matching the concise drug text format."""
     parts = []
     disease_labels = [str(x).strip() for x in disease_labels if str(x).strip()]
     symptom_terms = [normalize_symptom_name(x) for x in symptom_terms if str(x).strip()]
     if disease_labels:
-        parts.append("Related diseases: " + ", ".join(disease_labels) + ".")
+        parts.append("Diseases: " + ", ".join(disease_labels) + ".")
     if symptom_terms:
-        parts.append("Target symptoms: " + ", ".join(symptom_terms) + ".")
+        parts.append("Symptoms: " + ", ".join(symptom_terms) + ".")
     return " ".join(parts) if parts else "[MASK]"
 
 
