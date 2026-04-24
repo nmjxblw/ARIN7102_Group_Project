@@ -20,20 +20,20 @@ Phase 1 的目标不是继续推进主线集成，而是先把当前实验结果
 
 相关代码：
 
-- [app/embedded_module/experimental_recall_pipeline.py](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/app/embedded_module/experimental_recall_pipeline.py)
-- [app/evaluation/run_exp_drug_recall.py](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/app/evaluation/run_exp_drug_recall.py)
+- [app/embedded_module/experimental_recall_pipeline.py](app/embedded_module/experimental_recall_pipeline.py)
+- [app/evaluation/run_exp_drug_recall.py](app/evaluation/run_exp_drug_recall.py)
 
 ### 2. 生成了 exp vs yinan 对比产物
 
 新增并修正了对比脚本：
 
-- [app/evaluation/compare_exp_vs_yinan.py](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/app/evaluation/compare_exp_vs_yinan.py)
+- [app/evaluation/compare_exp_vs_yinan.py](app/evaluation/compare_exp_vs_yinan.py)
 
 产物：
 
-- [artifacts/exp_drug_recall/comparison_summary.md](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/comparison_summary.md)
-- [artifacts/exp_drug_recall/comparison_summary.json](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/comparison_summary.json)
-- [artifacts/exp_drug_recall/comparison_per_query.csv](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/comparison_per_query.csv)
+- [artifacts/exp_drug_recall/comparison_summary.md](artifacts/exp_drug_recall/comparison_summary.md)
+- [artifacts/exp_drug_recall/comparison_summary.json](artifacts/exp_drug_recall/comparison_summary.json)
+- [artifacts/exp_drug_recall/comparison_per_query.csv](artifacts/exp_drug_recall/comparison_per_query.csv)
 
 ### 3. 修了 ablation trace/metrics 对齐问题
 
@@ -43,7 +43,7 @@ Phase 1 的目标不是继续推进主线集成，而是先把当前实验结果
 
 新增：
 
-- [app/evaluation/diagnose_dense_recall.py](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/app/evaluation/diagnose_dense_recall.py)
+- [app/evaluation/diagnose_dense_recall.py](app/evaluation/diagnose_dense_recall.py)
 
 这版脚本已经改成：
 
@@ -56,12 +56,12 @@ Phase 1 的目标不是继续推进主线集成，而是先把当前实验结果
 
 为了解释 `no_bm25` 和 `no_prior_no_bm25` 为什么提升异常大，新增：
 
-- [app/evaluation/check_ablation_sanity.py](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/app/evaluation/check_ablation_sanity.py)
+- [app/evaluation/check_ablation_sanity.py](app/evaluation/check_ablation_sanity.py)
 
 产物：
 
-- [artifacts/exp_drug_recall/ablation_sanity_check.md](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/ablation_sanity_check.md)
-- [artifacts/exp_drug_recall/ablation_sanity_check.json](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/ablation_sanity_check.json)
+- [artifacts/exp_drug_recall/ablation_sanity_check.md](artifacts/exp_drug_recall/ablation_sanity_check.md)
+- [artifacts/exp_drug_recall/ablation_sanity_check.json](artifacts/exp_drug_recall/ablation_sanity_check.json)
 
 ## Phase 1 关键结果
 
@@ -134,25 +134,25 @@ Task A 还证明了：
 
 当前 dense 状态应记为：
 
-`diagnosed, projection/view strategy needs separate follow-up`
+`diagnosed, excluded from mainline by default`
 
 也就是：
 
 - dense 已经不是 `deferred`
-- 问题优先级从"是否可用"变成"projection/view 怎么修"
-- dense 后续应单独开线，不阻塞 label-core 主线
+- 但 dense 当前不作为 Phase 2 主线能力
+- 如果后续还有时间，再把 projection/view 当作可选探索项处理
 
 ## Phase 1 是否完成
 
 如果只看 aside / 验证目标，Phase 1 状态可以记为：
 
-`Phase 1 done, with dense follow-up separated`
+`Phase 1 done, with dense excluded from the mainline`
 
 也就是：
 
 - `BM25 / prior / label core` 已验证完
 - `Task A` 已完成并解释清楚异常提升来源
-- dense 已完成三视图诊断，但 projection/view 策略需要单独后续
+- dense 已完成三视图诊断，但默认不纳入 Phase 2 主线
 
 ## 对 Phase 2 的直接影响
 
@@ -164,14 +164,14 @@ Task A 还证明了：
    - `symptom`
 2. 暂不把 `BM25` 放进主线
 3. `prior` 不作为当前主增益来源推进
-4. `dense` 单开修复，不阻塞主线
+4. `dense` 不纳入主线；如需继续，只作为可选探索
 5. `local_ranker` 后置，在候选池稳定后再推进
 
 ## 本阶段核心产物
 
-- [EXP_DRUG_RECALL_ASIDE_PLAN.md](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/EXP_DRUG_RECALL_ASIDE_PLAN.md)
-- [artifacts/exp_drug_recall/metrics.json](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/metrics.json)
-- [artifacts/exp_drug_recall/per_query_results.csv](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/per_query_results.csv)
-- [artifacts/exp_drug_recall/stage_trace.jsonl](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/stage_trace.jsonl)
-- [artifacts/exp_drug_recall/comparison_summary.md](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/comparison_summary.md)
-- [artifacts/exp_drug_recall/ablation_sanity_check.md](/Users/jayden/Desktop/7012%20datamining%20and%20text/project_march/ARIN7102_Group_Project/artifacts/exp_drug_recall/ablation_sanity_check.md)
+- [EXP_DRUG_RECALL_ASIDE_PLAN.md](EXP_DRUG_RECALL_ASIDE_PLAN.md)
+- [artifacts/exp_drug_recall/metrics.json](artifacts/exp_drug_recall/metrics.json)
+- [artifacts/exp_drug_recall/per_query_results.csv](artifacts/exp_drug_recall/per_query_results.csv)
+- [artifacts/exp_drug_recall/stage_trace.jsonl](artifacts/exp_drug_recall/stage_trace.jsonl)
+- [artifacts/exp_drug_recall/comparison_summary.md](artifacts/exp_drug_recall/comparison_summary.md)
+- [artifacts/exp_drug_recall/ablation_sanity_check.md](artifacts/exp_drug_recall/ablation_sanity_check.md)

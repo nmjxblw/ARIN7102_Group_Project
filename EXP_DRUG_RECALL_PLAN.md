@@ -45,6 +45,14 @@ Auxiliary data:
 - `app/dataset_module/drugs_training_dataset/eval_dataset_llm_v2.json`
   - BERT-generated query data.
   - Use for weak training and stress testing.
+- `app/dataset_module/drugs_training_dataset/drug_data_half_1.json`
+  - Weak structured drug-label mapping data, 1465 rows.
+  - Use for Phase 2 label-core coverage and regression testing.
+  - Do not treat as a verified gold benchmark.
+- `app/dataset_module/drugs_training_dataset/drug_data_half_2.json`
+  - Weak structured drug-label mapping data, 1466 rows.
+  - Use together with `drug_data_half_1.json` for large-scale smoke tests.
+  - Do not use for final reported metrics.
 - `data/eval_dataset_verified.json`
   - Gold evaluation only.
   - Do not train on this file.
@@ -251,6 +259,38 @@ Run ablations on `data/eval_dataset_verified.json`:
 6. `candidate_union + deterministic_score`
 7. `candidate_union + local_ranker`
 
+Primary evaluation remains `data/eval_dataset_verified.json`. The two
+`drug_data_half_*.json` files are secondary weak structured evaluation data for
+Phase 2 regression only. They should be used to check label adapter coverage,
+label-core recall, large-scale pipeline stability, and whether the original
+`drug_name` appears in top-k results. They must not replace verified metrics in
+the report.
+
+For half-data evaluation, add an adapter that accepts the source schema:
+
+```json
+{
+  "drug_name": "aczone",
+  "diseases": [{"acne": 0.95}],
+  "symptoms": [{"skin_rash": 0.85}]
+}
+```
+
+The adapter should convert it to evaluation-style rows with:
+
+- `query_id`: `half1_000001` or `half2_000001`
+- `diseases`: `{"name": "acne", "confidence": 0.95}`
+- `symptoms`: `{"name": "skin_rash", "confidence": 0.85}`
+- `relevant_drugs`: `["aczone"]`
+- `symptom_text`: optional; pure label-core tests should allow it to be absent
+  or empty
+
+Run half-data checks first with `label_idf_only`, then with the Phase 2
+`label_core_rerank` mode once it exists. If BM25 or dense modes are evaluated on
+half data, the run must either construct synthetic query text from labels or
+explicitly document that the test is label-text based rather than natural
+language based.
+
 Required report metrics:
 
 - `precision@5`, `precision@10`, `precision@20`
@@ -316,3 +356,17 @@ Artifacts:
 6. Add deterministic scorer and compare against current label baseline.
 7. Train local ranker from weak data and evaluate against deterministic scorer.
 8. Save metrics and traces for report and presentation.
+
+## Phase 2 TODO
+
+1. Add a weak half-data evaluation adapter for `drug_data_half_1.json` and
+   `drug_data_half_2.json`.
+2. Support half-data rows with `drug_name`, `diseases`, and `symptoms`; do not
+   require `symptom_text` for pure label-core tests.
+3. Convert each source `drug_name` into `relevant_drugs: [drug_name]` and assign
+   deterministic query ids such as `half1_000001` and `half2_000001`.
+4. Use half-data evaluation only for weak structured regression, label adapter
+   coverage, and top-k containment checks.
+5. Keep final Phase 2 metrics on `data/eval_dataset_verified.json`.
+6. Limit the first half-data runs to `label_idf_only`; later rerun with
+   `label_core_rerank` after that mode is implemented.

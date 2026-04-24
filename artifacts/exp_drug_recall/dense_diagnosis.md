@@ -1,6 +1,6 @@
 # Dense Recall Diagnosis
 
-**Embedding**: `/opt/data/workspace/drug_comprehensive_embeddings.npy`  shape=(5595, 2, 768)
+**Embedding**: `/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/drug_comprehensive_embeddings.npy`  shape=(5595, 2, 768)
 **Query count**: 191  (all of `eval_dataset_verified.json`)
 
 ## Per-View Results
