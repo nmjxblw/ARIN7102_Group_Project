@@ -6,7 +6,12 @@ Pipeline Configuration - 集中配置读取模块
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+
+try:
+    from dotenv import load_dotenv
+except ImportError:  # pragma: no cover - environment fallback
+    def load_dotenv(*args, **kwargs):
+        return False
 
 # 加载 pipeline_config.env（项目根目录）
 _PROJECT_ROOT = Path(__file__).resolve().parent

@@ -19,6 +19,8 @@ from .recommendation_pipeline import (
 )
 from .cross_encoder_reranker import CrossEncoderReranker
 from .dual_recall_pipeline import DualRecallDrugRecommender, PipelineTrace, WeightedLabel, parse_weighted_labels
+from .experimental_recall_pipeline import ExperimentalDrugRecallPipeline, ExperimentalTrace
+from .label_adapter import NormalizedLabel, parse_labels
 
 __all__ = [
     "EVALUATION_SCOPE_NOTE",
@@ -36,4 +38,8 @@ __all__ = [
     "PipelineTrace",
     "WeightedLabel",
     "parse_weighted_labels",
+    "ExperimentalDrugRecallPipeline",
+    "ExperimentalTrace",
+    "NormalizedLabel",
+    "parse_labels",
 ]
