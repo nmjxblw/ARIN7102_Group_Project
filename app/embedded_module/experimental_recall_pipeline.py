@@ -27,6 +27,9 @@ ABLATION_MODES = (
     "label_bm25",
     "label_bm25_dense",
     "candidate_union",
+    "candidate_union_no_prior",
+    "candidate_union_no_bm25",
+    "candidate_union_no_prior_no_bm25",
     "local_ranker",
 )
 
@@ -231,6 +234,9 @@ class ExperimentalDrugRecallPipeline:
             "label_bm25": ("disease", "strict", "symptom", "bm25"),
             "label_bm25_dense": ("disease", "strict", "symptom", "bm25", "dense"),
             "candidate_union": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
+            "candidate_union_no_prior": ("disease", "strict", "symptom", "bm25", "dense"),
+            "candidate_union_no_bm25": ("disease", "strict", "symptom", "dense", "prior"),
+            "candidate_union_no_prior_no_bm25": ("disease", "strict", "symptom", "dense"),
             "local_ranker": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
         }
         rows: set[int] = set()
@@ -324,6 +330,21 @@ class ExperimentalDrugRecallPipeline:
 
     def _score_features(self, features: pd.DataFrame, *, mode: str) -> pd.DataFrame:
         scored = features.copy()
+
+        # Force features to 0 when their stage is excluded from the candidate pool
+        no_bm25_modes = {
+            "candidate_union_no_bm25",
+            "candidate_union_no_prior_no_bm25",
+        }
+        no_prior_modes = {
+            "candidate_union_no_prior",
+            "candidate_union_no_prior_no_bm25",
+        }
+        if mode in no_bm25_modes:
+            scored["bm25_score"] = 0.0
+        if mode in no_prior_modes:
+            scored["stage_prior"] = 0.0
+
         dense_weight = 0.15 if scored["dense_score"].max() > 0 else 0.05
         label_weight = 0.40 + (0.15 - dense_weight)
         scored["deterministic_score"] = (
@@ -368,14 +389,45 @@ class ExperimentalDrugRecallPipeline:
         selected_rows: list[int],
         mode: str,
     ) -> ExperimentalTrace:
-        stage_candidate_names = {}
+        selected_set = set(selected_rows)
+
+        # Determine which stages are actually part of this mode's candidate pool.
+        mode_stages = {
+            "label_idf_only": ("disease", "strict", "symptom"),
+            "bm25_only": ("bm25",),
+            "dense_only": ("dense",),
+            "label_bm25": ("disease", "strict", "symptom", "bm25"),
+            "label_bm25_dense": ("disease", "strict", "symptom", "bm25", "dense"),
+            "candidate_union": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
+            "candidate_union_no_prior": ("disease", "strict", "symptom", "bm25", "dense"),
+            "candidate_union_no_bm25": ("disease", "strict", "symptom", "dense", "prior"),
+            "candidate_union_no_prior_no_bm25": ("disease", "strict", "symptom", "dense"),
+            "local_ranker": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
+        }
+        active_stages = set(mode_stages.get(mode, ()))
+
+        # filtered_scores: only include rows that are both in selected_rows AND
+        # belong to a stage that is part of this mode's candidate pool.
+        # This ensures stage_hit=0 for stages excluded by the ablation.
+        filtered_scores: dict[str, dict[int, float]] = {}
         for stage, scores in stage_scores.items():
-            names = self.index.df.loc[list(scores.keys()), "drug_name"].astype(str).tolist() if scores else []
+            if stage in active_stages:
+                filtered_scores[stage] = {rid: s for rid, s in scores.items() if rid in selected_set}
+            else:
+                filtered_scores[stage] = {}  # excluded by ablation — empty
+
+        stage_candidate_names = {}
+        for stage, scores in filtered_scores.items():
+            if scores:
+                names = self.index.df.loc[list(scores.keys()), "drug_name"].astype(str).tolist()
+            else:
+                names = []
             stage_candidate_names[stage] = names
+
         return ExperimentalTrace(
             normalized_diseases=[asdict(label) for label in diseases],
             normalized_symptoms=[asdict(label) for label in symptoms],
-            candidate_counts={stage: len(scores) for stage, scores in stage_scores.items()},
+            candidate_counts={stage: len(scores) for stage, scores in filtered_scores.items()},
             final_union_size=len(selected_rows),
             embedding_manifest=self.index.embedding_manifest.to_dict(),
             mode=mode,

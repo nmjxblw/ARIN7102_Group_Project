@@ -40,11 +40,13 @@ class DrugEmbeddingEngine:
         batch_size: int = DEFAULT_BATCH_SIZE,
         max_length: int = DEFAULT_MAX_LENGTH,
         pooling: str = DEFAULT_POOLING,
+        local_files_only: bool = False,
     ):
         self.model_name = model_name
         self.batch_size = batch_size
         self.max_length = max_length
         self.pooling = pooling.strip().lower()  # 'cls' or 'mean'
+        self.local_files_only = local_files_only
 
         if device is None:
             if torch.cuda.is_available():
@@ -59,8 +61,14 @@ class DrugEmbeddingEngine:
         print(f"[DrugEmbeddingEngine] 设备: {self.device}")
         print(f"[DrugEmbeddingEngine] 正在加载模型: {self.model_name} ...")
         print(f"[DrugEmbeddingEngine] max_length={self.max_length}, pooling={self.pooling}")
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.model = AutoModel.from_pretrained(self.model_name).to(self.device)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.model_name,
+            local_files_only=self.local_files_only,
+        )
+        self.model = AutoModel.from_pretrained(
+            self.model_name,
+            local_files_only=self.local_files_only,
+        ).to(self.device)
         self.model.eval()
         print("[DrugEmbeddingEngine] 模型加载完成")
 

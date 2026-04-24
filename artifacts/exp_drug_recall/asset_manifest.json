@@ -1,5 +1,5 @@
 {
-  "path": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/drug_comprehensive_embeddings.npy",
+  "path": "/opt/data/workspace/drug_comprehensive_embeddings.npy",
   "available": true,
   "row_count": 5595,
   "ndim": 3,

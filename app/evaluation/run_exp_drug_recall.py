@@ -15,11 +15,14 @@ APP_ROOT = REPO_ROOT / "app"
 if str(APP_ROOT) not in sys.path:
     sys.path.insert(0, str(APP_ROOT))
 
+# Import directly from module files to avoid __init__.py cascading torch load
 from embedded_module.drug_ranker import LocalDrugRanker
 from embedded_module.drug_recall_index import DrugRecallIndex
 from embedded_module.experimental_recall_pipeline import ABLATION_MODES, ExperimentalDrugRecallPipeline
-from embedded_module.label_adapter import parse_labels
+import embedded_module.label_adapter as label_adapter_module
 from evaluation.metrics import evaluate_batch, evaluate_single_query
+
+parse_labels = label_adapter_module.parse_labels
 
 
 DEFAULT_TABLE = REPO_ROOT / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
@@ -263,7 +266,16 @@ def main() -> None:
     parser.add_argument("--eval-dataset", type=Path, default=DEFAULT_EVAL)
     parser.add_argument("--embeddings", type=Path, default=DEFAULT_EMBEDDINGS)
     parser.add_argument("--artifact-dir", type=Path, default=DEFAULT_ARTIFACT_DIR)
-    parser.add_argument("--modes", nargs="+", choices=ABLATION_MODES, default=list(ABLATION_MODES))
+    # Aside-plan default batch: 6 ablation modes (no local_ranker in default run)
+    DEFAULT_BATCH = [
+        "label_idf_only",
+        "label_bm25",
+        "candidate_union_no_prior",
+        "candidate_union_no_bm25",
+        "candidate_union_no_prior_no_bm25",
+        "candidate_union",
+    ]
+    parser.add_argument("--modes", nargs="+", choices=ABLATION_MODES, default=DEFAULT_BATCH)
     parser.add_argument("--k-values", nargs="+", type=int, default=[5, 10, 20])
     parser.add_argument("--pool-size", type=int, default=1000)
     parser.add_argument("--ranker", type=Path, default=DEFAULT_ARTIFACT_DIR / "ranker.joblib")
