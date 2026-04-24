@@ -121,32 +121,38 @@ Task A 还证明了：
 
 因此当前实现中，`_rows_for_mode()` 在 cap 前直接相加各 stage 原始分数，会对 `bm25` 产生数值偏置。
 
-### 结论 6：`dense` 仍未闭环，不能记功
+### 结论 6：`dense` 已完成三视图诊断，但暂不进入主线
 
-当前结论仍然是：
+当前结论应更新为：
 
-- `semantic-only` 为 0
-- `dense` 不应被计入当前阶段的正向解释
+- `dense` 不是完全不可用；三视图诊断已经跑出非零结果。
+- `view0` hit@20 = 0.2461
+- `view1` hit@20 = 0.2984
+- `vmean` hit@20 = 0.3246，是当前三种投影里最好的一种。
+- 但这个结果仍明显弱于 `label core + deterministic rerank`。
+- 因此 dense 不能作为 Phase 1 主增益解释，也不应直接进入 Phase 2 主线。
 
-不过这条线还没有完全关闭，不是因为规则问题，而是因为：
+当前 dense 状态应记为：
 
-- 现在的 dense 诊断脚本已经改成严格离线
-- 但当前机器缺少它所需的本地模型缓存
-- 同时 root `drug_comprehensive_embeddings.npy` 的真实同源模型仍未完全钉死
+`diagnosed, projection/view strategy needs separate follow-up`
 
-所以 dense 这一项目前状态是：`deferred`
+也就是：
+
+- dense 已经不是 `deferred`
+- 问题优先级从"是否可用"变成"projection/view 怎么修"
+- dense 后续应单独开线，不阻塞 label-core 主线
 
 ## Phase 1 是否完成
 
 如果只看 aside / 验证目标，Phase 1 状态可以记为：
 
-`Phase 1 done, with dense deferred`
+`Phase 1 done, with dense follow-up separated`
 
 也就是：
 
 - `BM25 / prior / label core` 已验证完
 - `Task A` 已完成并解释清楚异常提升来源
-- 只剩 `dense` 单线未闭环
+- dense 已完成三视图诊断，但 projection/view 策略需要单独后续
 
 ## 对 Phase 2 的直接影响
 
