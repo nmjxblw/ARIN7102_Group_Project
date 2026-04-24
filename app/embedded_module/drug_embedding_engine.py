@@ -1,11 +1,19 @@
 """
 drug_embedding_engine.py
-使用 PubMedBERT 对药物的"语义文本"(drug_name + symptoms + disease_desc)
-进行 768 维 Embedding，供后续 Faiss KNN 检索与传统 ML 重排使用。
+使用语义编码模型对药物的语义文本进行 Embedding,
+供后续 Faiss KNN 检索与 CrossEncoder 重排使用.
+
+支持模型:
+  - pritamdeka/S-PubMedBert-MS-MARCO (推荐, 医学检索专用)
+  - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract (旧模型)
+  - sentence-transformers/all-MiniLM-L6-v2 (轻量备选)
+
+支持 pooling 策略: cls / mean
 """
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -13,10 +21,14 @@ import torch  # pyright: ignore[reportMissingImports]
 from transformers import AutoModel, AutoTokenizer  # pyright: ignore[reportMissingImports]
 from tqdm import tqdm  # pyright: ignore[reportMissingModuleSource]
 
+# Import pipeline config
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from pipeline_config import cfg
 
-DEFAULT_MODEL_NAME = "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract"
+DEFAULT_MODEL_NAME = cfg.medbert_model_name
 DEFAULT_BATCH_SIZE = 32
-DEFAULT_MAX_LENGTH = 256
+DEFAULT_MAX_LENGTH = cfg.embedding_max_length
+DEFAULT_POOLING = cfg.embedding_pooling
 DEFAULT_OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -27,10 +39,12 @@ class DrugEmbeddingEngine:
         device: str | None = None,
         batch_size: int = DEFAULT_BATCH_SIZE,
         max_length: int = DEFAULT_MAX_LENGTH,
+        pooling: str = DEFAULT_POOLING,
     ):
         self.model_name = model_name
         self.batch_size = batch_size
         self.max_length = max_length
+        self.pooling = pooling.strip().lower()  # 'cls' or 'mean'
 
         if device is None:
             if torch.cuda.is_available():
@@ -44,10 +58,24 @@ class DrugEmbeddingEngine:
 
         print(f"[DrugEmbeddingEngine] 设备: {self.device}")
         print(f"[DrugEmbeddingEngine] 正在加载模型: {self.model_name} ...")
+        print(f"[DrugEmbeddingEngine] max_length={self.max_length}, pooling={self.pooling}")
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = AutoModel.from_pretrained(self.model_name).to(self.device)
         self.model.eval()
         print("[DrugEmbeddingEngine] 模型加载完成")
+
+    def _pool(self, outputs, attention_mask) -> np.ndarray:
+        """Extract sentence-level embeddings from model outputs."""
+        if self.pooling == "mean":
+            # Mean pooling: average all token embeddings weighted by attention mask
+            token_embeddings = outputs.last_hidden_state  # (B, seq_len, dim)
+            input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+            sum_embeddings = torch.sum(token_embeddings * input_mask_expanded, dim=1)
+            sum_mask = torch.clamp(input_mask_expanded.sum(dim=1), min=1e-9)
+            return (sum_embeddings / sum_mask).cpu().numpy()
+        else:
+            # CLS pooling: take the [CLS] token vector
+            return outputs.last_hidden_state[:, 0, :].cpu().numpy()
 
     def encode(self, texts: list[str]) -> np.ndarray:
         all_embeddings: list[np.ndarray] = []
@@ -70,8 +98,8 @@ class DrugEmbeddingEngine:
                 encoded = {k: v.to(self.device) for k, v in encoded.items()}
 
                 outputs = self.model(**encoded)
-                cls_vectors = outputs.last_hidden_state[:, 0, :].cpu().numpy()
-                all_embeddings.append(cls_vectors)
+                pooled = self._pool(outputs, encoded["attention_mask"])
+                all_embeddings.append(pooled)
 
         embeddings = np.vstack(all_embeddings)
         print(f"[DrugEmbeddingEngine] 编码完成: shape = {embeddings.shape}")

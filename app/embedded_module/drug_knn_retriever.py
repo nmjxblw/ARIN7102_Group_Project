@@ -50,9 +50,9 @@ class DrugKNNRetriever:
     ) -> pd.DataFrame:
         parts = []
         if disease_labels:
-            parts.append("Related diseases: " + ", ".join(disease_labels) + ".")
+            parts.append("Diseases: " + ", ".join(disease_labels) + ".")
         if symptom_terms:
-            parts.append("Target symptoms: " + ", ".join(symptom_terms) + ".")
+            parts.append("Symptoms: " + ", ".join(symptom_terms) + ".")
         query_text = " ".join(parts) if parts else "[MASK]"
 
         print(f"[KNN Query] {query_text}")
