@@ -103,6 +103,7 @@ class ExperimentalDrugRecallPipeline:
             diseases=diseases,
             symptoms=symptoms,
             pool_size=pool_size,
+            mode=mode,
         )
         selected_rows = self._rows_for_mode(stage_scores, mode=mode, pool_size=pool_size)
         features = self._build_feature_frame(
@@ -140,6 +141,7 @@ class ExperimentalDrugRecallPipeline:
         diseases: list[NormalizedLabel],
         symptoms: list[NormalizedLabel],
         pool_size: int,
+        mode: str,
     ) -> dict[str, dict[int, float]]:
         disease_conf = confidence_map(diseases)
         symptom_conf = confidence_map(symptoms)
@@ -184,16 +186,21 @@ class ExperimentalDrugRecallPipeline:
                 + stage_scores["symptom"].get(row_id, 0.0)
             )
 
-        bm25_scores = self.index.bm25.score(query_text, top_k=min(pool_size, self.index.row_count))
-        stage_scores["bm25"] = {int(idx): float(score) for idx, score in bm25_scores.items()}
+        active_stages = MODE_STAGE_MAP.get(mode, ())
 
-        dense_scores = self._dense_scores(query_text, top_k=min(pool_size, self.index.row_count))
-        stage_scores["dense"] = dense_scores
+        if "bm25" in active_stages:
+            bm25_scores = self.index.bm25.score(query_text, top_k=min(pool_size, self.index.row_count))
+            stage_scores["bm25"] = {int(idx): float(score) for idx, score in bm25_scores.items()}
 
-        seed_rows = set()
-        for stage in ("disease", "strict", "symptom", "bm25", "dense"):
-            seed_rows.update(stage_scores[stage].keys())
-        stage_scores["prior"] = self._prior_expansion(seed_rows, diseases, limit_per_group=30)
+        if "dense" in active_stages:
+            dense_scores = self._dense_scores(query_text, top_k=min(pool_size, self.index.row_count))
+            stage_scores["dense"] = dense_scores
+
+        if "prior" in active_stages:
+            seed_rows = set()
+            for stage in ("disease", "strict", "symptom", "bm25", "dense"):
+                seed_rows.update(stage_scores[stage].keys())
+            stage_scores["prior"] = self._prior_expansion(seed_rows, diseases, limit_per_group=30)
 
         for stage, scores in list(stage_scores.items()):
             if len(scores) > pool_size:
