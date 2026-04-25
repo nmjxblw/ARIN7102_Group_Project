@@ -113,5 +113,9 @@ def end_background_threads():
 
 def app_run() -> None:
     """主程序入口"""
+    from deployment_module import predict
+    test_text = "My joints are so stiff in the mornings, and it's getting painful just to walk up the stairs. I feel a constant ache in my knees and neck."
+    result = predict(test_text)
+    print(result)
 
-    pass
+
