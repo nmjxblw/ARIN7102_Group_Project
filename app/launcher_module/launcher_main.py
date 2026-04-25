@@ -118,4 +118,11 @@ def app_run() -> None:
     result = predict(test_text)
     print(result)
 
+    from evaluation.run_phase2_final_recommendation import predict as predict_recommendation
+    recommendation_result = predict_recommendation(result)
+    print(recommendation_result)
+    import json
+    with open("output.json", "w", encoding="utf-8") as f:
+        json.dump(recommendation_result, f, ensure_ascii=False, indent=4)
+    
 

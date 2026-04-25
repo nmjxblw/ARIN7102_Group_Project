@@ -1,0 +1,219 @@
+{
+    "input": {
+        "query_index": 0,
+        "diseases": [
+            {
+                "label": "arthritis",
+                "confidence": 0.77
+            },
+            {
+                "label": "osteoarthristis",
+                "confidence": 0.9
+            }
+        ],
+        "symptoms": [
+            {
+                "label": "joint_pain",
+                "confidence": 0.8553173676732357
+            },
+            {
+                "label": "neck_pain",
+                "confidence": 0.7792979952461874
+            },
+            {
+                "label": "stiff_neck",
+                "confidence": 0.20552087381850495
+            }
+        ],
+        "need_first_aid": 0,
+        "sentence": ""
+    },
+    "disease_results": [
+        {
+            "disease": "arthritis",
+            "disease_confidence": 0.77,
+            "phase2_top20_count": 20,
+            "half_confirmed_in_top20": 16,
+            "final_top3": [
+                {
+                    "drug_name": "ibuprofen",
+                    "phase2_rank": 2,
+                    "phase2_score": 0.8609167993121207,
+                    "matched_diseases": [
+                        "arthritis"
+                    ],
+                    "matched_symptoms": [
+                        "joint pain",
+                        "neck pain",
+                        "stiff neck"
+                    ],
+                    "selection_source": "half_confirmed",
+                    "half_disease_confidence": 0.95,
+                    "disease_rank": 1
+                },
+                {
+                    "drug_name": "naproxen",
+                    "phase2_rank": 3,
+                    "phase2_score": 0.8606673010935324,
+                    "matched_diseases": [
+                        "arthritis"
+                    ],
+                    "matched_symptoms": [
+                        "joint pain",
+                        "neck pain",
+                        "stiff neck"
+                    ],
+                    "selection_source": "half_confirmed",
+                    "half_disease_confidence": 0.95,
+                    "disease_rank": 2
+                },
+                {
+                    "drug_name": "triamcinolone",
+                    "phase2_rank": 4,
+                    "phase2_score": 0.8579499984541823,
+                    "matched_diseases": [
+                        "arthritis"
+                    ],
+                    "matched_symptoms": [
+                        "joint pain",
+                        "neck pain",
+                        "stiff neck"
+                    ],
+                    "selection_source": "half_confirmed",
+                    "half_disease_confidence": 0.85,
+                    "disease_rank": 3
+                }
+            ]
+        },
+        {
+            "disease": "osteoarthristis",
+            "disease_confidence": 0.9,
+            "phase2_top20_count": 20,
+            "half_confirmed_in_top20": 1,
+            "final_top3": [
+                {
+                    "drug_name": "naprosyn",
+                    "phase2_rank": 7,
+                    "phase2_score": 0.8510965895672751,
+                    "matched_diseases": [
+                        "osteoarthristis"
+                    ],
+                    "matched_symptoms": [
+                        "joint pain",
+                        "neck pain",
+                        "stiff neck"
+                    ],
+                    "selection_source": "half_confirmed",
+                    "half_disease_confidence": 0.95,
+                    "disease_rank": 1
+                },
+                {
+                    "drug_name": "doxycycline",
+                    "phase2_rank": 1,
+                    "phase2_score": 0.8654861737269615,
+                    "matched_diseases": [
+                        "osteoarthristis"
+                    ],
+                    "matched_symptoms": [
+                        "joint pain",
+                        "neck pain",
+                        "stiff neck"
+                    ],
+                    "selection_source": "phase2_fallback",
+                    "half_disease_confidence": 0.0,
+                    "disease_rank": 2
+                },
+                {
+                    "drug_name": "ibuprofen",
+                    "phase2_rank": 2,
+                    "phase2_score": 0.8609167993121207,
+                    "matched_diseases": [
+                        "osteoarthristis"
+                    ],
+                    "matched_symptoms": [
+                        "joint pain",
+                        "neck pain",
+                        "stiff neck"
+                    ],
+                    "selection_source": "phase2_fallback",
+                    "half_disease_confidence": 0.0,
+                    "disease_rank": 3
+                }
+            ]
+        }
+    ],
+    "recommendations": [
+        {
+            "query_index": 0,
+            "disease": "arthritis",
+            "disease_confidence": 0.77,
+            "drug_name": "ibuprofen",
+            "disease_rank": 1,
+            "global_display_rank": 1,
+            "phase2_rank": 2,
+            "selection_source": "half_confirmed",
+            "phase2_score": 0.8609167993121207,
+            "half_disease_confidence": 0.95
+        },
+        {
+            "query_index": 0,
+            "disease": "arthritis",
+            "disease_confidence": 0.77,
+            "drug_name": "naproxen",
+            "disease_rank": 2,
+            "global_display_rank": 2,
+            "phase2_rank": 3,
+            "selection_source": "half_confirmed",
+            "phase2_score": 0.8606673010935324,
+            "half_disease_confidence": 0.95
+        },
+        {
+            "query_index": 0,
+            "disease": "arthritis",
+            "disease_confidence": 0.77,
+            "drug_name": "triamcinolone",
+            "disease_rank": 3,
+            "global_display_rank": 3,
+            "phase2_rank": 4,
+            "selection_source": "half_confirmed",
+            "phase2_score": 0.8579499984541823,
+            "half_disease_confidence": 0.85
+        },
+        {
+            "query_index": 0,
+            "disease": "osteoarthristis",
+            "disease_confidence": 0.9,
+            "drug_name": "naprosyn",
+            "disease_rank": 1,
+            "global_display_rank": 4,
+            "phase2_rank": 7,
+            "selection_source": "half_confirmed",
+            "phase2_score": 0.8510965895672751,
+            "half_disease_confidence": 0.95
+        },
+        {
+            "query_index": 0,
+            "disease": "osteoarthristis",
+            "disease_confidence": 0.9,
+            "drug_name": "doxycycline",
+            "disease_rank": 2,
+            "global_display_rank": 5,
+            "phase2_rank": 1,
+            "selection_source": "phase2_fallback",
+            "phase2_score": 0.8654861737269615,
+            "half_disease_confidence": 0.0
+        },
+        {
+            "query_index": 0,
+            "disease": "osteoarthristis",
+            "disease_confidence": 0.9,
+            "drug_name": "ibuprofen",
+            "disease_rank": 3,
+            "global_display_rank": 6,
+            "phase2_rank": 2,
+            "selection_source": "phase2_fallback",
+            "phase2_score": 0.8609167993121207,
+            "half_disease_confidence": 0.0
+        }
+    ]
+}
