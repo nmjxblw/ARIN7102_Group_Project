@@ -27,7 +27,7 @@ PROVIDERS: dict[str, ProviderConfig] = {
     "deepseek": ProviderConfig(
         name="deepseek",
         base_url="https://api.deepseek.com",
-        default_model="deepseek-chat",
+        default_model="deepseek-v4-flash",
         env_key="DEEPSEEK_API_KEY",
     ),
     "minimax": ProviderConfig(

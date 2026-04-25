@@ -31,7 +31,22 @@ ABLATION_MODES = (
     "candidate_union_no_bm25",
     "candidate_union_no_prior_no_bm25",
     "local_ranker",
+    "label_core_rerank",
 )
+
+MODE_STAGE_MAP = {
+    "label_idf_only": ("disease", "strict", "symptom"),
+    "bm25_only": ("bm25",),
+    "dense_only": ("dense",),
+    "label_bm25": ("disease", "strict", "symptom", "bm25"),
+    "label_bm25_dense": ("disease", "strict", "symptom", "bm25", "dense"),
+    "candidate_union": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
+    "candidate_union_no_prior": ("disease", "strict", "symptom", "bm25", "dense"),
+    "candidate_union_no_bm25": ("disease", "strict", "symptom", "dense", "prior"),
+    "candidate_union_no_prior_no_bm25": ("disease", "strict", "symptom", "dense"),
+    "local_ranker": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
+    "label_core_rerank": ("disease", "strict", "symptom"),
+}
 
 
 @dataclass
@@ -227,27 +242,15 @@ class ExperimentalDrugRecallPipeline:
         mode: str,
         pool_size: int,
     ) -> list[int]:
-        mode_stages = {
-            "label_idf_only": ("disease", "strict", "symptom"),
-            "bm25_only": ("bm25",),
-            "dense_only": ("dense",),
-            "label_bm25": ("disease", "strict", "symptom", "bm25"),
-            "label_bm25_dense": ("disease", "strict", "symptom", "bm25", "dense"),
-            "candidate_union": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
-            "candidate_union_no_prior": ("disease", "strict", "symptom", "bm25", "dense"),
-            "candidate_union_no_bm25": ("disease", "strict", "symptom", "dense", "prior"),
-            "candidate_union_no_prior_no_bm25": ("disease", "strict", "symptom", "dense"),
-            "local_ranker": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
-        }
         rows: set[int] = set()
-        for stage in mode_stages[mode]:
+        for stage in MODE_STAGE_MAP[mode]:
             rows.update(stage_scores[stage].keys())
         if not rows:
             return []
 
         seed_score = defaultdict(float)
         for row_id in rows:
-            for stage in mode_stages[mode]:
+            for stage in MODE_STAGE_MAP[mode]:
                 seed_score[row_id] += stage_scores[stage].get(row_id, 0.0)
         ranked = sorted(rows, key=lambda row_id: seed_score[row_id], reverse=True)
         return ranked[:pool_size]
@@ -335,15 +338,22 @@ class ExperimentalDrugRecallPipeline:
         no_bm25_modes = {
             "candidate_union_no_bm25",
             "candidate_union_no_prior_no_bm25",
+            "label_core_rerank",
         }
         no_prior_modes = {
             "candidate_union_no_prior",
             "candidate_union_no_prior_no_bm25",
+            "label_core_rerank",
+        }
+        no_dense_modes = {
+            "label_core_rerank",
         }
         if mode in no_bm25_modes:
             scored["bm25_score"] = 0.0
         if mode in no_prior_modes:
             scored["stage_prior"] = 0.0
+        if mode in no_dense_modes:
+            scored["dense_score"] = 0.0
 
         dense_weight = 0.15 if scored["dense_score"].max() > 0 else 0.05
         label_weight = 0.40 + (0.15 - dense_weight)
@@ -376,6 +386,15 @@ class ExperimentalDrugRecallPipeline:
         elif mode == "local_ranker" and self.ranker and self.ranker.is_ready:
             scored["ranker_score"] = self.ranker.predict(scored)
             scored["final_score"] = 0.80 * scored["ranker_score"] + 0.20 * scored["deterministic_score"]
+        elif mode == "label_core_rerank":
+            scored["final_score"] = (
+                0.50 * scored["label_idf_score"]
+                + 0.20 * scored["symptom_coverage"]
+                + 0.10 * scored["quality_prior"]
+                + 0.06 * scored["stage_strict"]
+                + 0.03 * scored["stage_disease"]
+                - scored["others_penalty"]
+            )
         else:
             scored["final_score"] = scored["deterministic_score"]
         return scored
@@ -392,19 +411,7 @@ class ExperimentalDrugRecallPipeline:
         selected_set = set(selected_rows)
 
         # Determine which stages are actually part of this mode's candidate pool.
-        mode_stages = {
-            "label_idf_only": ("disease", "strict", "symptom"),
-            "bm25_only": ("bm25",),
-            "dense_only": ("dense",),
-            "label_bm25": ("disease", "strict", "symptom", "bm25"),
-            "label_bm25_dense": ("disease", "strict", "symptom", "bm25", "dense"),
-            "candidate_union": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
-            "candidate_union_no_prior": ("disease", "strict", "symptom", "bm25", "dense"),
-            "candidate_union_no_bm25": ("disease", "strict", "symptom", "dense", "prior"),
-            "candidate_union_no_prior_no_bm25": ("disease", "strict", "symptom", "dense"),
-            "local_ranker": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
-        }
-        active_stages = set(mode_stages.get(mode, ()))
+        active_stages = set(MODE_STAGE_MAP.get(mode, ()))
 
         # filtered_scores: only include rows that are both in selected_rows AND
         # belong to a stage that is part of this mode's candidate pool.

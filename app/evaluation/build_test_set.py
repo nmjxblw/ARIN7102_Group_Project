@@ -70,6 +70,26 @@ def generate_symptom_text_template(diseases: list[str], symptoms: list[str]) -> 
     )
 
 
+def row_symptom_text(row: dict) -> str:
+    return row["sentence"] or generate_symptom_text_template(
+        row["diseases"], row["symptoms"]
+    )
+
+
+def load_excluded_symptom_texts(paths: list[Path]) -> set[str]:
+    excluded: set[str] = set()
+    for path in paths:
+        if not path.exists():
+            raise FileNotFoundError(f"Exclude input not found: {path}")
+        with open(path, encoding="utf-8") as f:
+            rows = json.load(f)
+        for row in rows:
+            text = str(row.get("symptom_text", "")).strip()
+            if text:
+                excluded.add(text)
+    return excluded
+
+
 def load_drug_table() -> pd.DataFrame:
     df = pd.read_csv(DRUG_TABLE_CSV)
     df["avg_rating"] = pd.to_numeric(df["avg_rating"], errors="coerce")
@@ -190,6 +210,7 @@ def finalize_case(
     case: dict,
     rng: random.Random,
     confidence_range: tuple[float, float],
+    query_id_start: int = 1,
 ) -> dict:
     low, high = confidence_range
     diseases = [
@@ -213,7 +234,7 @@ def finalize_case(
         ]
 
     return {
-        "query_id": f"eval_{idx + 1:04d}",
+        "query_id": f"eval_{idx + query_id_start:04d}",
         "symptom_text": case["symptom_text"],
         "diseases": diseases,
         "symptoms": symptoms,
@@ -260,7 +281,7 @@ def query_to_candidate(
         "symptom_names": row["symptoms"],
         "diseases": disease_items,
         "symptoms": symptom_items,
-        "symptom_text": row["sentence"] or generate_symptom_text_template(row["diseases"], row["symptoms"]),
+        "symptom_text": row_symptom_text(row),
         "relevant_drugs": relevant_drugs,
         "relevance_scores": relevance_scores,
     }
@@ -285,6 +306,7 @@ def collect_bucket_cases(
     rng: random.Random,
     confidence_range: tuple[float, float],
     per_disease: int,
+    used_symptom_texts: set[str],
 ) -> list[dict]:
     rows = list(bucket_rows)
     rng.shuffle(rows)
@@ -303,9 +325,12 @@ def collect_bucket_cases(
         )
         if candidate is None:
             continue
+        if candidate["symptom_text"] in used_symptom_texts:
+            continue
         if candidate["source_idx"] in used_sources:
             continue
         used_sources.add(candidate["source_idx"])
+        used_symptom_texts.add(candidate["symptom_text"])
         cases.append(candidate)
 
     if len(cases) >= target_count:
@@ -320,6 +345,7 @@ def collect_bucket_cases(
     combo_items = list(combo_to_rows.items())
     rng.shuffle(combo_items)
     while len(cases) < target_count and combo_items:
+        added_this_round = 0
         for combo, combo_rows in combo_items:
             if len(cases) >= target_count:
                 break
@@ -337,7 +363,13 @@ def collect_bucket_cases(
             )
             if candidate is None:
                 continue
+            if candidate["symptom_text"] in used_symptom_texts:
+                continue
+            used_symptom_texts.add(candidate["symptom_text"])
             cases.append(candidate)
+            added_this_round += 1
+        if added_this_round == 0:
+            break
         if len(cases) < target_count and not cases:
             raise ValueError(f"Unable to build any valid {bucket_name} cases.")
         if len(cases) < target_count and len(combo_items) == 1:
@@ -365,6 +397,19 @@ def main() -> None:
         type=Path,
         default=REPO_ROOT / "data" / "eval_dataset_candidates.json",
     )
+    parser.add_argument(
+        "--exclude-input",
+        action="append",
+        type=Path,
+        default=[],
+        help="Existing candidate JSON file(s); generated cases with matching symptom_text are skipped.",
+    )
+    parser.add_argument(
+        "--query-id-start",
+        type=int,
+        default=1,
+        help="First numeric suffix for generated query_id values.",
+    )
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
 
@@ -383,6 +428,17 @@ def main() -> None:
 
     print("[build_test_set] loading query rows…")
     query_rows = load_query_rows()
+    excluded_texts = load_excluded_symptom_texts(args.exclude_input)
+    if excluded_texts:
+        before_count = len(query_rows)
+        query_rows = [
+            row for row in query_rows
+            if row_symptom_text(row) not in excluded_texts
+        ]
+        print(
+            f"[build_test_set] excluded {before_count - len(query_rows)} rows "
+            f"by symptom_text from {len(args.exclude_input)} file(s)"
+        )
     buckets = build_query_buckets(query_rows)
     print(
         "[build_test_set] query buckets:",
@@ -394,6 +450,7 @@ def main() -> None:
     )
 
     cases: list[dict] = []
+    used_symptom_texts: set[str] = set()
     cases += collect_bucket_cases(
         buckets["single"],
         "single",
@@ -402,6 +459,7 @@ def main() -> None:
         rng,
         confidence_range,
         args.drugs_per_disease,
+        used_symptom_texts,
     )
     cases += collect_bucket_cases(
         buckets["double"],
@@ -411,6 +469,7 @@ def main() -> None:
         rng,
         confidence_range,
         args.drugs_per_disease,
+        used_symptom_texts,
     )
     cases += collect_bucket_cases(
         buckets["triple_plus"],
@@ -420,11 +479,12 @@ def main() -> None:
         rng,
         confidence_range,
         args.drugs_per_disease,
+        used_symptom_texts,
     )
     rng.shuffle(cases)
 
     finalized = [
-        finalize_case(idx, case, rng, confidence_range)
+        finalize_case(idx, case, rng, confidence_range, args.query_id_start)
         for idx, case in enumerate(cases[: args.num_samples])
     ]
 

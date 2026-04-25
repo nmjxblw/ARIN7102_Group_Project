@@ -17,7 +17,11 @@ from .recommendation_pipeline import (
     query_drugs_hybrid,
     safe_cosine_scores,
 )
-from .cross_encoder_reranker import CrossEncoderReranker
+try:
+    from .cross_encoder_reranker import CrossEncoderReranker
+except ImportError:
+    CrossEncoderReranker = None
+
 from .dual_recall_pipeline import DualRecallDrugRecommender, PipelineTrace, WeightedLabel, parse_weighted_labels
 from .experimental_recall_pipeline import ExperimentalDrugRecallPipeline, ExperimentalTrace
 from .label_adapter import NormalizedLabel, parse_labels

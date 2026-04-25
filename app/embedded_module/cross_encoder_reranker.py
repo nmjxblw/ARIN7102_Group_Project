@@ -12,11 +12,16 @@ from __future__ import annotations
 from typing import Iterable
 
 import numpy as np
-import torch  # pyright: ignore[reportMissingImports]
-from transformers import (  # pyright: ignore[reportMissingImports]
-    AutoModelForSequenceClassification,
-    AutoTokenizer,
-)
+try:
+    import torch  # pyright: ignore[reportMissingImports]
+    from transformers import (  # pyright: ignore[reportMissingImports]
+        AutoModelForSequenceClassification,
+        AutoTokenizer,
+    )
+except ImportError:
+    torch = None
+    AutoModelForSequenceClassification = None
+    AutoTokenizer = None
 
 
 DEFAULT_CROSS_ENCODER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"

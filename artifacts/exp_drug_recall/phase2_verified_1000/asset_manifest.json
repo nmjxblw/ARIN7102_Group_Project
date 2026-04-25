@@ -1,0 +1,11 @@
+{
+  "path": "/tmp/nonexistent_drug_embeddings.npy",
+  "available": false,
+  "row_count": 0,
+  "ndim": 0,
+  "dim": 0,
+  "dtype": "",
+  "row_aligned": false,
+  "projected_view": null,
+  "message": "Embedding file not found: /tmp/nonexistent_drug_embeddings.npy"
+}

@@ -51,8 +51,8 @@ VERIFY_SYSTEM_PROMPT = """You are a clinical pharmacology reviewer. You assess w
 - For drug-drug interactions: Lexicomp / Micromedex severity grading (major / moderate / minor).
 
 You must return STRICT JSON only — no markdown fences, no commentary, no preamble,
-no chain-of-thought, no <think> tags. The first character of your response must
-be "{". Use integer scores as specified.
+no chain-of-thought, no <think> tags. Do not include reasoning, analysis, chain-of-thought, or reasoning_content.
+The first character of your response must be "{". Use integer scores as specified.
 """
 
 
@@ -70,7 +70,7 @@ For EACH candidate drug, rate (integer 0-3):
   - disease_match: 3 = first-line treatment for at least one listed disease; 2 = acceptable alternative; 1 = weak/edge-case; 0 = not indicated.
   - symptom_match: 3 = directly addresses multiple listed symptoms; 2 = addresses some; 1 = marginal; 0 = unrelated.
   - contraindication_risk: 0 = no concerns given listed diseases; 1 = caution advised; 2 = relative contraindication; 3 = absolute contraindication.
-  - rationale: ONE short sentence citing the indication or contraindication source.
+  - rationale: ONE short sentence, <= 30 words.
 
 DDI evaluation (pool-aware). Because the pool lists multiple alternatives per
 disease, do NOT assume all drugs are co-administered. Rate ddi_risk_overall
@@ -78,7 +78,7 @@ as the WORST interaction that would arise if a clinician picks a REASONABLE
 subset (e.g. at most one drug per disease class). If every such reasonable
 subset is safe, ddi_risk_overall = 0.
   - ddi_risk_overall (0-3): 0 = no clinically relevant interaction in any reasonable subset; 1 = minor; 2 = moderate (monitoring needed); 3 = major (avoid).
-  - ddi_rationale: ONE sentence naming the worst pair, or "N/A".
+  - ddi_rationale: ONE short sentence, <= 30 words, naming the worst pair, or "N/A".
 
 Return JSON exactly in this shape:
 {{
@@ -201,8 +201,16 @@ def call_verifier(
     user_prompt: str,
     temperature: float,
     max_tokens: int,
+    provider: str = "minimax",
+    thinking: str = "disabled",
 ) -> tuple[str, str | None]:
     try:
+        extra_body = {}
+        if provider == "deepseek":
+            extra_body = {"thinking": {"type": thinking}}
+        else:
+            extra_body = {"reasoning_split": True}
+
         resp = llm.client.chat.completions.create(
             model=model,
             messages=[
@@ -210,7 +218,7 @@ def call_verifier(
                 {"role": "user", "content": user_prompt},
             ],
             response_format={"type": "json_object"},
-            extra_body={"reasoning_split": True},
+            extra_body=extra_body,
             temperature=temperature,
             max_tokens=max_tokens,
         )
@@ -228,6 +236,8 @@ def attempt_repair(
     case: dict,
     raw: str,
     max_tokens: int,
+    provider: str = "minimax",
+    thinking: str = "disabled",
 ) -> tuple[dict[str, Any] | None, str, str | None]:
     if not raw.strip():
         return None, raw, None
@@ -242,6 +252,8 @@ def attempt_repair(
         user_prompt=repair_prompt,
         temperature=0.0,
         max_tokens=max_tokens,
+        provider=provider,
+        thinking=thinking,
     )
     repaired_verdict = parse_llm_json(repaired_raw) if repaired_raw else None
     return repaired_verdict, repaired_raw, repaired_err
@@ -377,14 +389,54 @@ def main() -> None:
         default="parse_fail",
         help="Reason to select from --retry-log. Default: parse_fail",
     )
+    parser.add_argument(
+        "--thinking",
+        choices=["enabled", "disabled"],
+        default="disabled",
+        help="Enable or disable thinking for models that support it.",
+    )
+    parser.add_argument(
+        "--skip-existing-log",
+        action="store_true",
+        help="Skip cases already present in the log file.",
+    )
+    parser.add_argument(
+        "--resume-log",
+        action="store_true",
+        help="Alias for --skip-existing-log.",
+    )
+    parser.add_argument(
+        "--checkpoint-every",
+        type=int,
+        default=50,
+        help="Save output JSON every N processed cases.",
+    )
     add_provider_args(parser)
     args = parser.parse_args()
+
+    if args.resume_log:
+        args.skip_existing_log = True
 
     if not args.input.exists():
         raise FileNotFoundError(f"Input not found: {args.input}")
 
     with open(args.input, encoding="utf-8") as f:
         cases = json.load(f)
+
+    if args.skip_existing_log and args.log.exists():
+        existing_ids = set()
+        with open(args.log, "r", encoding="utf-8") as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                try:
+                    entry = json.loads(line)
+                    if "query_id" in entry:
+                        existing_ids.add(str(entry["query_id"]))
+                except Exception:
+                    pass
+        cases = [c for c in cases if str(c["query_id"]) not in existing_ids]
+        print(f"[verify_test_set] skipped {len(existing_ids)} existing cases from log, {len(cases)} remaining.")
     if args.retry_log:
         retry_ids = load_retry_query_ids(args.retry_log, args.retry_reason)
         cases = [case for case in cases if case["query_id"] in retry_ids]
@@ -413,8 +465,21 @@ def main() -> None:
     args.log.parent.mkdir(parents=True, exist_ok=True)
 
     verified_cases: list[dict] = []
+    if args.skip_existing_log and args.output.exists():
+        try:
+            with open(args.output, "r", encoding="utf-8") as f:
+                verified_cases = json.load(f)
+            print(f"[verify_test_set] loaded {len(verified_cases)} previously verified cases from output.")
+        except Exception as e:
+            print(f"[verify_test_set] WARN: failed to load existing output: {e}")
+
     stats: Counter[str] = Counter()
     lock = threading.Lock()
+    processed_count = 0
+
+    def _checkpoint():
+        with open(args.output, "w", encoding="utf-8") as f:
+            json.dump(verified_cases, f, indent=2, ensure_ascii=False)
 
     def _postfix(progress: tqdm) -> None:
         progress.set_postfix(
@@ -444,12 +509,15 @@ def main() -> None:
             user_prompt=prompt,
             temperature=args.temperature,
             max_tokens=args.max_tokens,
+            provider=args.provider,
+            thinking=args.thinking,
         )
         verdict = parse_llm_json(raw) if raw else None
         repair_err = None
         if verdict is None and args.repair_parse_fail and raw:
             verdict, repair_raw, repair_err = attempt_repair(
-                llm=llm, case=case, raw=raw, max_tokens=args.max_tokens
+                llm=llm, case=case, raw=raw, max_tokens=args.max_tokens,
+                provider=args.provider, thinking=args.thinking
             )
             if verdict is not None:
                 raw = repair_raw
@@ -479,7 +547,8 @@ def main() -> None:
         decision["raw"] = raw[:2000]
         return decision, verified
 
-    with open(args.log, "w", encoding="utf-8") as log_f:
+    log_mode = "a" if args.skip_existing_log else "w"
+    with open(args.log, log_mode, encoding="utf-8") as log_f:
         if args.workers <= 1:
             progress = tqdm(cases, desc="verify")
             for case in progress:
@@ -490,6 +559,11 @@ def main() -> None:
                 log_f.write(json.dumps(decision, ensure_ascii=False) + "\n")
                 if verified is not None:
                     verified_cases.append(verified)
+                
+                processed_count += 1
+                if args.checkpoint_every > 0 and processed_count % args.checkpoint_every == 0:
+                    _checkpoint()
+                    
                 _postfix(progress)
                 if args.sleep:
                     time.sleep(args.sleep)
@@ -514,6 +588,11 @@ def main() -> None:
                                 and len(verified_cases) >= args.target_count
                             ):
                                 stop_event.set()
+                        
+                        processed_count += 1
+                        if args.checkpoint_every > 0 and processed_count % args.checkpoint_every == 0:
+                            _checkpoint()
+                            
                         _postfix(progress)
                         progress.update(1)
             progress.close()

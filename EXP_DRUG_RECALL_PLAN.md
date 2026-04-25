@@ -10,13 +10,17 @@ saved outputs, exception handling, and clear modular code.
 
 Primary target:
 
-- Evaluation set: `data/eval_dataset_verified.json`
+- Evaluation sets:
+  - `data/eval_dataset_verified.json`
+  - `data/eval_dataset_verified_1000_deepseek_v4_flash.json`
 - Main metric: `hit@20`
 - Secondary metrics: `recall@20`, `mrr`, `precision@5`, `ndcg@20`
 - Baseline to beat: current label recall, not broken semantic recall
   - `hit@20 = 0.6859`
   - `recall@20 = 0.5534`
   - `mrr = 0.2983`
+- Phase II status: verified-set recall is now saturated with
+  `label_core_rerank`; the remaining risk is clean half-data coverage.
 
 ## Data Sources
 
@@ -47,15 +51,19 @@ Auxiliary data:
   - Use for weak training and stress testing.
 - `app/dataset_module/drugs_training_dataset/drug_data_half_1.json`
   - Weak structured drug-label mapping data, 1465 rows.
-  - Use for Phase 2 label-core coverage and regression testing.
+  - Use with `drug_data_half_2.json` for Phase II clean-data sanity checks.
   - Do not treat as a verified gold benchmark.
 - `app/dataset_module/drugs_training_dataset/drug_data_half_2.json`
   - Weak structured drug-label mapping data, 1466 rows.
-  - Use together with `drug_data_half_1.json` for large-scale smoke tests.
-  - Do not use for final reported metrics.
+  - Must be merged with `drug_data_half_1.json` before grouped half evaluation.
+  - Do not use row-level single-drug metrics as final reported metrics.
 - `data/eval_dataset_verified.json`
   - Gold evaluation only.
   - Do not train on this file.
+- `data/eval_dataset_verified_1000_deepseek_v4_flash.json`
+  - Expanded verified evaluation set, 742 rows.
+  - Use as a stability check for conclusions drawn from
+    `data/eval_dataset_verified.json`.
 - `app/dataset_module/drugs_training_dataset/drug_disease_mapping.json`
   - Optional consistency check and expansion source.
   - It covers fewer drugs than the structured CSV, so it is not the main table.
@@ -259,12 +267,14 @@ Run ablations on `data/eval_dataset_verified.json`:
 6. `candidate_union + deterministic_score`
 7. `candidate_union + local_ranker`
 
-Primary evaluation remains `data/eval_dataset_verified.json`. The two
-`drug_data_half_*.json` files are secondary weak structured evaluation data for
-Phase 2 regression only. They should be used to check label adapter coverage,
-label-core recall, large-scale pipeline stability, and whether the original
-`drug_name` appears in top-k results. They must not replace verified metrics in
-the report.
+Primary evaluation remains verified data:
+
+- `data/eval_dataset_verified.json`
+- `data/eval_dataset_verified_1000_deepseek_v4_flash.json`
+
+The two `drug_data_half_*.json` files are secondary clean-data sanity checks.
+They should be merged before grouped evaluation. They must not replace verified
+metrics in the report.
 
 For half-data evaluation, add an adapter that accepts the source schema:
 
@@ -276,20 +286,35 @@ For half-data evaluation, add an adapter that accepts the source schema:
 }
 ```
 
-The adapter should convert it to evaluation-style rows with:
+The adapter supports three views:
 
-- `query_id`: `half1_000001` or `half2_000001`
+1. `row`
+   - legacy / deprecated
+   - converts each half row into one query with one relevant drug
+   - retained only for traceability because it creates false negatives for
+     other valid drugs under the same disease
+
+2. `disease`
+   - main Phase II half view
+   - merge half1 + half2, then group all drugs by disease
+
+3. `disease_symptom`
+   - optional follow-up
+   - merge half1 + half2, then group drugs by disease + symptom
+
+The disease view should convert it to evaluation-style rows with:
+
+- `query_id`: `half_all_disease_acne_0001`
 - `diseases`: `{"name": "acne", "confidence": 0.95}`
-- `symptoms`: `{"name": "skin_rash", "confidence": 0.85}`
-- `relevant_drugs`: `["aczone"]`
-- `symptom_text`: optional; pure label-core tests should allow it to be absent
-  or empty
+- `symptoms`: `[]`
+- `relevant_drugs`: all canonicalized half drugs labelled `acne`
+- `symptom_text`: synthetic label text such as `Drugs for acne.`
 
-Run half-data checks first with `label_idf_only`, then with the Phase 2
-`label_core_rerank` mode once it exists. If BM25 or dense modes are evaluated on
-half data, the run must either construct synthetic query text from labels or
-explicitly document that the test is label-text based rather than natural
-language based.
+Run half-data checks with `label_core_rerank` after canonicalizing half drug
+names to the structured table's display names where possible. If BM25 or dense
+modes are evaluated on half data, the run must either construct synthetic query
+text from labels or explicitly document that the test is label-text based rather
+than natural-language based.
 
 Required report metrics:
 
@@ -330,6 +355,10 @@ Artifacts:
 - `artifacts/exp_drug_recall/stage_trace.jsonl`
 - `artifacts/exp_drug_recall/ranker.joblib`
 - `artifacts/exp_drug_recall/asset_manifest.json`
+- Phase II final artifacts:
+  - `artifacts/exp_drug_recall/phase2_verified/metrics.json`
+  - `artifacts/exp_drug_recall/phase2_verified_1000/metrics.json`
+  - `artifacts/exp_drug_recall/phase2_half_all_disease/metrics.json`
 
 ## Risks and Controls
 
@@ -357,16 +386,30 @@ Artifacts:
 7. Train local ranker from weak data and evaluate against deterministic scorer.
 8. Save metrics and traces for report and presentation.
 
-## Phase 2 TODO
+## Phase 2 Status
 
-1. Add a weak half-data evaluation adapter for `drug_data_half_1.json` and
-   `drug_data_half_2.json`.
-2. Support half-data rows with `drug_name`, `diseases`, and `symptoms`; do not
-   require `symptom_text` for pure label-core tests.
-3. Convert each source `drug_name` into `relevant_drugs: [drug_name]` and assign
-   deterministic query ids such as `half1_000001` and `half2_000001`.
-4. Use half-data evaluation only for weak structured regression, label adapter
-   coverage, and top-k containment checks.
-5. Keep final Phase 2 metrics on `data/eval_dataset_verified.json`.
-6. Limit the first half-data runs to `label_idf_only`; later rerun with
-   `label_core_rerank` after that mode is implemented.
+Phase II is experimentally complete.
+
+Final Phase II state:
+
+1. `label_core_rerank` is the clean label-core mainline.
+2. Old verified 191 and new verified 742 both show saturated verified-set recall.
+3. Row-level half evaluation is deprecated.
+4. Merged half disease-level evaluation is the active clean-data sanity check.
+5. Half confidence is not safe to use directly as query confidence or sample
+   weight.
+
+Final Phase II metrics:
+
+| Evaluation | Queries | hit@20 | precision@20 | recall@20 | ndcg@20 | mrr |
+|---|---:|---:|---:|---:|---:|---:|
+| old verified | 191 | 0.9843 | 0.1204 | 0.9475 | 0.6716 | 0.6313 |
+| new verified | 742 | 0.9879 | 0.1172 | 0.9638 | 0.6925 | 0.6654 |
+| half disease-level | 31 | 0.7419 | 0.2806 | 0.1477 | 0.3453 | 0.5110 |
+
+Next sequence:
+
+1. Phase III-A: repair label coverage gaps exposed by half disease-level misses.
+2. Phase III-B: run the `disease_symptom` half view.
+3. Phase III-C: revisit `local_ranker` after coverage gaps are understood.
+4. Phase IV: optional dense/BM25 revisit.

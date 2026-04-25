@@ -1,0 +1,200 @@
+{
+  "queries": [
+    {
+      "query_index": 0,
+      "sentence": "Debug query",
+      "shared_symptoms": [
+        {
+          "label": "cough",
+          "confidence": 1.0
+        },
+        {
+          "label": "mild_fever",
+          "confidence": 1.0
+        }
+      ],
+      "disease_results": [
+        {
+          "disease": "acne",
+          "disease_confidence": 1.0,
+          "phase2_top20_count": 20,
+          "half_confirmed_in_top20": 3,
+          "final_top3": [
+            {
+              "drug_name": "doxycycline",
+              "phase2_rank": 1,
+              "phase2_score": 0.8654861737269615,
+              "matched_diseases": [
+                "acne"
+              ],
+              "matched_symptoms": [
+                "cough",
+                "mild fever"
+              ],
+              "selection_source": "half_confirmed",
+              "half_disease_confidence": 0.9,
+              "disease_rank": 1
+            },
+            {
+              "drug_name": "minocycline",
+              "phase2_rank": 2,
+              "phase2_score": 0.8568547338117813,
+              "matched_diseases": [
+                "acne"
+              ],
+              "matched_symptoms": [
+                "cough",
+                "mild fever"
+              ],
+              "selection_source": "half_confirmed",
+              "half_disease_confidence": 0.9,
+              "disease_rank": 2
+            },
+            {
+              "drug_name": "tetracycline",
+              "phase2_rank": 3,
+              "phase2_score": 0.8515217891373306,
+              "matched_diseases": [
+                "acne"
+              ],
+              "matched_symptoms": [
+                "cough",
+                "mild fever"
+              ],
+              "selection_source": "half_confirmed",
+              "half_disease_confidence": 0.95,
+              "disease_rank": 3
+            }
+          ]
+        },
+        {
+          "disease": "common_cold",
+          "disease_confidence": 1.0,
+          "phase2_top20_count": 20,
+          "half_confirmed_in_top20": 0,
+          "final_top3": [
+            {
+              "drug_name": "valacyclovir",
+              "phase2_rank": 1,
+              "phase2_score": 0.8710608682387873,
+              "matched_diseases": [
+                "common_cold"
+              ],
+              "matched_symptoms": [
+                "cough",
+                "mild fever"
+              ],
+              "selection_source": "phase2_fallback",
+              "half_disease_confidence": 0.0,
+              "disease_rank": 1
+            },
+            {
+              "drug_name": "valtrex",
+              "phase2_rank": 2,
+              "phase2_score": 0.8709487835723233,
+              "matched_diseases": [
+                "common_cold"
+              ],
+              "matched_symptoms": [
+                "cough",
+                "mild fever"
+              ],
+              "selection_source": "phase2_fallback",
+              "half_disease_confidence": 0.0,
+              "disease_rank": 2
+            },
+            {
+              "drug_name": "acyclovir",
+              "phase2_rank": 3,
+              "phase2_score": 0.8659776529289345,
+              "matched_diseases": [
+                "common_cold"
+              ],
+              "matched_symptoms": [
+                "cough",
+                "mild fever"
+              ],
+              "selection_source": "phase2_fallback",
+              "half_disease_confidence": 0.0,
+              "disease_rank": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "query_index": 0,
+      "disease": "acne",
+      "disease_confidence": 1.0,
+      "drug_name": "doxycycline",
+      "disease_rank": 1,
+      "global_display_rank": 1,
+      "phase2_rank": 1,
+      "selection_source": "half_confirmed",
+      "phase2_score": 0.8654861737269615,
+      "half_disease_confidence": 0.9
+    },
+    {
+      "query_index": 0,
+      "disease": "acne",
+      "disease_confidence": 1.0,
+      "drug_name": "minocycline",
+      "disease_rank": 2,
+      "global_display_rank": 2,
+      "phase2_rank": 2,
+      "selection_source": "half_confirmed",
+      "phase2_score": 0.8568547338117813,
+      "half_disease_confidence": 0.9
+    },
+    {
+      "query_index": 0,
+      "disease": "acne",
+      "disease_confidence": 1.0,
+      "drug_name": "tetracycline",
+      "disease_rank": 3,
+      "global_display_rank": 3,
+      "phase2_rank": 3,
+      "selection_source": "half_confirmed",
+      "phase2_score": 0.8515217891373306,
+      "half_disease_confidence": 0.95
+    },
+    {
+      "query_index": 0,
+      "disease": "common_cold",
+      "disease_confidence": 1.0,
+      "drug_name": "valacyclovir",
+      "disease_rank": 1,
+      "global_display_rank": 4,
+      "phase2_rank": 1,
+      "selection_source": "phase2_fallback",
+      "phase2_score": 0.8710608682387873,
+      "half_disease_confidence": 0.0
+    },
+    {
+      "query_index": 0,
+      "disease": "common_cold",
+      "disease_confidence": 1.0,
+      "drug_name": "valtrex",
+      "disease_rank": 2,
+      "global_display_rank": 5,
+      "phase2_rank": 2,
+      "selection_source": "phase2_fallback",
+      "phase2_score": 0.8709487835723233,
+      "half_disease_confidence": 0.0
+    },
+    {
+      "query_index": 0,
+      "disease": "common_cold",
+      "disease_confidence": 1.0,
+      "drug_name": "acyclovir",
+      "disease_rank": 3,
+      "global_display_rank": 6,
+      "phase2_rank": 3,
+      "selection_source": "phase2_fallback",
+      "phase2_score": 0.8659776529289345,
+      "half_disease_confidence": 0.0
+    }
+  ]
+}

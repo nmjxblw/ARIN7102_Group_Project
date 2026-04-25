@@ -132,6 +132,9 @@ def run_evaluation(
     *,
     table_path: Path,
     eval_dataset_path: Path,
+    eval_kind: str,
+    half_grouping: str,
+    half_extra_datasets: list[Path],
     embedding_path: Path | None,
     artifact_dir: Path,
     modes: list[str],
@@ -165,7 +168,19 @@ def run_evaluation(
         )
         pipeline.ranker = ranker
 
-    eval_data = _load_json(eval_dataset_path)
+    if eval_kind == "half":
+        from evaluation.half_data_adapter import convert_half_datasets
+        half_paths = [eval_dataset_path, *half_extra_datasets]
+        eval_data = convert_half_datasets(
+            half_paths,
+            grouping=half_grouping,
+            table_path=table_path,
+        )
+        allowed_modes = {"label_idf_only", "label_core_rerank"}
+        if any(m not in allowed_modes for m in modes):
+            raise ValueError(f"Half eval only supports {allowed_modes}")
+    else:
+        eval_data = _load_json(eval_dataset_path)
     if limit is not None:
         eval_data = eval_data[:limit]
 
@@ -182,7 +197,7 @@ def run_evaluation(
             for i, query in enumerate(eval_data, start=1):
                 print(f"[{i}/{len(eval_data)}] {query['query_id']}")
                 result_df, trace = pipeline.recommend(
-                    symptom_text=query["symptom_text"],
+                    symptom_text=query.get("symptom_text", ""),
                     disease_items=query.get("diseases", []),
                     symptom_items=query.get("symptoms", []),
                     top_k=max(k_values),
@@ -249,6 +264,13 @@ def run_evaluation(
         json.dump(
             {
                 "eval_dataset": str(eval_dataset_path),
+                "half_extra_datasets": (
+                    [str(path) for path in half_extra_datasets]
+                    if eval_kind == "half"
+                    else []
+                ),
+                "eval_kind": eval_kind,
+                "half_grouping": half_grouping if eval_kind == "half" else None,
                 "num_queries": len(eval_data),
                 "k_values": k_values,
                 "modes": modes,
@@ -264,6 +286,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Evaluate experimental drug recall ablations.")
     parser.add_argument("--table", type=Path, default=DEFAULT_TABLE)
     parser.add_argument("--eval-dataset", type=Path, default=DEFAULT_EVAL)
+    parser.add_argument("--eval-kind", choices=["verified", "half"], default="verified")
+    parser.add_argument(
+        "--half-grouping",
+        choices=["row", "disease", "disease_symptom"],
+        default="disease",
+        help="How to convert half JSON when --eval-kind half.",
+    )
+    parser.add_argument(
+        "--half-extra-dataset",
+        action="append",
+        type=Path,
+        default=[],
+        help="Additional half JSON split(s) to merge before grouped half evaluation.",
+    )
     parser.add_argument("--embeddings", type=Path, default=DEFAULT_EMBEDDINGS)
     parser.add_argument("--artifact-dir", type=Path, default=DEFAULT_ARTIFACT_DIR)
     # Aside-plan default batch: 6 ablation modes (no local_ranker in default run)
@@ -291,6 +327,9 @@ def main() -> None:
     metrics = run_evaluation(
         table_path=args.table,
         eval_dataset_path=args.eval_dataset,
+        eval_kind=args.eval_kind,
+        half_grouping=args.half_grouping,
+        half_extra_datasets=args.half_extra_dataset,
         embedding_path=args.embeddings,
         artifact_dir=args.artifact_dir,
         modes=args.modes,
