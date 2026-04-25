@@ -232,6 +232,12 @@ app/dataset_module/bert_training_dataset/generated_medical_dataset.csv
 *.safetensors
 
 # 
+.hermes/
 interaction/
 .DS_Store
+**/.vscode/
 app/interactions/app_interactions_evaluation_delivery.ipynb_\350\247\243\351\207\212.md
+codex.md
+Hermes.md
+phase1收束.md
+Reference/guideline.txt

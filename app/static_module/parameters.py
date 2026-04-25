@@ -28,9 +28,9 @@ THREAD_TIMEOUT: float = float(os.getenv("THREAD_TIMEOUT", "5.0"))
 # region DeepSeek API 相关设定
 DEEPSEEK_API_KEY: str = os.getenv("DEEPSEEK_API_KEY", "")
 """ DEEPSEEK API 密钥 """
-assert (
-    DEEPSEEK_API_KEY is not None and DEEPSEEK_API_KEY != ""
-), "DEEPSEEK_API_KEY未在.env文件中设置"
+assert DEEPSEEK_API_KEY is not None and DEEPSEEK_API_KEY != "", (
+    "DEEPSEEK_API_KEY未在.env文件中设置"
+)
 CHAT_HISTORY_DIR: str = os.getenv(
     "CHAT_HISTORY_DIR", r"remote_llm_module/chat_histories"
 )
