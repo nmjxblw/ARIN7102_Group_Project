@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 from pathlib import Path
+from typing import Any
 
 from app.embedded_module.drug_recall_index import DrugRecallIndex
 from app.embedded_module.phase2_final_recommender import Phase2FinalRecommender
@@ -10,6 +11,121 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_TABLE_PATH = REPO_ROOT / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
+DEFAULT_HALF1_PATH = REPO_ROOT / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"
+DEFAULT_HALF2_PATH = REPO_ROOT / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_2.json"
+DEFAULT_TOP_K_RECALL = 20
+DEFAULT_TOP_K_PER_DISEASE = 3
+
+_RECOMMENDER_CACHE: Phase2FinalRecommender | None = None
+
+
+def _confidence(value: Any, default: float = 1.0) -> float:
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError):
+        return default
+    if parsed < 0.0:
+        return 0.0
+    if parsed > 1.0:
+        return 1.0
+    return parsed
+
+
+def _normalize_label_items(items: Any) -> list[dict]:
+    normalized = []
+    for item in items or []:
+        if isinstance(item, str):
+            label = item.strip()
+            confidence = 1.0
+        elif isinstance(item, dict):
+            if "label" in item:
+                label = str(item.get("label") or "").strip()
+                confidence = _confidence(item.get("confidence"), default=1.0)
+            elif "name" in item:
+                label = str(item.get("name") or "").strip()
+                confidence = _confidence(item.get("confidence"), default=1.0)
+            elif len(item) == 1:
+                label = str(next(iter(item.keys())) or "").strip()
+                confidence = _confidence(next(iter(item.values())), default=1.0)
+            else:
+                continue
+        else:
+            continue
+
+        if label:
+            normalized.append({"label": label, "confidence": confidence})
+    return normalized
+
+
+def _normalize_bert_output(bert_output: dict) -> dict:
+    if not isinstance(bert_output, dict):
+        raise TypeError("bert_output must be a dict")
+
+    return {
+        "query_index": 0,
+        "diseases": _normalize_label_items(bert_output.get("diseases", [])),
+        "symptoms": _normalize_label_items(bert_output.get("symptoms", [])),
+        "need_first_aid": bert_output.get("need_first_aid", 0),
+        "sentence": str(bert_output.get("sentence") or ""),
+    }
+
+
+def _get_recommender() -> Phase2FinalRecommender:
+    global _RECOMMENDER_CACHE
+    if _RECOMMENDER_CACHE is None:
+        import pandas as pd
+
+        df = pd.read_csv(DEFAULT_TABLE_PATH)
+        index = DrugRecallIndex(
+            df=df,
+            embedding_path=None,
+        )
+        _RECOMMENDER_CACHE = Phase2FinalRecommender(
+            index=index,
+            half_data_paths=[DEFAULT_HALF1_PATH, DEFAULT_HALF2_PATH],
+            table_path=DEFAULT_TABLE_PATH,
+        )
+    return _RECOMMENDER_CACHE
+
+
+def _build_flat_recommendations(result: dict) -> list[dict]:
+    flat_results = []
+    global_rank = 1
+    for d_res in result.get("disease_results", []):
+        for top_drug in d_res.get("final_top3", []):
+            flat_item = {
+                "query_index": result.get("query_index", 0),
+                "disease": d_res.get("disease", ""),
+                "disease_confidence": d_res.get("disease_confidence", 1.0),
+                "drug_name": top_drug.get("drug_name", ""),
+                "disease_rank": top_drug.get("disease_rank", global_rank),
+                "global_display_rank": global_rank,
+                "phase2_rank": top_drug.get("phase2_rank"),
+                "selection_source": top_drug.get("selection_source", ""),
+            }
+            if "phase2_score" in top_drug:
+                flat_item["phase2_score"] = top_drug["phase2_score"]
+            if "half_disease_confidence" in top_drug:
+                flat_item["half_disease_confidence"] = top_drug["half_disease_confidence"]
+            flat_results.append(flat_item)
+            global_rank += 1
+    return flat_results
+
+
+def predict(bert_output: dict) -> dict:
+    query = _normalize_bert_output(bert_output)
+    recommender = _get_recommender()
+    result = recommender.recommend_query(
+        query=query,
+        top_k_recall=DEFAULT_TOP_K_RECALL,
+        top_k_per_disease=DEFAULT_TOP_K_PER_DISEASE,
+    )
+    return {
+        "input": query,
+        "disease_results": result.get("disease_results", []),
+        "recommendations": _build_flat_recommendations(result),
+    }
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run Phase II Final Recommendation Pipeline")
@@ -19,9 +135,9 @@ def parse_args():
     parser.add_argument("--output-json", type=str, help="Path to save the output JSON")
     parser.add_argument("--top-k-recall", type=int, default=20, help="Phase II recall Top K limit")
     parser.add_argument("--top-k-per-disease", type=int, default=3, help="Final Top K limit per disease")
-    parser.add_argument("--table-path", type=str, default=str(REPO_ROOT / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"))
-    parser.add_argument("--half1-path", type=str, default=str(REPO_ROOT / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"))
-    parser.add_argument("--half2-path", type=str, default=str(REPO_ROOT / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_2.json"))
+    parser.add_argument("--table-path", type=str, default=str(DEFAULT_TABLE_PATH))
+    parser.add_argument("--half1-path", type=str, default=str(DEFAULT_HALF1_PATH))
+    parser.add_argument("--half2-path", type=str, default=str(DEFAULT_HALF2_PATH))
     return parser.parse_args()
 
 def main():
@@ -80,28 +196,7 @@ def main():
         
         all_grouped_results.append(res)
         
-        # Build flat view for this query
-        global_rank = 1
-        for d_res in res["disease_results"]:
-            for top_drug in d_res["final_top3"]:
-                flat_item = {
-                    "query_index": res["query_index"],
-                    "disease": d_res["disease"],
-                    "disease_confidence": d_res["disease_confidence"],
-                    "drug_name": top_drug["drug_name"],
-                    "disease_rank": top_drug["disease_rank"],
-                    "global_display_rank": global_rank,
-                    "phase2_rank": top_drug["phase2_rank"],
-                    "selection_source": top_drug["selection_source"]
-                }
-                # add phase2_score and half_disease_confidence if available
-                if "phase2_score" in top_drug:
-                    flat_item["phase2_score"] = top_drug["phase2_score"]
-                if "half_disease_confidence" in top_drug:
-                    flat_item["half_disease_confidence"] = top_drug["half_disease_confidence"]
-                    
-                all_flat_results.append(flat_item)
-                global_rank += 1
+        all_flat_results.extend(_build_flat_recommendations(res))
 
     output = {
         "queries": all_grouped_results,

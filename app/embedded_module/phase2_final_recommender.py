@@ -42,7 +42,7 @@ class Phase2FinalRecommender:
         
         # To handle multi-disease properly, we iterate each disease
         for d in diseases:
-            d_label = d.get("label", "")
+            d_label = d.get("label") or d.get("name") or ""
             if not d_label:
                 continue
                 
