@@ -846,34 +846,34 @@ def predict_with_preload(
 
 
 # region 单例模式
-class BERTManager(metaclass=SingletonMeta):
-    """BERTManager 类，使用单例模式管理模型加载和推理，确保全局只有一个实例存在，避免重复加载模型带来的资源浪费。"""
+# class BERTManager(metaclass=SingletonMeta):
+#     """BERTManager 类，使用单例模式管理模型加载和推理，确保全局只有一个实例存在，避免重复加载模型带来的资源浪费。"""
 
-    def __init__(
-        self, model_path: str | Path = SAVE_PATH, device: torch.device = TORCH_DEVICE
-    ):
-        (
-            self.inference_device,
-            self.tokenizer,
-            self.inference_model,
-            self.mlb_d,
-            self.mlb_s,
-            self.medians,
-        ) = preload(model_path, device)
+#     def __init__(
+#         self, model_path: str | Path = SAVE_PATH, device: torch.device = TORCH_DEVICE
+#     ):
+#         (
+#             self.inference_device,
+#             self.tokenizer,
+#             self.inference_model,
+#             self.mlb_d,
+#             self.mlb_s,
+#             self.medians,
+#         ) = preload(model_path, device)
 
-    def predict(
-        self, text_input: str, threshold: float = 1 / (1 + math.pow(math.e, -(0)))
-    ) -> dict[str, Any]:
-        return predict_with_preload(
-            text_input,
-            self.tokenizer,
-            self.inference_device,
-            self.inference_model,
-            self.mlb_d,
-            self.mlb_s,
-            self.medians,
-            threshold,
-        )
+#     def predict(
+#         self, text_input: str, threshold: float = 1 / (1 + math.pow(math.e, -(0)))
+#     ) -> dict[str, Any]:
+#         return predict_with_preload(
+#             text_input,
+#             self.tokenizer,
+#             self.inference_device,
+#             self.inference_model,
+#             self.mlb_d,
+#             self.mlb_s,
+#             self.medians,
+#             threshold,
+#         )
 
 
 # endregion

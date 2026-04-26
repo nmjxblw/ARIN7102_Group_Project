@@ -37,8 +37,15 @@ CHAT_HISTORY_DIR: str = os.getenv(
 """ 对话历史记录文件路径 """
 DEEPSEEK_MODEL: str = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
 """ DeepSeek模型名称，默认为"deepseek-v4-flash" """
+
+
+DEFAULT_PROMPT_FOLDER_PATH: str = os.getenv(
+    "DEFAULT_PROMPT_FOLDER_PATH", r"remote_llm_module/prompts"
+)
+""" 默认提示词文件夹路径 """
 # endregion
 
+# region 数据集相关设定
 KAGGLE_DATASET_DOWNLOAD_URLS_FILE: str = os.getenv(
     "KAGGLE_DATASET_DOWNLOAD_URLS_FILE",
     r"dataset_module/kaggle_dataset_download_urls.json",
@@ -55,7 +62,7 @@ DISEASES_SYMPTOM_DICT: str = os.getenv(
     r"dataset_module/disease-symptom-description-dataset/disease_symptoms_dict.json",
 )
 """ 疾病症状字典文件路径 """
-
+# endregion
 
 # region BERT模型训练参数
 try:

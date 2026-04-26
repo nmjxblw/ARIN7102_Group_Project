@@ -20,6 +20,7 @@ from static_module import (
     RUNTIME_TIMESTAMP,
     CHAT_HISTORY_DIR,
     DEEPSEEK_MODEL,
+    DEFAULT_PROMPT_FOLDER_PATH,
 )
 from utility_module import logger
 
@@ -45,12 +46,19 @@ class DeepSeekManager(metaclass=SingletonMeta):
         """ 系统提示语 """
         self._debug_mode: bool = debug_mode
         """ 调试模式标识符 """
+        if self._debug_mode:
+            logger.info("DeepSeekManager 已进入调试模式")
+        self.default_prompt_folder_path: str = DEFAULT_PROMPT_FOLDER_PATH
+        """ 默认提示词文件夹路径 """
+        self.default_prompt: str = ""
+        """ 默认提示词内容 """
         # 调用初始化函数
         self._initialize()
 
     def _initialize(self) -> None:
         """初始化函数"""
         if not self._initialized:
+            self._load_prompts()
             self._load_history_from_file()
             self._deepseek_background_thread = threading.Thread(
                 target=self._deepseek_background_task,
@@ -60,6 +68,28 @@ class DeepSeekManager(metaclass=SingletonMeta):
             self._deepseek_background_thread.start()
             self._initialized = True
             logger.debug("DeepSeek 管理器已初始化。")
+
+    def _load_prompts(self) -> None:
+        """加载提示词"""
+        default_prompt_path = Path(self.default_prompt_folder_path)
+        prompt_file: Path | None = None
+        for root, dir, files in os.walk(default_prompt_path):
+            for file in files:
+                if file.endswith(".md") and file.startswith("default"):
+                    prompt_file = Path(root) / file
+                    break
+        if not prompt_file or not prompt_file.exists():
+            raise FileNotFoundError(
+                f"未找到默认提示词文件，路径: {self.default_prompt_folder_path}，请确保该文件夹下存在以default开头的.md文件。"
+            )
+
+        try:
+            with open(prompt_file, "r", encoding="utf-8") as f:
+                self.default_prompt = f.read()
+            if self._debug_mode:
+                logger.debug(f"已加载默认提示词: {prompt_file}")
+        except Exception as e:
+            logger.error(f"加载默认提示词失败: {e}")
 
     def _load_history_from_file(self, file_path: Optional[os.PathLike] = None) -> bool:
         """从文件加载对话历史记录"""
@@ -76,7 +106,8 @@ class DeepSeekManager(metaclass=SingletonMeta):
 
                 with open(self.history_file, "r", encoding="utf-8") as f:
                     self._history = json.load(f)
-                logger.debug(f"已从文件加载对话历史记录: {self.history_file}")
+                if self._debug_mode:
+                    logger.debug(f"已从文件加载对话历史记录: {self.history_file}")
                 return True
             except Exception as e:
                 logger.error(f"加载对话历史记录失败: {e}")
@@ -102,68 +133,22 @@ class DeepSeekManager(metaclass=SingletonMeta):
             return ""
         pipeline_output: dict = getattr(input, "pipeline_output", {})
         bert_output: dict = getattr(input, "bert_output", {})
-        prompt: str = rf"""
-# Role
-You are a professional, rigorous, and empathetic AI pharmaceutical assistant. Your task is to generate a safe, clear, and easy-to-understand medication recommendation plan for users based on their illness descriptions, system-inferred symptom/disease labels, and the database-matched candidate drug list.
-
-# Input
-You will receive a conversation containing user input, formatted as follows:
-{sentences}
-
-As well as a system-processed data set containing an analysis of the user's symptoms from the text and the system's confidence level regarding the disease/symptom:
-{bert_output}
-
-Also a response of drug system, the corresponding drugs and related information that were matched are as follows:
-{pipeline_output}
-
-# Task
-Please generate a structured response to the user based on the above input. You must strictly adhere to the following rules:
-
-1. **Data Desensitization and Value Concealment (Top Priority)**:
-   - **Absolutely Prohibited**: Do not expose any underlying numerical information of labels in the response (e.g., match rate 0.95, weight 80%, ranking order, confidence level, etc.).
-   - Convert system data into natural and fluent dialogue. Avoid saying "The system disease label triggered X," and instead phrase it as "Based on your description, it may be related to X."
-
-2. **Transparent Explanation of Recommendation Basis**:
-   - Clearly inform the user of the reasoning behind the recommended medication. Explain the alignment between `inferred_tags` (disease/symptom labels) and `drug_candidates` (drug indications).
-   - Example: "We recommend [Drug A] because it directly alleviates [Symptom X] and the potential [Disease Y] inferred from your description."
-
-3. **Tone and Wording Guidelines**:
-   - Maintain empathy and objectivity to reassure the user.
-   - **Avoid Overdiagnosis**: Use cautious phrasing such as "may be related to..." or "exhibits characteristics of..." rather than absolute statements like "you are diagnosed with..." or "will definitely cure."
-
-5. **Mandatory Medical Disclaimer**:
-   - The response must conclude with a standard disclaimer emphasizing that AI recommendations cannot replace a face-to-face consultation with a professional doctor.
-   
-   
-# Output Format
-Reply ONLY with a JSON array.
-Do NOT output explanations, markdown, or text outside JSON.
-
-Drug recommendation plan, including the following fields:
-- `drug_name`: Recommended drugs/compound medications. The drug names must be strictly output as matched by the system, without any rewriting (e.g., synonym substitution, abbreviations, etc.). For compound drugs, use the compound drug name matched by the system, and do not split it into single-component drugs.
-- `drug_preference`: The appropriateness of the drug in the current conversation context (e.g., highly recommended, recommended, optional, not recommended), to be evaluated based on the match between the system-inferred symptom/disease labels and the drug's indications.
-- `recommendation_reasoning`:Detailed explanation of the recommendation rationale, which must include an explanation of the relationship between the system-inferred symptom/disease labels and the drug's indications.
-```
-
-Example:
-[
-    {{
-        "drug_name": "Drug A",
-        "drug_preference": "highly recommended",
-        "recommendation_reasoning": "We recommend Drug A because it directly alleviates Symptom X and the potential Disease Y inferred from your description."
-    }},
-    {{
-        "drug_name": "Drug B",
-        "drug_preference": "recommended",
-        "recommendation_reasoning": "Drug B is quite suitable for your current condition and is a common choice for treating Disease Y. It is an over-the-counter medication, so you can purchase it at a pharmacy without a doctor's prescription."
-    }}
-]
-"""
+        prompt: str = self.default_prompt.format(
+            sentences=sentences,
+            pipeline_output=pipeline_output,
+            bert_output=bert_output,
+        )
         return prompt
 
     def send(self, input_object: object) -> None:
         """发送消息到 DeepSeek"""
         self.message_queue.put(input_object)
+
+    def dev_send(self, string: str) -> None:
+        """开发测试用发送消息到 DeepSeek"""
+        if not self._debug_mode:
+            return
+        self.message_queue.put(string)
 
     def _deepseek_background_task(self):
         """DeepSeek 后台任务处理函数"""
@@ -173,8 +158,10 @@ Example:
                     continue
                 input_object: object = self.message_queue.get(block=False, timeout=1)
                 # logger.debug(f"正在处理用户输入: {input_message}")
-
-                input_content: str = self._prompt_build(input_object)
+                if self._debug_mode:
+                    input_content: str = str(input_object)
+                else:
+                    input_content: str = self._prompt_build(input_object)
                 if not input_content:
                     continue
                 self._history.append(
@@ -204,7 +191,3 @@ Example:
                         self._save_history_to_file()
             except queue.Empty:
                 continue
-
-
-deepseek_manager = DeepSeekManager()
-""" DeepSeek 管理器单例 """
