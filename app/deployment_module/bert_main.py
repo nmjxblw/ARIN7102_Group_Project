@@ -95,14 +95,14 @@ if USE_CUDA:
     torch.backends.cudnn.allow_tf32 = True
 
 
-# @dataclass
-# class MultitaskSequenceClassifierOutput(ModelOutput):
-#     """多任务分类模型的输出，包含损失、三个分类头的 logits，以及可选的隐藏状态和注意力权重。"""
+@dataclass
+class MultitaskSequenceClassifierOutput(ModelOutput):
+    """多任务分类模型的输出，包含损失、三个分类头的 logits，以及可选的隐藏状态和注意力权重。"""
 
-#     loss: Optional[torch.Tensor] = None
-#     logits: Optional[Tuple[torch.Tensor, torch.Tensor, torch.Tensor]] = None
-#     hidden_states: Optional[Tuple[torch.Tensor, ...]] = None
-#     attentions: Optional[Tuple[torch.Tensor, ...]] = None
+    loss: Optional[torch.Tensor] = None
+    logits: Optional[Tuple[torch.Tensor, torch.Tensor, torch.Tensor]] = None
+    hidden_states: Optional[Tuple[torch.Tensor, ...]] = None
+    attentions: Optional[Tuple[torch.Tensor, ...]] = None
 
 
 # def print_runtime_device_info() -> None:
@@ -136,7 +136,7 @@ if USE_CUDA:
 # """ 症状标签二值化器，适用于多标签分类，将症状列表转换为多热编码 """
 
 
-# # 处理数据集
+# 处理数据集
 # class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
 #     def __init__(
 #         self,
@@ -857,6 +857,8 @@ class BERTManager(metaclass=SingletonMeta):
         """ 调试模式标志，启用后会在推理过程中输出更多内部状态信息，帮助分析模型行为 """
         self._is_initialized: bool = False
         """ 是否已初始化标志，确保模型和相关组件只加载一次 """
+        self._need_pretrain: bool = True
+        """ 是否需要预训练，初始为 True，首次调用 predict 时如果模型文件缺失会自动下载预训练模型并设置为 False，避免重复下载 """
         # self._bert_config: Optional[PretrainedConfig] = None
         # """ BERT 模型配置实例，初始为 None，首次调用 predict 时加载并缓存配置以加快后续推理速度 """
         # self._bert_model: Optional[DistilBertForMultitaskLearning] = None
@@ -877,12 +879,16 @@ class BERTManager(metaclass=SingletonMeta):
             return  # 已初始化，无需重复加载
         if self._debug_mode:
             logger.debug("BERTManager: 正在初始化 BERT 模型和相关组件...")
-        if not self._check_bert_download():
+        if self._check_trained_bert_exists():
+            self._need_pretrain = False
+        elif not self._check_bert_download():
             if self._debug_mode:
                 logger.debug("BERTManager: 本地预训练模型文件缺失，正在下载...")
             success = self._download_bert_from_git_url()
             if not success:
                 raise RuntimeError("无法下载预训练模型，请检查网络连接或下载链接。")
+        if self._need_pretrain:
+            self.train_bert()
         self._is_initialized = True
         if self._debug_mode:
             logger.debug("BERTManager: BERT 模型和相关组件已成功初始化。")
@@ -944,3 +950,23 @@ class BERTManager(metaclass=SingletonMeta):
             return False
 
         return True
+
+    def _check_trained_bert_exists(self) -> bool:
+        """检查本地是否存在训练好的模型文件，确保推理前模型已正确训练和保存。"""
+        required_files = [
+            "config.json",
+            "label_encoders.pkl",
+            "model.safetensors",
+            "tokenizer_config.json",
+            "tokenizer.json",
+        ]
+        for file in required_files:
+            if not (SAVE_PATH / file).exists():
+                self._need_pretrain = False
+                return False
+        self._need_pretrain = True
+        return True
+
+    def train_bert(self):
+        """训练 BERT 模型"""
+        pass
