@@ -21,7 +21,7 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         """
         logger.info("Initializing DrugRecommendationService (Singleton)...")
 
-        # 1. 路径配置 (可以根据需要改为从外部配置文件读取)
+
         self.repo_root = Path(__file__).resolve().parents[2]
         self.table_path = self.repo_root / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
         self.half1_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"
@@ -45,7 +45,6 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         )
         logger.info("DrugRecommendationService initialized successfully.")
 
-    # --- 内部逻辑处理方法 (原私有函数) ---
 
     def _confidence(self, value: Any, default: float = 1.0) -> float:
         try:
@@ -92,37 +91,40 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         for d_res in result.get("disease_results", []):
             for top_drug in d_res.get("final_top3", []):
                 flat_item = {
-                    "query_index": result.get("query_index", 0),
+                    #"query_index": result.get("query_index", 0),
                     "disease": d_res.get("disease", ""),
-                    "disease_confidence": d_res.get("disease_confidence", 1.0),
+                    #"disease_confidence": d_res.get("disease_confidence", 1.0),
                     "drug_name": top_drug.get("drug_name", ""),
-                    "disease_rank": top_drug.get("disease_rank", global_rank),
-                    "global_display_rank": global_rank,
-                    "phase2_rank": top_drug.get("phase2_rank"),
-                    "selection_source": top_drug.get("selection_source", ""),
+                    #"disease_rank": top_drug.get("disease_rank", global_rank),
+                    #"global_display_rank": global_rank,
+                    #"phase2_rank": top_drug.get("phase2_rank"),
+                    #"selection_source": top_drug.get("selection_source", ""),
+                    "final_confidence": top_drug.get("half_disease_confidence", 0.0)
                 }
-                if "phase2_score" in top_drug:
-                    flat_item["phase2_score"] = top_drug["phase2_score"]
+                # if "phase2_score" in top_drug:
+                #     flat_item["phase2_score"] = top_drug["phase2_score"]
                 flat_results.append(flat_item)
                 global_rank += 1
         return flat_results
 
-    # --- 外部调用接口 ---
 
-    def predict(self, bert_output: dict) -> dict:
+
+    def predict(self, bert_output: dict,flat_out=False) -> dict:
         """外部调用主入口"""
         query = self._normalize_bert_output(bert_output)
 
-        # 调用已经加载好的 self.recommender
+
         result = self.recommender.recommend_query(
             query=query,
             top_k_recall=self.default_top_k_recall,
             top_k_per_disease=self.default_top_k_per_disease,
         )
-
-        return {
-            "input": query,
-            "disease_results": result.get("disease_results", []),
-            "recommendations": self._build_flat_recommendations(result),
-        }
+        if flat_out == False:
+            return {
+                "input": query,
+                "disease_results": result.get("disease_results", []),
+                "recommendations": self._build_flat_recommendations(result),
+            }
+        else:
+            return {"recommendations":self._build_flat_recommendations(result)}
 
