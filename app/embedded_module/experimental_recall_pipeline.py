@@ -32,6 +32,8 @@ ABLATION_MODES = (
     "candidate_union_no_prior_no_bm25",
     "local_ranker",
     "label_core_rerank",
+    "verified_learned_rerank",
+    "verified_xgb_ranker",
 )
 
 MODE_STAGE_MAP = {
@@ -46,6 +48,8 @@ MODE_STAGE_MAP = {
     "candidate_union_no_prior_no_bm25": ("disease", "strict", "symptom", "dense"),
     "local_ranker": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
     "label_core_rerank": ("disease", "strict", "symptom"),
+    "verified_learned_rerank": ("disease", "strict", "symptom"),
+    "verified_xgb_ranker": ("disease", "strict", "symptom"),
 }
 
 
@@ -58,6 +62,8 @@ class ExperimentalTrace:
     embedding_manifest: dict = field(default_factory=dict)
     fallback_mode: bool = False
     ranker_used: bool = False
+    ranker_model_type: str = ""
+    ranker_train_source: str = ""
     mode: str = "candidate_union"
     stage_candidate_names: dict[str, list[str]] = field(default_factory=dict)
 
@@ -127,12 +133,30 @@ class ExperimentalDrugRecallPipeline:
             selected_rows=selected_rows,
             mode=mode,
         )
-        trace.ranker_used = bool(mode == "local_ranker" and self.ranker and self.ranker.is_ready)
-        trace.fallback_mode = bool(mode == "local_ranker" and not trace.ranker_used)
+        learned_weight_modes = {"local_ranker", "verified_learned_rerank", "verified_xgb_ranker"}
+        trace.ranker_used = bool(
+            mode in learned_weight_modes
+            and self.ranker
+            and self.ranker.is_ready
+            and self._ranker_matches_mode(mode)
+        )
+        trace.fallback_mode = bool(mode in learned_weight_modes and not trace.ranker_used)
+        if self.ranker:
+            trace.ranker_model_type = self.ranker.model_type
+            trace.ranker_train_source = str(self.ranker.metadata.get("train_source", ""))
 
         if return_trace:
             return result, trace
         return result
+
+    def _ranker_matches_mode(self, mode: str) -> bool:
+        if not self.ranker or not self.ranker.is_ready:
+            return False
+        if mode == "verified_learned_rerank":
+            return self.ranker.model_type == "logreg"
+        if mode == "verified_xgb_ranker":
+            return self.ranker.model_type == "xgb_ranker"
+        return True
 
     def _collect_candidates(
         self,
@@ -346,14 +370,20 @@ class ExperimentalDrugRecallPipeline:
             "candidate_union_no_bm25",
             "candidate_union_no_prior_no_bm25",
             "label_core_rerank",
+            "verified_learned_rerank",
+            "verified_xgb_ranker",
         }
         no_prior_modes = {
             "candidate_union_no_prior",
             "candidate_union_no_prior_no_bm25",
             "label_core_rerank",
+            "verified_learned_rerank",
+            "verified_xgb_ranker",
         }
         no_dense_modes = {
             "label_core_rerank",
+            "verified_learned_rerank",
+            "verified_xgb_ranker",
         }
         if mode in no_bm25_modes:
             scored["bm25_score"] = 0.0
@@ -393,6 +423,32 @@ class ExperimentalDrugRecallPipeline:
         elif mode == "local_ranker" and self.ranker and self.ranker.is_ready:
             scored["ranker_score"] = self.ranker.predict(scored)
             scored["final_score"] = 0.80 * scored["ranker_score"] + 0.20 * scored["deterministic_score"]
+        elif mode == "verified_learned_rerank":
+            if self._ranker_matches_mode(mode):
+                scored["ranker_score"] = self.ranker.predict(scored)
+                scored["final_score"] = scored["ranker_score"]
+            else:
+                scored["final_score"] = (
+                    0.50 * scored["label_idf_score"]
+                    + 0.20 * scored["symptom_coverage"]
+                    + 0.10 * scored["quality_prior"]
+                    + 0.06 * scored["stage_strict"]
+                    + 0.03 * scored["stage_disease"]
+                    - scored["others_penalty"]
+                )
+        elif mode == "verified_xgb_ranker":
+            if self._ranker_matches_mode(mode):
+                scored["ranker_score"] = self.ranker.predict(scored)
+                scored["final_score"] = scored["ranker_score"]
+            else:
+                scored["final_score"] = (
+                    0.50 * scored["label_idf_score"]
+                    + 0.20 * scored["symptom_coverage"]
+                    + 0.10 * scored["quality_prior"]
+                    + 0.06 * scored["stage_strict"]
+                    + 0.03 * scored["stage_disease"]
+                    - scored["others_penalty"]
+                )
         elif mode == "label_core_rerank":
             scored["final_score"] = (
                 0.50 * scored["label_idf_score"]
