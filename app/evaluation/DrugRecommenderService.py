@@ -7,8 +7,8 @@ import pandas as pd
 from singleton_module import SingletonMeta
 
 
-from app.embedded_module.drug_recall_index import DrugRecallIndex
-from app.embedded_module.phase2_final_recommender import Phase2FinalRecommender
+from embedded_module.drug_recall_index import DrugRecallIndex
+from embedded_module.phase2_final_recommender import Phase2FinalRecommender
 
 logger = logging.getLogger(__name__)
 

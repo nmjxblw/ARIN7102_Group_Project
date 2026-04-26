@@ -124,6 +124,7 @@ def app_run() -> None:
 
     result = {'diseases': [{'name': 'arthritis', 'confidence': 0.77}, {'name': 'osteoarthristis', 'confidence': 0.9}], 'symptoms': [{'name': 'joint_pain', 'confidence': 0.8553173676732357}, {'name': 'neck_pain', 'confidence': 0.7792979952461874}, {'name': 'stiff_neck', 'confidence': 0.20552087381850495}], 'need_first_aid': 0}
     service = DrugRecommendationService()
+    #from evaluation.run_phase2_final_recommendation import predict as predict_rec
     recommendation_result = service.predict(result)
     print(recommendation_result)
     import json
