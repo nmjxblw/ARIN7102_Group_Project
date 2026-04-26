@@ -35,12 +35,16 @@ CHAT_HISTORY_DIR: str = os.getenv(
     "CHAT_HISTORY_DIR", r"remote_llm_module/chat_histories"
 )
 """ 对话历史记录文件路径 """
+DEEPSEEK_MODEL: str = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
+""" DeepSeek模型名称，默认为"deepseek-v4-flash" """
+# endregion
+
 KAGGLE_DATASET_DOWNLOAD_URLS_FILE: str = os.getenv(
     "KAGGLE_DATASET_DOWNLOAD_URLS_FILE",
     r"dataset_module/kaggle_dataset_download_urls.json",
 )
 """ Kaggle数据集下载URL列表文件路径 """
-# endregion
+
 DATABASE_FILE: str = os.getenv("DATABASE_FILE", r"database_module/database.db")
 """ 数据库文件路径 """
 

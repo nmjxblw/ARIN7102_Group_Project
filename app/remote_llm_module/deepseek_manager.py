@@ -15,7 +15,12 @@ from torch import Stream
 
 # 本地模块导入
 from singleton_module import SingletonMeta
-from static_module import DEEPSEEK_API_KEY, RUNTIME_TIMESTAMP, CHAT_HISTORY_DIR
+from static_module import (
+    DEEPSEEK_API_KEY,
+    RUNTIME_TIMESTAMP,
+    CHAT_HISTORY_DIR,
+    DEEPSEEK_MODEL,
+)
 from utility_module import logger
 
 
@@ -30,7 +35,7 @@ class DeepSeekManager(metaclass=SingletonMeta):
             api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com"
         )
         """ 初始化 DeepSeek 客户端 """
-        self.message_queue = queue.Queue()
+        self.message_queue: queue.Queue = queue.Queue()
         """ 消息队列 """
         self._history: list = []
         """ 对话历史记录 """
@@ -49,12 +54,12 @@ class DeepSeekManager(metaclass=SingletonMeta):
             self._load_history_from_file()
             self._deepseek_background_thread = threading.Thread(
                 target=self._deepseek_background_task,
-                daemon=True,
+                daemon=True,  # 设置为守护线程，随主程序退出而自动结束
                 name="DeepSeekBackgroundThread",
             )
             self._deepseek_background_thread.start()
             self._initialized = True
-            logger.debug("DeepSeek 管理器已初始化并启动后台线程。")
+            logger.debug("DeepSeek 管理器已初始化。")
 
     def _load_history_from_file(self, file_path: Optional[os.PathLike] = None) -> bool:
         """从文件加载对话历史记录"""
@@ -90,9 +95,11 @@ class DeepSeekManager(metaclass=SingletonMeta):
             logger.error(f"保存对话历史记录失败: {e}")
             return False
 
-    def _initial_prompt_build(self, input: object) -> str:
-        """构建初始提示词的函数示例，实际实现可以根据需求进行调整"""
+    def _prompt_build(self, input: object) -> str:
+        """构建提示词"""
         sentences: str = getattr(input, "sentences", "")
+        if not sentences:
+            return ""
         pipeline_output: dict = getattr(input, "pipeline_output", {})
         bert_output: dict = getattr(input, "bert_output", {})
         prompt: str = rf"""
@@ -133,7 +140,7 @@ Reply ONLY with a JSON array.
 Do NOT output explanations, markdown, or text outside JSON.
 
 Drug recommendation plan, including the following fields:
-- `recommended_drug`: Recommended drugs/compound medications.
+- `drug_name`: Recommended drugs/compound medications. The drug names must be strictly output as matched by the system, without any rewriting (e.g., synonym substitution, abbreviations, etc.). For compound drugs, use the compound drug name matched by the system, and do not split it into single-component drugs.
 - `drug_preference`: The appropriateness of the drug in the current conversation context (e.g., highly recommended, recommended, optional, not recommended), to be evaluated based on the match between the system-inferred symptom/disease labels and the drug's indications.
 - `recommendation_reasoning`:Detailed explanation of the recommendation rationale, which must include an explanation of the relationship between the system-inferred symptom/disease labels and the drug's indications.
 ```
@@ -141,12 +148,12 @@ Drug recommendation plan, including the following fields:
 Example:
 [
     {{
-        "recommended_drug": "Drug A",
+        "drug_name": "Drug A",
         "drug_preference": "highly recommended",
         "recommendation_reasoning": "We recommend Drug A because it directly alleviates Symptom X and the potential Disease Y inferred from your description."
     }},
     {{
-        "recommended_drug": "Drug B",
+        "drug_name": "Drug B",
         "drug_preference": "recommended",
         "recommendation_reasoning": "Drug B is quite suitable for your current condition and is a common choice for treating Disease Y. It is an over-the-counter medication, so you can purchase it at a pharmacy without a doctor's prescription."
     }}
@@ -154,9 +161,9 @@ Example:
 """
         return prompt
 
-    def send(self, message: str) -> None:
+    def send(self, input_object: object) -> None:
         """发送消息到 DeepSeek"""
-        self.message_queue.put(message)
+        self.message_queue.put(input_object)
 
     def _deepseek_background_task(self):
         """DeepSeek 后台任务处理函数"""
@@ -164,32 +171,37 @@ Example:
             try:
                 if self.message_queue.empty():
                     continue
-                user_input_message = self.message_queue.get(block=False, timeout=1)
-                logger.debug(f"正在处理用户输入: {user_input_message}")
+                input_object: object = self.message_queue.get(block=False, timeout=1)
+                # logger.debug(f"正在处理用户输入: {input_message}")
+
+                input_content: str = self._prompt_build(input_object)
+                if not input_content:
+                    continue
                 self._history.append(
                     {
                         "role": "user",
-                        "content": user_input_message,
+                        "content": input_content,
                     }
                 )
                 # 在这里处理消息，例如发送到 DeepSeek API
                 response: ChatCompletion = self.client.chat.completions.create(
-                    model="deepseek-reasoner", messages=self._history
+                    model=DEEPSEEK_MODEL, messages=self._history
                 )
                 if response is not None:
                     response_json_text = json.dumps(
                         response.model_dump(), ensure_ascii=False, indent=4
                     )
-                    logger.debug(f"DeepSeek:\n {response_json_text}")
-                    _response_content = response.choices[0].message.content
-                    logger.info(f"DeepSeek:\n{_response_content}")
-                    self._history.append(
-                        {
-                            "role": "assistant",
-                            "content": _response_content,
-                        }
-                    )
-                    self._save_history_to_file()
+                    # logger.debug(f"DeepSeek:\n {response_json_text}")
+                    _response_content: str = str(response.choices[0].message.content)
+                    # logger.info(f"DeepSeek:\n{_response_content}")
+                    if _response_content is not None:
+                        self._history.append(
+                            {
+                                "role": "assistant",
+                                "content": _response_content,
+                            }
+                        )
+                        self._save_history_to_file()
             except queue.Empty:
                 continue
 

@@ -33,6 +33,7 @@ from transformers.utils.generic import ModelOutput
 from typing import Any, Optional, Tuple, cast
 from pathlib import Path
 
+from singleton_module import SingletonMeta
 from static_module import (
     BERT_FOLDER,
     TRAINED_BERT_SAVE_PATH,
@@ -181,8 +182,12 @@ class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
         )  # 二分类用float方便BCEWithLogitsLoss
 
         return {
-            "input_ids": encoding["input_ids"].squeeze(0),
-            "attention_mask": encoding["attention_mask"].squeeze(0),
+            "input_ids": torch.tensor(encoding["input_ids"], dtype=torch.long).squeeze(
+                0
+            ),
+            "attention_mask": torch.tensor(
+                encoding["attention_mask"], dtype=torch.long
+            ).squeeze(0),
             "labels_disease": labels_disease,
             "labels_symptom": labels_symptom,
             "labels_first_aid": labels_first_aid,
@@ -435,7 +440,7 @@ def train_bert():
         range(len(raw_data)), test_size=0.2, random_state=42
     )
     # 简单的训练/验证划分（实际请用 train_test_split）
-    logger.debug(f"训练集大小: {len(train_idx)}, 验证集大小: {len(test_idx)}")
+    # logger.debug(f"训练集大小: {len(train_idx)}, 验证集大小: {len(test_idx)}")
     train_dataset = MultitaskDataset(train_idx, raw_data, tokenizer, max_len=MAX_LEN)
     val_dataset = MultitaskDataset(test_idx, raw_data, tokenizer, max_len=MAX_LEN)
     # 1. 准备 DataLoader
@@ -476,11 +481,21 @@ def train_bert():
             optimizer.zero_grad()
 
             # 将所有输入移至设备
-            input_ids = batch["input_ids"].to(TORCH_DEVICE).long()
-            attention_mask = batch["attention_mask"].to(TORCH_DEVICE).long()
-            labels_dis = batch["labels_disease"].to(TORCH_DEVICE)
-            labels_sym = batch["labels_symptom"].to(TORCH_DEVICE)
-            labels_emg = batch["labels_first_aid"].to(TORCH_DEVICE)
+            input_ids = torch.tensor(batch["input_ids"], dtype=torch.long).to(
+                TORCH_DEVICE
+            )
+            attention_mask = torch.tensor(batch["attention_mask"], dtype=torch.long).to(
+                TORCH_DEVICE
+            )
+            labels_dis = torch.tensor(batch["labels_disease"], dtype=torch.float).to(
+                TORCH_DEVICE
+            )
+            labels_sym = torch.tensor(batch["labels_symptom"], dtype=torch.float).to(
+                TORCH_DEVICE
+            )
+            labels_emg = torch.tensor(batch["labels_first_aid"], dtype=torch.float).to(
+                TORCH_DEVICE
+            )
 
             # 前向传播 (模型内部已计算联合 Loss)
             outputs: MultitaskSequenceClassifierOutput = model(
@@ -512,11 +527,21 @@ def train_bert():
         val_pbar = tqdm(val_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Eval]")
         with torch.no_grad():
             for batch in val_pbar:
-                input_ids = batch["input_ids"].to(TORCH_DEVICE).long()
-                attention_mask = batch["attention_mask"].to(TORCH_DEVICE).long()
-                labels_dis = batch["labels_disease"].to(TORCH_DEVICE)
-                labels_sym = batch["labels_symptom"].to(TORCH_DEVICE)
-                labels_emg = batch["labels_first_aid"].to(TORCH_DEVICE)
+                input_ids = torch.tensor(batch["input_ids"], dtype=torch.long).to(
+                    TORCH_DEVICE
+                )
+                attention_mask = torch.tensor(
+                    batch["attention_mask"], dtype=torch.long
+                ).to(TORCH_DEVICE)
+                labels_dis = torch.tensor(
+                    batch["labels_disease"], dtype=torch.float
+                ).to(TORCH_DEVICE)
+                labels_sym = torch.tensor(
+                    batch["labels_symptom"], dtype=torch.float
+                ).to(TORCH_DEVICE)
+                labels_emg = torch.tensor(
+                    batch["labels_first_aid"], dtype=torch.float
+                ).to(TORCH_DEVICE)
 
                 outputs: MultitaskSequenceClassifierOutput = model(
                     input_ids=input_ids,
@@ -555,9 +580,15 @@ def train_bert():
                 all_emg_pred.append((torch.sigmoid(logits_emg) > 0.5).cpu().numpy())
 
                 # 收集真实值
-                all_dis_true.append(batch["labels_disease"].numpy())
-                all_sym_true.append(batch["labels_symptom"].numpy())
-                all_emg_true.append(batch["labels_first_aid"].numpy())
+                all_dis_true.append(
+                    torch.tensor(batch["labels_disease"], dtype=torch.float).numpy()
+                )
+                all_sym_true.append(
+                    torch.tensor(batch["labels_symptom"], dtype=torch.float).numpy()
+                )
+                all_emg_true.append(
+                    torch.tensor(batch["labels_first_aid"], dtype=torch.float).numpy()
+                )
 
         # 计算指标
         f1_dis = f1_score(
@@ -621,7 +652,8 @@ def train_bert():
 
 
 # ====================== 6. 推理函数 ======================
-PER_HEATED: bool = False
+PRELOAD_MODEL: bool = False
+""" 是否预加载模型"""
 
 
 def predict(
@@ -812,6 +844,39 @@ def predict_with_preload(
 
     return result
 
+
+# region 单例模式
+class BERTManager(metaclass=SingletonMeta):
+    """BERTManager 类，使用单例模式管理模型加载和推理，确保全局只有一个实例存在，避免重复加载模型带来的资源浪费。"""
+
+    def __init__(
+        self, model_path: str | Path = SAVE_PATH, device: torch.device = TORCH_DEVICE
+    ):
+        (
+            self.inference_device,
+            self.tokenizer,
+            self.inference_model,
+            self.mlb_d,
+            self.mlb_s,
+            self.medians,
+        ) = preload(model_path, device)
+
+    def predict(
+        self, text_input: str, threshold: float = 1 / (1 + math.pow(math.e, -(0)))
+    ) -> dict[str, Any]:
+        return predict_with_preload(
+            text_input,
+            self.tokenizer,
+            self.inference_device,
+            self.inference_model,
+            self.mlb_d,
+            self.mlb_s,
+            self.medians,
+            threshold,
+        )
+
+
+# endregion
 
 # 测试推理
 if __name__ == "__main__":

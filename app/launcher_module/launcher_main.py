@@ -12,6 +12,8 @@ import re
 from static_module import TaskStatus, PROJECT_NAME, THREAD_TIMEOUT
 from .main_thread_task_manager import AppAsyncTaskManager
 from utility_module import logger
+from remote_llm_module import deepseek_manager
+
 
 app_running_flag: bool = True
 """应用程序运行标志"""
@@ -114,15 +116,18 @@ def end_background_threads():
 def app_run() -> None:
     """主程序入口"""
     from deployment_module import predict
+
     test_text = "My joints are so stiff in the mornings, and it's getting painful just to walk up the stairs. I feel a constant ache in my knees and neck."
     result = predict(test_text)
     print(result)
 
-    from evaluation.run_phase2_final_recommendation import predict as predict_recommendation
+    from evaluation.run_phase2_final_recommendation import (
+        predict as predict_recommendation,
+    )
+
     recommendation_result = predict_recommendation(result)
     print(recommendation_result)
     import json
+
     with open("output.json", "w", encoding="utf-8") as f:
         json.dump(recommendation_result, f, ensure_ascii=False, indent=4)
-    
-
