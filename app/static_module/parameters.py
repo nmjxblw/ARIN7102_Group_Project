@@ -101,11 +101,17 @@ DRUGS_TRAINING_DATASET_FOLDER: str = os.getenv(
 # endregion
 
 # region 本地模型
-BERT_FOLDER: str = os.getenv("BERT_FOLDER", r"deployment_module/clinicalbert_local")
-""" 本地BERT模型文件夹路径。包含模型权重文件（如pytorch_model.bin）和配置文件（如config.json） """
+GIT_BERT_MODEL_URL: str = os.getenv(
+    "GIT_BERT_MODEL_URL", r"https://huggingface.co/medicalai/ClinicalBERT.git "
+)
+""" Git BERT模型仓库URL"""
+DEPLOYMENT_FOLDER: str = os.getenv(
+    "DEPLOYMENT_FOLDER", r"deployment_module/clinicalbert_local"
+)
+""" 本地 BERT 模型部署路径 """
 TRAINED_BERT_SAVE_PATH: str = os.getenv(
     "TRAINED_BERT_SAVE_PATH", r"deployment_module/trained_bert"
 )
-""" 训练后BERT模型保存路径 """
+""" 训练后 BERT 模型保存路径 """
 
 # endregion

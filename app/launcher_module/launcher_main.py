@@ -12,8 +12,10 @@ import re
 from static_module import TaskStatus, PROJECT_NAME, THREAD_TIMEOUT
 from .main_thread_task_manager import AppAsyncTaskManager
 from utility_module import logger
-#from remote_llm_module import deepseek_manager
-from evaluation.DrugRecommenderService import DrugRecommendationService
+from remote_llm_module import DeepSeekManager
+from deployment_module import BERTManager
+
+# from evaluation.DrugRecommenderService import DrugRecommendationService
 
 app_running_flag: bool = True
 """应用程序运行标志"""
@@ -29,6 +31,12 @@ user_input_queue: queue.Queue[Any] = queue.Queue()
 # 全局任务管理器
 app_async_task_manager = AppAsyncTaskManager()
 """ 全局异步任务管理器单例 """
+
+deepseek_manager = DeepSeekManager(debug_mode=True)
+""" DeepSeek 管理器单例 """
+
+bert_manager = BERTManager(debug_mode=True)
+""" BERT 管理器单例 """
 
 
 def exit() -> NoReturn:
@@ -121,13 +129,15 @@ def app_run() -> None:
     # result = predict(test_text)
     # print(result)
 
+    # result = {'diseases': [{'name': 'arthritis', 'confidence': 0.77}, {'name': 'osteoarthristis', 'confidence': 0.9}], 'symptoms': [{'name': 'joint_pain', 'confidence': 0.8553173676732357}, {'name': 'neck_pain', 'confidence': 0.7792979952461874}, {'name': 'stiff_neck', 'confidence': 0.20552087381850495}], 'need_first_aid': 0}
+    # service = DrugRecommendationService()
+    # #from evaluation.run_phase2_final_recommendation import predict as predict_rec
+    # recommendation_result = service.predict(result,flat_out=True)
+    # print(recommendation_result)
+    # import json
 
-    result = {'diseases': [{'name': 'arthritis', 'confidence': 0.77}, {'name': 'osteoarthristis', 'confidence': 0.9}], 'symptoms': [{'name': 'joint_pain', 'confidence': 0.8553173676732357}, {'name': 'neck_pain', 'confidence': 0.7792979952461874}, {'name': 'stiff_neck', 'confidence': 0.20552087381850495}], 'need_first_aid': 0}
-    service = DrugRecommendationService()
-    #from evaluation.run_phase2_final_recommendation import predict as predict_rec
-    recommendation_result = service.predict(result,flat_out=True)
-    print(recommendation_result)
-    import json
+    # with open("output.json", "w", encoding="utf-8") as f:
+    #     json.dump(recommendation_result, f, ensure_ascii=False, indent=4)
 
-    with open("output.json", "w", encoding="utf-8") as f:
-        json.dump(recommendation_result, f, ensure_ascii=False, indent=4)
+    # msg = "Introduce yourself and tell me what can you do for me?"
+    # deepseek_manager.dev_send(msg)
