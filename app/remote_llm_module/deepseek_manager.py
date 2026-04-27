@@ -52,6 +52,8 @@ class DeepSeekManager(metaclass=SingletonMeta):
         """ 默认提示词文件夹路径 """
         self.default_prompt: str = ""
         """ 默认提示词内容 """
+        self._app_is_running: bool = True
+        """ 应用程序运行标志 """
         # 调用初始化函数
         self._initialize()
 
@@ -128,11 +130,11 @@ class DeepSeekManager(metaclass=SingletonMeta):
 
     def _prompt_build(self, input: object) -> str:
         """构建提示词"""
-        sentences: str = getattr(input, "sentences", "")
+        sentences: str = input.get( "sentences", "")
         if not sentences:
             return ""
-        pipeline_output: dict = getattr(input, "pipeline_output", {})
-        bert_output: dict = getattr(input, "bert_output", {})
+        pipeline_output: dict = input.get("pipeline_output", {})
+        bert_output: dict = input.get("bert_output", {})
         prompt: str = self.default_prompt.format(
             sentences=sentences,
             pipeline_output=pipeline_output,
@@ -152,16 +154,17 @@ class DeepSeekManager(metaclass=SingletonMeta):
 
     def _deepseek_background_task(self):
         """DeepSeek 后台任务处理函数"""
-        while True:
+        while self._app_is_running:
             try:
                 if self.message_queue.empty():
                     continue
                 input_object: object = self.message_queue.get(block=False, timeout=1)
-                # logger.debug(f"正在处理用户输入: {input_message}")
+                logger.debug(f"正在处理用户输入: {input_object}")
                 if self._debug_mode:
                     input_content: str = str(input_object)
                 else:
                     input_content: str = self._prompt_build(input_object)
+                logger.debug(input_content)
                 if not input_content:
                     continue
                 self._history.append(
@@ -189,5 +192,14 @@ class DeepSeekManager(metaclass=SingletonMeta):
                             }
                         )
                         self._save_history_to_file()
+                        from launcher_module.launcher_main import (
+                            display_deepseek_response,
+                        )
+
+                        display_deepseek_response(_response_content)
             except queue.Empty:
                 continue
+
+    def set_app_running_flag(self, flag: bool) -> None:
+        """设置应用程序运行标志"""
+        self._app_is_running = flag

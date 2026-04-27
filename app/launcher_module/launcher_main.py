@@ -32,10 +32,10 @@ user_input_queue: queue.Queue[Any] = queue.Queue()
 app_async_task_manager = AppAsyncTaskManager()
 """ 全局异步任务管理器单例 """
 
-deepseek_manager = DeepSeekManager(debug_mode=True)
+deepseek_manager = DeepSeekManager(debug_mode=False)
 """ DeepSeek 管理器单例 """
 
-bert_manager = BERTManager(debug_mode=True)
+bert_manager = BERTManager(debug_mode=False)
 """ BERT 管理器单例 """
 recommendation_manager = DrugRecommendationService()
 """ 药物推荐管理器单例 """
@@ -47,7 +47,9 @@ def exit() -> NoReturn:
     return os._exit(0)
 
 
-def submit_async_task(task_func: Callable, task_name: str = "未命名任务") -> int:
+def submit_async_task(
+    task_func: Callable, task_name: str = "未命名任务", **kwargs
+) -> int:
     """
     提交异步任务到任务管理器
 
@@ -58,7 +60,7 @@ def submit_async_task(task_func: Callable, task_name: str = "未命名任务") -
     Returns:
         任务ID
     """
-    task_id = app_async_task_manager.create_task(task_func, task_name)
+    task_id = app_async_task_manager.create_task(task_func, task_name, **kwargs)
     app_async_task_manager.submit_task(task_id)
     return task_id
 
@@ -69,8 +71,19 @@ def process_user_input():
     user_input: str = input("用户：").strip()
     if re.match(r"^\s?(exit|quit|q)\.?$", user_input, re.IGNORECASE):
         app_running_flag = False
+        deepseek_manager.set_app_running_flag(False)
         return
-    # deepseek_manager.send(user_input)
+    bert_prediction = bert_manager.predict(user_input)
+    logger.debug(f"bert_prediction: {bert_prediction}")
+    pipeline_output = recommendation_manager.predict(bert_prediction, flat_out=True)
+    logger.debug(pipeline_output)
+    deepseek_manager.send(
+        {
+            "sentences": user_input,
+            "pipeline_output": pipeline_output,
+            "bert_output": bert_prediction,
+        }
+    )
 
 
 def register_default_main_thread_tasks():
@@ -122,21 +135,13 @@ def end_background_threads():
             t.join(timeout=THREAD_TIMEOUT)
     logger.debug("结束后台线程。")
 
-import time
-import json
+
+def display_deepseek_response(response: str) -> None:
+    """显示 DeepSeek 响应"""
+    print(f"DeepSeek: {response}")
+
+
 def app_run() -> None:
     """主程序入口"""
-    start_time = time.time()
-    user_input = [
-        "I am not feeling well today, I have headache and fever. Can not smell anything.",
-        "My nose is blocked and I have a sore throat. What should I do?",
-    ]
-    answers = [bert_manager.predict(_input) for _input in user_input]
-    logger.debug(f"用户输入: {user_input}")
-    logger.debug(f"BERT模型预测结果: {answers}")
-    drug = [recommendation_manager.predict(answer,flat_out=True) for answer in answers]
-    logger.debug(f"药物推荐:{drug}")
-    end_time = time.time()
-    logger.info(end_time - start_time)
-
-    logger.debug(json.dumps(drug,indent=4, ensure_ascii=False))
+    register_default_main_thread_tasks()
+    main_thread_task_handler()
