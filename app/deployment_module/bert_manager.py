@@ -398,9 +398,9 @@ class BERTManager(metaclass=SingletonMeta):
         ]
         for file in required_files:
             if not (SAVE_PATH / file).exists():
-                self._need_pretrain = False
+                self._need_pretrain = True
                 return False
-        self._need_pretrain = True
+        self._need_pretrain = False
         return True
 
     # 加载分词器
@@ -447,7 +447,7 @@ class BERTManager(metaclass=SingletonMeta):
             msg += f"GPU: {torch.cuda.get_device_name(0)}\n"
         else:
             msg += "未检测到可用 CUDA，当前将使用 CPU 训练。"
-
+        logger.info(msg)
         return msg
 
     def _load_multilabel_binarizers(
@@ -569,6 +569,7 @@ class BERTManager(metaclass=SingletonMeta):
         val_loader: DataLoader = DataLoader(
             self._val_dataset, batch_size=BATCH_SIZE, shuffle=False
         )
+        self._bert_model = self._get_bert_model()
         assert self._bert_model is not None and isinstance(
             self._bert_model, DistilBertForMultitaskLearning
         ), "BERT 模型未加载，无法进行训练"
@@ -610,18 +611,10 @@ class BERTManager(metaclass=SingletonMeta):
                 input_ids = torch.tensor(batch["input_ids"], dtype=torch.long).to(
                     self._device
                 )
-                attention_mask = torch.tensor(
-                    batch["attention_mask"], dtype=torch.long
-                ).to(self._device)
-                labels_dis = torch.tensor(
-                    batch["labels_disease"], dtype=torch.float
-                ).to(self._device)
-                labels_sym = torch.tensor(
-                    batch["labels_symptom"], dtype=torch.float
-                ).to(self._device)
-                labels_emg = torch.tensor(
-                    batch["labels_first_aid"], dtype=torch.float
-                ).to(self._device)
+                attention_mask = batch["attention_mask"].to(self._device)
+                labels_dis = batch["labels_disease"].to(self._device)
+                labels_sym = batch["labels_symptom"].to(self._device)
+                labels_emg = batch["labels_first_aid"].to(self._device)
 
                 # 前向传播 (模型内部已计算联合 Loss)
                 outputs: MultitaskSequenceClassifierOutput = self._bert_model(
@@ -653,21 +646,11 @@ class BERTManager(metaclass=SingletonMeta):
             val_pbar = tqdm(val_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Eval]")
             with torch.no_grad():
                 for batch in val_pbar:
-                    input_ids = torch.tensor(batch["input_ids"], dtype=torch.long).to(
-                        TORCH_DEVICE
-                    )
-                    attention_mask = torch.tensor(
-                        batch["attention_mask"], dtype=torch.long
-                    ).to(TORCH_DEVICE)
-                    labels_dis = torch.tensor(
-                        batch["labels_disease"], dtype=torch.float
-                    ).to(TORCH_DEVICE)
-                    labels_sym = torch.tensor(
-                        batch["labels_symptom"], dtype=torch.float
-                    ).to(TORCH_DEVICE)
-                    labels_emg = torch.tensor(
-                        batch["labels_first_aid"], dtype=torch.float
-                    ).to(TORCH_DEVICE)
+                    input_ids = batch["input_ids"].to(TORCH_DEVICE)
+                    attention_mask = batch["attention_mask"].to(TORCH_DEVICE)
+                    labels_dis = batch["labels_disease"].to(TORCH_DEVICE)
+                    labels_sym = batch["labels_symptom"].to(TORCH_DEVICE)
+                    labels_emg = batch["labels_first_aid"].to(TORCH_DEVICE)
 
                     outputs: MultitaskSequenceClassifierOutput = self._bert_model(
                         input_ids=input_ids,
@@ -707,15 +690,14 @@ class BERTManager(metaclass=SingletonMeta):
 
                     # 收集真实值
                     all_dis_true.append(
-                        torch.tensor(batch["labels_disease"], dtype=torch.float).numpy()
+                        batch["labels_disease"].numpy()
                     )
                     all_sym_true.append(
-                        torch.tensor(batch["labels_symptom"], dtype=torch.float).numpy()
+                        batch["labels_symptom"].numpy()
                     )
                     all_emg_true.append(
-                        torch.tensor(
-                            batch["labels_first_aid"], dtype=torch.float
-                        ).numpy()
+
+                            batch["labels_first_aid"].numpy()
                     )
 
             # 计算指标
@@ -767,7 +749,7 @@ class BERTManager(metaclass=SingletonMeta):
                 assert self._disease_label_binarizer is not None
                 assert self._symptom_label_binarizer is not None
 
-                self._bert_model.save_pretrained(SAVE_PATH)
+                self._bert_model.save_pretrained(SAVE_PATH,max_shard_size="50MB")
                 self._tokenizer.save_pretrained(SAVE_PATH)
                 # 保存 label_encoders
                 label_encoders = {
@@ -887,9 +869,9 @@ class BERTManager(metaclass=SingletonMeta):
         with torch.no_grad():
             for batch in tqdm(loader, desc="计算每个 label 正样本中位数"):
                 # 只传入模型需要的输入（不传入 labels，避免计算 loss）
-                input_ids = torch.tensor(batch["input_ids"]).to(self._device).long()
+                input_ids = batch["input_ids"].to(self._device).long()
                 attention_mask = (
-                    torch.tensor(batch["attention_mask"]).to(self._device).long()
+                    batch["attention_mask"].to(self._device).long()
                 )
 
                 outputs: MultitaskSequenceClassifierOutput = self._bert_model(
@@ -906,13 +888,13 @@ class BERTManager(metaclass=SingletonMeta):
 
                 # ground-truth
                 labels_d = (
-                    torch.tensor(batch["labels_disease"]).cpu().numpy()
+                    (batch["labels_disease"]).cpu().numpy()
                 )  # (bs, num_diseases)
                 labels_s = (
-                    torch.tensor(batch["labels_symptom"]).cpu().numpy()
+                    (batch["labels_symptom"]).cpu().numpy()
                 )  # (bs, num_symptoms)
                 labels_f = (
-                    torch.tensor(batch["labels_first_aid"]).cpu().numpy()
+                    (batch["labels_first_aid"]).cpu().numpy()
                 )  # (bs, 1)
 
                 for i in range(len(probs_d)):  # 遍历 batch 内每个样本

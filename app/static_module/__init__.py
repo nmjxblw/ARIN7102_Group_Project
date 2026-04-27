@@ -33,4 +33,5 @@ __all__ = [
     "AppAsyncTask",
     # Enums
     "TaskStatus",
+    "DEFAULT_PROMPT_FOLDER_PATH"
 ]
