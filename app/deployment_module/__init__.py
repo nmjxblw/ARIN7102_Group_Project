@@ -6,6 +6,6 @@
 也可以在这里写点 Transformer/Bert 之类的模型
 """
 
-from .bert_main import *
+from .bert_manager import *
 
-__all__ = ["predict", "train_bert", "BERTManager"]
+__all__ = ["BERTManager"]
