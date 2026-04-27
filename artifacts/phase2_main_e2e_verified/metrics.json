@@ -1,0 +1,35 @@
+{
+  "eval_dataset": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/data/eval_dataset_verified.json",
+  "num_queries_total": 191,
+  "num_queries_evaluated": 191,
+  "num_queries_failed": 0,
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "top_k_recall": 20,
+  "top_k_per_disease": 3,
+  "elapsed_seconds": 12.15,
+  "phase2_assets": {
+    "table_path": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/match_data_preprocessing/data/enhanced_drug_table_v1_structured.csv",
+    "half1_path": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/app/dataset_module/drugs_training_dataset/drug_data_half_1.json",
+    "half2_path": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/app/dataset_module/drugs_training_dataset/drug_data_half_2.json",
+    "trained_bert_dir": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/app/deployment_module/trained_bert"
+  },
+  "metrics": {
+    "precision@5": 0.268063,
+    "recall@5": 0.51195,
+    "hit@5": 0.732984,
+    "ndcg@5": 0.502599,
+    "precision@10": 0.148168,
+    "recall@10": 0.561302,
+    "hit@10": 0.753927,
+    "ndcg@10": 0.52082,
+    "precision@20": 0.074084,
+    "recall@20": 0.561302,
+    "hit@20": 0.753927,
+    "ndcg@20": 0.52082,
+    "mrr": 0.620606
+  }
+}

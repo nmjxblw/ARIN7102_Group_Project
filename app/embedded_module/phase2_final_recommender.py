@@ -16,8 +16,8 @@ class Phase2FinalRecommender:
             half_data_paths: list[Path | str],
             table_path: Path | str,
             *,
-            phase2_mode: str = "label_core_rerank",
-            ranker_path: Path | str | None = None,
+            phase2_mode: str = "xgb_ranker",
+            ranker_path: Path | str | None = "artifacts/exp_drug_recall/phase2_e2e_xgb_train/ranker.joblib",
     ):
         self.index = index
         self.phase2_mode = phase2_mode

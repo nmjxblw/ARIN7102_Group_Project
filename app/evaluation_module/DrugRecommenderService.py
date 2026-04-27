@@ -27,8 +27,9 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         self.table_path = self.repo_root / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
         self.half1_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"
         self.half2_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_2.json"
-        self.phase2_mode = os.getenv("PHASE2_MODE", "label_core_rerank")
-        ranker_path_env = os.getenv("PHASE2_RANKER_PATH", "").strip()
+        self.phase2_mode = os.getenv("PHASE2_MODE", "xgb_ranker")
+        default_ranker = str(self.repo_root / "artifacts/exp_drug_recall/phase2_e2e_xgb_train/ranker.joblib")
+        ranker_path_env = os.getenv("PHASE2_RANKER_PATH", default_ranker).strip()
         self.ranker_path = Path(ranker_path_env) if ranker_path_env else None
 
         self.default_top_k_recall = 20

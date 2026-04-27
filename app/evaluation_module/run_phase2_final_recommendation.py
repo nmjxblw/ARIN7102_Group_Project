@@ -1,6 +1,7 @@
 import argparse
 import json
 import logging
+import os
 from pathlib import Path
 from typing import Any
 
@@ -85,6 +86,8 @@ def _get_recommender() -> Phase2FinalRecommender:
             index=index,
             half_data_paths=[DEFAULT_HALF1_PATH, DEFAULT_HALF2_PATH],
             table_path=DEFAULT_TABLE_PATH,
+            phase2_mode=os.getenv("PHASE2_MODE", "xgb_ranker"),
+            ranker_path=os.getenv("PHASE2_RANKER_PATH", str(REPO_ROOT / "artifacts/exp_drug_recall/phase2_e2e_xgb_train/ranker.joblib")),
         )
     return _RECOMMENDER_CACHE
 

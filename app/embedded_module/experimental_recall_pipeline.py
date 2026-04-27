@@ -32,6 +32,7 @@ ABLATION_MODES = (
     "candidate_union_no_prior_no_bm25",
     "local_ranker",
     "label_core_rerank",
+    "xgb_ranker",
 )
 
 MODE_STAGE_MAP = {
@@ -46,6 +47,7 @@ MODE_STAGE_MAP = {
     "candidate_union_no_prior_no_bm25": ("disease", "strict", "symptom", "dense"),
     "local_ranker": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
     "label_core_rerank": ("disease", "strict", "symptom"),
+    "xgb_ranker": ("disease", "strict", "symptom", "bm25", "dense", "prior"),
 }
 
 
@@ -127,8 +129,8 @@ class ExperimentalDrugRecallPipeline:
             selected_rows=selected_rows,
             mode=mode,
         )
-        trace.ranker_used = bool(mode == "local_ranker" and self.ranker and self.ranker.is_ready)
-        trace.fallback_mode = bool(mode == "local_ranker" and not trace.ranker_used)
+        trace.ranker_used = bool(mode in ("local_ranker", "xgb_ranker") and self.ranker and self.ranker.is_ready)
+        trace.fallback_mode = bool(mode in ("local_ranker", "xgb_ranker") and not trace.ranker_used)
 
         if return_trace:
             return result, trace
@@ -390,7 +392,7 @@ class ExperimentalDrugRecallPipeline:
                 + 0.25 * scored["bm25_score"]
                 + 0.15 * scored["dense_score"]
             )
-        elif mode == "local_ranker" and self.ranker and self.ranker.is_ready:
+        elif mode in ("local_ranker", "xgb_ranker") and self.ranker and self.ranker.is_ready:
             scored["ranker_score"] = self.ranker.predict(scored)
             scored["final_score"] = 0.80 * scored["ranker_score"] + 0.20 * scored["deterministic_score"]
         elif mode == "label_core_rerank":
