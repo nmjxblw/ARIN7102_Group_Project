@@ -1,4 +1,5 @@
 import logging
+import os
 from pathlib import Path
 from typing import Any
 import pandas as pd
@@ -54,10 +55,15 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         self.index = DrugRecallIndex(df=self.df, embedding_path=None)
 
         logger.info("Setting up Phase2FinalRecommender...")
+        if self.ranker_path is not None:
+            logger.info("Phase2 ranker path configured: %s", self.ranker_path)
+        logger.info("Phase2 mode configured: %s", self.phase2_mode)
         self.recommender = Phase2FinalRecommender(
             index=self.index,
             half_data_paths=[self.half1_path, self.half2_path],
             table_path=self.table_path,
+            phase2_mode=self.phase2_mode,
+            ranker_path=self.ranker_path,
         )
         logger.info("DrugRecommendationService initialized successfully.")
 

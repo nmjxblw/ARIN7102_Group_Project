@@ -4,6 +4,7 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
+from app.embedded_module.drug_ranker import LocalDrugRanker
 from app.embedded_module.experimental_recall_pipeline import (
     ExperimentalDrugRecallPipeline,
 )
@@ -16,9 +17,17 @@ class Phase2FinalRecommender:
         index: DrugRecallIndex,
         half_data_paths: list[Path | str],
         table_path: Path | str,
+        *,
+        phase2_mode: str = "label_core_rerank",
+        ranker_path: Path | str | None = None,
     ):
         self.index = index
-        self.pipeline = ExperimentalDrugRecallPipeline(index=index)
+        self.phase2_mode = phase2_mode
+        self.ranker_path = Path(ranker_path) if ranker_path else None
+        self.ranker = (
+            LocalDrugRanker.load(self.ranker_path) if self.ranker_path else None
+        )
+        self.pipeline = ExperimentalDrugRecallPipeline(index=index, ranker=self.ranker)
 
         self.half_pool: dict[str, dict[str, float]] = defaultdict(dict)
 
@@ -75,6 +84,9 @@ class Phase2FinalRecommender:
                 top_k=top_k_recall,
                 pool_size=1000,  # Use a reasonable default size
                 mode="label_core_rerank",
+                return_trace=False,
+                pool_size=1000,  # Use a reasonable default size
+                mode=self.phase2_mode,
                 return_trace=False,
             )
 
