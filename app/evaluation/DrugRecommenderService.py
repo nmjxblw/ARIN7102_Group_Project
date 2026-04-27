@@ -1,4 +1,5 @@
 import logging
+import os
 from pathlib import Path
 from typing import Any
 import pandas as pd
@@ -26,6 +27,9 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         self.table_path = self.repo_root / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
         self.half1_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"
         self.half2_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_2.json"
+        self.phase2_mode = os.getenv("PHASE2_MODE", "label_core_rerank")
+        ranker_path_env = os.getenv("PHASE2_RANKER_PATH", "").strip()
+        self.ranker_path = Path(ranker_path_env) if ranker_path_env else None
 
         self.default_top_k_recall = 20
         self.default_top_k_per_disease = 3
@@ -38,10 +42,15 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         self.index = DrugRecallIndex(df=self.df, embedding_path=None)
 
         logger.info("Setting up Phase2FinalRecommender...")
+        if self.ranker_path is not None:
+            logger.info("Phase2 ranker path configured: %s", self.ranker_path)
+        logger.info("Phase2 mode configured: %s", self.phase2_mode)
         self.recommender = Phase2FinalRecommender(
             index=self.index,
             half_data_paths=[self.half1_path, self.half2_path],
             table_path=self.table_path,
+            phase2_mode=self.phase2_mode,
+            ranker_path=self.ranker_path,
         )
         logger.info("DrugRecommendationService initialized successfully.")
 
@@ -127,4 +136,3 @@ class DrugRecommendationService(metaclass=SingletonMeta):
             }
         else:
             return {"recommendations":self._build_flat_recommendations(result)}
-
