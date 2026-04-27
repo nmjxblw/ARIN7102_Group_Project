@@ -11,7 +11,7 @@ from singleton_module import SingletonMeta
 from embedded_module.drug_recall_index import DrugRecallIndex
 from embedded_module.phase2_final_recommender import Phase2FinalRecommender
 
-from utility_module import logger
+logger = logging.getLogger(__name__)
 
 
 class DrugRecommendationService(metaclass=SingletonMeta):
@@ -22,27 +22,14 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         """
         logger.info("Initializing DrugRecommendationService (Singleton)...")
 
+
         self.repo_root = Path(__file__).resolve().parents[2]
-        self.table_path = (
-            self.repo_root
-            / "match_data_preprocessing"
-            / "data"
-            / "enhanced_drug_table_v1_structured.csv"
-        )
-        self.half1_path = (
-            self.repo_root
-            / "app"
-            / "dataset_module"
-            / "drugs_training_dataset"
-            / "drug_data_half_1.json"
-        )
-        self.half2_path = (
-            self.repo_root
-            / "app"
-            / "dataset_module"
-            / "drugs_training_dataset"
-            / "drug_data_half_2.json"
-        )
+        self.table_path = self.repo_root / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
+        self.half1_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"
+        self.half2_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_2.json"
+        self.phase2_mode = os.getenv("PHASE2_MODE", "label_core_rerank")
+        ranker_path_env = os.getenv("PHASE2_RANKER_PATH", "").strip()
+        self.ranker_path = Path(ranker_path_env) if ranker_path_env else None
 
         self.default_top_k_recall = 20
         self.default_top_k_per_disease = 3
@@ -66,6 +53,7 @@ class DrugRecommendationService(metaclass=SingletonMeta):
             ranker_path=self.ranker_path,
         )
         logger.info("DrugRecommendationService initialized successfully.")
+
 
     def _confidence(self, value: Any, default: float = 1.0) -> float:
         try:
@@ -112,15 +100,15 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         for d_res in result.get("disease_results", []):
             for top_drug in d_res.get("final_top3", []):
                 flat_item = {
-                    # "query_index": result.get("query_index", 0),
+                    #"query_index": result.get("query_index", 0),
                     "disease": d_res.get("disease", ""),
-                    # "disease_confidence": d_res.get("disease_confidence", 1.0),
+                    #"disease_confidence": d_res.get("disease_confidence", 1.0),
                     "drug_name": top_drug.get("drug_name", ""),
-                    # "disease_rank": top_drug.get("disease_rank", global_rank),
-                    # "global_display_rank": global_rank,
-                    # "phase2_rank": top_drug.get("phase2_rank"),
-                    # "selection_source": top_drug.get("selection_source", ""),
-                    "final_confidence": top_drug.get("half_disease_confidence", 0.0),
+                    #"disease_rank": top_drug.get("disease_rank", global_rank),
+                    #"global_display_rank": global_rank,
+                    #"phase2_rank": top_drug.get("phase2_rank"),
+                    #"selection_source": top_drug.get("selection_source", ""),
+                    "final_confidence": top_drug.get("half_disease_confidence", 0.0)
                 }
                 # if "phase2_score" in top_drug:
                 #     flat_item["phase2_score"] = top_drug["phase2_score"]
@@ -128,9 +116,12 @@ class DrugRecommendationService(metaclass=SingletonMeta):
                 global_rank += 1
         return flat_results
 
-    def predict(self, bert_output: dict, flat_out=False) -> dict:
+
+
+    def predict(self, bert_output: dict,flat_out=False) -> dict:
         """外部调用主入口"""
         query = self._normalize_bert_output(bert_output)
+
 
         result = self.recommender.recommend_query(
             query=query,
@@ -144,4 +135,4 @@ class DrugRecommendationService(metaclass=SingletonMeta):
                 "recommendations": self._build_flat_recommendations(result),
             }
         else:
-            return {"recommendations": self._build_flat_recommendations(result)}
+            return {"recommendations":self._build_flat_recommendations(result)}

@@ -787,16 +787,6 @@ class BERTManager(metaclass=SingletonMeta):
         """模型预测前预加载，加载模型、分词器和标签编码器，并将模型移动到指定设备。"""
         self._device = device
         self._tokenizer = self._get_tokenizer(model_path)
-        self._bert_model = cast(
-            DistilBertForMultitaskLearning,
-            DistilBertForMultitaskLearning.from_pretrained(
-                model_path, local_files_only=True, ignore_mismatched_sizes=True
-            ),
-        )
-        if isinstance(self._device, torch.device) and self._device.type == "cuda":
-            torch.nn.Module.cuda(self._bert_model)
-        else:
-            torch.nn.Module.cpu(self._bert_model)
         encoders: Any = None
         with open(f"{model_path}/label_encoders.pkl", "rb") as f:
             encoders = pickle.load(f)
@@ -808,6 +798,17 @@ class BERTManager(metaclass=SingletonMeta):
             encoders = {"disease": encoders[0], "symptom": encoders[1]}
         self._disease_label_binarizer = encoders["disease"]
         self._symptom_label_binarizer = encoders["symptom"]
+        self._bert_model = cast(
+            DistilBertForMultitaskLearning,
+            DistilBertForMultitaskLearning.from_pretrained(
+                model_path,disease_label_binarizer= self._disease_label_binarizer,symptom_label_binarizer=self._symptom_label_binarizer,local_files_only=True, ignore_mismatched_sizes=True
+            ),
+        )
+        if isinstance(self._device, torch.device) and self._device.type == "cuda":
+            torch.nn.Module.cuda(self._bert_model)
+        else:
+            torch.nn.Module.cpu(self._bert_model)
+
         self._medians = dict(encoders).get("medians", {})
         return (
             self._device,

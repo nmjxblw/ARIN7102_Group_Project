@@ -122,9 +122,11 @@ def end_background_threads():
             t.join(timeout=THREAD_TIMEOUT)
     logger.debug("结束后台线程。")
 
-
+import time
+import json
 def app_run() -> None:
     """主程序入口"""
+    start_time = time.time()
     user_input = [
         "I am not feeling well today, I have headache and fever. Can not smell anything.",
         "My nose is blocked and I have a sore throat. What should I do?",
@@ -132,3 +134,9 @@ def app_run() -> None:
     answers = [bert_manager.predict(_input) for _input in user_input]
     logger.debug(f"用户输入: {user_input}")
     logger.debug(f"BERT模型预测结果: {answers}")
+    drug = [recommendation_manager.predict(answer,flat_out=True) for answer in answers]
+    logger.debug(f"药物推荐:{drug}")
+    end_time = time.time()
+    logger.info(end_time - start_time)
+
+    logger.debug(json.dumps(drug,indent=4, ensure_ascii=False))
