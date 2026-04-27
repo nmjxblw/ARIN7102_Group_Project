@@ -13,6 +13,7 @@ Usage:
     --mode semantic --k-values 5 10 20 \
     --output data/eval_results_semantic.json
 """
+
 from __future__ import annotations
 
 import argparse
@@ -25,7 +26,7 @@ APP_ROOT = REPO_ROOT / "app"
 if str(APP_ROOT) not in sys.path:
     sys.path.insert(0, str(APP_ROOT))
 
-from evaluation.metrics import evaluate_batch
+from evaluation_module.metrics import evaluate_batch
 from fastapi_module.service import get_recommendation_service
 
 MODES = ("semantic", "label", "fusion", "full")
@@ -41,14 +42,18 @@ def _recommend_by_mode(pipeline, query: dict, top_k: int, mode: str) -> list[str
         df = df.sort_values("semantic_score_raw", ascending=False)
 
     elif mode == "label":
-        df = pipeline.label_recall(disease_items=diseases, symptom_items=symptoms, top_k=top_k)
+        df = pipeline.label_recall(
+            disease_items=diseases, symptom_items=symptoms, top_k=top_k
+        )
         if len(df) == 0:
             return []
         df = df.sort_values("label_score_raw", ascending=False)
 
     elif mode == "fusion":
         sem = pipeline.semantic_recall(symptom_text=symptom_text, top_k=300)
-        lbl = pipeline.label_recall(disease_items=diseases, symptom_items=symptoms, top_k=300)
+        lbl = pipeline.label_recall(
+            disease_items=diseases, symptom_items=symptoms, top_k=300
+        )
         df = pipeline.fuse_recalls(sem, lbl, top_k=top_k)
         if len(df) == 0:
             return []
@@ -84,13 +89,17 @@ def run_evaluation(
     for i, query in enumerate(eval_data):
         print(f"[{i+1}/{len(eval_data)}] {query['query_id']}")
         try:
-            recommended = _recommend_by_mode(pipeline, query, top_k=max(k_values), mode=mode)
-            results.append({
-                "query_id": query["query_id"],
-                "recommended": recommended,
-                "relevant": query["relevant_drugs"],
-                "relevance_scores": query.get("relevance_scores", {}),
-            })
+            recommended = _recommend_by_mode(
+                pipeline, query, top_k=max(k_values), mode=mode
+            )
+            results.append(
+                {
+                    "query_id": query["query_id"],
+                    "recommended": recommended,
+                    "relevant": query["relevant_drugs"],
+                    "relevance_scores": query.get("relevance_scores", {}),
+                }
+            )
         except Exception as e:
             print(f"  Error: {e}")
             continue
@@ -100,16 +109,24 @@ def run_evaluation(
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
-            json.dump({"mode": mode, "metrics": metrics, "num_queries": len(results)}, f, indent=2)
+            json.dump(
+                {"mode": mode, "metrics": metrics, "num_queries": len(results)},
+                f,
+                indent=2,
+            )
         print(f"\nResults saved to: {output_path}")
 
     return metrics
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Ablation evaluation by pipeline stage.")
+    parser = argparse.ArgumentParser(
+        description="Ablation evaluation by pipeline stage."
+    )
     parser.add_argument("--eval-dataset", type=Path, required=True)
-    parser.add_argument("--mode", choices=MODES, required=True, help="Pipeline stage to evaluate")
+    parser.add_argument(
+        "--mode", choices=MODES, required=True, help="Pipeline stage to evaluate"
+    )
     parser.add_argument("--k-values", type=int, nargs="+", default=[5, 10, 20])
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()

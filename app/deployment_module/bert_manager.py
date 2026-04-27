@@ -404,35 +404,37 @@ class BERTManager(metaclass=SingletonMeta):
         return True
 
     # 加载分词器
-    @classmethod
     def _get_tokenizer(
-        cls,
+        self,
         model_path: str | Path = INITIAL_BERT_MODEL_PATH,
         local_files_only: bool = False,
     ) -> DistilBertTokenizer:
         """兼容不同 transformers 版本的 Mistral regex 修复参数。"""
-        if cls._tokenizer is not None and isinstance(
-            cls._tokenizer, DistilBertTokenizer
+        if self._tokenizer is not None and isinstance(
+            self._tokenizer, DistilBertTokenizer
         ):
-            return cls._tokenizer
+            return self._tokenizer
         try:
-            cls._tokenizer = DistilBertTokenizer.from_pretrained(
+            self._tokenizer = DistilBertTokenizer.from_pretrained(
                 model_path,
                 local_files_only=local_files_only,
-                fix_mistral_regex=True,
             )
 
         except TypeError as exc:
             if "fix_mistral_regex" in str(exc) and "multiple values" in str(exc):
-                cls._tokenizer = DistilBertTokenizer.from_pretrained(
+                logger.debug(
+                    "检测到 transformers 已在内部注入 fix_mistral_regex，改用兼容加载路径。"
+                )
+                self._tokenizer = DistilBertTokenizer.from_pretrained(
                     model_path,
                     local_files_only=local_files_only,
                 )
-            raise
-        if isinstance(cls._tokenizer, DistilBertTokenizer):
-            return cls._tokenizer
+            else:
+                raise
+        if isinstance(self._tokenizer, DistilBertTokenizer):
+            return self._tokenizer
         raise RuntimeError(
-            f"加载分词器失败，预期类型 DistilBertTokenizer，但实际类型为 {type(cls._tokenizer)}"
+            f"加载分词器失败，预期类型 DistilBertTokenizer，但实际类型为 {type(self._tokenizer)}"
         )
 
     @staticmethod
@@ -448,9 +450,8 @@ class BERTManager(metaclass=SingletonMeta):
 
         return msg
 
-    @classmethod
     def _load_multilabel_binarizers(
-        cls,
+        self,
     ) -> tuple[MultiLabelBinarizer, MultiLabelBinarizer]:
         """
         加载疾病和症状标签的 MultiLabelBinarizer 实例，并缓存到类变量中以加快后续训练和推理速度。
@@ -458,10 +459,10 @@ class BERTManager(metaclass=SingletonMeta):
         """
         # 判断是否已经加载过，如果加载过直接 return
         if (
-            cls._disease_label_binarizer is not None
-            and cls._symptom_label_binarizer is not None
+            self._disease_label_binarizer is not None
+            and self._symptom_label_binarizer is not None
         ):
-            return cls._disease_label_binarizer, cls._symptom_label_binarizer
+            return self._disease_label_binarizer, self._symptom_label_binarizer
         # 提取所有标签
         if not DISEASE_LABELS_PATH.exists():
             raise FileNotFoundError(f"疾病标签文件未找到: {DISEASE_LABELS_PATH}")
@@ -474,10 +475,10 @@ class BERTManager(metaclass=SingletonMeta):
             all_symptoms: list[str] = json.load(f)
 
         # 初始化标签编码器
-        cls._disease_label_binarizer = MultiLabelBinarizer().fit([all_diseases])
-        cls._symptom_label_binarizer = MultiLabelBinarizer().fit([all_symptoms])
+        self._disease_label_binarizer = MultiLabelBinarizer().fit([all_diseases])
+        self._symptom_label_binarizer = MultiLabelBinarizer().fit([all_symptoms])
 
-        return cls._disease_label_binarizer, cls._symptom_label_binarizer
+        return self._disease_label_binarizer, self._symptom_label_binarizer
 
     def _load_training_data(self) -> list[dict[str, Any]]:
         """加载训练数据"""
@@ -493,17 +494,16 @@ class BERTManager(metaclass=SingletonMeta):
             logger.debug(f"已加载训练数据，共 {len(raw_data)} 条样本。")
         return self._raw_training_data
 
-    @classmethod
-    def _get_bert_config(cls) -> PretrainedConfig:
-        if cls._bert_config is not None and isinstance(
-            cls._bert_config, PretrainedConfig
+    def _get_bert_config(self) -> PretrainedConfig:
+        if self._bert_config is not None and isinstance(
+            self._bert_config, PretrainedConfig
         ):
-            return cls._bert_config
+            return self._bert_config
         config: PretrainedConfig = AutoConfig.from_pretrained(
             INITIAL_BERT_MODEL_PATH, local_files_only=True
         )
-        cls._bert_config = config
-        return cls._bert_config
+        self._bert_config = config
+        return self._bert_config
 
     def _get_bert_model(self) -> DistilBertForMultitaskLearning:
         if self._bert_model is not None and isinstance(
@@ -781,23 +781,22 @@ class BERTManager(metaclass=SingletonMeta):
                     f"★ 模型表现提升 (Disease Metric: {current_disease_metric:.4f})，已保存至 {SAVE_PATH}"
                 )
 
-    @classmethod
     def preload(
-        cls, model_path: str | Path = SAVE_PATH, device: torch.device = TORCH_DEVICE
+        self, model_path: str | Path = SAVE_PATH, device: torch.device = TORCH_DEVICE
     ):
         """模型预测前预加载，加载模型、分词器和标签编码器，并将模型移动到指定设备。"""
-        cls._device = device
-        cls._tokenizer = cls._get_tokenizer(model_path)
-        cls._bert_model = cast(
+        self._device = device
+        self._tokenizer = self._get_tokenizer(model_path)
+        self._bert_model = cast(
             DistilBertForMultitaskLearning,
             DistilBertForMultitaskLearning.from_pretrained(
                 model_path, local_files_only=True, ignore_mismatched_sizes=True
             ),
         )
-        if isinstance(cls._device, torch.device) and cls._device.type == "cuda":
-            torch.nn.Module.cuda(cls._bert_model)
+        if isinstance(self._device, torch.device) and self._device.type == "cuda":
+            torch.nn.Module.cuda(self._bert_model)
         else:
-            torch.nn.Module.cpu(cls._bert_model)
+            torch.nn.Module.cpu(self._bert_model)
         encoders: Any = None
         with open(f"{model_path}/label_encoders.pkl", "rb") as f:
             encoders = pickle.load(f)
@@ -807,16 +806,16 @@ class BERTManager(metaclass=SingletonMeta):
             # 如果保存时是列表格式，需要处理
             # 这里假设列表中第一个元素是disease，第二个是symptom
             encoders = {"disease": encoders[0], "symptom": encoders[1]}
-        cls._disease_label_binarizer = encoders["disease"]
-        cls._symptom_label_binarizer = encoders["symptom"]
-        cls._medians = dict(encoders).get("medians", {})
+        self._disease_label_binarizer = encoders["disease"]
+        self._symptom_label_binarizer = encoders["symptom"]
+        self._medians = dict(encoders).get("medians", {})
         return (
-            cls._device,
-            cls._tokenizer,
-            cls._bert_model,
-            cls._disease_label_binarizer,
-            cls._symptom_label_binarizer,
-            cls._medians,
+            self._device,
+            self._tokenizer,
+            self._bert_model,
+            self._disease_label_binarizer,
+            self._symptom_label_binarizer,
+            self._medians,
         )
 
     @staticmethod
@@ -960,7 +959,7 @@ class BERTManager(metaclass=SingletonMeta):
             "first_aid": first_aid_median,
         }
 
-    def predict_with_preload(
+    def predict(
         self,
         text: str,
         *,

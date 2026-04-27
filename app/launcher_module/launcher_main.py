@@ -15,7 +15,7 @@ from utility_module import logger
 from remote_llm_module import DeepSeekManager
 from deployment_module import BERTManager
 
-# from evaluation.DrugRecommenderService import DrugRecommendationService
+from evaluation_module import DrugRecommendationService
 
 app_running_flag: bool = True
 """应用程序运行标志"""
@@ -37,6 +37,8 @@ deepseek_manager = DeepSeekManager(debug_mode=True)
 
 bert_manager = BERTManager(debug_mode=True)
 """ BERT 管理器单例 """
+recommendation_manager = DrugRecommendationService()
+""" 药物推荐管理器单例 """
 
 
 def exit() -> NoReturn:
@@ -123,21 +125,10 @@ def end_background_threads():
 
 def app_run() -> None:
     """主程序入口"""
-    # from deployment_module import predict
-    #
-    # test_text = "My joints are so stiff in the mornings, and it's getting painful just to walk up the stairs. I feel a constant ache in my knees and neck."
-    # result = predict(test_text)
-    # print(result)
-
-    # result = {'diseases': [{'name': 'arthritis', 'confidence': 0.77}, {'name': 'osteoarthristis', 'confidence': 0.9}], 'symptoms': [{'name': 'joint_pain', 'confidence': 0.8553173676732357}, {'name': 'neck_pain', 'confidence': 0.7792979952461874}, {'name': 'stiff_neck', 'confidence': 0.20552087381850495}], 'need_first_aid': 0}
-    # service = DrugRecommendationService()
-    # #from evaluation.run_phase2_final_recommendation import predict as predict_rec
-    # recommendation_result = service.predict(result,flat_out=True)
-    # print(recommendation_result)
-    # import json
-
-    # with open("output.json", "w", encoding="utf-8") as f:
-    #     json.dump(recommendation_result, f, ensure_ascii=False, indent=4)
-
-    # msg = "Introduce yourself and tell me what can you do for me?"
-    # deepseek_manager.dev_send(msg)
+    user_input = [
+        "I am not feeling well today, I have headache and fever. Can not smell anything.",
+        "My nose is blocked and I have a sore throat. What should I do?",
+    ]
+    answers = [bert_manager.predict(_input) for _input in user_input]
+    logger.debug(f"用户输入: {user_input}")
+    logger.debug(f"BERT模型预测结果: {answers}")

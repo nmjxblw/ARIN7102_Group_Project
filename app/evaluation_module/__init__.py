@@ -15,6 +15,8 @@ from .metrics import (
     reciprocal_rank,
 )
 
+from .DrugRecommenderService import DrugRecommendationService
+
 __all__ = [
     "precision_at_k",
     "recall_at_k",
@@ -25,4 +27,5 @@ __all__ = [
     "evaluate_single_query",
     "evaluate_batch",
     "generate_eval_dataset_llm_main",
+    "DrugRecommenderService",
 ]

@@ -18,10 +18,15 @@ if str(APP_ROOT) not in sys.path:
 from embedded_module.drug_recall_index import DrugRecallIndex
 from embedded_module.experimental_recall_pipeline import ExperimentalDrugRecallPipeline
 from embedded_module.label_adapter import parse_labels
-from evaluation.metrics import evaluate_batch
+from evaluation_module.metrics import evaluate_batch
 
 
-DEFAULT_TABLE = REPO_ROOT / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
+DEFAULT_TABLE = (
+    REPO_ROOT
+    / "match_data_preprocessing"
+    / "data"
+    / "enhanced_drug_table_v1_structured.csv"
+)
 DEFAULT_EVAL = REPO_ROOT / "data" / "eval_dataset_verified.json"
 DEFAULT_EMBEDDINGS = REPO_ROOT / "drug_comprehensive_embeddings.npy"
 DEFAULT_ARTIFACT_DIR = REPO_ROOT / "artifacts" / "exp_drug_recall"
@@ -32,7 +37,9 @@ def _load_json(path: Path) -> list[dict]:
         return json.load(f)
 
 
-def _build_pipeline(table_path: Path, embedding_path: Path | None) -> tuple[pd.DataFrame, ExperimentalDrugRecallPipeline]:
+def _build_pipeline(
+    table_path: Path, embedding_path: Path | None
+) -> tuple[pd.DataFrame, ExperimentalDrugRecallPipeline]:
     df = pd.read_csv(table_path)
     embeddings = None
     if embedding_path and embedding_path.exists():
@@ -42,10 +49,14 @@ def _build_pipeline(table_path: Path, embedding_path: Path | None) -> tuple[pd.D
     return df, pipeline
 
 
-def _query_parts(pipeline: ExperimentalDrugRecallPipeline, query: dict) -> tuple[list, list, str]:
+def _query_parts(
+    pipeline: ExperimentalDrugRecallPipeline, query: dict
+) -> tuple[list, list, str]:
     diseases = parse_labels(query.get("diseases", []), kind="disease")
     symptoms = parse_labels(query.get("symptoms", []), kind="symptom")
-    query_text = pipeline._build_query_text(query["symptom_text"], diseases, symptoms)  # noqa: SLF001
+    query_text = pipeline._build_query_text(
+        query["symptom_text"], diseases, symptoms
+    )  # noqa: SLF001
     return diseases, symptoms, query_text
 
 
@@ -63,19 +74,35 @@ def _mode_rows(
         pool_size=pool_size,
     )
     rows = {
-        "label_idf_only": set(pipeline._rows_for_mode(stage_scores, mode="label_idf_only", pool_size=pool_size)),  # noqa: SLF001
-        "candidate_union": set(pipeline._rows_for_mode(stage_scores, mode="candidate_union", pool_size=pool_size)),  # noqa: SLF001
+        "label_idf_only": set(
+            pipeline._rows_for_mode(
+                stage_scores, mode="label_idf_only", pool_size=pool_size
+            )
+        ),  # noqa: SLF001
+        "candidate_union": set(
+            pipeline._rows_for_mode(
+                stage_scores, mode="candidate_union", pool_size=pool_size
+            )
+        ),  # noqa: SLF001
         "candidate_union_no_bm25": set(
-            pipeline._rows_for_mode(stage_scores, mode="candidate_union_no_bm25", pool_size=pool_size)  # noqa: SLF001
+            pipeline._rows_for_mode(
+                stage_scores, mode="candidate_union_no_bm25", pool_size=pool_size
+            )  # noqa: SLF001
         ),
         "candidate_union_no_prior_no_bm25": set(
-            pipeline._rows_for_mode(stage_scores, mode="candidate_union_no_prior_no_bm25", pool_size=pool_size)  # noqa: SLF001
+            pipeline._rows_for_mode(
+                stage_scores,
+                mode="candidate_union_no_prior_no_bm25",
+                pool_size=pool_size,
+            )  # noqa: SLF001
         ),
     }
     return stage_scores, rows
 
 
-def _summarize_stage_scales(per_query_stage_values: dict[str, list[dict[str, float]]]) -> dict[str, dict[str, float]]:
+def _summarize_stage_scales(
+    per_query_stage_values: dict[str, list[dict[str, float]]],
+) -> dict[str, dict[str, float]]:
     summary = {}
     for stage, values in per_query_stage_values.items():
         if not values:
@@ -84,7 +111,9 @@ def _summarize_stage_scales(per_query_stage_values: dict[str, list[dict[str, flo
             "queries_with_stage": len(values),
             "mean_max": round(float(np.mean([item["max"] for item in values])), 4),
             "mean_p95": round(float(np.mean([item["p95"] for item in values])), 4),
-            "mean_median": round(float(np.mean([item["median"] for item in values])), 4),
+            "mean_median": round(
+                float(np.mean([item["median"] for item in values])), 4
+            ),
         }
     return summary
 
@@ -107,7 +136,9 @@ def _pool_sweep(
                 pool_size=pool_size,
                 mode="candidate_union",
             )
-            recommended = result["drug_name"].astype(str).tolist() if len(result) else []
+            recommended = (
+                result["drug_name"].astype(str).tolist() if len(result) else []
+            )
             batch_results.append(
                 {
                     "query_id": query["query_id"],
@@ -136,9 +167,13 @@ def build_sanity_report(
 ) -> dict:
     df, pipeline = _build_pipeline(table_path, embedding_path)
     queries = _load_json(eval_dataset_path)
-    existing_metrics = json.loads((artifact_dir / "metrics.json").read_text(encoding="utf-8"))["metrics"]
+    existing_metrics = json.loads(
+        (artifact_dir / "metrics.json").read_text(encoding="utf-8")
+    )["metrics"]
 
-    stage_scale_values = {stage: [] for stage in ("disease", "strict", "symptom", "bm25", "prior")}
+    stage_scale_values = {
+        stage: [] for stage in ("disease", "strict", "symptom", "bm25", "prior")
+    }
     same_label_core = 0
     cap_overflow_queries = 0
     bm25_excludes_label_rows_queries = 0
@@ -175,8 +210,12 @@ def build_sanity_report(
         if missing_label_rows:
             bm25_excludes_label_rows_queries += 1
             excluded_label_rows_total += len(missing_label_rows)
-            missing_names = {str(df.loc[row_id, "drug_name"]) for row_id in missing_label_rows}
-            relevant_overlap = sorted(set(query.get("relevant_drugs", [])) & missing_names)
+            missing_names = {
+                str(df.loc[row_id, "drug_name"]) for row_id in missing_label_rows
+            }
+            relevant_overlap = sorted(
+                set(query.get("relevant_drugs", [])) & missing_names
+            )
             if relevant_overlap:
                 relevant_excluded_queries += 1
                 if len(relevant_exclusion_examples) < 10:
@@ -218,7 +257,10 @@ def build_sanity_report(
         )
     sweep_base = pool_sweep[str(pool_size)]
     sweep_full = pool_sweep[str(row_count)]
-    if sweep_full["hit@20"] > sweep_base["hit@20"] or sweep_full["recall@20"] > sweep_base["recall@20"]:
+    if (
+        sweep_full["hit@20"] > sweep_base["hit@20"]
+        or sweep_full["recall@20"] > sweep_base["recall@20"]
+    ):
         conclusions.append(
             f"candidate_union improves from hit@20={sweep_base['hit@20']:.4f} / recall@20={sweep_base['recall@20']:.4f} "
             f"at pool_size={pool_size} to hit@20={sweep_full['hit@20']:.4f} / recall@20={sweep_full['recall@20']:.4f} "
@@ -254,7 +296,9 @@ def build_sanity_report(
         },
         "candidate_set_checks": {
             "same_label_idf_vs_no_prior_no_bm25_queries": same_label_core,
-            "same_label_idf_vs_no_prior_no_bm25_ratio": round(same_label_core / len(queries), 4),
+            "same_label_idf_vs_no_prior_no_bm25_ratio": round(
+                same_label_core / len(queries), 4
+            ),
             "mean_label_core_size": round(float(np.mean(label_core_sizes)), 2),
             "mean_union_selected_size": round(float(np.mean(union_selected_sizes)), 2),
             "mean_union_pre_cap_size": round(float(np.mean(union_pre_cap_sizes)), 2),

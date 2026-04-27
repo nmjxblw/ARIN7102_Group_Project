@@ -1,6 +1,7 @@
 """
 Run evaluation on the drug recommendation system.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -15,7 +16,7 @@ APP_ROOT = REPO_ROOT / "app"
 if str(APP_ROOT) not in sys.path:
     sys.path.insert(0, str(APP_ROOT))
 
-from evaluation.metrics import evaluate_batch
+from evaluation_module.metrics import evaluate_batch
 from fastapi_module.service import get_recommendation_service
 
 
@@ -48,12 +49,14 @@ def run_evaluation(
             )
 
             recommended = result_df["drug_name"].tolist()
-            results.append({
-                "query_id": query["query_id"],
-                "recommended": recommended,
-                "relevant": query["relevant_drugs"],
-                "relevance_scores": query.get("relevance_scores", {}),
-            })
+            results.append(
+                {
+                    "query_id": query["query_id"],
+                    "recommended": recommended,
+                    "relevant": query["relevant_drugs"],
+                    "relevance_scores": query.get("relevance_scores", {}),
+                }
+            )
         except Exception as e:
             print(f"Error on query {query['query_id']}: {e}")
             continue
@@ -63,11 +66,15 @@ def run_evaluation(
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
-            json.dump({
-                "metrics": metrics,
-                "num_queries": len(results),
-                "k_values": k_values,
-            }, f, indent=2)
+            json.dump(
+                {
+                    "metrics": metrics,
+                    "num_queries": len(results),
+                    "k_values": k_values,
+                },
+                f,
+                indent=2,
+            )
         print(f"\nResults saved to: {output_path}")
 
     return metrics
@@ -82,9 +89,9 @@ def main():
 
     metrics = run_evaluation(args.eval_dataset, args.k_values, args.output)
 
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("EVALUATION RESULTS")
-    print("="*50)
+    print("=" * 50)
     for metric_name, value in sorted(metrics.items()):
         print(f"{metric_name:20s}: {value:.4f}")
 

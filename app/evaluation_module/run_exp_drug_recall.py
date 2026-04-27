@@ -18,18 +18,32 @@ if str(APP_ROOT) not in sys.path:
 # Import directly from module files to avoid __init__.py cascading torch load
 from embedded_module.drug_ranker import LocalDrugRanker
 from embedded_module.drug_recall_index import DrugRecallIndex
-from embedded_module.experimental_recall_pipeline import ABLATION_MODES, ExperimentalDrugRecallPipeline
+from embedded_module.experimental_recall_pipeline import (
+    ABLATION_MODES,
+    ExperimentalDrugRecallPipeline,
+)
 import embedded_module.label_adapter as label_adapter_module
-from evaluation.metrics import evaluate_batch, evaluate_single_query
+from evaluation_module.metrics import evaluate_batch, evaluate_single_query
 
 parse_labels = label_adapter_module.parse_labels
 
 
-DEFAULT_TABLE = REPO_ROOT / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
+DEFAULT_TABLE = (
+    REPO_ROOT
+    / "match_data_preprocessing"
+    / "data"
+    / "enhanced_drug_table_v1_structured.csv"
+)
 DEFAULT_EVAL = REPO_ROOT / "data" / "eval_dataset_verified.json"
 DEFAULT_EMBEDDINGS = REPO_ROOT / "drug_comprehensive_embeddings.npy"
 DEFAULT_ARTIFACT_DIR = REPO_ROOT / "artifacts" / "exp_drug_recall"
-DEFAULT_WEAK_TRAIN = REPO_ROOT / "app" / "dataset_module" / "drugs_training_dataset" / "eval_dataset_llm_v2.json"
+DEFAULT_WEAK_TRAIN = (
+    REPO_ROOT
+    / "app"
+    / "dataset_module"
+    / "drugs_training_dataset"
+    / "eval_dataset_llm_v2.json"
+)
 
 
 def _load_json(path: Path) -> list[dict]:
@@ -62,7 +76,11 @@ def _maybe_load_query_encoder(enable_dense: bool, model_name: str | None):
         return None
     from embedded_module.drug_embedding_engine import DrugEmbeddingEngine
 
-    return DrugEmbeddingEngine(model_name=model_name) if model_name else DrugEmbeddingEngine()
+    return (
+        DrugEmbeddingEngine(model_name=model_name)
+        if model_name
+        else DrugEmbeddingEngine()
+    )
 
 
 def train_ranker_from_weak_data(
@@ -83,14 +101,18 @@ def train_ranker_from_weak_data(
 
         disease_labels = parse_labels(query.get("diseases", []), kind="disease")
         symptom_labels = parse_labels(query.get("symptoms", []), kind="symptom")
-        query_text = pipeline._build_query_text(query.get("sentence", ""), disease_labels, symptom_labels)  # noqa: SLF001
+        query_text = pipeline._build_query_text(
+            query.get("sentence", ""), disease_labels, symptom_labels
+        )  # noqa: SLF001
         stage_scores = pipeline._collect_candidates(  # noqa: SLF001
             query_text=query_text,
             diseases=disease_labels,
             symptoms=symptom_labels,
             pool_size=pool_size,
         )
-        row_ids = pipeline._rows_for_mode(stage_scores, mode="candidate_union", pool_size=pool_size)  # noqa: SLF001
+        row_ids = pipeline._rows_for_mode(
+            stage_scores, mode="candidate_union", pool_size=pool_size
+        )  # noqa: SLF001
         features = pipeline._build_feature_frame(  # noqa: SLF001
             row_ids=row_ids,
             stage_scores=stage_scores,
@@ -100,7 +122,9 @@ def train_ranker_from_weak_data(
         )
         if len(features) == 0:
             continue
-        scored = pipeline._score_features(features, mode="candidate_union")  # noqa: SLF001
+        scored = pipeline._score_features(
+            features, mode="candidate_union"
+        )  # noqa: SLF001
 
         positive_mask = (scored["disease_conf_overlap"] > 0) & (
             (scored["symptom_conf_overlap"] > 0)
@@ -108,14 +132,18 @@ def train_ranker_from_weak_data(
             | (scored["stage_strict"] > 0)
         )
         positives = scored[positive_mask].head(20)
-        negatives = scored[~positive_mask].sort_values("deterministic_score", ascending=False).head(
-            max(20, len(positives) * 3)
+        negatives = (
+            scored[~positive_mask]
+            .sort_values("deterministic_score", ascending=False)
+            .head(max(20, len(positives) * 3))
         )
         if len(positives) == 0 or len(negatives) == 0:
             continue
 
         feature_batches.append(pd.concat([positives, negatives], axis=0))
-        label_batches.append(np.concatenate([np.ones(len(positives)), np.zeros(len(negatives))]))
+        label_batches.append(
+            np.concatenate([np.ones(len(positives)), np.zeros(len(negatives))])
+        )
 
     if not feature_batches:
         raise ValueError("No weak training samples were generated for the ranker")
@@ -124,7 +152,9 @@ def train_ranker_from_weak_data(
     labels_all = np.concatenate(label_batches).astype(int)
     ranker = LocalDrugRanker().fit(features_all, labels_all)
     ranker.save(output_path)
-    print(f"Ranker trained on {len(labels_all)} weak candidate rows and saved to: {output_path}")
+    print(
+        f"Ranker trained on {len(labels_all)} weak candidate rows and saved to: {output_path}"
+    )
     return ranker
 
 
@@ -150,11 +180,15 @@ def run_evaluation(
     train_pool_size: int,
 ) -> dict:
     df = pd.read_csv(table_path)
-    embeddings = np.load(embedding_path) if embedding_path and embedding_path.exists() else None
+    embeddings = (
+        np.load(embedding_path) if embedding_path and embedding_path.exists() else None
+    )
     index = DrugRecallIndex(df, embedding_path=embedding_path, embeddings=embeddings)
     query_encoder = _maybe_load_query_encoder(enable_dense, model_name)
     ranker = _maybe_load_ranker(ranker_path)
-    pipeline = ExperimentalDrugRecallPipeline(index, ranker=ranker, query_encoder=query_encoder)
+    pipeline = ExperimentalDrugRecallPipeline(
+        index, ranker=ranker, query_encoder=query_encoder
+    )
 
     if train_ranker:
         if ranker_path is None:
@@ -169,7 +203,8 @@ def run_evaluation(
         pipeline.ranker = ranker
 
     if eval_kind == "half":
-        from evaluation.half_data_adapter import convert_half_datasets
+        from evaluation_module.half_data_adapter import convert_half_datasets
+
         half_paths = [eval_dataset_path, *half_extra_datasets]
         eval_data = convert_half_datasets(
             half_paths,
@@ -205,7 +240,11 @@ def run_evaluation(
                     mode=mode,
                     return_trace=True,
                 )
-                recommended = result_df["drug_name"].astype(str).tolist() if len(result_df) else []
+                recommended = (
+                    result_df["drug_name"].astype(str).tolist()
+                    if len(result_df)
+                    else []
+                )
                 relevant = query.get("relevant_drugs", [])
                 relevance_scores = query.get("relevance_scores", {})
                 single_metrics = evaluate_single_query(
@@ -283,7 +322,9 @@ def run_evaluation(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Evaluate experimental drug recall ablations.")
+    parser = argparse.ArgumentParser(
+        description="Evaluate experimental drug recall ablations."
+    )
     parser.add_argument("--table", type=Path, default=DEFAULT_TABLE)
     parser.add_argument("--eval-dataset", type=Path, default=DEFAULT_EVAL)
     parser.add_argument("--eval-kind", choices=["verified", "half"], default="verified")
@@ -311,10 +352,14 @@ def main() -> None:
         "candidate_union_no_prior_no_bm25",
         "candidate_union",
     ]
-    parser.add_argument("--modes", nargs="+", choices=ABLATION_MODES, default=DEFAULT_BATCH)
+    parser.add_argument(
+        "--modes", nargs="+", choices=ABLATION_MODES, default=DEFAULT_BATCH
+    )
     parser.add_argument("--k-values", nargs="+", type=int, default=[5, 10, 20])
     parser.add_argument("--pool-size", type=int, default=1000)
-    parser.add_argument("--ranker", type=Path, default=DEFAULT_ARTIFACT_DIR / "ranker.joblib")
+    parser.add_argument(
+        "--ranker", type=Path, default=DEFAULT_ARTIFACT_DIR / "ranker.joblib"
+    )
     parser.add_argument("--enable-dense", action="store_true")
     parser.add_argument("--model-name", default=None)
     parser.add_argument("--limit", type=int, default=None)
