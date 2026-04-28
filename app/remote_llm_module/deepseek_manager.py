@@ -47,7 +47,7 @@ class DeepSeekManager(metaclass=SingletonMeta):
         self._debug_mode: bool = debug_mode
         """ 调试模式标识符 """
         if self._debug_mode:
-            logger.info("DeepSeekManager 已进入调试模式")
+            logger.debug("DeepSeekManager 已进入调试模式")
         self.default_prompt_folder_path: str = DEFAULT_PROMPT_FOLDER_PATH
         """ 默认提示词文件夹路径 """
         self.default_prompt: str = ""
@@ -130,7 +130,7 @@ class DeepSeekManager(metaclass=SingletonMeta):
 
     def _prompt_build(self, input: object) -> str:
         """构建提示词"""
-        sentences: str = input.get( "sentences", "")
+        sentences: str = input.get("sentences", "")
         if not sentences:
             return ""
         pipeline_output: dict = input.get("pipeline_output", {})
@@ -183,7 +183,7 @@ class DeepSeekManager(metaclass=SingletonMeta):
                     )
                     # logger.debug(f"DeepSeek:\n {response_json_text}")
                     _response_content: str = str(response.choices[0].message.content)
-                    # logger.info(f"DeepSeek:\n{_response_content}")
+                    # logger.debug(f"DeepSeek:\n{_response_content}")
                     if _response_content is not None:
                         self._history.append(
                             {

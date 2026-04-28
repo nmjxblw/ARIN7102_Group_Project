@@ -349,10 +349,10 @@ class BERTManager(metaclass=SingletonMeta):
         # 检查 git-xet 命令是否存在
         if shutil.which("git-xet"):
             if self._debug_mode:
-                logger.info("检测到 Git-Xet 已安装，跳过下载。")
+                logger.debug("检测到 Git-Xet 已安装，跳过下载。")
         else:
             if self._debug_mode:
-                logger.info("未检测到 Git-Xet，准备安装...")
+                logger.debug("未检测到 Git-Xet，准备安装...")
             winget_install_command = [
                 "winget",
                 "install",
@@ -368,7 +368,7 @@ class BERTManager(metaclass=SingletonMeta):
             except subprocess.CalledProcessError as e:
                 if e.returncode == 2316632107:
                     if self._debug_mode:
-                        logger.info(
+                        logger.debug(
                             "检测到 Git-Xet 已经安装且是最新版本，跳过安装步骤。"
                         )
                 else:
@@ -378,7 +378,7 @@ class BERTManager(metaclass=SingletonMeta):
         try:
             subprocess.run(git_clone_command, shell=True, check=True)
             if self._debug_mode:
-                logger.info(
+                logger.debug(
                     f"成功从 {GIT_BERT_MODEL_URL} 下载并解压模型到 {INITIAL_BERT_MODEL_PATH}"
                 )
         except subprocess.CalledProcessError as e:
@@ -447,7 +447,7 @@ class BERTManager(metaclass=SingletonMeta):
             msg += f"GPU: {torch.cuda.get_device_name(0)}\n"
         else:
             msg += "未检测到可用 CUDA，当前将使用 CPU 训练。"
-        logger.info(msg)
+        logger.debug(msg)
         return msg
 
     def _load_multilabel_binarizers(
@@ -689,16 +689,9 @@ class BERTManager(metaclass=SingletonMeta):
                     all_emg_pred.append((torch.sigmoid(logits_emg) > 0.5).cpu().numpy())
 
                     # 收集真实值
-                    all_dis_true.append(
-                        batch["labels_disease"].numpy()
-                    )
-                    all_sym_true.append(
-                        batch["labels_symptom"].numpy()
-                    )
-                    all_emg_true.append(
-
-                            batch["labels_first_aid"].numpy()
-                    )
+                    all_dis_true.append(batch["labels_disease"].numpy())
+                    all_sym_true.append(batch["labels_symptom"].numpy())
+                    all_emg_true.append(batch["labels_first_aid"].numpy())
 
             # 计算指标
             f1_dis = f1_score(
@@ -743,13 +736,13 @@ class BERTManager(metaclass=SingletonMeta):
             if current_disease_metric > best_f1:
                 best_f1 = float(current_disease_metric)
 
-                logger.info("模型表现提升，计算每个 label 正样本的中位数...")
+                logger.debug("模型表现提升，计算每个 label 正样本的中位数...")
                 medians_dict = self.compute_label_medians()
 
                 assert self._disease_label_binarizer is not None
                 assert self._symptom_label_binarizer is not None
 
-                self._bert_model.save_pretrained(SAVE_PATH,max_shard_size="50MB")
+                self._bert_model.save_pretrained(SAVE_PATH, max_shard_size="50MB")
                 self._tokenizer.save_pretrained(SAVE_PATH)
                 # 保存 label_encoders
                 label_encoders = {
@@ -783,7 +776,11 @@ class BERTManager(metaclass=SingletonMeta):
         self._bert_model = cast(
             DistilBertForMultitaskLearning,
             DistilBertForMultitaskLearning.from_pretrained(
-                model_path,disease_label_binarizer= self._disease_label_binarizer,symptom_label_binarizer=self._symptom_label_binarizer,local_files_only=True, ignore_mismatched_sizes=True
+                model_path,
+                disease_label_binarizer=self._disease_label_binarizer,
+                symptom_label_binarizer=self._symptom_label_binarizer,
+                local_files_only=True,
+                ignore_mismatched_sizes=True,
             ),
         )
         if isinstance(self._device, torch.device) and self._device.type == "cuda":
@@ -870,9 +867,7 @@ class BERTManager(metaclass=SingletonMeta):
             for batch in tqdm(loader, desc="计算每个 label 正样本中位数"):
                 # 只传入模型需要的输入（不传入 labels，避免计算 loss）
                 input_ids = batch["input_ids"].to(self._device).long()
-                attention_mask = (
-                    batch["attention_mask"].to(self._device).long()
-                )
+                attention_mask = batch["attention_mask"].to(self._device).long()
 
                 outputs: MultitaskSequenceClassifierOutput = self._bert_model(
                     input_ids=input_ids,
@@ -887,15 +882,9 @@ class BERTManager(metaclass=SingletonMeta):
                 probs_f = torch.sigmoid(logits_f).cpu().numpy()  # (bs, 1)
 
                 # ground-truth
-                labels_d = (
-                    (batch["labels_disease"]).cpu().numpy()
-                )  # (bs, num_diseases)
-                labels_s = (
-                    (batch["labels_symptom"]).cpu().numpy()
-                )  # (bs, num_symptoms)
-                labels_f = (
-                    (batch["labels_first_aid"]).cpu().numpy()
-                )  # (bs, 1)
+                labels_d = (batch["labels_disease"]).cpu().numpy()  # (bs, num_diseases)
+                labels_s = (batch["labels_symptom"]).cpu().numpy()  # (bs, num_symptoms)
+                labels_f = (batch["labels_first_aid"]).cpu().numpy()  # (bs, 1)
 
                 for i in range(len(probs_d)):  # 遍历 batch 内每个样本
                     # 疾病

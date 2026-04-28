@@ -23,11 +23,11 @@ def json_to_dataframe_main():
     if not file_full_path.exists():
         raise FileNotFoundError(f"JSON 文件[{file_full_path}]不存在")
     df = json_to_dataframe(file_full_path)
-    logger.info(f"DataFrame shape: {df.shape}")
-    logger.info(f"DataFrame columns: {df.columns.tolist()}")
-    logger.info(f"DataFrame head:\n{df.head()}")
+    logger.debug(f"DataFrame shape: {df.shape}")
+    logger.debug(f"DataFrame columns: {df.columns.tolist()}")
+    logger.debug(f"DataFrame head:\n{df.head()}")
     output_csv_path = (
         Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "generated_medical_dataset.csv"
     )
     df.to_csv(output_csv_path, index=False)
-    logger.info(f"DataFrame saved to CSV: {output_csv_path}")
+    logger.debug(f"DataFrame saved to CSV: {output_csv_path}")

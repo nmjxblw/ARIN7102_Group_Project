@@ -279,7 +279,7 @@ def visualize_data_frame(
     plt.savefig(fig_path, dpi=300, bbox_inches="tight", facecolor="white")
     plt.close()
 
-    logger.info(f"可视化图表已保存至: {fig_path}")
+    logger.debug(f"可视化图表已保存至: {fig_path}")
     return fig_path
 
 

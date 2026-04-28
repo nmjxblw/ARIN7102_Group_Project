@@ -21,5 +21,5 @@ async def query_and_print_balance() -> None:
 
     response = requests.request("GET", url, headers=headers, data=payload)
 
-    logger.info(f"余额查询结果：{response.text}")
+    logger.debug(f"余额查询结果：{response.text}")
     return await asyncio.sleep(0)  # 模拟异步操作

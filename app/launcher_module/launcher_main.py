@@ -7,6 +7,7 @@ import threading
 import atexit
 import queue
 import re
+import json
 
 # 本地模块导入
 from static_module import TaskStatus, PROJECT_NAME, THREAD_TIMEOUT
@@ -65,18 +66,27 @@ def submit_async_task(
     return task_id
 
 
+input_lock: bool = False
+
+
 def process_user_input():
     """处理用户输入"""
     global app_running_flag
-    user_input: str = input("用户：").strip()
+    global input_lock
+    if input_lock:
+        return
+    input_lock = True
+    user_input: str = input("[Input]\n")
     if re.match(r"^\s?(exit|quit|q)\.?$", user_input, re.IGNORECASE):
         app_running_flag = False
         deepseek_manager.set_app_running_flag(False)
         return
     bert_prediction = bert_manager.predict(user_input)
-    logger.debug(f"bert_prediction: {bert_prediction}")
+    bert_msg: str = json.dumps(bert_prediction, indent=4, ensure_ascii=False)
+    logger.info(f"[BERT Prediction]\n{bert_msg}")
     pipeline_output = recommendation_manager.predict(bert_prediction, flat_out=True)
-    logger.debug(pipeline_output)
+    pipeline_msg: str = json.dumps(pipeline_output, indent=4, ensure_ascii=False)
+    logger.info(f"[Drug Prediction]\n{pipeline_msg}")
     deepseek_manager.send(
         {
             "sentences": user_input,
@@ -138,7 +148,9 @@ def end_background_threads():
 
 def display_deepseek_response(response: str) -> None:
     """显示 DeepSeek 响应"""
-    print(f"DeepSeek: {response}")
+    print(f"[Response]\n{response}")
+    global input_lock
+    input_lock = False
 
 
 def app_run() -> None:

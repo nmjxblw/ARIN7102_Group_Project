@@ -30,7 +30,7 @@ class AppAsyncTask:
             self.cancel_event.set()
             from utility_module import logger  # 避免循环导入
 
-            logger.info(f"任务 {self.task_id} ({self.task_name}) 取消请求已发出。")
+            logger.debug(f"任务 {self.task_id} ({self.task_name}) 取消请求已发出。")
             return True
         return False
 

@@ -20,7 +20,7 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         初始化方法只会在第一次实例化时运行一次。
         在这里完成所有耗时的加载操作。
         """
-        logger.info("Initializing DrugRecommendationService (Singleton)...")
+        logger.debug("Initializing DrugRecommendationService (Singleton)...")
 
 
         self.repo_root = Path(__file__).resolve().parents[2]
@@ -36,16 +36,16 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         self.default_top_k_per_disease = 3
 
         # 2. 加载核心组件
-        logger.info(f"Loading drug table from {self.table_path}...")
+        logger.debug(f"Loading drug table from {self.table_path}...")
         self.df = pd.read_csv(self.table_path)
 
-        logger.info("Building DrugRecallIndex...")
+        logger.debug("Building DrugRecallIndex...")
         self.index = DrugRecallIndex(df=self.df, embedding_path=None)
 
-        logger.info("Setting up Phase2FinalRecommender...")
+        logger.debug("Setting up Phase2FinalRecommender...")
         if self.ranker_path is not None:
-            logger.info("Phase2 ranker path configured: %s", self.ranker_path)
-        logger.info("Phase2 mode configured: %s", self.phase2_mode)
+            logger.debug("Phase2 ranker path configured: %s", self.ranker_path)
+        logger.debug("Phase2 mode configured: %s", self.phase2_mode)
         self.recommender = Phase2FinalRecommender(
             index=self.index,
             half_data_paths=[self.half1_path, self.half2_path],
@@ -53,7 +53,7 @@ class DrugRecommendationService(metaclass=SingletonMeta):
             phase2_mode=self.phase2_mode,
             ranker_path=self.ranker_path,
         )
-        logger.info("DrugRecommendationService initialized successfully.")
+        logger.debug("DrugRecommendationService initialized successfully.")
 
 
     def _confidence(self, value: Any, default: float = 1.0) -> float:

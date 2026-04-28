@@ -29,7 +29,7 @@ class AppAsyncTaskManager(metaclass=SingletonMeta):
                 task_id=task_id, task_func=task_func, task_name=task_name
             )
             self._tasks[task_id] = task
-            logger.info(f"任务 {task_id} ({task_name}) 已创建。")
+            logger.debug(f"任务 {task_id} ({task_name}) 已创建。")
             return task_id
 
     def submit_task(self, task_id: int) -> bool:
@@ -53,7 +53,7 @@ class AppAsyncTaskManager(metaclass=SingletonMeta):
                 name=f"AppAsyncTask-{task_id}",
             )
             task.execution_thread.start()
-            logger.info(f"任务 {task_id} ({task.task_name}) 已提交执行。")
+            logger.debug(f"任务 {task_id} ({task.task_name}) 已提交执行。")
             return True
 
     def _execute_task(self, task_id: int) -> None:
@@ -75,11 +75,11 @@ class AppAsyncTaskManager(metaclass=SingletonMeta):
             if task.is_cancelled():
                 with self._manager_lock:
                     task.status = TaskStatus.CANCELLED
-                logger.info(f"任务 {task_id} ({task.task_name}) 已取消。")
+                logger.debug(f"任务 {task_id} ({task.task_name}) 已取消。")
             else:
                 with self._manager_lock:
                     task.status = TaskStatus.COMPLETED
-                logger.info(f"任务 {task_id} ({task.task_name}) 已完成。")
+                logger.debug(f"任务 {task_id} ({task.task_name}) 已完成。")
         except Exception as e:
             with self._manager_lock:
                 task.status = TaskStatus.FAILED
@@ -126,6 +126,6 @@ class AppAsyncTaskManager(metaclass=SingletonMeta):
         with self._manager_lock:
             if task_id in self._tasks:
                 del self._tasks[task_id]
-                logger.info(f"任务 {task_id} 已移除。")
+                logger.debug(f"任务 {task_id} 已移除。")
                 return True
         return False

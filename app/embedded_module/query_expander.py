@@ -71,9 +71,9 @@ def expand_query_with_llm(symptom_text: str, timeout: float = 10.0) -> str:
             temperature=0.0,
             timeout=timeout,
         )
-        medical_terms = response.choices[0].message.content.strip()
+        medical_terms = str(response.choices[0].message.content).strip()
         elapsed = time.perf_counter() - t0
-        logger.info(f"[QueryExpander] {elapsed:.2f}s | terms: {medical_terms[:80]}")
+        logger.debug(f"[QueryExpander] {elapsed:.2f}s | terms: {medical_terms[:80]}")
 
         if medical_terms:
             return f"{symptom_text} Medical terms: {medical_terms}"
