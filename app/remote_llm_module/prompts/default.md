@@ -29,8 +29,6 @@ Please generate a structured response to the user based on the above input. You 
    - Maintain empathy and objectivity to reassure the user.
    - **Avoid Overdiagnosis**: Use cautious phrasing such as "may be related to..." or "exhibits characteristics of..." rather than absolute statements like "you are diagnosed with..." or "will definitely cure."
 
-4. **Mandatory Medical Disclaimer**:
-   - The response must conclude with a standard disclaimer emphasizing that AI recommendations cannot replace a face-to-face consultation with a professional doctor.
 
 # Output Format
 
