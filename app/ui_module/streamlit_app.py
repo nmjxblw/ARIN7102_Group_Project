@@ -149,6 +149,57 @@ def build_conversation_history(previous_rounds: list[dict[str, Any]]) -> str:
     return "\n".join(history_lines)
 
 
+def find_latest_grounded_round(
+    previous_rounds: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    for round_data in reversed(previous_rounds):
+        if str(round_data.get("round_type", "")).strip() == "grounded":
+            return round_data
+    return None
+
+
+def extract_label_names(items: list[dict[str, Any]]) -> list[str]:
+    names = []
+    for item in items or []:
+        name = str(item.get("name") or item.get("label") or "").strip()
+        if name and name not in names:
+            names.append(name)
+    return names
+
+
+def is_others_only_prediction(bert_prediction: dict[str, Any]) -> bool:
+    disease_names = [
+        name.lower() for name in extract_label_names(bert_prediction.get("diseases", []))
+    ]
+    return bool(disease_names) and all(name == "others" for name in disease_names)
+
+
+def build_others_only_guidance(bert_prediction: dict[str, Any]) -> dict[str, Any]:
+    symptom_names = extract_label_names(bert_prediction.get("symptoms", []))
+    if symptom_names:
+        summary = (
+            "The current BERT result does not support a reliable disease-level match. "
+            "Detected symptom clues include: "
+            + ", ".join(symptom_names[:6])
+            + "."
+        )
+    else:
+        summary = (
+            "The current BERT result does not support a reliable disease-level match, "
+            "and no stable symptom labels were extracted from this round."
+        )
+
+    return {
+        "symptom_names": symptom_names,
+        "summary": summary,
+        "advice": (
+            "Because this round was classified as 'others', the system will not send the "
+            "case to DeepSeek or provide medication recommendations. Please go to a "
+            "hospital or clinic and seek help from a licensed medical professional."
+        ),
+    }
+
+
 def normalize_follow_up_questions(questions: Any) -> list[str]:
     if isinstance(questions, str):
         questions = [questions]
@@ -332,6 +383,25 @@ def render_recommendation_cards(
             st.markdown(f"**DeepSeek Reasoning:**\n\n{reason}")
 
 
+def render_others_only_guidance(guidance: dict[str, Any]) -> None:
+    st.subheader("⚠️ Professional Medical Follow-up Recommended")
+    st.warning(
+        "BERT classified this round as `others`, so the app skipped both the medication "
+        "ranking pipeline and the DeepSeek analysis."
+    )
+    st.markdown(guidance.get("summary", ""))
+
+    symptom_names = guidance.get("symptom_names", [])
+    if symptom_names:
+        st.markdown("**Possible symptom clues detected in this round:**")
+        for symptom_name in symptom_names:
+            st.markdown(f"- `{symptom_name}`")
+    else:
+        st.info("No stable symptom clues were extracted for this round.")
+
+    st.error(guidance.get("advice", "Please seek professional medical help promptly."))
+
+
 def render_follow_up_section(
     follow_up_questions: list[str],
     round_index: int,
@@ -359,6 +429,7 @@ def render_recent_conversation(previous_rounds: list[dict[str, Any]]) -> None:
     st.caption("Brief history of previous rounds in this session.")
 
     for idx, round_data in enumerate(previous_rounds, start=1):
+        round_type = str(round_data.get("round_type", "")).strip()
         user_text = str(round_data.get("user_text", "")).strip()
         bert_prediction = round_data.get("bert_prediction", {})
         disease_names = [
@@ -377,7 +448,11 @@ def render_recent_conversation(previous_rounds: list[dict[str, Any]]) -> None:
         label = f"Round {idx}: {user_text[:60]}{'...' if len(user_text) > 60 else ''}"
         with st.expander(label, expanded=False):
             st.markdown(f"**User Question:** {user_text}")
-            if disease_names:
+            if round_type == "followup_only":
+                st.markdown(
+                    "**Context Mode:** Follow-up only. This round reused previous conversation context and did not rerun BERT."
+                )
+            elif disease_names:
                 st.markdown(f"**Detected Diseases:** {', '.join(disease_names[:3])}")
             else:
                 st.markdown("**Detected Diseases:** No specific disease detected")
@@ -408,6 +483,30 @@ def process_round(
 
         with bert_placeholder:
             render_bert_analysis(bert_prediction)
+
+        if is_others_only_prediction(bert_prediction):
+            st.write(
+                "⚠️ BERT classified this case as `others`. Skipping medication ranking and DeepSeek analysis."
+            )
+            status.update(
+                label="Diagnosis complete! Professional follow-up recommended.",
+                state="complete",
+                expanded=False,
+            )
+            return {
+                "round_type": "others_only",
+                "user_text": user_text,
+                "context_text": context_text,
+                "bert_prediction": bert_payload,
+                "pipeline_output": {"recommendations": []},
+                "recommendations": [],
+                "suggested_follow_up_questions": [],
+                "raw_result": "",
+                "parse_error_message": "",
+                "used_fallback_questions": False,
+                "skip_deepseek_reason": "others_only",
+                "hospital_guidance": build_others_only_guidance(bert_prediction),
+            }
 
         st.write("💊 Retrieving and ranking candidate drugs...")
         pipeline_output = recommendation_manager.predict(bert_payload, flat_out=True)
@@ -443,6 +542,7 @@ def process_round(
         used_fallback_questions = True
 
     return {
+        "round_type": "grounded",
         "user_text": user_text,
         "context_text": context_text,
         "bert_prediction": bert_payload,
@@ -452,6 +552,91 @@ def process_round(
         "raw_result": raw_result,
         "parse_error_message": parse_error_message,
         "used_fallback_questions": used_fallback_questions,
+        "skip_deepseek_reason": "",
+        "hospital_guidance": {},
+    }
+
+
+def process_followup_round(
+    user_text: str,
+    previous_rounds: list[dict[str, Any]],
+    prompt_template: str,
+    deepseek_client: OpenAI,
+    system_prompt: str,
+) -> dict[str, Any]:
+    grounded_round = find_latest_grounded_round(previous_rounds)
+    reference_bert_output = grounded_round.get("bert_prediction", {}) if grounded_round else {}
+    reference_pipeline_output = (
+        grounded_round.get("pipeline_output", {}) if grounded_round else {"recommendations": []}
+    )
+    conversation_history = build_conversation_history(previous_rounds)
+    context_text = (
+        "Follow-up-only mode. Do not assume a new BERT prediction or a new drug-retrieval run "
+        "for this round. Use the conversation history as the primary context. If reference "
+        "BERT labels or reference candidate drugs are provided below, treat them as cached "
+        "materials from the most recent grounded round, not as fresh predictions for the "
+        "current sentence."
+    )
+
+    with st.status("💬 Processing follow-up question...", expanded=True) as status:
+        st.write("🧾 Building conversation history context for the follow-up...")
+        if grounded_round:
+            st.write(
+                "📌 Reusing the most recent grounded system context as reference material for DeepSeek..."
+            )
+        else:
+            st.write("📌 No grounded round found. Sending conversation history only to DeepSeek...")
+
+        st.write("🤖 Requesting DeepSeek for follow-up analysis...")
+        prompt_content = render_prompt_template(
+            prompt_template,
+            current_user_input=(
+                f"{user_text}\n\n"
+                "Note: This is a follow-up turn. Do not assume the app reran BERT or the "
+                "drug-retrieval pipeline for this message."
+            ),
+            context_text=context_text,
+            conversation_history=conversation_history,
+            bert_output=reference_bert_output,
+            pipeline_output=reference_pipeline_output,
+        )
+
+        response = deepseek_client.chat.completions.create(
+            model=DEEPSEEK_MODEL,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt_content},
+            ],
+        )
+        raw_result = response.choices[0].message.content or ""
+        status.update(label="Follow-up complete!", state="complete", expanded=False)
+
+    parse_error_message = ""
+    used_fallback_questions = False
+    try:
+        recommendations, follow_up_questions = parse_deepseek_payload(raw_result)
+    except (json.JSONDecodeError, ValueError) as exc:
+        recommendations = []
+        follow_up_questions = normalize_follow_up_questions([])
+        parse_error_message = str(exc)
+        used_fallback_questions = True
+
+    return {
+        "round_type": "followup_only",
+        "user_text": user_text,
+        "context_text": context_text,
+        "bert_prediction": {},
+        "pipeline_output": {"recommendations": []},
+        "recommendations": recommendations,
+        "suggested_follow_up_questions": follow_up_questions,
+        "raw_result": raw_result,
+        "parse_error_message": parse_error_message,
+        "used_fallback_questions": used_fallback_questions,
+        "skip_deepseek_reason": "",
+        "hospital_guidance": {},
+        "grounding_reference_available": bool(grounded_round),
+        "grounding_bert_prediction": reference_bert_output,
+        "grounding_pipeline_output": reference_pipeline_output,
     }
 
 
@@ -524,15 +709,24 @@ if active_query:
         )
     else:
         try:
-            current_round = process_round(
-                user_text=active_query,
-                previous_rounds=st.session_state.conversation_rounds,
-                prompt_template=streamlit_followup_prompt,
-                bert_manager=bert_manager,
-                recommendation_manager=recommendation_manager,
-                deepseek_client=deepseek_client,
-                system_prompt=system_prompt,
-            )
+            if triggered_by_followup:
+                current_round = process_followup_round(
+                    user_text=active_query,
+                    previous_rounds=st.session_state.conversation_rounds,
+                    prompt_template=streamlit_followup_prompt,
+                    deepseek_client=deepseek_client,
+                    system_prompt=system_prompt,
+                )
+            else:
+                current_round = process_round(
+                    user_text=active_query,
+                    previous_rounds=st.session_state.conversation_rounds,
+                    prompt_template=streamlit_followup_prompt,
+                    bert_manager=bert_manager,
+                    recommendation_manager=recommendation_manager,
+                    deepseek_client=deepseek_client,
+                    system_prompt=system_prompt,
+                )
         except Exception as exc:
             st.error(f"Failed to call DeepSeek API: {exc}")
         else:
@@ -544,23 +738,34 @@ current_round = conversation_rounds[-1] if conversation_rounds else None
 previous_rounds = conversation_rounds[:-1] if len(conversation_rounds) > 1 else []
 
 if current_round:
-    if not processed_round_this_run:
+    if (
+        not processed_round_this_run
+        and current_round.get("round_type") in {"grounded", "others_only"}
+    ):
         render_bert_analysis(current_round.get("bert_prediction", {}))
 
-    render_recommendation_cards(
-        current_round.get("recommendations", []),
-        current_round.get("pipeline_output", {}),
-    )
-
-    if current_round.get("parse_error_message"):
-        st.warning(
-            "DeepSeek returned a non-standard JSON format for this round. Generic follow-up questions are shown below."
+    if current_round.get("round_type") == "followup_only":
+        st.info(
+            "This follow-up turn used conversation history only. The app did not rerun BERT or the medication retrieval pipeline for this round."
         )
-        with st.expander("View raw response text"):
-            st.code(current_round.get("raw_result", ""))
 
-    render_follow_up_section(
-        current_round.get("suggested_follow_up_questions", []),
-        round_index=len(conversation_rounds),
-    )
+    if current_round.get("skip_deepseek_reason") == "others_only":
+        render_others_only_guidance(current_round.get("hospital_guidance", {}))
+    else:
+        render_recommendation_cards(
+            current_round.get("recommendations", []),
+            current_round.get("pipeline_output", {}),
+        )
+
+        if current_round.get("parse_error_message"):
+            st.warning(
+                "DeepSeek returned a non-standard JSON format for this round. Generic follow-up questions are shown below."
+            )
+            with st.expander("View raw response text"):
+                st.code(current_round.get("raw_result", ""))
+
+        render_follow_up_section(
+            current_round.get("suggested_follow_up_questions", []),
+            round_index=len(conversation_rounds),
+        )
     render_recent_conversation(previous_rounds)
