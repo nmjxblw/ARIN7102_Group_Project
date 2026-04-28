@@ -22,9 +22,13 @@ STREAMLIT_PROMPT_PATH = (
     / "default_streamlit_followup.md"
 )
 FALLBACK_FOLLOW_UP_QUESTIONS = [
-    "如果症状持续两三天还没有缓解，我下一步该怎么办？",
-    "如果还伴随发烧、头痛或恶心，需要特别注意什么？",
-    "出现哪些情况时我应该尽快去看医生，而不是继续自行处理？",
+    "Have your symptoms been getting better, staying about the same, or getting worse?",
+]
+FALLBACK_ANSWER_OPTIONS = [
+    "Getting better",
+    "About the same",
+    "Getting worse",
+    "I'm not sure",
 ]
 
 st.set_page_config(page_title="Smart Medical Assistant", page_icon="💊", layout="wide")
@@ -112,6 +116,12 @@ def load_system_metrics():
 
 def queue_followup_query(question: str) -> None:
     st.session_state.pending_query = question
+
+
+def reset_conversation() -> None:
+    st.session_state.conversation_rounds = []
+    st.session_state.pending_query = ""
+    st.session_state.diagnosis_input = ""
 
 
 def build_context_text(previous_rounds: list[dict[str, Any]], current_query: str) -> str:
@@ -218,6 +228,24 @@ def normalize_follow_up_questions(questions: Any) -> list[str]:
     return normalized[:3]
 
 
+def normalize_answer_options(options: Any) -> list[str]:
+    if isinstance(options, str):
+        options = [options]
+
+    normalized = []
+    for option in options or []:
+        text = str(option).strip()
+        if text and text not in normalized:
+            normalized.append(text)
+
+    for fallback in FALLBACK_ANSWER_OPTIONS:
+        if len(normalized) >= 4:
+            break
+        if fallback not in normalized:
+            normalized.append(fallback)
+    return normalized[:4]
+
+
 def extract_json_string(raw_result: str) -> str:
     json_str = (raw_result or "").strip()
     if json_str.startswith("```"):
@@ -230,12 +258,19 @@ def extract_json_string(raw_result: str) -> str:
     return json_str
 
 
-def parse_deepseek_payload(raw_result: str) -> tuple[list[dict[str, Any]], list[str]]:
+def parse_deepseek_payload(
+    raw_result: str,
+) -> tuple[list[dict[str, Any]], str, str, list[str]]:
     json_str = extract_json_string(raw_result)
     payload = json.loads(json_str)
 
     if isinstance(payload, list):
-        return payload, normalize_follow_up_questions([])
+        return (
+            payload,
+            "",
+            FALLBACK_FOLLOW_UP_QUESTIONS[0],
+            normalize_answer_options([]),
+        )
 
     if not isinstance(payload, dict):
         raise ValueError("Unsupported DeepSeek payload type.")
@@ -244,10 +279,25 @@ def parse_deepseek_payload(raw_result: str) -> tuple[list[dict[str, Any]], list[
     if not isinstance(recommendations, list):
         raise ValueError("DeepSeek payload is missing recommendations.")
 
-    follow_up_questions = normalize_follow_up_questions(
-        payload.get("suggested_follow_up_questions", [])
+    assistant_reply = str(payload.get("assistant_reply", "")).strip()
+    clarifying_question = str(
+        payload.get("next_clarifying_question")
+        or payload.get("clarifying_question")
+        or payload.get("suggested_follow_up_question")
+        or ""
+    ).strip()
+    if not clarifying_question:
+        follow_up_questions = normalize_follow_up_questions(
+            payload.get("suggested_follow_up_questions", [])
+        )
+        clarifying_question = (
+            follow_up_questions[0] if follow_up_questions else FALLBACK_FOLLOW_UP_QUESTIONS[0]
+        )
+
+    answer_options = normalize_answer_options(
+        payload.get("suggested_answer_options", [])
     )
-    return recommendations, follow_up_questions
+    return recommendations, assistant_reply, clarifying_question, answer_options
 
 
 def serialize_prompt_value(value: Any) -> str:
@@ -403,18 +453,27 @@ def render_others_only_guidance(guidance: dict[str, Any]) -> None:
 
 
 def render_follow_up_section(
-    follow_up_questions: list[str],
+    assistant_reply: str,
+    clarifying_question: str,
+    answer_options: list[str],
     round_index: int,
 ) -> None:
-    st.subheader("Suggested Follow-up Questions")
-    st.caption("Click one question to continue the next round directly.")
+    st.subheader("Continue The Conversation")
+    if assistant_reply:
+        st.markdown("**Assistant message**")
+        st.info(assistant_reply)
 
-    columns = st.columns(len(follow_up_questions))
-    for idx, question in enumerate(follow_up_questions):
+    st.markdown("**Clarifying question**")
+    st.write(clarifying_question or FALLBACK_FOLLOW_UP_QUESTIONS[0])
+    st.caption("Choose one suggested answer below, or type your own reply in the input box above.")
+
+    options = answer_options or normalize_answer_options([])
+    columns = st.columns(len(options))
+    for idx, question in enumerate(options):
         with columns[idx]:
             st.button(
                 question,
-                key=f"followup_round_{round_index}_{idx}",
+                key=f"answer_option_round_{round_index}_{idx}",
                 width="stretch",
                 on_click=queue_followup_query,
                 args=(question,),
@@ -500,7 +559,9 @@ def process_round(
                 "bert_prediction": bert_payload,
                 "pipeline_output": {"recommendations": []},
                 "recommendations": [],
-                "suggested_follow_up_questions": [],
+                "assistant_reply": "",
+                "clarifying_question": "",
+                "suggested_answer_options": [],
                 "raw_result": "",
                 "parse_error_message": "",
                 "used_fallback_questions": False,
@@ -534,10 +595,17 @@ def process_round(
     parse_error_message = ""
     used_fallback_questions = False
     try:
-        recommendations, follow_up_questions = parse_deepseek_payload(raw_result)
+        (
+            recommendations,
+            assistant_reply,
+            clarifying_question,
+            answer_options,
+        ) = parse_deepseek_payload(raw_result)
     except (json.JSONDecodeError, ValueError) as exc:
         recommendations = []
-        follow_up_questions = normalize_follow_up_questions([])
+        assistant_reply = ""
+        clarifying_question = FALLBACK_FOLLOW_UP_QUESTIONS[0]
+        answer_options = normalize_answer_options([])
         parse_error_message = str(exc)
         used_fallback_questions = True
 
@@ -548,7 +616,9 @@ def process_round(
         "bert_prediction": bert_payload,
         "pipeline_output": pipeline_output,
         "recommendations": recommendations,
-        "suggested_follow_up_questions": follow_up_questions,
+        "assistant_reply": assistant_reply,
+        "clarifying_question": clarifying_question,
+        "suggested_answer_options": answer_options,
         "raw_result": raw_result,
         "parse_error_message": parse_error_message,
         "used_fallback_questions": used_fallback_questions,
@@ -614,10 +684,17 @@ def process_followup_round(
     parse_error_message = ""
     used_fallback_questions = False
     try:
-        recommendations, follow_up_questions = parse_deepseek_payload(raw_result)
+        (
+            recommendations,
+            assistant_reply,
+            clarifying_question,
+            answer_options,
+        ) = parse_deepseek_payload(raw_result)
     except (json.JSONDecodeError, ValueError) as exc:
         recommendations = []
-        follow_up_questions = normalize_follow_up_questions([])
+        assistant_reply = ""
+        clarifying_question = FALLBACK_FOLLOW_UP_QUESTIONS[0]
+        answer_options = normalize_answer_options([])
         parse_error_message = str(exc)
         used_fallback_questions = True
 
@@ -628,7 +705,9 @@ def process_followup_round(
         "bert_prediction": {},
         "pipeline_output": {"recommendations": []},
         "recommendations": recommendations,
-        "suggested_follow_up_questions": follow_up_questions,
+        "assistant_reply": assistant_reply,
+        "clarifying_question": clarifying_question,
+        "suggested_answer_options": answer_options,
         "raw_result": raw_result,
         "parse_error_message": parse_error_message,
         "used_fallback_questions": used_fallback_questions,
@@ -675,6 +754,8 @@ st.title("💊 Smart Medical Assistant")
 st.markdown(
     "Please describe your symptoms. The system will automatically analyze them, match relevant medications, and provide professional medical guidance."
 )
+if st.session_state.conversation_rounds:
+    st.button("Start New Conversation", on_click=reset_conversation)
 
 active_query = ""
 triggered_by_followup = False
@@ -686,12 +767,23 @@ if pending_query:
 
 with st.form(key="diagnosis_form"):
     st.text_area(
-        "✍️ Please describe your symptoms in detail:",
+        (
+            "✍️ Reply in your own words:"
+            if st.session_state.conversation_rounds
+            else "✍️ Please describe your symptoms in detail:"
+        ),
         height=150,
         key="diagnosis_input",
-        placeholder="Example: I've had a headache and fever for the past few days, with a runny nose...",
+        placeholder=(
+            "Type your own answer to continue the conversation..."
+            if st.session_state.conversation_rounds
+            else "Example: I've had a headache and fever for the past few days, with a runny nose..."
+        ),
     )
-    submit_button = st.form_submit_button("🚀 Start Diagnosis", width="stretch")
+    submit_button = st.form_submit_button(
+        "💬 Continue Conversation" if st.session_state.conversation_rounds else "🚀 Start Diagnosis",
+        width="stretch",
+    )
 
 if submit_button:
     submitted_query = str(st.session_state.diagnosis_input).strip()
@@ -699,7 +791,7 @@ if submit_button:
         st.warning("Please enter your symptom description!")
     else:
         active_query = submitted_query
-        triggered_by_followup = False
+        triggered_by_followup = bool(st.session_state.conversation_rounds)
 
 processed_round_this_run = False
 if active_query:
@@ -759,13 +851,15 @@ if current_round:
 
         if current_round.get("parse_error_message"):
             st.warning(
-                "DeepSeek returned a non-standard JSON format for this round. Generic follow-up questions are shown below."
+                "DeepSeek returned a non-standard JSON format for this round. Generic English conversation prompts are shown below."
             )
             with st.expander("View raw response text"):
                 st.code(current_round.get("raw_result", ""))
 
         render_follow_up_section(
-            current_round.get("suggested_follow_up_questions", []),
+            current_round.get("assistant_reply", ""),
+            current_round.get("clarifying_question", ""),
+            current_round.get("suggested_answer_options", []),
             round_index=len(conversation_rounds),
         )
     render_recent_conversation(previous_rounds)
