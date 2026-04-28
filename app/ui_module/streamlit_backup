@@ -1,0 +1,185 @@
+import os
+import sys
+import json
+import streamlit as st
+
+# Ensure other modules in the project can be imported
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from deployment_module import BERTManager
+from evaluation_module import DrugRecommendationService
+from static_module import DEEPSEEK_MODEL, DEEPSEEK_API_KEY, DEFAULT_PROMPT_FOLDER_PATH
+from openai import OpenAI
+from pathlib import Path
+
+st.set_page_config(page_title="Smart Medical Assistant", page_icon="💊", layout="centered")
+
+@st.cache_resource
+def load_managers():
+    """
+    Use st.cache_resource to cache singleton managers,
+    preventing repeated loading of massive models upon web page refresh or interaction.
+    """
+    bert = BERTManager(debug_mode=False)
+    recommendation = DrugRecommendationService()
+    return bert, recommendation
+
+bert_manager, recommendation_manager = load_managers()
+
+@st.cache_resource
+def load_deepseek_prompt():
+    prompt_file = None
+    for root, dir, files in os.walk(DEFAULT_PROMPT_FOLDER_PATH):
+        for file in files:
+            if file.endswith(".md") and file.startswith("default"):
+                prompt_file = Path(root) / file
+                break
+    if prompt_file and prompt_file.exists():
+        with open(prompt_file, "r", encoding="utf-8") as f:
+            return f.read()
+    return ""
+
+default_prompt = load_deepseek_prompt()
+deepseek_client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com")
+system_prompt = r"You are a medical consultant robot."
+
+st.title("💊 Smart Medical Assistant Diagnosis System")
+st.markdown("Please describe your symptoms. The system will automatically analyze them, match relevant medications, and provide professional medical guidance.")
+
+user_input = st.text_area("✍️ Please describe your symptoms in detail:", height=150, placeholder="Example: I've had a headache and fever for the past few days, with a runny nose...")
+
+if st.button("🚀 Start Diagnosis", use_container_width=True):
+    if not user_input.strip():
+        st.warning("Please enter your symptom description!")
+    else:
+        # Step 1: BERT Classification Inference
+        with st.spinner("🔍 Analyzing symptoms and inferring diseases using BERT..."):
+            bert_prediction = bert_manager.predict(user_input)
+            
+        # --- Display BERT Extraction Results ---
+        st.subheader("🔬 AI Symptom Analysis Results")
+        diseases = bert_prediction.get("diseases", [])
+        symptoms = bert_prediction.get("symptoms", [])
+        
+        import pandas as pd
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**🔍 Predicted Diseases**")
+            if diseases:
+                d_list = [{"Disease Name": d.get("name") or d.get("label", "Unknown"), "Confidence": float(d.get("confidence", 0.0))} for d in diseases if str(d.get("name") or d.get("label", "")).lower() != "others"]
+                if d_list:
+                    df_d = pd.DataFrame(d_list)
+                    st.dataframe(
+                        df_d,
+                        column_config={
+                            "Confidence": st.column_config.ProgressColumn(
+                                "Confidence",
+                                help="AI predicted match probability",
+                                format="%.2f",
+                                min_value=0,
+                                max_value=1,
+                            ),
+                        },
+                        hide_index=True,
+                        use_container_width=True
+                    )
+                else:
+                    st.info("No specific major diseases detected, identified as common discomfort.")
+            else:
+                st.info("No specific disease detected.")
+                
+        with col2:
+            st.markdown("**🤒 Extracted Symptoms**")
+            if symptoms:
+                s_list = [{"Symptom Name": s.get("name") or s.get("label", "Unknown"), "Confidence": float(s.get("confidence", 0.0))} for s in symptoms]
+                if s_list:
+                    df_s = pd.DataFrame(s_list)
+                    st.dataframe(
+                        df_s,
+                        column_config={
+                            "Confidence": st.column_config.ProgressColumn(
+                                "Confidence",
+                                help="AI identified symptom probability",
+                                format="%.2f",
+                                min_value=0,
+                                max_value=1,
+                            ),
+                        },
+                        hide_index=True,
+                        use_container_width=True
+                    )
+                else:
+                    st.info("No specific symptoms detected.")
+            else:
+                st.info("No specific symptoms detected.")
+        st.divider()
+            
+        # Step 2: Recommendation System Retrieve and Rank Candidate Drugs
+        with st.spinner("💊 Retrieving and ranking candidate drugs..."):
+            pipeline_output = recommendation_manager.predict(bert_prediction, flat_out=True)
+            
+        # Step 3: DeepSeek Packaging and Explanation Display
+        with st.spinner("🤖 Requesting DeepSeek for diagnostic analysis..."):
+            # Assemble Prompt
+            if not default_prompt:
+                st.error("Failed to construct a valid prompt template.")
+                st.stop()
+                
+            prompt_content = default_prompt.format(
+                sentences=user_input,
+                pipeline_output=pipeline_output,
+                bert_output=bert_prediction,
+            )
+            
+            # Initiate synchronous request (blocking wait for result)
+            try:
+                response = deepseek_client.chat.completions.create(
+                    model=DEEPSEEK_MODEL,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": prompt_content}
+                    ]
+                )
+                raw_result = response.choices[0].message.content
+                
+                # Start parsing JSON result returned by the LLM
+                try:
+                    # Fault tolerance: if LLM has markdown code block prefix
+                    json_str = raw_result
+                    if json_str.startswith("```json"):
+                        json_str = json_str.strip("```json").strip("```")
+                    elif json_str.startswith("```"):
+                        json_str = json_str.strip("```")
+                        
+                    recommendations = json.loads(json_str)
+                    
+                    st.divider()
+                    st.subheader("📋 Recommended Medication Plan")
+                    
+                    # Iterate and draw beautiful cards
+                    for item in recommendations:
+                        drug_name = item.get("recommended_drug", "Unknown Drug")
+                        preference = item.get("drug_preference", "unknown")
+                        reason = item.get("recommendation_reasoning", "No description available")
+                        
+                        # Assign different color badges according to recommendation level
+                        preference_lower = preference.lower()
+                        if "highly" in preference_lower or "强烈" in preference_lower:
+                            badge = "🟢 Highly Recommended"
+                        elif "optional" in preference_lower or "备选" in preference_lower:
+                            badge = "⚪ Optional"
+                        else:
+                            badge = "🔵 Recommended"
+                            
+                        # Use expander to do folding card display
+                        with st.expander(f"{badge} : {drug_name}", expanded=True):
+                            st.markdown(f"**Recommendation Reasoning:**\n\n{reason}")
+                            
+                except json.JSONDecodeError:
+                    st.error("Failed to parse result. The LLM might have returned a non-standard JSON format.")
+                    with st.expander("View raw response text"):
+                        st.code(raw_result)
+                        
+            except Exception as e:
+                st.error(f"Failed to call DeepSeek API: {e}")

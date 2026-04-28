@@ -22,13 +22,33 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         """
         logger.info("Initializing DrugRecommendationService (Singleton)...")
 
-
         self.repo_root = Path(__file__).resolve().parents[2]
-        self.table_path = self.repo_root / "match_data_preprocessing" / "data" / "enhanced_drug_table_v1_structured.csv"
-        self.half1_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"
-        self.half2_path = self.repo_root / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_2.json"
-        self.phase2_mode = os.getenv("PHASE2_MODE", "xgb_ranker")
-        default_ranker = str(self.repo_root / "artifacts/exp_drug_recall/phase2_e2e_xgb_train/ranker.joblib")
+        self.table_path = (
+            self.repo_root
+            / "match_data_preprocessing"
+            / "data"
+            / "enhanced_drug_table_v1_structured.csv"
+        )
+        self.half1_path = (
+            self.repo_root
+            / "app"
+            / "dataset_module"
+            / "drugs_training_dataset"
+            / "drug_data_half_1.json"
+        )
+        self.half2_path = (
+            self.repo_root
+            / "app"
+            / "dataset_module"
+            / "drugs_training_dataset"
+            / "drug_data_half_2.json"
+        )
+        # self.phase2_mode = os.getenv("PHASE2_MODE", "xgb_ranker")
+        self.phase2_mode = os.getenv("PHASE2_MODE", "label_core_rerank")
+        default_ranker = str(
+            self.repo_root
+            / "artifacts/exp_drug_recall/phase2_e2e_xgb_train/ranker.joblib"
+        )
         ranker_path_env = os.getenv("PHASE2_RANKER_PATH", default_ranker).strip()
         self.ranker_path = Path(ranker_path_env) if ranker_path_env else None
 
@@ -54,6 +74,20 @@ class DrugRecommendationService(metaclass=SingletonMeta):
             ranker_path=self.ranker_path,
         )
         logger.info("DrugRecommendationService initialized successfully.")
+
+    def switch_mode(self, new_mode: str):
+        """Dynamically switch the phase2 ranking mode at runtime."""
+        if new_mode and new_mode != self.phase2_mode:
+            logger.info(f"Switching Phase2FinalRecommender mode from {self.phase2_mode} to {new_mode}")
+            self.phase2_mode = new_mode
+            self.recommender = Phase2FinalRecommender(
+                index=self.index,
+                half_data_paths=[self.half1_path, self.half2_path],
+                table_path=self.table_path,
+                phase2_mode=self.phase2_mode,
+                ranker_path=self.ranker_path,
+            )
+            
 
 
     def _confidence(self, value: Any, default: float = 1.0) -> float:
@@ -101,28 +135,35 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         for d_res in result.get("disease_results", []):
             for top_drug in d_res.get("final_top3", []):
                 flat_item = {
-                    #"query_index": result.get("query_index", 0),
                     "disease": d_res.get("disease", ""),
-                    #"disease_confidence": d_res.get("disease_confidence", 1.0),
                     "drug_name": top_drug.get("drug_name", ""),
-                    #"disease_rank": top_drug.get("disease_rank", global_rank),
-                    #"global_display_rank": global_rank,
-                    #"phase2_rank": top_drug.get("phase2_rank"),
-                    #"selection_source": top_drug.get("selection_source", ""),
-                    "final_confidence": top_drug.get("half_disease_confidence", 0.0)
+                    "final_confidence": top_drug.get("half_disease_confidence", 0.0),
+                    "phase2_score": top_drug.get("phase2_score", 0.0),
+                    "matched_symptoms": top_drug.get("matched_symptoms", []),
                 }
-                # if "phase2_score" in top_drug:
-                #     flat_item["phase2_score"] = top_drug["phase2_score"]
                 flat_results.append(flat_item)
                 global_rank += 1
         return flat_results
 
-
-
-    def predict(self, bert_output: dict,flat_out=False) -> dict:
+    def predict(self, bert_output: dict, flat_out=False) -> dict:
         """外部调用主入口"""
         query = self._normalize_bert_output(bert_output)
-
+        
+        # 提取除 'others' 之外的特定疾病
+        specific_diseases = [d for d in query["diseases"] if str(d.get("label", "")).strip().lower() != "others"]
+        
+        if len(specific_diseases) == 0:
+            # 场景A：如果没有具体疾病（全是 others 或者为空），直接跳过召回打分，返回空推荐列表
+            if flat_out:
+                return {"recommendations": []}
+            return {
+                "input": query,
+                "disease_results": [],
+                "recommendations": [],
+            }
+        
+        # 场景B：如果有具体疾病，剔除 'others' 防止干扰召回
+        query["diseases"] = specific_diseases
 
         result = self.recommender.recommend_query(
             query=query,
@@ -136,4 +177,4 @@ class DrugRecommendationService(metaclass=SingletonMeta):
                 "recommendations": self._build_flat_recommendations(result),
             }
         else:
-            return {"recommendations":self._build_flat_recommendations(result)}
+            return {"recommendations": self._build_flat_recommendations(result)}
