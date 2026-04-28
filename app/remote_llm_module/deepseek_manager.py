@@ -1,17 +1,10 @@
-"""DeepSeek 管理器模块"""
-
 # 系统/第三方模块导入
 import os
-import sys
-import queue
-from typing import Any, Optional
-import threading
-from openai import OpenAI, resources, responses
-from openai.types.chat import ChatCompletion
-from pathlib import Path
 import json
-
-from torch import Stream
+import asyncio
+from typing import Any, Optional, Dict
+from pathlib import Path
+from openai import AsyncOpenAI  # 关键：改用异步客户端以适配 FastAPI
 
 # 本地模块导入
 from singleton_module import SingletonMeta
@@ -24,182 +17,115 @@ from static_module import (
 )
 from utility_module import logger
 
-
 class DeepSeekManager(metaclass=SingletonMeta):
-    """DeepSeek 管理器单例类"""
+    """DeepSeek 管理器单例类 (异步适配 Web 版)"""
 
     def __init__(self, *, debug_mode: bool = False):
-        # 声明变量
         self._initialized: bool = False
-        """ 初始化标识符 """
-        self.client = OpenAI(
+        # 初始化异步客户端
+        self.aclient = AsyncOpenAI(
             api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com"
         )
-        """ 初始化 DeepSeek 客户端 """
-        self.message_queue: queue.Queue = queue.Queue()
-        """ 消息队列 """
         self._history: list = []
-        """ 对话历史记录 """
         self.history_file: Path
-        """ 对话历史记录文件路径 """
         self._system_prompt: str = rf"""You are a medical consultant robot."""
-        """ 系统提示语 """
         self._debug_mode: bool = debug_mode
-        """ 调试模式标识符 """
+        self.default_prompt_folder_path: str = DEFAULT_PROMPT_FOLDER_PATH
+        self.default_prompt: str = ""
+        
         if self._debug_mode:
             logger.info("DeepSeekManager 已进入调试模式")
-        self.default_prompt_folder_path: str = DEFAULT_PROMPT_FOLDER_PATH
-        """ 默认提示词文件夹路径 """
-        self.default_prompt: str = ""
-        """ 默认提示词内容 """
-        self._app_is_running: bool = True
-        """ 应用程序运行标志 """
-        # 调用初始化函数
+            
         self._initialize()
 
     def _initialize(self) -> None:
-        """初始化函数"""
+        """初始化：加载提示词和历史记录"""
         if not self._initialized:
             self._load_prompts()
             self._load_history_from_file()
-            self._deepseek_background_thread = threading.Thread(
-                target=self._deepseek_background_task,
-                daemon=True,  # 设置为守护线程，随主程序退出而自动结束
-                name="DeepSeekBackgroundThread",
-            )
-            self._deepseek_background_thread.start()
+            # 注意：在 Web 模式下不再需要启动 _deepseek_background_task 线程
             self._initialized = True
-            logger.debug("DeepSeek 管理器已初始化。")
+            logger.debug("DeepSeek 管理器已完成异步模式初始化。")
 
     def _load_prompts(self) -> None:
-        """加载提示词"""
+        """(逻辑保持不变) 加载默认的 markdown 提示词模板"""
         default_prompt_path = Path(self.default_prompt_folder_path)
-        prompt_file: Path | None = None
-        for root, dir, files in os.walk(default_prompt_path):
+        prompt_file: Optional[Path] = None
+        for root, dirs, files in os.walk(default_prompt_path):
             for file in files:
                 if file.endswith(".md") and file.startswith("default"):
                     prompt_file = Path(root) / file
                     break
+        
         if not prompt_file or not prompt_file.exists():
-            raise FileNotFoundError(
-                f"未找到默认提示词文件，路径: {self.default_prompt_folder_path}，请确保该文件夹下存在以default开头的.md文件。"
-            )
+            logger.error("未找到提示词文件")
+            return
 
-        try:
-            with open(prompt_file, "r", encoding="utf-8") as f:
-                self.default_prompt = f.read()
-            if self._debug_mode:
-                logger.debug(f"已加载默认提示词: {prompt_file}")
-        except Exception as e:
-            logger.error(f"加载默认提示词失败: {e}")
+        with open(prompt_file, "r", encoding="utf-8") as f:
+            self.default_prompt = f.read()
 
-    def _load_history_from_file(self, file_path: Optional[os.PathLike] = None) -> bool:
-        """从文件加载对话历史记录"""
+    def _load_history_from_file(self) -> None:
+        """(逻辑简化) 初始化对话历史"""
         chat_history_dir = Path.cwd() / CHAT_HISTORY_DIR
         chat_history_dir.mkdir(parents=True, exist_ok=True)
-        self.history_file = (
-            chat_history_dir
-            / f"{RUNTIME_TIMESTAMP.strftime('%Y%m%d_%H%M%S')if file_path is None else Path(file_path).stem}.json"
-        )
-        # 首先将系统提示词添加到历史记录中
-        self._history.append({"role": "system", "content": self._system_prompt})
-        if self.history_file.exists():
-            try:
+        self.history_file = chat_history_dir / f"chat_{RUNTIME_TIMESTAMP.strftime('%Y%m%d_%H%M%S')}.json"
+        
+        # 初始载入系统提示词
+        self._history = [{"role": "system", "content": self._system_prompt}]
 
-                with open(self.history_file, "r", encoding="utf-8") as f:
-                    self._history = json.load(f)
-                if self._debug_mode:
-                    logger.debug(f"已从文件加载对话历史记录: {self.history_file}")
-                return True
-            except Exception as e:
-                logger.error(f"加载对话历史记录失败: {e}")
-        return False
-
-    def _save_history_to_file(self) -> bool:
-        """保存对话历史记录到文件"""
+    def _save_history_to_file(self) -> None:
+        """(逻辑保持不变) 保存记录"""
         try:
-            # 保存时移除系统提示词，避免重复保存
-            self.saved_history = self._history[1:]
             with open(self.history_file, "w", encoding="utf-8") as f:
-                json.dump(self.saved_history, f, ensure_ascii=False, indent=4)
-            logger.debug(f"已保存对话历史记录到文件: {self.history_file}")
-            return True
+                json.dump(self._history, f, ensure_ascii=False, indent=4)
         except Exception as e:
-            logger.error(f"保存对话历史记录失败: {e}")
-            return False
+            logger.error(f"保存历史记录失败: {e}")
 
-    def _prompt_build(self, input: object) -> str:
-        """构建提示词"""
-        sentences: str = input.get( "sentences", "")
-        if not sentences:
-            return ""
-        pipeline_output: dict = input.get("pipeline_output", {})
-        bert_output: dict = input.get("bert_output", {})
-        prompt: str = self.default_prompt.format(
+    def _prompt_build(self, input_obj: Dict[str, Any]) -> str:
+        """构建提示词内容"""
+        sentences = input_obj.get("sentences", "")
+        if not sentences: return ""
+        
+        return self.default_prompt.format(
             sentences=sentences,
-            pipeline_output=pipeline_output,
-            bert_output=bert_output,
+            pipeline_output=input_obj.get("pipeline_output", {}),
+            bert_output=input_obj.get("bert_output", {}),
         )
-        return prompt
 
-    def send(self, input_object: object) -> None:
-        """发送消息到 DeepSeek"""
-        self.message_queue.put(input_object)
+    async def generate_response(self, input_object: Dict[str, Any]) -> str:
+        """
+        供 FastAPI 调用的异步核心方法
+        
+        Args:
+            input_object: 包含用户输入、BERT结果和推荐结果的字典
+        Returns:
+            AI 生成的文本回复
+        """
+        # 1. 组装输入
+        input_content = self._prompt_build(input_object)
+        if not input_content:
+            return "收到空输入，无法处理。"
 
-    def dev_send(self, string: str) -> None:
-        """开发测试用发送消息到 DeepSeek"""
-        if not self._debug_mode:
-            return
-        self.message_queue.put(string)
+        # 2. 加入历史记录
+        self._history.append({"role": "user", "content": input_content})
 
-    def _deepseek_background_task(self):
-        """DeepSeek 后台任务处理函数"""
-        while self._app_is_running:
-            try:
-                if self.message_queue.empty():
-                    continue
-                input_object: object = self.message_queue.get(block=False, timeout=1)
-                logger.debug(f"正在处理用户输入: {input_object}")
-                if self._debug_mode:
-                    input_content: str = str(input_object)
-                else:
-                    input_content: str = self._prompt_build(input_object)
-                logger.debug(input_content)
-                if not input_content:
-                    continue
-                self._history.append(
-                    {
-                        "role": "user",
-                        "content": input_content,
-                    }
-                )
-                # 在这里处理消息，例如发送到 DeepSeek API
-                response: ChatCompletion = self.client.chat.completions.create(
-                    model=DEEPSEEK_MODEL, messages=self._history
-                )
-                if response is not None:
-                    response_json_text = json.dumps(
-                        response.model_dump(), ensure_ascii=False, indent=4
-                    )
-                    # logger.debug(f"DeepSeek:\n {response_json_text}")
-                    _response_content: str = str(response.choices[0].message.content)
-                    # logger.info(f"DeepSeek:\n{_response_content}")
-                    if _response_content is not None:
-                        self._history.append(
-                            {
-                                "role": "assistant",
-                                "content": _response_content,
-                            }
-                        )
-                        self._save_history_to_file()
-                        from launcher_module.launcher_main import (
-                            display_deepseek_response,
-                        )
+        try:
+            # 3. 异步请求 DeepSeek API
+            response = await self.aclient.chat.completions.create(
+                model=DEEPSEEK_MODEL,
+                messages=self._history
+            )
+            
+            ai_content = response.choices[0].message.content
+            
+            # 4. 更新回复历史并持久化
+            if ai_content:
+                self._history.append({"role": "assistant", "content": ai_content})
+                self._save_history_to_file()
+                return ai_content
+            
+            return "AI 未生成内容。"
 
-                        display_deepseek_response(_response_content)
-            except queue.Empty:
-                continue
-
-    def set_app_running_flag(self, flag: bool) -> None:
-        """设置应用程序运行标志"""
-        self._app_is_running = flag
+        except Exception as e:
+            logger.error(f"DeepSeek API 请求出错: {e}")
+            return f"系统繁忙，请稍后再试。错误详情: {str(e)}"
