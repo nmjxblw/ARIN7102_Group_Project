@@ -10,7 +10,10 @@ from typing import Sequence
 
 APP_DIR = Path(__file__).resolve().parent
 STREAMLIT_APP = APP_DIR / "ui_module" / "streamlit_app.py"
-CLI_ALIASES = {"cli", "launcher"}
+
+# 支持的启动模式（用户要求的 cli / ui）
+CLI_ALIASES = {"cli"}
+UI_ALIASES = {"ui"}
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -21,8 +24,8 @@ def build_parser() -> argparse.ArgumentParser:
         "mode",
         nargs="?",
         default="cli",
-        choices=sorted(CLI_ALIASES | {"streamlit"}),
-        help="Launch mode: cli/launcher for terminal mode, streamlit for web UI.",
+        choices=sorted(CLI_ALIASES | UI_ALIASES),
+        help="Launch mode: cli 为命令行模式，ui 为 Web UI 模式。",
     )
     return parser
 
@@ -39,7 +42,7 @@ def launch_cli() -> None:
     prepare_runtime_context()
     from launcher_module import app_run
 
-    print(f"{__package__}.{__name__} 被作为主程序运行，启动 launcher 模式...")
+    print(f"{__package__}.{__name__} 被作为主程序运行，启动 CLI 模式...")
     app_run()
 
 
@@ -66,6 +69,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         launch_cli()
         return
 
+    # ui 模式（原 streamlit 模式）
     launch_streamlit(extra_args)
 
 
