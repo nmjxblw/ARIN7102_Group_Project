@@ -1,0 +1,591 @@
+[
+  {
+    "query_id": "eval_0002",
+    "symptom_text": "The blackheads and rash on my skin make me self-conscious. How can I clear this up quickly?",
+    "diseases": [
+      {
+        "name": "acne",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "blackheads",
+        "confidence": 1.0
+      },
+      {
+        "name": "skin_rash",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "isotretinoin",
+      "accutane",
+      "adapalene / benzoyl peroxide"
+    ],
+    "relevance_scores": {
+      "isotretinoin": 2,
+      "accutane": 2,
+      "adapalene / benzoyl peroxide": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 0,
+      "rationale": "N/A - Candidate drugs are alternative monotherapies per disease class, not co-administered.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0004",
+    "symptom_text": "I have a runny nose, sneezing, and a slight cough. Could it be allergies or just a cold?",
+    "diseases": [
+      {
+        "name": "allergy",
+        "confidence": 0.95
+      },
+      {
+        "name": "common_cold",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "continuous_sneezing",
+        "confidence": 0.89
+      },
+      {
+        "name": "cough",
+        "confidence": 1.0
+      },
+      {
+        "name": "runny_nose",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "promethazine",
+      "cyproheptadine"
+    ],
+    "relevance_scores": {
+      "promethazine": 3,
+      "cyproheptadine": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "The most concerning interaction is prednisone + doxycycline (decreased doxycycline metabolism), which would occur if both were selected for a hypothetical combination regimen.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0006",
+    "symptom_text": "My aunt is having continuous sneezing along with severe vomiting and diarrhea, she looks pale.",
+    "diseases": [
+      {
+        "name": "allergy",
+        "confidence": 0.99
+      },
+      {
+        "name": "gastroenteritis",
+        "confidence": 0.93
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "continuous_sneezing",
+        "confidence": 1.0
+      },
+      {
+        "name": "diarrhoea",
+        "confidence": 1.0
+      },
+      {
+        "name": "vomiting",
+        "confidence": 0.32
+      }
+    ],
+    "relevant_drugs": [
+      "prednisone",
+      "promethazine",
+      "hydroxyzine"
+    ],
+    "relevance_scores": {
+      "prednisone": 2,
+      "promethazine": 3,
+      "hydroxyzine": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "Moderate risk: promethazine + hydroxyzine both increase CNS depression; if selecting both for allergy, sedation risk is significant.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0008",
+    "symptom_text": "I've been getting these awful headaches, and on top of that, it hurts when I pee. What a week!",
+    "diseases": [
+      {
+        "name": "migraine",
+        "confidence": 0.99
+      },
+      {
+        "name": "urinary_tract_infection",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "burning_micturition",
+        "confidence": 1.0
+      },
+      {
+        "name": "headache",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "amitriptyline",
+      "venlafaxine",
+      "elavil",
+      "doxycycline",
+      "azithromycin"
+    ],
+    "relevance_scores": {
+      "amitriptyline": 3,
+      "venlafaxine": 2,
+      "elavil": 3,
+      "doxycycline": 3,
+      "azithromycin": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "Moderate interaction: amitriptyline/venlafaxine + azithromycin increase QTc-prolongation risk; avoid combination or monitor ECG.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0009",
+    "symptom_text": "I've lost weight suddenly, my vision is distorted, and I have severe headaches. I'm really scared.",
+    "diseases": [
+      {
+        "name": "diabetes",
+        "confidence": 0.33
+      },
+      {
+        "name": "migraine",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "blurred_and_distorted_vision",
+        "confidence": 0.95
+      },
+      {
+        "name": "headache",
+        "confidence": 1.0
+      },
+      {
+        "name": "weight_loss",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "gabapentin",
+      "pregabalin",
+      "topiramate"
+    ],
+    "relevance_scores": {
+      "gabapentin": 2,
+      "pregabalin": 2,
+      "topiramate": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "Topiramate + amitriptyline increases CNS depressant activity, requiring monitoring.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0010",
+    "symptom_text": "My neck hurts when I turn my head, and my fingers are stiff in the morning. Could it be arthritis?",
+    "diseases": [
+      {
+        "name": "osteoarthristis",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "joint_pain",
+        "confidence": 0.82
+      },
+      {
+        "name": "neck_pain",
+        "confidence": 0.27
+      }
+    ],
+    "relevant_drugs": [
+      "naproxen"
+    ],
+    "relevance_scores": {
+      "naproxen": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 0,
+      "rationale": "No significant interactions among these drugs; they can be considered independently if selected.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0011",
+    "symptom_text": "I can't breathe properly, my heart is pounding, and I have a high fever. I'm really worried.",
+    "diseases": [
+      {
+        "name": "bronchial_asthma",
+        "confidence": 0.19
+      },
+      {
+        "name": "pneumonia",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "breathlessness",
+        "confidence": 1.0
+      },
+      {
+        "name": "fast_heart_rate",
+        "confidence": 1.0
+      },
+      {
+        "name": "high_fever",
+        "confidence": 0.72
+      }
+    ],
+    "relevant_drugs": [
+      "doxycycline",
+      "azithromycin",
+      "clindamycin"
+    ],
+    "relevance_scores": {
+      "doxycycline": 2,
+      "azithromycin": 3,
+      "clindamycin": 2
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "Moderate interaction: doxycycline + prednisone coadministration decreases doxycycline metabolism, requiring monitoring.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0012",
+    "symptom_text": "I have these rough, itchy patches on my skin that are sometimes red and sometimes have silvery bits. They don't seem to go away.",
+    "diseases": [
+      {
+        "name": "acne",
+        "confidence": 0.23
+      },
+      {
+        "name": "fungal_infection",
+        "confidence": 0.78
+      },
+      {
+        "name": "psoriasis",
+        "confidence": 0.97
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "itching",
+        "confidence": 0.91
+      },
+      {
+        "name": "silver_like_dusting",
+        "confidence": 0.95
+      },
+      {
+        "name": "skin_rash",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "methotrexate",
+      "enbrel",
+      "stelara"
+    ],
+    "relevance_scores": {
+      "methotrexate": 3,
+      "enbrel": 3,
+      "stelara": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 1,
+      "rationale": "Minor interaction: doxycycline + prednisone (or dexamethasone) can decrease doxycycline metabolism, but these drugs are not indicated for psoriasis so this is avoided in reasonable subsets.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0013",
+    "symptom_text": "My skin is so itchy, and I see some dark spots appearing. Also, I've been feeling like I need to urinate frequently.",
+    "diseases": [
+      {
+        "name": "fungal_infection",
+        "confidence": 1.0
+      },
+      {
+        "name": "urinary_tract_infection",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "continuous_feel_of_urine",
+        "confidence": 1.0
+      },
+      {
+        "name": "itching",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "azithromycin",
+      "sulfamethoxazole / trimethoprim",
+      "bactrim",
+      "fluconazole"
+    ],
+    "relevance_scores": {
+      "azithromycin": 2,
+      "sulfamethoxazole / trimethoprim": 3,
+      "bactrim": 3,
+      "fluconazole": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "The combination of azithromycin and fluconazole poses a moderate risk of QTc prolongation.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0014",
+    "symptom_text": "Sometimes after eating, I feel a tightness in my chest and find it hard to breathe. Is this normal?",
+    "diseases": [
+      {
+        "name": "gerd",
+        "confidence": 0.7
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "breathlessness",
+        "confidence": 0.63
+      },
+      {
+        "name": "chest_pain",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "aciphex",
+      "dexlansoprazole",
+      "rabeprazole"
+    ],
+    "relevance_scores": {
+      "aciphex": 3,
+      "dexlansoprazole": 3,
+      "rabeprazole": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 0,
+      "rationale": "All three are proton‑pump inhibitors with no documented interactions; monotherapy is standard.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0015",
+    "symptom_text": "Shortness of breath with mucus, tips for better breathing?",
+    "diseases": [
+      {
+        "name": "bronchial_asthma",
+        "confidence": 0.99
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "breathlessness",
+        "confidence": 1.0
+      },
+      {
+        "name": "mucoid_sputum",
+        "confidence": 0.84
+      }
+    ],
+    "relevant_drugs": [
+      "prednisone"
+    ],
+    "relevance_scores": {
+      "prednisone": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "Moderate interaction: doxycycline + azithromycin decreases doxycycline metabolism.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0017",
+    "symptom_text": "The pain in my stomach is sharp and constant, and I threw up blood today. I don't know what to do.",
+    "diseases": [
+      {
+        "name": "peptic_ulcer_diseae",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "abdominal_pain",
+        "confidence": 1.0
+      },
+      {
+        "name": "stomach_pain",
+        "confidence": 1.0
+      },
+      {
+        "name": "vomiting",
+        "confidence": 0.86
+      }
+    ],
+    "relevant_drugs": [
+      "rabeprazole",
+      "esomeprazole",
+      "lansoprazole"
+    ],
+    "relevance_scores": {
+      "rabeprazole": 3,
+      "esomeprazole": 3,
+      "lansoprazole": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 0,
+      "rationale": "N/A — a reasonable prescribing approach would select only one PPI, avoiding all listed metabolic interactions.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0018",
+    "symptom_text": "My chest is tight, I'm wheezing, and coughing up thick phlegm. Breathing is a struggle.",
+    "diseases": [
+      {
+        "name": "bronchial_asthma",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "breathlessness",
+        "confidence": 1.0
+      },
+      {
+        "name": "chest_pain",
+        "confidence": 0.16
+      },
+      {
+        "name": "cough",
+        "confidence": 0.95
+      },
+      {
+        "name": "mucoid_sputum",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "prednisone"
+    ],
+    "relevance_scores": {
+      "prednisone": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "Co‑administration of doxycycline with prednisone (or azithromycin) decreases doxycycline metabolism, representing a moderate interaction that warrants monitoring.",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0019",
+    "symptom_text": "Walking downstairs is becoming painful, and my ankles feel swollen at times.",
+    "diseases": [
+      {
+        "name": "arthritis",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "painful_walking",
+        "confidence": 1.0
+      },
+      {
+        "name": "swelling_joints",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "diclofenac",
+      "tramadol",
+      "acetaminophen / hydrocodone"
+    ],
+    "relevance_scores": {
+      "diclofenac": 3,
+      "tramadol": 2,
+      "acetaminophen / hydrocodone": 2
+    },
+    "ddi_flags": {
+      "overall_severity": 0,
+      "rationale": "N/A",
+      "checked_subset_semantics": "pool"
+    }
+  },
+  {
+    "query_id": "eval_0020",
+    "symptom_text": "I get pain in my upper belly, especially after eating, along with acid reflux and indigestion.",
+    "diseases": [
+      {
+        "name": "gerd",
+        "confidence": 1.0
+      },
+      {
+        "name": "peptic_ulcer_diseae",
+        "confidence": 1.0
+      }
+    ],
+    "symptoms": [
+      {
+        "name": "abdominal_pain",
+        "confidence": 0.59
+      },
+      {
+        "name": "acidity",
+        "confidence": 0.48
+      },
+      {
+        "name": "indigestion",
+        "confidence": 1.0
+      }
+    ],
+    "relevant_drugs": [
+      "rabeprazole",
+      "esomeprazole",
+      "lansoprazole"
+    ],
+    "relevance_scores": {
+      "rabeprazole": 3,
+      "esomeprazole": 3,
+      "lansoprazole": 3
+    },
+    "ddi_flags": {
+      "overall_severity": 2,
+      "rationale": "Moderate risk exists if a PPI is combined with diclofenac, as diclofenac metabolism can be decreased by PPIs, requiring monitoring.",
+      "checked_subset_semantics": "pool"
+    }
+  }
+]

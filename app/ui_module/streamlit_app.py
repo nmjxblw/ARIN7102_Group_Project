@@ -84,7 +84,7 @@ def load_streamlit_followup_prompt() -> str:
 def load_system_metrics():
     """Load comparison metrics from the artifacts folder to display in the sidebar"""
     metrics_path = (
-        Path(__file__).parent.parent.parent
+        Path.cwd()
         / "artifacts"
         / "exp_drug_recall"
         / "comparison_summary.json"
@@ -420,7 +420,7 @@ def render_recommendation_cards(
             if phase2_score is not None:
                 cols = st.columns([1, 3])
                 with cols[0]:
-                    st.metric(label="AI Match Score", value=f"{phase2_score:.2f}")
+                    st.metric(label="Weight", value=f"{phase2_score:.2f}")
                 with cols[1]:
                     if matched_symptoms:
                         st.markdown("**Targeted Symptoms:**")
@@ -741,10 +741,10 @@ with st.sidebar:
     st.info("**Status**: Online 🟢")
 
     metrics = load_system_metrics()
-    st.markdown("### 📊 Offline Evaluation Metrics")
-    st.metric(label="Hit@20 (Accuracy)", value=f"{metrics['hit']*100:.2f}%")
-    st.metric(label="Recall@20", value=f"{metrics['recall']*100:.2f}%")
-    st.metric(label="MRR (Mean Reciprocal Rank)", value=f"{metrics['mrr']:.4f}")
+    # st.markdown("### 📊 Offline Evaluation Metrics")
+    # st.metric(label="Hit@20 (Accuracy)", value=f"{metrics['hit']*100:.2f}%")
+    # st.metric(label="Recall@20", value=f"{metrics['recall']*100:.2f}%")
+    # st.metric(label="MRR (Mean Reciprocal Rank)", value=f"{metrics['mrr']:.4f}")
 
     st.markdown("---")
     st.caption("Powered by BERT Multi-task Classifier & XGBoost/Deterministic Ranker Pipeline.")

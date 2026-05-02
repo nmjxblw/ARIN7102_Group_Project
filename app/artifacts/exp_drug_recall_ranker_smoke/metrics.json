@@ -1,0 +1,36 @@
+{
+  "eval_dataset": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/data/eval_dataset_verified.json",
+  "num_queries": 5,
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "modes": [
+    "local_ranker"
+  ],
+  "metrics": {
+    "local_ranker": {
+      "precision@5": 0.24,
+      "recall@5": 0.4333333333333333,
+      "hit@5": 0.6,
+      "ndcg@5": 0.33464360738416854,
+      "precision@10": 0.18,
+      "recall@10": 0.8,
+      "hit@10": 0.8,
+      "ndcg@10": 0.4785101104343731,
+      "precision@20": 0.09,
+      "recall@20": 0.8,
+      "hit@20": 0.8,
+      "ndcg@20": 0.4785101104343731,
+      "mrr": 0.36666666666666664,
+      "stage_hit_disease": 1.0,
+      "stage_hit_strict": 1.0,
+      "stage_hit_symptom": 1.0,
+      "stage_hit_bm25": 1.0,
+      "stage_hit_dense": 0.0,
+      "stage_hit_prior": 0.8,
+      "stage_hit_union": 1.0
+    }
+  }
+}

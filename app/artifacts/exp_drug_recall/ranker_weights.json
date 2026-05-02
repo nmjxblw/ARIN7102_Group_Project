@@ -1,0 +1,29 @@
+{
+  "model_type": "gbdt",
+  "feature_columns": [
+    "label_idf_score",
+    "disease_idf_score",
+    "symptom_idf_score",
+    "symptom_coverage",
+    "disease_specificity",
+    "quality_prior",
+    "disease_conf_overlap",
+    "symptom_conf_overlap",
+    "stage_disease",
+    "stage_strict",
+    "stage_symptom",
+    "others_penalty"
+  ],
+  "metadata": {
+    "train_source": "verified_742",
+    "train_dataset": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/data/eval_dataset_verified_1000_deepseek_v4_flash.json",
+    "train_split": "train",
+    "split_seed": 42,
+    "candidate_mode": "label_core_rerank",
+    "num_queries_total": 519,
+    "num_queries_used": 519,
+    "num_queries_skipped": 0,
+    "num_candidate_rows": 390210
+  },
+  "note": "Model does not expose linear coefficients for direct weight export."
+}

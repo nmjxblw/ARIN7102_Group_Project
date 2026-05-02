@@ -1,0 +1,171 @@
+path,tracked,git_status,primary_author_name,primary_author_email,primary_author_commit_count,your_commit_count,other_commit_count,has_uncommitted_changes,historical_primary_owner,owner_bucket
+.claude/settings.local.json,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+.env.example,yes,,YangZhenyu23,905929921@qq.com,1,0,2,no,others,others
+.gitignore,yes,M ,nmjxblw,915253492@qq.com,5,1,14,yes,others,yours_currently_modified
+.vscode/launch.json,yes,,nmjxblw,915253492@qq.com,3,0,3,no,others,others
+.vscode/settings.json,yes,,z c,915253492@qq.com,1,0,2,no,others,others
+README.md,yes,,nmjxblw,915253492@qq.com,5,0,7,no,others,others
+References/ARIN 7102 Project Instruction and Guideline - 2026 Spring.docx,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/.env.example,yes,,nmjxblw,915253492@qq.com,4,0,7,no,others,others
+app/__init__.py,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/__main__.py,yes,,nmjxblw,915253492@qq.com,7,0,9,no,others,others
+app/database_module/__init__.py,yes,,z c,915253492@qq.com,2,0,3,no,others,others
+app/database_module/database_main.py,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/__init__.py,yes,,nmjxblw,915253492@qq.com,5,0,7,no,others,others
+app/dataset_module/bert_training_dataset/disease_labels.json,yes,,z c,915253492@qq.com,3,0,6,no,others,others
+app/dataset_module/bert_training_dataset/extracted_unlabeled_diseases.json,yes,,z c,915253492@qq.com,4,0,4,no,others,others
+app/dataset_module/bert_training_dataset/generated_medical_dataset.json,yes,,z c,915253492@qq.com,3,0,5,no,others,others
+app/dataset_module/bert_training_dataset/symptom_labels.json,yes,,nmjxblw,915253492@qq.com,1,0,2,no,others,others
+app/dataset_module/csv_to_json.py,yes,,nmjxblw,915253492@qq.com,1,0,2,no,others,others
+app/dataset_module/data_process.py,yes,,nmjxblw,915253492@qq.com,6,0,7,no,others,others
+app/dataset_module/disease-symptom-description-dataset/Symptom-severity.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/disease-symptom-description-dataset/Symptom-severity_cleaned.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/disease-symptom-description-dataset/dataset.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/disease-symptom-description-dataset/dataset_cleaned.csv,yes,,z c,915253492@qq.com,2,0,5,no,others,others
+app/dataset_module/disease-symptom-description-dataset/disease_symptoms_dict.json,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/disease-symptom-description-dataset/symptom_Description.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/disease-symptom-description-dataset/symptom_Description_cleaned.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/disease-symptom-description-dataset/symptom_precaution.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/disease-symptom-description-dataset/symptom_precaution_cleaned.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/disease-symptoms-and-patient-profile-dataset/Disease_symptom_and_patient_profile_dataset.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/disease-symptoms-and-patient-profile-dataset/Disease_symptom_and_patient_profile_dataset_cleaned.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/disease_data_process.py,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/drug-prescription-to-disease-dataset/final.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/drug-prescription-to-disease-dataset/final_cleaned.csv,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/drug_data_process.py,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/drugs-related-to-common-treatments/drugs_for_common_treatments.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/drugs-related-to-common-treatments/drugs_for_common_treatments_cleaned.csv,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/drugs-side-effects-and-medical-condition/drugs_side_effects_drugs_com.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/drugs-side-effects-and-medical-condition/drugs_side_effects_drugs_com_cleaned.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/drugs_training_dataset/.gitignore,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/drugs_training_dataset/drug_disease_mapping.json,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/drugs_training_dataset/enhanced_drug_table_v1.json,yes,,z c,915253492@qq.com,2,0,5,no,others,others
+app/dataset_module/drugs_training_dataset/enhanced_drug_table_v1_structured.csv,yes,,nmjxblw,915253492@qq.com,3,0,4,no,others,others
+app/dataset_module/drugs_training_dataset/eval_dataset_llm.json,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/drugs_training_dataset/eval_dataset_llm_v2.json,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/drugs_training_dataset/temp_tool.py,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/extract_unlabeled_diseases.py,yes,,z c,915253492@qq.com,4,0,4,no,others,others
+app/dataset_module/first-aid-QA/firstaidqa_v1.json,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/first-aid-QA/labeled_firstaidqa.json,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/generate_eval_datasets_via_bert.py,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/generated-miss-data/generated_medical_dataset_missing_keys.json,yes,,PeaHaWf,1161428420@qq.com,1,0,1,no,others,others
+app/dataset_module/json_to_dataframe.py,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/kaggle_dataset_download_urls.json,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/kaggle_download.py,yes,,nmjxblw,915253492@qq.com,5,0,7,no,others,others
+app/dataset_module/kuc-hackathon-winter-2018/drugsComTest_raw.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/kuc-hackathon-winter-2018/drugsComTest_raw_cleaned.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/kuc-hackathon-winter-2018/drugsComTrain_raw.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/kuc-hackathon-winter-2018/drugsComTrain_raw_cleaned.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/dataset_module/labels_extractor.py,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/raw_data_merge.py,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/dataset_module/symptom2disease/Symptom2Disease.csv,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/dataset_module/symptom2disease/Symptom2Disease_cleaned.csv,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/deployment_module/__init__.py,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/deployment_module/bert_main.py,yes,,PeaHaWf,1161428420@qq.com,5,0,14,no,others,others
+app/deployment_module/clinicalbert_local/ClinicalBERT,yes,,PeaHaWf,1161428420@qq.com,1,0,1,no,others,others
+app/deployment_module/clinicalbert_local/README.md,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/deployment_module/clinicalbert_local/config.json,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/deployment_module/clinicalbert_local/medicalaiClinicalBERT_git_clone.png,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/deployment_module/clinicalbert_local/special_tokens_map.json,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/deployment_module/clinicalbert_local/tokenizer_config.json,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/deployment_module/clinicalbert_local/vocab.txt,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/deployment_module/trained_bert/config.json,yes,,PeaHaWf,1161428420@qq.com,1,0,2,no,others,others
+app/deployment_module/trained_bert/label_encoders.pkl,yes,,z c,915253492@qq.com,4,0,8,no,others,others
+app/deployment_module/trained_bert/tokenizer.json,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/deployment_module/trained_bert/tokenizer_config.json,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/embedded_module/__init__.py,yes,M ,yinan,zhangyinan197@microconnect.com,1,1,3,yes,others,yours_currently_modified
+app/embedded_module/cross_encoder_reranker.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/embedded_module/drug_embedding_engine.py,yes,,yaoja123,yaoja123@gmail.com,3,3,1,no,yours,yours
+app/embedded_module/drug_knn_retriever.py,yes,,yaoja123,yaoja123@gmail.com,1,1,0,no,yours,yours
+app/embedded_module/dual_recall_pipeline.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/embedded_module/evaluation.py,yes,A ,,,0,0,0,yes,new_tracked_local,yours_currently_modified
+app/embedded_module/recommendation_pipeline.py,yes,,yaoja123,yaoja123@gmail.com,1,1,0,no,yours,yours
+app/evaluation/__init__.py,yes,M ,nmjxblw,915253492@qq.com,1,0,2,yes,others,yours_currently_modified
+app/evaluation/generate_eval_dataset.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/evaluation/generate_eval_dataset_llm.py,yes,M ,nmjxblw,915253492@qq.com,1,0,2,yes,others,yours_currently_modified
+app/evaluation/llm_client.py,yes,M ,nmjxblw,915253492@qq.com,1,0,2,yes,others,yours_currently_modified
+app/evaluation/metrics.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/evaluation/run_evaluation.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/fastapi_module/__init__.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/fastapi_module/app_main.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/fastapi_module/offline_assets_builder.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/fastapi_module/router.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/fastapi_module/schemas.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/fastapi_module/service.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+app/interactions/3_28_Sat_下午EDA.md,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+app/interactions/app_interactions_evaluation_delivery.ipynb_解释.md,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+app/interactions/comment_eda_and_coverage.ipynb,yes,A ,,,0,0,0,yes,new_tracked_local,yours_currently_modified
+app/interactions/data_collection_eda copy.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+app/interactions/data_collection_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+app/interactions/data_collection_eda_notes.md,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+app/interactions/data_collection_eda_解释.md,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+app/interactions/drug_recommendation_experiment.ipynb,yes,M ,yaoja123,yaoja123@gmail.com,2,2,0,yes,yours,yours_currently_modified
+app/interactions/evaluation_delivery.ipynb,yes,A ,,,0,0,0,yes,new_tracked_local,yours_currently_modified
+app/interactions/module_explanation_zh.md,yes,,yaoja123,yaoja123@gmail.com,1,1,0,no,yours,yours
+app/interactions/naive_bayes_baseline_comparison.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+app/interactions/simple_explnation.md,yes,,yaoja123,yaoja123@gmail.com,2,2,0,no,yours,yours
+app/launcher_module/__init__.py,yes,,nmjxblw,915253492@qq.com,4,0,5,no,others,others
+app/launcher_module/launcher_main.py,yes,,z c,915253492@qq.com,12,0,24,no,others,others
+app/launcher_module/main_thread_task_manager.py,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/remote_llm_module/__init__.py,yes,,nmjxblw,915253492@qq.com,2,0,2,no,others,others
+app/remote_llm_module/deepseek_manager.py,yes,,nmjxblw,915253492@qq.com,3,0,4,no,others,others
+app/remote_llm_module/query_balance.py,yes,,nmjxblw,915253492@qq.com,3,0,3,no,others,others
+app/singleton_module/__init__.py,yes,,z c,915253492@qq.com,2,0,5,no,others,others
+app/singleton_module/singleton_meta.py,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/static_module/__init__.py,yes,,nmjxblw,915253492@qq.com,6,0,9,no,others,others
+app/static_module/classes.py,yes,,nmjxblw,915253492@qq.com,3,0,4,no,others,others
+app/static_module/enums.py,yes,,nmjxblw,915253492@qq.com,1,0,1,no,others,others
+app/static_module/parameters.py,yes,,nmjxblw,915253492@qq.com,6,0,9,no,others,others
+app/ui_module/__init__.py,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/ui_module/ui_main.py,yes,,z c,915253492@qq.com,1,0,1,no,others,others
+app/utility_module/__init__.py,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+app/utility_module/log_utility.py,yes,,nmjxblw,915253492@qq.com,4,0,5,no,others,others
+app/评估使用.md,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+app/评估使用_mac.md,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+data/eval_dataset_llm.json,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+data/eval_results.json,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+data/ownership_audit.csv,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+data/sync_backup_20260414_1/branch.txt,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+data/sync_backup_20260414_1/diff_staged.patch,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+data/sync_backup_20260414_1/diff_unstaged.patch,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+data/sync_backup_20260414_1/status_before_sync.txt,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+data/sync_backup_20260414_1/untracked_files.txt,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+disease_keys.json,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+docs/evaluation_dataset_format.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+docs/llm_eval_dataset_config.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+docs/ownership_audit.md,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+docs/pipeline_design.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+docs/架构.md,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+drug_comprehensive_embeddings.npy,yes,,nmjxblw,915253492@qq.com,2,1,4,no,others,others
+eda/ds1_prescription_to_disease_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/ds2_drug_side_effects_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/ds3_common_treatment_drugs_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/ds4_drug_reviews_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/ds5_disease_symptom_mapping_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/ds6_symptom_description_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/ds7_patient_profile_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/ds8_symptom2disease_nl_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/generate_eda_notebooks.py,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+eda/hf_firstaidqa_eda.ipynb,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+match_data_preprocessing/analysis/drug_ingredient_pairs_数据描述.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/analysis/embedding_方案说明.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/analysis/增强数据的使用.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/analysis/数据使用说明.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/analysis/数据清洗说明.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/analysis/链路实现函数级说明.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/analysis/链路输入输出说明.md,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/data/db_drug_interactions.csv,yes,,nmjxblw,915253492@qq.com,2,1,3,no,others,others
+match_data_preprocessing/data/drug_ingredient_pairs.csv,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/data/enhanced_drug_table.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+match_data_preprocessing/data/enhanced_drug_table_v1.csv,yes,,yinan,zhangyinan197@microconnect.com,2,0,4,no,others,others
+match_data_preprocessing/data/enhanced_drug_table_v1.json,yes,,yinan,zhangyinan197@microconnect.com,1,0,3,no,others,others
+match_data_preprocessing/data/enhanced_drug_table_v1_structured.csv,yes,,nmjxblw,915253492@qq.com,2,0,3,no,others,others
+match_data_preprocessing/disease_keys.json,yes,,z c,915253492@qq.com,1,0,2,no,others,others
+match_data_preprocessing/scripts/analyze_and_build_dataset.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/scripts/backfill_others_symptoms.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/scripts/build_enhanced_drug_table.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+match_data_preprocessing/scripts/generate_others_symptoms.py,yes,,yinan,zhangyinan197@microconnect.com,1,0,1,no,others,others
+modify_notebook.py,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+requirements.txt,yes,,z c,915253492@qq.com,3,0,7,no,others,others
+requirements_mac.txt,no,??,,,0,0,0,yes,untracked_local,yours_local_uncommitted
+评估使用.md,yes,,Sparks,smart030518@126.com,1,0,1,no,others,others

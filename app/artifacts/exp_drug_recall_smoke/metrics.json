@@ -1,0 +1,59 @@
+{
+  "eval_dataset": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/data/eval_dataset_verified.json",
+  "num_queries": 5,
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "modes": [
+    "label_idf_only",
+    "candidate_union"
+  ],
+  "metrics": {
+    "label_idf_only": {
+      "precision@5": 0.16,
+      "recall@5": 0.4666666666666666,
+      "hit@5": 0.6,
+      "ndcg@5": 0.23535011447207105,
+      "precision@10": 0.12000000000000002,
+      "recall@10": 0.6,
+      "hit@10": 0.6,
+      "ndcg@10": 0.2912404964661562,
+      "precision@20": 0.06000000000000001,
+      "recall@20": 0.6,
+      "hit@20": 0.6,
+      "ndcg@20": 0.2912404964661562,
+      "mrr": 0.15666666666666668,
+      "stage_hit_disease": 1.0,
+      "stage_hit_strict": 1.0,
+      "stage_hit_symptom": 1.0,
+      "stage_hit_bm25": 1.0,
+      "stage_hit_dense": 0.0,
+      "stage_hit_prior": 0.8,
+      "stage_hit_union": 1.0
+    },
+    "candidate_union": {
+      "precision@5": 0.24,
+      "recall@5": 0.4333333333333333,
+      "hit@5": 0.6,
+      "ndcg@5": 0.33464360738416854,
+      "precision@10": 0.18,
+      "recall@10": 0.8,
+      "hit@10": 0.8,
+      "ndcg@10": 0.4785101104343731,
+      "precision@20": 0.09,
+      "recall@20": 0.8,
+      "hit@20": 0.8,
+      "ndcg@20": 0.4785101104343731,
+      "mrr": 0.36666666666666664,
+      "stage_hit_disease": 1.0,
+      "stage_hit_strict": 1.0,
+      "stage_hit_symptom": 1.0,
+      "stage_hit_bm25": 1.0,
+      "stage_hit_dense": 0.0,
+      "stage_hit_prior": 0.8,
+      "stage_hit_union": 1.0
+    }
+  }
+}

@@ -23,7 +23,7 @@ from tqdm import tqdm  # pyright: ignore[reportMissingModuleSource]
 
 # Import pipeline config
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from pipeline_config import cfg
+from static_module.pipeline_config import cfg
 
 DEFAULT_MODEL_NAME = cfg.medbert_model_name
 DEFAULT_BATCH_SIZE = 32

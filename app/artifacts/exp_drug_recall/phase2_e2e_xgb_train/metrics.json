@@ -1,0 +1,46 @@
+{
+  "eval_dataset": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/data/eval_dataset_verified.json",
+  "half_extra_datasets": [],
+  "eval_kind": "verified",
+  "half_grouping": null,
+  "verified_eval_split": "all",
+  "verified_train_dataset": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/data/eval_dataset_verified_1000_deepseek_v4_flash.json",
+  "train_ranker_source": "verified",
+  "ranker_model": "xgb_ranker",
+  "ranker_candidate_mode": "label_core_rerank",
+  "ranker_explanation_artifact": "artifacts/exp_drug_recall/phase2_e2e_xgb_train/ranker_feature_importance.json",
+  "split_manifest": "artifacts/exp_drug_recall/phase2_e2e_xgb_train/split_manifest.json",
+  "num_queries": 191,
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "modes": [
+    "verified_xgb_ranker"
+  ],
+  "metrics": {
+    "verified_xgb_ranker": {
+      "precision@5": 0.39685863874345556,
+      "recall@5": 0.8231758497465304,
+      "hit@5": 0.9633507853403142,
+      "ndcg@5": 0.7554056878211912,
+      "precision@10": 0.2303664921465969,
+      "recall@10": 0.9091394498462562,
+      "hit@10": 0.9685863874345549,
+      "ndcg@10": 0.7924017103353457,
+      "precision@20": 0.12303664921465969,
+      "recall@20": 0.9514564115349456,
+      "hit@20": 0.9790575916230366,
+      "ndcg@20": 0.8072742794808434,
+      "mrr": 0.8161431064572425,
+      "stage_hit_disease": 0.9947643979057592,
+      "stage_hit_strict": 1.0,
+      "stage_hit_symptom": 0.9842931937172775,
+      "stage_hit_bm25": 0.0,
+      "stage_hit_dense": 0.0,
+      "stage_hit_prior": 0.0,
+      "stage_hit_union": 1.0
+    }
+  }
+}

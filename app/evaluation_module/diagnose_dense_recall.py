@@ -18,7 +18,7 @@ import math
 import importlib.util
 from pathlib import Path
 
-APP_ROOT = Path(__file__).parent.parent.parent
+APP_ROOT = Path.cwd()
 OUT_DIR  = APP_ROOT / "artifacts" / "exp_drug_recall"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 

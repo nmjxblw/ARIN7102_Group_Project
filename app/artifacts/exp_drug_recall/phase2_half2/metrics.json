@@ -1,0 +1,53 @@
+{
+  "eval_dataset": "app/dataset_module/drugs_training_dataset/drug_data_half_2.json",
+  "num_queries": 1466,
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "modes": [
+    "label_idf_only",
+    "label_core_rerank"
+  ],
+  "metrics": {
+    "label_idf_only": {
+      "precision@5": 0.0028649386084583905,
+      "recall@5": 0.01432469304229195,
+      "hit@5": 0.01432469304229195,
+      "precision@10": 0.0028649386084583905,
+      "recall@10": 0.0286493860845839,
+      "hit@10": 0.0286493860845839,
+      "precision@20": 0.0024215552523874488,
+      "recall@20": 0.048431105047748974,
+      "hit@20": 0.048431105047748974,
+      "mrr": 0.010093879555573726,
+      "stage_hit_disease": 0.32332878581173263,
+      "stage_hit_strict": 0.20804911323328787,
+      "stage_hit_symptom": 0.23124147339699863,
+      "stage_hit_bm25": 0.0,
+      "stage_hit_dense": 0.0,
+      "stage_hit_prior": 0.0,
+      "stage_hit_union": 0.3581173260572988
+    },
+    "label_core_rerank": {
+      "precision@5": 0.0020463847203274215,
+      "recall@5": 0.010231923601637109,
+      "hit@5": 0.010231923601637109,
+      "precision@10": 0.0022510231923601634,
+      "recall@10": 0.022510231923601638,
+      "hit@10": 0.022510231923601638,
+      "precision@20": 0.002592087312414734,
+      "recall@20": 0.05184174624829468,
+      "hit@20": 0.05184174624829468,
+      "mrr": 0.00852121125872599,
+      "stage_hit_disease": 0.32332878581173263,
+      "stage_hit_strict": 0.20804911323328787,
+      "stage_hit_symptom": 0.23124147339699863,
+      "stage_hit_bm25": 0.0,
+      "stage_hit_dense": 0.0,
+      "stage_hit_prior": 0.0,
+      "stage_hit_union": 0.3581173260572988
+    }
+  }
+}

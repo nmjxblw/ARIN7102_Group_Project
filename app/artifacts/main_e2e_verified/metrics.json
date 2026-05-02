@@ -1,0 +1,42 @@
+{
+  "eval_dataset": "/Users/jayden/Desktop/7012 datamining and text/project_march/ARIN7102_Group_Project/data/eval_dataset_verified.json",
+  "num_queries_total": 191,
+  "num_queries_evaluated": 191,
+  "num_queries_failed": 0,
+  "k_values": [
+    5,
+    10,
+    20
+  ],
+  "top_k_recommendation": 20,
+  "elapsed_seconds": 187.04,
+  "pipeline_params": {
+    "RECALL_TOP_K_EACH": "200",
+    "FUSED_TOP_K": "200",
+    "RECALL_WEIGHT_SEMANTIC": "0.5",
+    "RECALL_WEIGHT_LABEL": "0.5",
+    "LABEL_DISEASE_WEIGHT": "0.55",
+    "LABEL_SYMPTOM_WEIGHT": "0.45",
+    "FINAL_WEIGHT_RECALL": "0.35",
+    "FINAL_WEIGHT_CROSS_ENCODER": "0.50",
+    "FINAL_WEIGHT_BUSINESS": "0.15",
+    "TOP_K": "10",
+    "MEDBERT_MODEL_NAME": "pritamdeka/S-PubMedBert-MS-MARCO",
+    "CROSS_ENCODER_MODEL_NAME": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  },
+  "metrics": {
+    "precision@5": 0.052356,
+    "recall@5": 0.083151,
+    "hit@5": 0.17801,
+    "ndcg@5": 0.07148,
+    "precision@10": 0.048168,
+    "recall@10": 0.154783,
+    "hit@10": 0.293194,
+    "ndcg@10": 0.101968,
+    "precision@20": 0.038743,
+    "recall@20": 0.245213,
+    "hit@20": 0.361257,
+    "ndcg@20": 0.133403,
+    "mrr": 0.116903
+  }
+}

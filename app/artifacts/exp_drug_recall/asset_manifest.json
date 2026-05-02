@@ -1,0 +1,11 @@
+{
+  "path": "/opt/data/workspace/drug_comprehensive_embeddings.npy",
+  "available": true,
+  "row_count": 5595,
+  "ndim": 3,
+  "dim": 768,
+  "dtype": "float32",
+  "row_aligned": true,
+  "projected_view": 1,
+  "message": "ok"
+}

@@ -10,10 +10,9 @@ Pipeline stages:
 
 from __future__ import annotations
 
-import os
 import sys
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Iterable
 
 import numpy as np
@@ -21,7 +20,7 @@ import pandas as pd
 
 # Import pipeline config (project root level)
 sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parents[2]))
-from pipeline_config import cfg
+from static_module.pipeline_config import cfg
 
 from .cross_encoder_reranker import CrossEncoderReranker
 from .recommendation_pipeline import (

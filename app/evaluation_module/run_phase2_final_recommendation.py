@@ -11,7 +11,7 @@ from app.embedded_module.phase2_final_recommender import Phase2FinalRecommender
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path.cwd()
 DEFAULT_TABLE_PATH = (
     REPO_ROOT
     / "match_data_preprocessing"

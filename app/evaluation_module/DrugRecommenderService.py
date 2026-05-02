@@ -22,7 +22,7 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         """
         logger.debug("Initializing DrugRecommendationService (Singleton)...")
 
-        self.repo_root = Path(__file__).resolve().parents[2]
+        self.repo_root = Path.cwd()
         self.table_path = (
             self.repo_root
             / "match_data_preprocessing"
@@ -31,14 +31,12 @@ class DrugRecommendationService(metaclass=SingletonMeta):
         )
         self.half1_path = (
             self.repo_root
-            / "app"
             / "dataset_module"
             / "drugs_training_dataset"
             / "drug_data_half_1.json"
         )
         self.half2_path = (
             self.repo_root
-            / "app"
             / "dataset_module"
             / "drugs_training_dataset"
             / "drug_data_half_2.json"

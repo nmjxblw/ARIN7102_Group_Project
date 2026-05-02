@@ -5,7 +5,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path.cwd()
 
 def calculate_row_conf(row: dict) -> float:
     diseases = row.get("diseases", [])
@@ -45,8 +45,8 @@ def load_half_data(json_path: Path, prefix: str) -> dict:
     return confs
 
 def main():
-    half1_json = REPO_ROOT / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"
-    half2_json = REPO_ROOT / "app" / "dataset_module" / "drugs_training_dataset" / "drug_data_half_2.json"
+    half1_json = REPO_ROOT / "dataset_module" / "drugs_training_dataset" / "drug_data_half_1.json"
+    half2_json = REPO_ROOT / "dataset_module" / "drugs_training_dataset" / "drug_data_half_2.json"
     
     half1_csv = REPO_ROOT / "artifacts" / "exp_drug_recall" / "phase2_half1" / "per_query_results.csv"
     half2_csv = REPO_ROOT / "artifacts" / "exp_drug_recall" / "phase2_half2" / "per_query_results.csv"

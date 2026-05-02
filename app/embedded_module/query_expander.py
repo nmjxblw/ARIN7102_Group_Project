@@ -8,12 +8,11 @@ LLM Query Expander — 医学术语扩展模块
 from __future__ import annotations
 
 import logging
-import os
 import sys
 import time
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parents[2]))
-from pipeline_config import cfg
+from static_module.pipeline_config import cfg
 
 logger = logging.getLogger(__name__)
 
