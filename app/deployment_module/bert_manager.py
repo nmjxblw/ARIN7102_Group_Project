@@ -1,10 +1,9 @@
 from __future__ import annotations
 import json
-import math
 import pickle
 import threading
 from pathlib import Path
-from typing import Any, Optional, Tuple, cast
+from typing import Any, Optional, Tuple
 from dataclasses import dataclass
 import numpy as np
 import torch
@@ -23,7 +22,6 @@ from transformers import (
     DistilBertTokenizerFast,
     PretrainedConfig,
 )
-from transformers.modeling_outputs import BaseModelOutput
 from transformers.utils.generic import ModelOutput
 from static_module import (
     DEPLOYMENT_FOLDER,
@@ -52,9 +50,15 @@ FIRST_AID_CLASSIFIER_LR: float = 1e-3
 DISEASE_POSITIVE_WEIGHT: float = 1.2
 
 # ===== Path Configuration =====
-RAW_DATA_PATH: Path = Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "generated_medical_dataset.json"
-DISEASE_LABELS_PATH: Path = Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "disease_labels.json"
-SYMPTOM_LABELS_PATH: Path = Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "symptom_labels.json"
+RAW_DATA_PATH: Path = (
+    Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "generated_medical_dataset.json"
+)
+DISEASE_LABELS_PATH: Path = (
+    Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "disease_labels.json"
+)
+SYMPTOM_LABELS_PATH: Path = (
+    Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "symptom_labels.json"
+)
 
 # ===== Hugging Face Base Model =====
 # If the local base model (in DEPLOYMENT_FOLDER) does not exist,
@@ -115,8 +119,12 @@ class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
             return_tensors="pt",
         )
 
-        labels_disease = torch.FloatTensor(self.mlb_disease.transform([item["disease"]])[0])
-        labels_symptom = torch.FloatTensor(self.mlb_symptom.transform([item["symptoms"]])[0])
+        labels_disease = torch.FloatTensor(
+            self.mlb_disease.transform([item["disease"]])[0]
+        )
+        labels_symptom = torch.FloatTensor(
+            self.mlb_symptom.transform([item["symptoms"]])[0]
+        )
         labels_first_aid = torch.FloatTensor([item.get("need_first_aid", 0)])
 
         return {
@@ -142,8 +150,16 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         self.all_tied_weights_keys = {}
 
         # Allow dynamic dimension retrieval from passed parameters or config
-        self.num_diseases = num_diseases if num_diseases is not None else getattr(config, "num_diseases", 1)
-        self.num_symptoms = num_symptoms if num_symptoms is not None else getattr(config, "num_symptoms", 1)
+        self.num_diseases = (
+            num_diseases
+            if num_diseases is not None
+            else getattr(config, "num_diseases", 1)
+        )
+        self.num_symptoms = (
+            num_symptoms
+            if num_symptoms is not None
+            else getattr(config, "num_symptoms", 1)
+        )
         self.hidden_size = config.hidden_size
 
         self.classifier_disease = nn.Linear(self.hidden_size, self.num_diseases)
@@ -166,7 +182,9 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         labels_first_aid=None,
         **kwargs,
     ) -> MultitaskSequenceClassifierOutput:
-        outputs = self.distil_bert(input_ids=input_ids, attention_mask=attention_mask, **kwargs)
+        outputs = self.distil_bert(
+            input_ids=input_ids, attention_mask=attention_mask, **kwargs
+        )
         pooled_output = outputs.last_hidden_state[:, 0, :]
 
         logits_disease = self.classifier_disease(pooled_output)
@@ -272,7 +290,9 @@ class BERTManager:
         model = DistilBertModel.from_pretrained(HF_BASE_MODEL_NAME)
         model.save_pretrained(LOCAL_MODEL_PATH)
 
-        logger.info(f"✅ Base model successfully downloaded and saved to {LOCAL_MODEL_PATH}.")
+        logger.info(
+            f"✅ Base model successfully downloaded and saved to {LOCAL_MODEL_PATH}."
+        )
 
     def _print_runtime_device_info(self) -> None:
         """Print runtime device information for debugging."""
@@ -316,7 +336,9 @@ class BERTManager:
         self.mlb_d = encoders["disease"]
         self.mlb_s = encoders["symptom"]
         self.medians = encoders.get("medians", {})
-
+        assert (
+            self.mlb_d is not None and self.mlb_s is not None
+        ), "Label encoders are missing in the loaded file."
         self.model = DistilBertForMultitaskLearning.from_pretrained(
             model_path,
             local_files_only=True,
@@ -326,15 +348,16 @@ class BERTManager:
         )
 
         if self.device.type == "cuda":
-            self.model.cuda()
+            nn.Module.cuda(self=self.model, device=self.device)
         else:
-            self.model.cpu()
+            nn.Module.cpu(self=self.model)
 
         self.model.eval()
         logger.info("Preload completed.")
 
     def _compute_label_medians(self, dataset: MultitaskDataset) -> dict:
         """Compute median probability for each positive label on the validation set."""
+        assert self.model is not None, "Model must be loaded before computing medians."
         self.model.eval()
         disease_probs_pos = [[] for _ in range(self.model.num_diseases)]
         symptom_probs_pos = [[] for _ in range(self.model.num_symptoms)]
@@ -367,7 +390,9 @@ class BERTManager:
                             symptom_probs_pos[j].append(probs_s[i, j])
                     if labels_f[i, 0] == 1.0:
                         first_aid_probs_pos.append(probs_f[i, 0])
-
+        assert (
+            self.mlb_d is not None and self.mlb_s is not None
+        ), "Label encoders must be loaded."
         disease_medians = {
             self.mlb_d.classes_[j]: float(np.median(p)) if p else 0.5
             for j, p in enumerate(disease_probs_pos)
@@ -376,7 +401,9 @@ class BERTManager:
             self.mlb_s.classes_[j]: float(np.median(p)) if p else 0.5
             for j, p in enumerate(symptom_probs_pos)
         }
-        first_aid_median = float(np.median(first_aid_probs_pos)) if first_aid_probs_pos else 0.5
+        first_aid_median = (
+            float(np.median(first_aid_probs_pos)) if first_aid_probs_pos else 0.5
+        )
 
         return {
             "disease": disease_medians,
@@ -425,20 +452,29 @@ class BERTManager:
             num_diseases=len(self.mlb_d.classes_),
             num_symptoms=len(self.mlb_s.classes_),
         )
-        self.model.to(self.device)
+        nn.Module.to(self=self.model, device=self.device)
 
         optimizer = AdamW(
             [
                 {"params": self.model.distil_bert.parameters(), "lr": LEARNING_RATE},
-                {"params": self.model.classifier_disease.parameters(), "lr": DISEASE_CLASSIFIER_LR},
-                {"params": self.model.classifier_symptom.parameters(), "lr": SYMPTOM_CLASSIFIER_LR},
-                {"params": self.model.classifier_first_aid.parameters(), "lr": FIRST_AID_CLASSIFIER_LR},
+                {
+                    "params": self.model.classifier_disease.parameters(),
+                    "lr": DISEASE_CLASSIFIER_LR,
+                },
+                {
+                    "params": self.model.classifier_symptom.parameters(),
+                    "lr": SYMPTOM_CLASSIFIER_LR,
+                },
+                {
+                    "params": self.model.classifier_first_aid.parameters(),
+                    "lr": FIRST_AID_CLASSIFIER_LR,
+                },
             ],
             weight_decay=0.01,
         )
 
         # Automatic mixed precision acceleration
-        scaler = torch.amp.GradScaler('cuda',enabled=USE_FP16)
+        scaler = torch.amp.GradScaler("cuda", enabled=USE_FP16)
 
         best_f1 = 0.0
         for epoch in range(EPOCHS):
@@ -450,12 +486,16 @@ class BERTManager:
                 optimizer.zero_grad(set_to_none=True)
 
                 input_ids = batch["input_ids"].to(self.device, non_blocking=True)
-                attention_mask = batch["attention_mask"].to(self.device, non_blocking=True)
+                attention_mask = batch["attention_mask"].to(
+                    self.device, non_blocking=True
+                )
                 labels_dis = batch["labels_disease"].to(self.device, non_blocking=True)
                 labels_sym = batch["labels_symptom"].to(self.device, non_blocking=True)
-                labels_emg = batch["labels_first_aid"].to(self.device, non_blocking=True)
+                labels_emg = batch["labels_first_aid"].to(
+                    self.device, non_blocking=True
+                )
 
-                with torch.amp.autocast('cuda',enabled=USE_FP16):
+                with torch.amp.autocast("cuda", enabled=USE_FP16):
                     outputs = self.model(
                         input_ids=input_ids,
                         attention_mask=attention_mask,
@@ -544,7 +584,9 @@ class BERTManager:
         # Safety check (in case the module is reloaded in some edge cases)
         if self.model is None:
             self.preload()
-
+        assert (
+            self.model is not None and self.tokenizer is not None
+        ), "Model and tokenizer must be loaded."
         inputs = self.tokenizer(
             text_input,
             return_tensors="pt",
@@ -564,15 +606,12 @@ class BERTManager:
 
         # Disease results with confidence adjustment
         diseases_result_temp = []
+        assert self.mlb_d is not None, "Disease label encoder must be loaded."
         for idx in np.where(disease_probs >= threshold)[0]:
             name = self.mlb_d.classes_[idx]
             prob = float(disease_probs[idx])
             med = self.medians.get("disease", {}).get(name, 0.5)
-            conf = (
-                1.0
-                if med <= 0.5 or prob >= med
-                else (prob - 0.5) / (med - 0.5)
-            )
+            conf = 1.0 if med <= 0.5 or prob >= med else (prob - 0.5) / (med - 0.5)
             diseases_result_temp.append(
                 {"name": name, "confidence": round(float(np.clip(conf, 0.0, 1.0)), 2)}
             )
@@ -588,15 +627,12 @@ class BERTManager:
 
         # Symptom results
         symptoms_result = []
+        assert self.mlb_s is not None, "Symptom label encoder must be loaded."
         for idx in np.where(symptom_probs >= threshold)[0]:
             name = self.mlb_s.classes_[idx]
             prob = float(symptom_probs[idx])
             med = self.medians.get("symptom", {}).get(name, 0.5)
-            conf = (
-                1.0
-                if med <= 0.5 or prob >= med
-                else (prob - 0.5) / (med - 0.5)
-            )
+            conf = 1.0 if med <= 0.5 or prob >= med else (prob - 0.5) / (med - 0.5)
             symptoms_result.append(
                 {"name": name, "confidence": round(float(np.clip(conf, 0.0, 1.0)), 2)}
             )
