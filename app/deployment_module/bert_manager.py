@@ -594,8 +594,8 @@ class BERTManager(metaclass=SingletonMeta):
             weight_decay=0.01,
         )
         self.get_runtime_device_info()
-        model = cast(DistilBertForMultitaskLearning, self._bert_model)
-        nn.Module.to(model, self._device)
+        self._bert_model = cast(DistilBertForMultitaskLearning, self._bert_model)
+        nn.Module.to(self=self._bert_model, device=self._device)
         best_f1: float = 0.0
 
         for epoch in range(EPOCHS):
