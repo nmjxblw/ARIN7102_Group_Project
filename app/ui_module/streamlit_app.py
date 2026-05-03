@@ -11,7 +11,7 @@ from openai import OpenAI
 # Ensure other modules in the project can be imported
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from deployment_module._bert_manager_improved import BERTManager
+from deployment_module import BERTManager
 from evaluation_module import DrugRecommendationService
 from static_module import DEEPSEEK_API_KEY, DEEPSEEK_MODEL
 
