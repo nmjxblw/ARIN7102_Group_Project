@@ -241,7 +241,7 @@ class BERTManager:
         """Check whether a fully trained model exists on disk."""
         return (
             SAVE_PATH.exists()
-            and (SAVE_PATH / "pytorch_model.bin").exists()
+            and (SAVE_PATH / "model-00001-of-00005.safetensors").exists()
             and (SAVE_PATH / "config.json").exists()
             and (SAVE_PATH / "label_encoders.pkl").exists()
         )

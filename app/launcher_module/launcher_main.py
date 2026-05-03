@@ -36,7 +36,7 @@ app_async_task_manager = AppAsyncTaskManager()
 deepseek_manager = DeepSeekManager(debug_mode=False)
 """ DeepSeek 管理器单例 """
 
-bert_manager = BERTManager(debug_mode=False)
+bert_manager = BERTManager()
 """ BERT 管理器单例 """
 recommendation_manager = DrugRecommendationService()
 """ 药物推荐管理器单例 """
