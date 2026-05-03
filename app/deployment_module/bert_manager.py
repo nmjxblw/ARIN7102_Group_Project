@@ -32,15 +32,15 @@ from static_module import (
 )
 from utility_module import logger
 
-# ====================== 1. Configuration and Parameters ======================
+# ====================== 1. 配置与参数 ======================
 LOCAL_MODEL_PATH: Path = Path.cwd() / DEPLOYMENT_FOLDER
 SAVE_PATH: Path = Path.cwd() / TRAINED_BERT_SAVE_PATH
 MAX_LEN: int = 256
-BATCH_SIZE: int = 64  # Increased Batch Size to fully utilize GPU performance
+BATCH_SIZE: int = 64  # 增大批量大小以更充分利用 GPU 性能
 EPOCHS: int = 10
 LEARNING_RATE: float = 3e-5
 
-# ===== Disease Label Optimization Parameters =====
+# ===== 疾病标签优化参数 =====
 DISEASE_LOSS_WEIGHT: float = 2.5
 SYMPTOM_LOSS_WEIGHT: float = 1.0
 FIRST_AID_LOSS_WEIGHT: float = 0.5
@@ -49,7 +49,7 @@ SYMPTOM_CLASSIFIER_LR: float = 1e-3
 FIRST_AID_CLASSIFIER_LR: float = 1e-3
 DISEASE_POSITIVE_WEIGHT: float = 1.2
 
-# ===== Path Configuration =====
+# ===== 路径配置 =====
 RAW_DATA_PATH: Path = (
     Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "generated_medical_dataset.json"
 )
@@ -60,10 +60,10 @@ SYMPTOM_LABELS_PATH: Path = (
     Path.cwd() / BERT_TRAINING_DATASET_FOLDER / "symptom_labels.json"
 )
 
-# ===== Hugging Face Base Model =====
-# If the local base model (in DEPLOYMENT_FOLDER) does not exist,
-# it will be automatically downloaded from Hugging Face and saved locally.
-# Change this string if you are using a different clinical/distilbert variant.
+# ===== Hugging Face 基础模型 =====
+# 如果本地基础模型（位于 DEPLOYMENT_FOLDER）不存在，
+# 程序会自动从 Hugging Face 下载并保存到本地。
+# 如果你使用的是其他 clinical/distilbert 变体，请修改这个字符串。
 HF_BASE_MODEL_NAME: str = "medicalai/ClinicalBERT"
 
 USE_FP16: bool = USE_CUDA
@@ -73,7 +73,7 @@ if USE_CUDA:
     torch.backends.cudnn.benchmark = True
 
 
-# ====================== 2. Data Structures ======================
+# ====================== 2. 数据结构 ======================
 @dataclass
 class MultitaskSequenceClassifierOutput(ModelOutput):
     loss: Optional[torch.Tensor] = None
@@ -83,7 +83,7 @@ class MultitaskSequenceClassifierOutput(ModelOutput):
 
 
 class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
-    """Decoupled dataset class that no longer depends on external global variables."""
+    """解耦后的数据集类，不再依赖外部全局变量。"""
 
     def __init__(
         self,
@@ -137,7 +137,7 @@ class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
 
 
 class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
-    """Decoupled multitask learning model. Dimensions are passed via parameters."""
+    """解耦的多任务学习模型，维度通过参数传入。"""
 
     def __init__(
         self,
@@ -149,7 +149,7 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         self.distil_bert = DistilBertModel(config)
         self.all_tied_weights_keys = {}
 
-        # Allow dynamic dimension retrieval from passed parameters or config
+        # 支持从传入参数或配置中动态获取维度
         self.num_diseases = (
             num_diseases
             if num_diseases is not None
@@ -166,8 +166,8 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         self.classifier_symptom = nn.Linear(self.hidden_size, self.num_symptoms)
         self.classifier_first_aid = nn.Linear(self.hidden_size, 1)
 
-        # [Optimization] Disease positive weights are baked directly into the loss function,
-        # dramatically speeding up GPU computation
+        # 【优化】将疾病正样本权重直接写入损失函数，
+        # 可显著加快 GPU 计算
         pos_weight = torch.tensor([DISEASE_POSITIVE_WEIGHT] * self.num_diseases)
         self.bce_disease = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
         self.bce_symptom = nn.BCEWithLogitsLoss()
@@ -211,9 +211,9 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         )
 
 
-# ====================== 3. Singleton Manager ======================
+# ====================== 3. 单例管理器 ======================
 class BERTManager:
-    """BERT Multitask Model Manager (thread-safe singleton pattern)."""
+    """BERT 多任务模型管理器（线程安全单例模式）。"""
 
     _instance = None
     _lock = threading.Lock()
@@ -226,7 +226,7 @@ class BERTManager:
         return cls._instance
 
     def __init__(self):
-        # Avoid re-initialization when retrieving the singleton
+        # 避免在获取单例时重复初始化
         if getattr(self, "_is_initialized", False):
             return
 
@@ -241,22 +241,22 @@ class BERTManager:
 
         self._is_initialized = True
 
-        # === Automatic model initialization on class instantiation ===
-        # 1. Check if the trained multitask model exists.
-        # 2. If not, ensure the base pre-trained model (from DEPLOYMENT_FOLDER)
-        #    exists locally; if missing, download it automatically from Hugging Face.
-        # 3. Then start training.
-        # Other modules can simply call manager.predict() — everything is handled automatically.
+        # === 类实例化时自动初始化模型 ===
+        # 1. 检查是否存在已训练好的多任务模型。
+        # 2. 如果不存在，先确保基础预训练模型（来自 DEPLOYMENT_FOLDER）
+        #    已经保存在本地；若缺失，则自动从 Hugging Face 下载。
+        # 3. 然后开始训练。
+        # 其他模块只需要调用 manager.predict()，其余流程会自动处理。
         if not self._model_exists():
-            logger.info("No trained BERT model found locally. Preparing to train...")
+            logger.info("本地未发现已训练的 BERT 模型，准备开始训练...")
             self._ensure_base_model()
             self.train_bert()
         else:
-            logger.info("Trained BERT model found locally. Loading the model...")
+            logger.info("本地已找到训练好的 BERT 模型，正在加载模型...")
             self.preload()
 
     def _model_exists(self) -> bool:
-        """Check whether a fully trained model exists on disk."""
+        """检查磁盘上是否存在完整训练好的模型。"""
         return (
             SAVE_PATH.exists()
             and (SAVE_PATH / "model-00001-of-00005.safetensors").exists()
@@ -265,44 +265,42 @@ class BERTManager:
         )
 
     def _ensure_base_model(self) -> None:
-        """Ensure the base pre-trained model exists in DEPLOYMENT_FOLDER.
-        If it does not exist (or is incomplete), download it automatically from Hugging Face
-        and save it locally so that local_files_only=True works in the future.
+        """确保 DEPLOYMENT_FOLDER 中存在基础预训练模型。
+        如果不存在（或不完整），则自动从 Hugging Face 下载并保存到本地，
+        这样后续 local_files_only=True 才能正常工作。
         """
         if LOCAL_MODEL_PATH.exists() and (LOCAL_MODEL_PATH / "config.json").exists():
-            logger.info(f"Base model already exists at {LOCAL_MODEL_PATH}.")
+            logger.info(f"基础模型已存在于 {LOCAL_MODEL_PATH}。")
             return
 
         logger.info(
-            f"Base model not found at {LOCAL_MODEL_PATH}. "
-            f"Automatically downloading '{HF_BASE_MODEL_NAME}' from Hugging Face..."
+            f"在 {LOCAL_MODEL_PATH} 未找到基础模型。"
+            f"正在自动从 Hugging Face 下载 '{HF_BASE_MODEL_NAME}'..."
         )
 
-        # Download tokenizer (will cache to Hugging Face cache and then save locally)
+        # 下载分词器（会先缓存到 Hugging Face 缓存目录，再保存到本地）
         tokenizer = DistilBertTokenizerFast.from_pretrained(HF_BASE_MODEL_NAME)
         tokenizer.save_pretrained(LOCAL_MODEL_PATH)
 
-        # Download config
+        # 下载配置文件
         config = AutoConfig.from_pretrained(HF_BASE_MODEL_NAME)
         config.save_pretrained(LOCAL_MODEL_PATH)
 
-        # Download model weights
+        # 下载模型权重
         model = DistilBertModel.from_pretrained(HF_BASE_MODEL_NAME)
         model.save_pretrained(LOCAL_MODEL_PATH)
 
-        logger.info(
-            f"✅ Base model successfully downloaded and saved to {LOCAL_MODEL_PATH}."
-        )
+        logger.info(f"基础模型已成功下载并保存到 {LOCAL_MODEL_PATH}。")
 
     def _print_runtime_device_info(self) -> None:
-        """Print runtime device information for debugging."""
-        msg = f"Current device: {self.device}\n"
+        """打印运行时设备信息，便于调试。"""
+        msg = f"当前设备：{self.device}\n"
         if USE_CUDA:
             torch_version = getattr(torch, "version", SimpleNamespace(cuda=None))
-            msg += f"CUDA version: {torch_version.cuda}\n"
-            msg += f"GPU: {torch.cuda.get_device_name(0)}\n"
+            msg += f"CUDA 版本：{torch_version.cuda}\n"
+            msg += f"GPU：{torch.cuda.get_device_name(0)}\n"
         else:
-            msg += "No CUDA detected, training will use CPU."
+            msg += "未检测到 CUDA，训练将使用 CPU。"
         logger.info(msg)
 
     def load_tokenizer_compat(self, model_path: str | Path) -> DistilBertTokenizerFast:
@@ -321,11 +319,11 @@ class BERTManager:
             raise
 
     def preload(self, model_path: str | Path = SAVE_PATH) -> None:
-        """Load the trained model and configuration into memory."""
+        """将训练好的模型和配置加载到内存中。"""
         if self.model is not None:
-            return  # Already loaded
+            return  # 已加载过
 
-        logger.info("Preloading the trained model into memory...")
+        logger.info("正在将训练好的模型预加载到内存中...")
         self.tokenizer = self.load_tokenizer_compat(model_path)
 
         with open(f"{model_path}/label_encoders.pkl", "rb") as f:
@@ -338,7 +336,7 @@ class BERTManager:
         self.medians = encoders.get("medians", {})
         assert (
             self.mlb_d is not None and self.mlb_s is not None
-        ), "Label encoders are missing in the loaded file."
+        ), "加载的文件中缺少标签编码器。"
         self.model = DistilBertForMultitaskLearning.from_pretrained(
             model_path,
             local_files_only=True,
@@ -353,11 +351,11 @@ class BERTManager:
             nn.Module.cpu(self=self.model)
 
         self.model.eval()
-        logger.info("Preload completed.")
+        logger.info("预加载完成。")
 
     def _compute_label_medians(self, dataset: MultitaskDataset) -> dict:
-        """Compute median probability for each positive label on the validation set."""
-        assert self.model is not None, "Model must be loaded before computing medians."
+        """计算验证集中每个正样本标签的概率中位数。"""
+        assert self.model is not None, "在计算中位数前必须先加载模型。"
         self.model.eval()
         disease_probs_pos = [[] for _ in range(self.model.num_diseases)]
         symptom_probs_pos = [[] for _ in range(self.model.num_symptoms)]
@@ -412,10 +410,10 @@ class BERTManager:
         }
 
     def train_bert(self):
-        """Execute the full training logic (data loading is internal to avoid global pollution)."""
+        """执行完整训练逻辑（数据加载放在内部，避免全局变量污染）。"""
         self._print_runtime_device_info()
 
-        # Load raw data and label lists
+        # 加载原始数据和标签列表
         with open(RAW_DATA_PATH, "r", encoding="utf-8") as f:
             raw_data = json.load(f)
         with open(DISEASE_LABELS_PATH, "r", encoding="utf-8") as f:
@@ -438,7 +436,7 @@ class BERTManager:
             test_idx, raw_data, self.tokenizer, MAX_LEN, self.mlb_d, self.mlb_s
         )
 
-        # Optimized DataLoader
+        # 优化后的 DataLoader
         train_loader = DataLoader(
             train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=USE_CUDA
         )
@@ -473,14 +471,14 @@ class BERTManager:
             weight_decay=0.01,
         )
 
-        # Automatic mixed precision acceleration
+        # 自动混合精度加速
         scaler = torch.amp.GradScaler("cuda", enabled=USE_FP16)
 
         best_f1 = 0.0
         for epoch in range(EPOCHS):
             self.model.train()
             total_loss = 0
-            train_pbar = tqdm(train_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Train]")
+            train_pbar = tqdm(train_loader, desc=f"第 {epoch + 1}/{EPOCHS} 轮 [训练]")
 
             for batch in train_pbar:
                 optimizer.zero_grad(set_to_none=True)
@@ -513,11 +511,11 @@ class BERTManager:
 
             avg_train_loss = total_loss / len(train_loader)
 
-            # === Evaluation phase ===
+            # === 评估阶段 ===
             self.model.eval()
             all_dis_true, all_dis_pred = [], []
             total_val_loss = 0
-            val_pbar = tqdm(val_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Eval]")
+            val_pbar = tqdm(val_loader, desc=f"第 {epoch + 1}/{EPOCHS} 轮 [评估]")
 
             with torch.no_grad():
                 for batch in val_pbar:
@@ -539,26 +537,31 @@ class BERTManager:
                     logits_dis = outputs.logits[0]
                     all_dis_pred.append((torch.sigmoid(logits_dis) > 0.5).cpu().numpy())
                     all_dis_true.append(batch["labels_disease"].numpy())
+                    f1_dis = f1_score(
+                        np.vstack(all_dis_true),
+                        np.vstack(all_dis_pred),
+                        average="micro",
+                    )
+                    val_pbar.set_postfix(
+                        val_loss=f"{outputs.loss.item():.4f}", f1_dis=f"{f1_dis:.4f}"
+                    )
 
             f1_dis = f1_score(
                 np.vstack(all_dis_true), np.vstack(all_dis_pred), average="micro"
             )
 
             logger.debug(
-                f"\nEpoch {epoch + 1} | "
-                f"Train Loss: {avg_train_loss:.4f} | "
-                f"Val Loss: {total_val_loss/len(val_loader):.4f} | "
-                f"Disease F1: {f1_dis:.4f}"
+                f"\n第 {epoch + 1} 轮 | "
+                f"训练损失：{avg_train_loss:.4f} | "
+                f"验证损失：{total_val_loss/len(val_loader):.4f} | "
+                f"疾病 F1：{f1_dis:.4f}"
             )
 
             if f1_dis > best_f1:
                 best_f1 = f1_dis
-                logger.info(
-                    "Model performance improved. Computing median for each positive label "
-                    "and saving the model..."
-                )
+                logger.info("模型性能提升，正在计算每个正样本标签的中位数并保存模型...")
 
-                # Update dimension information in config for future loading
+                # 更新配置中的维度信息，方便后续加载
                 self.model.config.num_diseases = len(self.mlb_d.classes_)
                 self.model.config.num_symptoms = len(self.mlb_s.classes_)
 
@@ -577,16 +580,16 @@ class BERTManager:
                         f,
                     )
 
-                logger.info(f"★ Model successfully saved to {SAVE_PATH}")
+                logger.info(f"★ 模型已成功保存到 {SAVE_PATH}。")
 
     def predict(self, text_input: str, threshold: float = 0.5) -> dict[str, Any]:
-        """Singleton-level prediction call. The model is guaranteed to be loaded by __init__."""
-        # Safety check (in case the module is reloaded in some edge cases)
+        """单例级别的预测入口，模型会在 __init__ 中保证已加载。"""
+        # 安全检查（以防模块在某些边缘情况下被重新加载）
         if self.model is None:
             self.preload()
         assert (
             self.model is not None and self.tokenizer is not None
-        ), "Model and tokenizer must be loaded."
+        ), "模型和分词器必须已加载。"
         inputs = self.tokenizer(
             text_input,
             return_tensors="pt",
@@ -604,7 +607,7 @@ class BERTManager:
         symptom_probs = torch.sigmoid(logits_s).cpu().numpy()[0]
         first_aid_prob = torch.sigmoid(logits_f).cpu().numpy()[0][0]
 
-        # Disease results with confidence adjustment
+        # 疾病结果，并对置信度做调整
         diseases_result_temp = []
         assert self.mlb_d is not None, "Disease label encoder must be loaded."
         for idx in np.where(disease_probs >= threshold)[0]:
@@ -616,7 +619,7 @@ class BERTManager:
                 {"name": name, "confidence": round(float(np.clip(conf, 0.0, 1.0)), 2)}
             )
 
-        # Special handling for "others" label
+        # 对 "others" 标签做特殊处理
         has_others = any(d["name"] == "others" for d in diseases_result_temp)
         if has_others and len(diseases_result_temp) > 1:
             diseases_result = [d for d in diseases_result_temp if d["name"] != "others"]
@@ -625,7 +628,7 @@ class BERTManager:
         else:
             diseases_result = diseases_result_temp
 
-        # Symptom results
+        # 症状结果
         symptoms_result = []
         assert self.mlb_s is not None, "Symptom label encoder must be loaded."
         for idx in np.where(symptom_probs >= threshold)[0]:
@@ -646,19 +649,8 @@ class BERTManager:
         }
 
 
-# ====================== 4. Quick Call Interface ======================
-# Expose a friendly singleton instance. Other modules can simply do:
+# ====================== 4. 快速调用接口 ======================
+# 暴露一个友好的单例实例。其他模块可以直接这样使用：
 # from this_module import manager
 # result = manager.predict("some text")
 manager = BERTManager()
-
-if __name__ == "__main__":
-    # Training and base model download now happen automatically during class initialization.
-    # No manual calls are required.
-    test_text = "I feel dizzy and nauseous"
-    result = manager.predict(test_text)
-    logger.info(
-        f"Input text: {test_text}\n"
-        f"Inference test result:\n"
-        f"{json.dumps(result, indent=2)}"
-    )
