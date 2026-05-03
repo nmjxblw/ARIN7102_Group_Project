@@ -14,7 +14,7 @@ from static_module import TaskStatus, PROJECT_NAME, THREAD_TIMEOUT
 from .main_thread_task_manager import AppAsyncTaskManager
 from utility_module import logger
 from remote_llm_module import DeepSeekManager
-from deployment_module import BERTManager
+from deployment_module._bert_manager_improved import BERTManager
 
 from evaluation_module import DrugRecommendationService
 

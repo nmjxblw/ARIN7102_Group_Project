@@ -229,7 +229,9 @@ reports/
 app/deployment_module/clinicalbert_local/*.bin
 app/deployment_module/_trained_bert/checkpoint-*
 app/dataset_module/bert_training_dataset/generated_medical_dataset.csv
-# *.safetensors
+*.safetensors
+app/deployment_module/trained_bert/
+app/deployment_module/clinicalbert_local/
 # 
 interaction/
 .DS_Store
