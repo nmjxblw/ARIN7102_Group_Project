@@ -18,7 +18,7 @@ from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_sc
 from transformers import (
     AutoConfig,
     DistilBertConfig,
-    DistilBertTokenizer,
+    DistilBertTokenizerFast,
     DistilBertModel,
     DistilBertPreTrainedModel,
     TrainingArguments,
@@ -53,7 +53,7 @@ SAVE_PATH: Path = Path.cwd() / TRAINED_BERT_SAVE_PATH
 """ 训练后模型保存路径，训练完成后模型和标签编码器将保存在此路径下 """
 MAX_LEN: int = 256
 """ 模型输入的最大长度，超过部分将被截断。根据你的数据特点调整，过长可能导致训练效率降低，过短可能丢失信息。 """
-BATCH_SIZE: int = 8
+BATCH_SIZE: int = 128
 """ 训练批次大小，根据你的 GPU 内存调整，过大可能导致 OOM，过小可能导致训练不稳定。 """
 EPOCHS: int = 10
 """ 训练轮数，根据你的数据量和模型复杂度调整，过多可能导致过拟合，过少可能导致欠拟合。 """
@@ -92,6 +92,7 @@ USE_FP16: bool = USE_CUDA
 if USE_CUDA:
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.backends.cudnn.allow_tf32 = True
+    torch.backends.cudnn.benchmark = True
 
 
 @dataclass
@@ -105,68 +106,32 @@ class MultitaskSequenceClassifierOutput(ModelOutput):
 
 
 # 处理数据集
-class MultitaskDataset(torch.utils.data.Dataset[dict[str, torch.Tensor]]):
+# 修改数据集类，直接接收处理好的 Tensor
+class MultitaskDataset(torch.utils.data.Dataset):
     def __init__(
         self,
-        indices,
-        data: list[dict[str, Any]],
-        tokenizer: DistilBertTokenizer,
-        disease_label_binarizer: MultiLabelBinarizer,
-        symptom_label_binarizer: MultiLabelBinarizer,
-        max_len: int,
-    ) -> None:
-        """数据集类，负责将原始数据转换为模型输入格式，包括文本的分词和标签的编码。
-        Args:
-            data: 原始数据列表，每个元素是一个包含 "sentences", "disease", "symptoms", "need_first_aid" 等字段的字典。
-            tokenizer: DistilBertTokenizer 实例，用于文本分词。
-            max_len: 模型输入的最大长度，超过部分将被截断。
-        """
-        self.data: list[dict[str, Any]] = data
-        self.tokenizer: DistilBertTokenizer = tokenizer
-        self.max_len: int = max_len
-        self.indices = indices
-        self.disease_label_binarizer = disease_label_binarizer
-        self.symptom_label_binarizer = symptom_label_binarizer
+        input_ids,
+        attention_mask,
+        labels_disease,
+        labels_symptom,
+        labels_first_aid,
+    ):
+        self.input_ids = input_ids
+        self.attention_mask = attention_mask
+        self.labels_disease = labels_disease
+        self.labels_symptom = labels_symptom
+        self.labels_first_aid = labels_first_aid
 
     def __len__(self) -> int:
-        return len(self.indices)
+        return len(self.input_ids)
 
-    def __getitem__(self, id: int) -> dict[str, torch.Tensor]:
-        idx = self.indices[id]
-        item: dict[str, Any] = self.data[idx]
-        text: str = item.get("sentences", "")
-        if not text:
-            raise ValueError(f"数据项缺少 'sentences' 字段或其值为空: {item}")
-        # 分词
-        encoding: BatchEncoding = self.tokenizer(
-            text,
-            truncation=True,
-            padding="max_length",
-            max_length=self.max_len,
-            return_tensors="pt",
-        )
-
-        # 编码标签
-        labels_disease: torch.FloatTensor = torch.FloatTensor(
-            self.disease_label_binarizer.transform([item["disease"]])[0]
-        )
-        labels_symptom: torch.FloatTensor = torch.FloatTensor(
-            self.symptom_label_binarizer.transform([item["symptoms"]])[0]
-        )
-        labels_first_aid: torch.FloatTensor = torch.FloatTensor(
-            [item["need_first_aid"]]
-        )  # 二分类用float方便BCEWithLogitsLoss
-
+    def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
         return {
-            "input_ids": torch.tensor(encoding["input_ids"], dtype=torch.long).squeeze(
-                0
-            ),
-            "attention_mask": torch.tensor(
-                encoding["attention_mask"], dtype=torch.long
-            ).squeeze(0),
-            "labels_disease": labels_disease,
-            "labels_symptom": labels_symptom,
-            "labels_first_aid": labels_first_aid,
+            "input_ids": self.input_ids[idx],
+            "attention_mask": self.attention_mask[idx],
+            "labels_disease": self.labels_disease[idx],
+            "labels_symptom": self.labels_symptom[idx],
+            "labels_first_aid": self.labels_first_aid[idx],
         }
 
 
@@ -204,10 +169,10 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         )
         self.classifier_first_aid: nn.Linear = nn.Linear(self.hidden_size, 1)  # 二分类
 
-        # 损失函数
-        self.bce_with_logits_loss: nn.BCEWithLogitsLoss = (
-            nn.BCEWithLogitsLoss()
-        )  # 用于多标签和二分类
+        pos_weight = torch.tensor([DISEASE_POSITIVE_WEIGHT] * self.num_diseases)
+        self.bce_disease = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
+        self.bce_symptom = nn.BCEWithLogitsLoss()
+        self.bce_first_aid = nn.BCEWithLogitsLoss()
 
     def forward(
         self,
@@ -232,31 +197,16 @@ class DistilBertForMultitaskLearning(DistilBertPreTrainedModel):
         logits_symptom: torch.Tensor = self.classifier_symptom(pooled_output)
         logits_first_aid: torch.Tensor = self.classifier_first_aid(pooled_output)
 
-        # 计算损失 - 使用加权的多任务学习
-        loss: torch.Tensor | None = None  # 默认无损失
-        if labels_disease is not None:
-            loss_disease: torch.Tensor = self.bce_with_logits_loss(
-                logits_disease, labels_disease
-            )
-            loss_symptom: torch.Tensor = self.bce_with_logits_loss(
-                logits_symptom, labels_symptom
-            )
-            loss_first_aid: torch.Tensor = self.bce_with_logits_loss(
-                logits_first_aid, labels_first_aid
-            )
-            # 对疾病正样本应用额外权重，提高疾病预测精度
-            disease_weight = torch.where(
-                labels_disease == 1,
-                torch.full_like(labels_disease, DISEASE_POSITIVE_WEIGHT),
-                torch.ones_like(labels_disease),
-            )
-            loss_disease = (loss_disease * disease_weight).mean()
-            # 使用不同的权重组合三个损失
-            loss = (
-                DISEASE_LOSS_WEIGHT * loss_disease
-                + SYMPTOM_LOSS_WEIGHT * loss_symptom
-                + FIRST_AID_LOSS_WEIGHT * loss_first_aid
-            )
+        loss_disease = self.bce_disease(logits_disease, labels_disease)
+        loss_symptom = self.bce_symptom(logits_symptom, labels_symptom)
+        loss_first_aid = self.bce_first_aid(logits_first_aid, labels_first_aid)
+
+        # 直接组合
+        loss = (
+            DISEASE_LOSS_WEIGHT * loss_disease
+            + SYMPTOM_LOSS_WEIGHT * loss_symptom
+            + FIRST_AID_LOSS_WEIGHT * loss_first_aid
+        )
 
         return MultitaskSequenceClassifierOutput(
             loss=loss,
@@ -288,7 +238,7 @@ class BERTManager(metaclass=SingletonMeta):
         """ BERT 模型配置实例，初始为 None """
         self._bert_model: Optional[DistilBertForMultitaskLearning] = None
         """ BERT 模型实例，初始为 None"""
-        self._tokenizer: Optional[DistilBertTokenizer] = None
+        self._tokenizer: Optional[DistilBertTokenizerFast] = None
         """ BERT 分词器实例，初始为 None"""
         self._disease_label_binarizer: Optional[MultiLabelBinarizer] = None
         """ 疾病标签二值化器，适用于多标签分类，将疾病列表转换为多热编码 """
@@ -408,14 +358,14 @@ class BERTManager(metaclass=SingletonMeta):
         self,
         model_path: str | Path = INITIAL_BERT_MODEL_PATH,
         local_files_only: bool = False,
-    ) -> DistilBertTokenizer:
+    ) -> DistilBertTokenizerFast:
         """兼容不同 transformers 版本的 Mistral regex 修复参数。"""
         if self._tokenizer is not None and isinstance(
-            self._tokenizer, DistilBertTokenizer
+            self._tokenizer, DistilBertTokenizerFast
         ):
             return self._tokenizer
         try:
-            self._tokenizer = DistilBertTokenizer.from_pretrained(
+            self._tokenizer = DistilBertTokenizerFast.from_pretrained(
                 model_path,
                 local_files_only=local_files_only,
             )
@@ -425,16 +375,16 @@ class BERTManager(metaclass=SingletonMeta):
                 logger.debug(
                     "检测到 transformers 已在内部注入 fix_mistral_regex，改用兼容加载路径。"
                 )
-                self._tokenizer = DistilBertTokenizer.from_pretrained(
+                self._tokenizer = DistilBertTokenizerFast.from_pretrained(
                     model_path,
                     local_files_only=local_files_only,
                 )
             else:
                 raise
-        if isinstance(self._tokenizer, DistilBertTokenizer):
+        if isinstance(self._tokenizer, DistilBertTokenizerFast):
             return self._tokenizer
         raise RuntimeError(
-            f"加载分词器失败，预期类型 DistilBertTokenizer，但实际类型为 {type(self._tokenizer)}"
+            f"加载分词器失败，预期类型 DistilBertTokenizerFast，但实际类型为 {type(self._tokenizer)}"
         )
 
     @staticmethod
@@ -528,46 +478,72 @@ class BERTManager(metaclass=SingletonMeta):
         return self._bert_model
 
     def train_bert(self):
-        """训练 BERT 模型"""
         self._load_training_data()
-        assert self._raw_training_data is not None, "训练数据未加载，无法进行训练"
-        # 创建 Dataset
+
+        # 1. 一次性提取所有数据
+        all_texts = [item["sentences"] for item in self._raw_training_data]
+        all_diseases = [item["disease"] for item in self._raw_training_data]
+        all_symptoms = [item["symptoms"] for item in self._raw_training_data]
+        all_first_aid = [
+            [item.get("need_first_aid", 0)] for item in self._raw_training_data
+        ]
+
+        logger.debug("正在预处理数据集...")
+
+        # 2. 一次性调用 sklearn transform，这只需要几秒钟
+        disease_tensors = torch.tensor(
+            self._disease_label_binarizer.transform(all_diseases), dtype=torch.float32
+        )
+        symptom_tensors = torch.tensor(
+            self._symptom_label_binarizer.transform(all_symptoms), dtype=torch.float32
+        )
+        first_aid_tensors = torch.tensor(all_first_aid, dtype=torch.float32)
+
+        # 3. 一次性进行批量分词（Fast分词器极快）
+        encodings = self._tokenizer(
+            all_texts,
+            truncation=True,
+            padding="max_length",  # 这里建议直接 padding 到最大长度
+            max_length=MAX_LEN,
+            return_tensors="pt",
+        )
+
+        # 4. 划分训练集和测试集的索引
         train_idx, test_idx = train_test_split(
             range(len(self._raw_training_data)), test_size=0.2, random_state=42
         )
-        assert self._tokenizer is not None and isinstance(
-            self._tokenizer, DistilBertTokenizer
-        ), "分词器未加载，无法进行训练"
-        assert self._disease_label_binarizer is not None and isinstance(
-            self._disease_label_binarizer, MultiLabelBinarizer
-        ), "疾病标签编码器未加载，无法进行训练"
-        assert self._symptom_label_binarizer is not None and isinstance(
-            self._symptom_label_binarizer, MultiLabelBinarizer
-        ), "症状标签编码器未加载，无法进行训练"
-        # 简单的训练/验证划分（实际请用 train_test_split）
-        # logger.debug(f"训练集大小: {len(train_idx)}, 验证集大小: {len(test_idx)}")
+
+        # 5. 实例化精简后的 Dataset
         self._train_dataset = MultitaskDataset(
-            train_idx,
-            self._raw_training_data,
-            self._tokenizer,
-            self._disease_label_binarizer,
-            self._symptom_label_binarizer,
-            max_len=MAX_LEN,
+            encodings["input_ids"][train_idx],
+            encodings["attention_mask"][train_idx],
+            disease_tensors[train_idx],
+            symptom_tensors[train_idx],
+            first_aid_tensors[train_idx],
         )
         self._val_dataset = MultitaskDataset(
-            test_idx,
-            self._raw_training_data,
-            self._tokenizer,
-            self._disease_label_binarizer,
-            self._symptom_label_binarizer,
-            max_len=MAX_LEN,
+            encodings["input_ids"][test_idx],
+            encodings["attention_mask"][test_idx],
+            disease_tensors[test_idx],
+            symptom_tensors[test_idx],
+            first_aid_tensors[test_idx],
         )
-        # 1. 准备 DataLoader
-        train_loader: DataLoader = DataLoader(
-            self._train_dataset, batch_size=BATCH_SIZE, shuffle=True
+
+        # 6. DataLoader 配置 (Windows 建议先将 num_workers 设为 0)
+        # 因为数据已经是纯 Tensor，单进程拿数据反而最快，省去跨进程拷贝开销
+        train_loader = DataLoader(
+            self._train_dataset,
+            batch_size=BATCH_SIZE,
+            shuffle=True,
+            num_workers=0,
+            pin_memory=False,
         )
-        val_loader: DataLoader = DataLoader(
-            self._val_dataset, batch_size=BATCH_SIZE, shuffle=False
+        val_loader = DataLoader(
+            self._val_dataset,
+            batch_size=BATCH_SIZE,
+            shuffle=False,
+            num_workers=0,
+            pin_memory=False,
         )
         self._bert_model = self._get_bert_model()
         assert self._bert_model is not None and isinstance(
@@ -594,9 +570,15 @@ class BERTManager(metaclass=SingletonMeta):
             weight_decay=0.01,
         )
         self.get_runtime_device_info()
-        model = cast(DistilBertForMultitaskLearning, self._bert_model)
-        nn.Module.to(model, self._device)
+        self._bert_model = cast(DistilBertForMultitaskLearning, self._bert_model)
+        nn.Module.to(self=self._bert_model, device=self._device)
+        if not USE_CUDA:
+            logger.warning(
+                "当前 torch.cuda.is_available()=False，将在 CPU 上训练；速度会明显更慢。"
+            )
+
         best_f1: float = 0.0
+        best_state_dict: dict[str, torch.Tensor] | None = None
 
         for epoch in range(EPOCHS):
             # --- 训练阶段 ---
@@ -605,12 +587,10 @@ class BERTManager(metaclass=SingletonMeta):
             train_pbar = tqdm(train_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Train]")
 
             for batch in train_pbar:
-                optimizer.zero_grad()
+                optimizer.zero_grad(set_to_none=True)
 
                 # 将所有输入移至设备
-                input_ids = torch.tensor(batch["input_ids"], dtype=torch.long).to(
-                    self._device
-                )
+                input_ids = batch["input_ids"].to(self._device)
                 attention_mask = batch["attention_mask"].to(self._device)
                 labels_dis = batch["labels_disease"].to(self._device)
                 labels_sym = batch["labels_symptom"].to(self._device)
@@ -646,11 +626,11 @@ class BERTManager(metaclass=SingletonMeta):
             val_pbar = tqdm(val_loader, desc=f"Epoch {epoch + 1}/{EPOCHS} [Eval]")
             with torch.no_grad():
                 for batch in val_pbar:
-                    input_ids = batch["input_ids"].to(TORCH_DEVICE)
-                    attention_mask = batch["attention_mask"].to(TORCH_DEVICE)
-                    labels_dis = batch["labels_disease"].to(TORCH_DEVICE)
-                    labels_sym = batch["labels_symptom"].to(TORCH_DEVICE)
-                    labels_emg = batch["labels_first_aid"].to(TORCH_DEVICE)
+                    input_ids = batch["input_ids"].to(self._device)
+                    attention_mask = batch["attention_mask"].to(self._device)
+                    labels_dis = batch["labels_disease"].to(self._device)
+                    labels_sym = batch["labels_symptom"].to(self._device)
+                    labels_emg = batch["labels_first_aid"].to(self._device)
 
                     outputs: MultitaskSequenceClassifierOutput = self._bert_model(
                         input_ids=input_ids,
@@ -736,25 +716,32 @@ class BERTManager(metaclass=SingletonMeta):
             if current_disease_metric > best_f1:
                 best_f1 = float(current_disease_metric)
 
-                logger.debug("模型表现提升，计算每个 label 正样本的中位数...")
-                medians_dict = self.compute_label_medians()
-
-                assert self._disease_label_binarizer is not None
-                assert self._symptom_label_binarizer is not None
-
-                self._bert_model.save_pretrained(SAVE_PATH, max_shard_size="50MB")
-                self._tokenizer.save_pretrained(SAVE_PATH)
-                # 保存 label_encoders
-                label_encoders = {
-                    "disease": self._disease_label_binarizer,
-                    "symptom": self._symptom_label_binarizer,
-                    "medians": medians_dict,
+                # 只在内存中记录最佳权重；避免每次提升都全量跑 compute_label_medians + 磁盘保存。
+                best_state_dict = {
+                    k: v.detach().cpu().clone()
+                    for k, v in self._bert_model.state_dict().items()
                 }
-                with open(SAVE_PATH / "label_encoders.pkl", "wb") as f:
-                    pickle.dump(label_encoders, f)
                 logger.debug(
-                    f"★ 模型表现提升 (Disease Metric: {current_disease_metric:.4f})，已保存至 {SAVE_PATH}"
+                    f"★ 记录当前最佳模型权重 (Disease Metric: {current_disease_metric:.4f})"
                 )
+
+        # 训练结束后：加载最佳权重、计算中位数并保存一次（大幅减少训练时间）
+        if best_state_dict is not None:
+            self._bert_model.load_state_dict(best_state_dict)
+            logger.debug("训练完成：使用最佳模型计算 label 正样本中位数并保存...")
+            medians_dict = self.compute_label_medians()
+            assert self._disease_label_binarizer is not None
+            assert self._symptom_label_binarizer is not None
+            self._bert_model.save_pretrained(SAVE_PATH, max_shard_size="50MB")
+            self._tokenizer.save_pretrained(SAVE_PATH)
+            label_encoders = {
+                "disease": self._disease_label_binarizer,
+                "symptom": self._symptom_label_binarizer,
+                "medians": medians_dict,
+            }
+            with open(SAVE_PATH / "label_encoders.pkl", "wb") as f:
+                pickle.dump(label_encoders, f)
+            logger.debug(f"已保存最佳模型与 label_encoders 至 {SAVE_PATH}")
 
     def preload(
         self, model_path: str | Path = SAVE_PATH, device: torch.device = TORCH_DEVICE
@@ -859,8 +846,52 @@ class BERTManager(metaclass=SingletonMeta):
         ]
         first_aid_probs_pos: list[float] = []
         assert self._train_dataset is not None, "训练数据集未加载，无法计算中位数"
+        assert self._tokenizer is not None
+        assert self._disease_label_binarizer is not None
+        assert self._symptom_label_binarizer is not None
+
+        def collate_fn(items: list[dict[str, Any]]) -> dict[str, torch.Tensor]:
+            texts = [it["text"] for it in items]
+            diseases = [it["disease"] for it in items]
+            symptoms = [it["symptoms"] for it in items]
+            need_first_aid = [it["need_first_aid"] for it in items]
+
+            encoding: BatchEncoding = self._tokenizer(
+                texts,
+                truncation=True,
+                padding=True,
+                max_length=MAX_LEN,
+                return_tensors="pt",
+            )
+            labels_disease = torch.tensor(
+                self._disease_label_binarizer.transform(diseases),
+                dtype=torch.float32,
+            )
+            labels_symptom = torch.tensor(
+                self._symptom_label_binarizer.transform(symptoms),
+                dtype=torch.float32,
+            )
+            labels_first_aid = torch.tensor(need_first_aid, dtype=torch.float32).view(
+                -1, 1
+            )
+            return {
+                "input_ids": encoding["input_ids"],
+                "attention_mask": encoding["attention_mask"],
+                "labels_disease": labels_disease,
+                "labels_symptom": labels_symptom,
+                "labels_first_aid": labels_first_aid,
+            }
+
+        num_workers = min(4, (os.cpu_count() or 1)) if USE_CUDA else 0
+        use_persistent_workers = num_workers > 0
         loader: DataLoader = DataLoader(
-            self._train_dataset, batch_size=BATCH_SIZE, shuffle=False
+            self._train_dataset,
+            batch_size=BATCH_SIZE,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=bool(USE_CUDA),
+            persistent_workers=use_persistent_workers,
+            collate_fn=collate_fn,
         )
 
         with torch.no_grad():
@@ -939,7 +970,7 @@ class BERTManager(metaclass=SingletonMeta):
     ) -> dict[str, Any]:
         """使用预加载的模型和相关组件进行预测，返回带置信度的疾病和症状列表。"""
         assert self._tokenizer is not None and isinstance(
-            self._tokenizer, DistilBertTokenizer
+            self._tokenizer, DistilBertTokenizerFast
         ), "分词器未加载，无法进行预测"
         assert self._bert_model is not None and isinstance(
             self._bert_model, DistilBertForMultitaskLearning
